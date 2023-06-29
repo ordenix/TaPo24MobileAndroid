@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TaPo24</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Tapo24.pl</string>
+    <string name="nav_header_subtitle">kontakt@tapo24.pl</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="info_version">Informacje o wersji aplikacji</string>
+    <string name="login">Zaloguj</string>
+    <string name="logout">Wyloguj</string>
+    <string name="settings">Ustawienia</string>
+    <string name="about_me">Profil</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_tariff">Taryfikator</string>
+    <string name="menu_road">Droga</string>
+    <string name="menu_law">Przepisy</string>
+    <string name="menu_helpers">Pomoce</string>
+    <string name="menu_about">O aplikacji</string>
+
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>

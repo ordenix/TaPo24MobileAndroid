@@ -1,0 +1,128 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "915f2cdb57dd103fab42f7c0bd50ac5d",
+    "entities": [
+      {
+        "tableName": "Setting",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `value` TEXT NOT NULL, `count` INTEGER NOT NULL, `state` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`name`))",
+        "fields": [
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "value",
+            "columnName": "value",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "count",
+            "columnName": "count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "false"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "name"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "WhatsNews",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `title` TEXT NOT NULL, `p1` TEXT NOT NULL, `p2` TEXT NOT NULL, `p3` TEXT NOT NULL, `p4` TEXT NOT NULL, `footerBold` TEXT NOT NULL, `footer` TEXT NOT NULL, `author` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "date",
+            "columnName": "date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "p1",
+            "columnName": "p1",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "p2",
+            "columnName": "p2",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "p3",
+            "columnName": "p3",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "p4",
+            "columnName": "p4",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "footerBold",
+            "columnName": "footerBold",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "footer",
+            "columnName": "footer",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '915f2cdb57dd103fab42f7c0bd50ac5d')"
+    ]
+  }
+}

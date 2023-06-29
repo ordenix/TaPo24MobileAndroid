@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent" android:paddingTop="20dp"
+                                                   android:paddingLeft="20dp" android:paddingRight="20dp"
+                                                   android:paddingBottom="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/style_social_media_button">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+            >
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="0.1">
+                    <TextView
+                            android:text="@string/uid"
+                            style="@style/textAboutApplicationLeftCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView5"/>
+                    <TextView
+                            android:text="@string/vCode"
+                            style="@style/textAboutApplicationLeftCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView7"/>
+                    <TextView
+                            android:text="@string/vName"
+                            style="@style/textAboutApplicationLeftCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView8"/>
+                    <TextView
+                            android:text="@string/vBase"
+                            style="@style/textAboutApplicationLeftCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView11"/>
+                </LinearLayout>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="0.5">
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textAboutApplicationRightCol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/uid" android:maxLines="1"/>
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textAboutApplicationRightCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/versionCode"/>
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textAboutApplicationRightCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/versionName"/>
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textAboutApplicationRightCol"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/versionBase"/>
+                </LinearLayout>
+            </LinearLayout>
+            <View style="@style/Divider"/>
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <TextView
+                        android:text="@string/vServer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/textView13"
+                        android:textAlignment="center" style="@style/textAboutApplicationRightCol"/>
+                <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                >
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:layout_weight="0.1">
+                        <TextView
+                                android:text="@string/vCode"
+                                style="@style/textAboutApplicationLeftCol"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView16"/>
+                        <TextView
+                                android:text="@string/vBase"
+                                style="@style/textAboutApplicationLeftCol"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView15"/>
+                    </LinearLayout>
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:layout_weight="0.5">
+                        <TextView
+                                android:text="TextView"
+                                style="@style/textAboutApplicationRightCol"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/versionCodeServer"/>
+                        <TextView
+                                android:text="TextView"
+                                style="@style/textAboutApplicationRightCol"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/versionBaseServer"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <Button
+                        android:text="@string/checkUpdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/button3"
+                        android:theme="@style/OrangeBtn"
+                        app:icon="@drawable/code_pull_request_solid"
+                        app:iconSize="20dp"
+                        android:backgroundTint="@color/orange_tapo"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
