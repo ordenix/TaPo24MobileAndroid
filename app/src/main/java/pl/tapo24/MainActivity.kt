@@ -22,6 +22,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import pl.tapo24.data.EnginesType
+import pl.tapo24.data.EnvironmentType
 import pl.tapo24.data.State
 import pl.tapo24.data.Uid
 import pl.tapo24.databinding.ActivityMainBinding
@@ -62,6 +64,35 @@ class MainActivity: AppCompatActivity() {
                 }.await()
             } else {
                 State.uid = settingUid!!.value
+            }
+        }
+
+        MainScope().launch(Dispatchers.IO) {
+            var settingEnvironment : Setting? = null
+            var settingEngine : Setting? = null
+            async { settingEnvironment = tapoDb.settingDb().getSettingByName("settingEnvironment") }.await()
+            async { settingEngine = tapoDb.settingDb().getSettingByName("settingEngine") }.await()
+
+            if (settingEnvironment == null) {
+                State.environmentType = EnvironmentType.Master
+                async {
+                    val setting: Setting = Setting("settingEnvironment","",EnvironmentType.Master.ordinal)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                State.environmentType = EnvironmentType.Master
+
+            } else {
+                State.environmentType = EnvironmentType.values()[settingEnvironment!!.count]
+            }
+            if (settingEngine == null) {
+                State.enginesType = EnginesType.New
+                async {
+                    val setting: Setting = Setting("settingEngine","",EnginesType.New.ordinal)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                State.enginesType = EnginesType.New
+            } else {
+                State.enginesType = EnginesType.values()[settingEngine!!.count]
             }
         }
 

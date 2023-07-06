@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TaPo24</string>
+    <string name="app_name_long">TAryfikator POlicyjny24</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Tapo24.pl</string>
@@ -28,4 +29,13 @@
 
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="enviroment">Środowisko:</string>
+    <string name="EnvTest">Testowe</string>
+    <string name="EnvProd">Produkcyjne</string>
+    <string name="EnvFeature">Beta</string>
+    <string name="engine">Silnik wykroczeń:</string>
+    <string name="before09">Przed wrześńiem 2022</string>
+    <string name="after09">Po wrześniu 2022 (obecne)</string>
+    <string name="WarnEngine">Uwaga!! Zmiana silnika wpływa na wyświetlanie wykroczeń w całej aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian. Przeznaczona głównie dla osób prowadzących sprawy z przez zmiany przepisów. Wyłącznie wsparcia tej opcji planowane jest w 2025 roku</string>
+    <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera!</string>
 </resources>

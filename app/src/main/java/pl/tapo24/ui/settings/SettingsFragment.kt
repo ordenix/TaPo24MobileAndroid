@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.data.EnginesType
+import pl.tapo24.data.EnvironmentType
 import pl.tapo24.databinding.FragmentRoadBinding
 import pl.tapo24.databinding.FragmentSettingBinding
 import pl.tapo24.ui.tariff.TariffViewModel
-
+@AndroidEntryPoint
 class SettingsFragment: Fragment() {
     private var _binding: FragmentSettingBinding? = null
 
@@ -30,10 +34,57 @@ class SettingsFragment: Fragment() {
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textViewSetting
-        settingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        settingsViewModel.environment.observe(viewLifecycleOwner) {
+            when (it) {
+                EnvironmentType.Master -> binding.radioGroupEnviroment.check(binding.radioButtonProduction.id)
+                EnvironmentType.Beta -> binding.radioGroupEnviroment.check(binding.radioButtonTest.id)
+                EnvironmentType.Feature -> binding.radioGroupEnviroment.check(binding.radioButtonFeature.id)
+            }
         }
+        settingsViewModel.engine.observe(viewLifecycleOwner) {
+            when (it) {
+                EnginesType.New -> binding.radioGroupEngine.check(binding.radioButtonAfter.id)
+                EnginesType.Old -> binding.radioGroupEngine.check(binding.radioButtonBefore.id)
+            }
+        }
+
+        binding.radioButtonBefore.setOnClickListener {
+            binding.radioButtonBefore.isChecked = true
+            settingsViewModel.engine.value = EnginesType.Old
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono silnik, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonAfter.setOnClickListener {
+            binding.radioButtonAfter.isChecked = true
+            settingsViewModel.engine.value = EnginesType.New
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono silnik, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+
+        binding.radioButtonProduction.setOnClickListener {
+            binding.radioButtonProduction.isChecked = true
+            settingsViewModel.environment.value = EnvironmentType.Master
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonFeature.setOnClickListener {
+            binding.radioButtonFeature.isChecked = true
+            settingsViewModel.environment.value = EnvironmentType.Feature
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonTest.setOnClickListener {
+            binding.radioButtonTest.isChecked = true
+            settingsViewModel.environment.value = EnvironmentType.Beta
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+
+
+//        val textView: TextView = binding.textViewSetting
+//        settingsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 

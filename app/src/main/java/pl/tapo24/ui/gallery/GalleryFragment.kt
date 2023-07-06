@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.data.State
 import pl.tapo24.databinding.FragmentGalleryBinding
 @AndroidEntryPoint
 class GalleryFragment : Fragment() {
@@ -42,6 +43,8 @@ class GalleryFragment : Fragment() {
             galleryViewModel.test()
         }
         binding.button2.setOnClickListener {
+            println(State.environmentType.description)
+            println(State.enginesType.description)
             galleryViewModel.test2()
         }
         return root
