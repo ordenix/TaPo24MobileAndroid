@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "80f0d3d70a40f11aba1d72874dad392e",
+    "identityHash": "612d65c0ad35525fda18f42353f16e21",
     "entities": [
       {
         "tableName": "Setting",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `value` TEXT NOT NULL, `count` INTEGER NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `value` TEXT NOT NULL DEFAULT '', `count` INTEGER NOT NULL DEFAULT 0, `state` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -18,13 +18,22 @@
             "fieldPath": "value",
             "columnName": "value",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "count",
             "columnName": "count",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "state",
+            "columnName": "state",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "false"
           }
         ],
         "primaryKey": {
@@ -38,7 +47,7 @@
       },
       {
         "tableName": "WhatsNews",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `title` TEXT NOT NULL, `p1` TEXT NOT NULL, `p2` TEXT NOT NULL, `p3` TEXT NOT NULL, `p4` TEXT NOT NULL, `footerBold` TEXT NOT NULL, `footer` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL DEFAULT 0, `title` TEXT NOT NULL DEFAULT '', `p1` TEXT NOT NULL DEFAULT '', `p2` TEXT NOT NULL DEFAULT '', `p3` TEXT NOT NULL DEFAULT '', `p4` TEXT NOT NULL DEFAULT '', `footerBold` TEXT NOT NULL DEFAULT '', `footer` TEXT NOT NULL DEFAULT '', `author` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -50,49 +59,209 @@
             "fieldPath": "date",
             "columnName": "date",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "0"
           },
           {
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p1",
             "columnName": "p1",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p2",
             "columnName": "p2",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p3",
             "columnName": "p3",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p4",
             "columnName": "p4",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "footerBold",
             "columnName": "footerBold",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "footer",
             "columnName": "footer",
             "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Tariff",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `category` TEXT DEFAULT '', `code` TEXT DEFAULT '', `law` TEXT DEFAULT '', `lawSub` TEXT DEFAULT '', `maxSpeed` INTEGER DEFAULT 0, `minSpeed` INTEGER DEFAULT 0, `name` TEXT DEFAULT '', `paragraph` TEXT DEFAULT '', `paragraphSub` TEXT DEFAULT '', `path` TEXT DEFAULT '', `points` INTEGER DEFAULT 0, `subName` TEXT DEFAULT '', `tax` TEXT DEFAULT '', `taxRecidive` TEXT DEFAULT '', `recidive` INTEGER, `text` TEXT DEFAULT '', `visible` INTEGER NOT NULL DEFAULT true, `enginesType` TEXT NOT NULL DEFAULT '1', PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "code",
+            "columnName": "code",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "law",
+            "columnName": "law",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "lawSub",
+            "columnName": "lawSub",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "maxSpeed",
+            "columnName": "maxSpeed",
+            "affinity": "INTEGER",
+            "notNull": false,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "minSpeed",
+            "columnName": "minSpeed",
+            "affinity": "INTEGER",
+            "notNull": false,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "paragraph",
+            "columnName": "paragraph",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "paragraphSub",
+            "columnName": "paragraphSub",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "points",
+            "columnName": "points",
+            "affinity": "INTEGER",
+            "notNull": false,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "subName",
+            "columnName": "subName",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "tax",
+            "columnName": "tax",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "taxRecidive",
+            "columnName": "taxRecidive",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "recidive",
+            "columnName": "recidive",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": false,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "visible",
+            "columnName": "visible",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "true"
+          },
+          {
+            "fieldPath": "enginesType",
+            "columnName": "enginesType",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "'1'"
           }
         ],
         "primaryKey": {
@@ -108,7 +277,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '80f0d3d70a40f11aba1d72874dad392e')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '612d65c0ad35525fda18f42353f16e21')"
     ]
   }
 }

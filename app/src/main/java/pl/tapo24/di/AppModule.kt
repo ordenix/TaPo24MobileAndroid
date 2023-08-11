@@ -9,8 +9,10 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import pl.tapo24.data.EnvironmentType
 import pl.tapo24.db.TapoDb
 import pl.tapo24.db.entity.Setting
+import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.infrastructure.NetworkClient
 import javax.inject.Singleton
 
@@ -31,20 +33,28 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideDataTapoDb(@ApplicationContext app: Context): DataTapoDb {
+        return Room.databaseBuilder(
+            app,
+            DataTapoDb::class.java,
+            "DataTapo24.db"
+        ).build()
+    }
+
+    @Provides
+    @Singleton
     fun provideNetwork(tapoDb: TapoDb): NetworkClient {
         var url : String?
         runBlocking(Dispatchers.IO) {
-            val settingEnvironmentTest: Setting?  = tapoDb.settingDb().getSettingByName("environmentTest")
-            if (settingEnvironmentTest == null) {
-                url = "https://api3.tapo24.pl/api/"
+            val settingEnvironment: Setting?  = tapoDb.settingDb().getSettingByName("settingEnvironment")
+            if (settingEnvironment !=null) {
+                val environment = EnvironmentType.values()[settingEnvironment.count]
+                url = environment.url
             } else {
-                if (settingEnvironmentTest.state) {
-                    url = "https://develop.api3.tapo24.pl/api/"
+                url = "https://api3.tapo24.pl/api/"
 
-                } else {
-                    url = "https://api3.tapo24.pl/api/"
-                }
             }
+
 
         }
 

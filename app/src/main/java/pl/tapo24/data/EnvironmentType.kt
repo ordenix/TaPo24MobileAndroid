@@ -1,8 +1,8 @@
 package pl.tapo24.data
 
 enum class EnvironmentType(val description: String, val url: String) {
-    Beta("Beta", ""),
+    Beta("Beta", "https://develop.api3.tapo24.pl/api/"),
     Feature("Feature", ""),
-    Master("Production", "")
+    Master("Production", "https://api3.tapo24.pl/api/")
 
 }

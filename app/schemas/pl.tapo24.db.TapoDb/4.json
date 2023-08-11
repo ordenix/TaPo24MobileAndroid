@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "915f2cdb57dd103fab42f7c0bd50ac5d",
+    "identityHash": "dbf5e627f441d6f8687bb77d61d4a987",
     "entities": [
       {
         "tableName": "Setting",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `value` TEXT NOT NULL, `count` INTEGER NOT NULL, `state` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `value` TEXT NOT NULL DEFAULT '', `count` INTEGER NOT NULL DEFAULT 0, `state` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -18,13 +18,15 @@
             "fieldPath": "value",
             "columnName": "value",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "count",
             "columnName": "count",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "0"
           },
           {
             "fieldPath": "state",
@@ -45,7 +47,7 @@
       },
       {
         "tableName": "WhatsNews",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL, `title` TEXT NOT NULL, `p1` TEXT NOT NULL, `p2` TEXT NOT NULL, `p3` TEXT NOT NULL, `p4` TEXT NOT NULL, `footerBold` TEXT NOT NULL, `footer` TEXT NOT NULL, `author` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `date` INTEGER NOT NULL DEFAULT 0, `title` TEXT NOT NULL DEFAULT '', `p1` TEXT NOT NULL DEFAULT '', `p2` TEXT NOT NULL DEFAULT '', `p3` TEXT NOT NULL DEFAULT '', `p4` TEXT NOT NULL DEFAULT '', `footerBold` TEXT NOT NULL DEFAULT '', `footer` TEXT NOT NULL DEFAULT '', `author` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -57,49 +59,57 @@
             "fieldPath": "date",
             "columnName": "date",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "0"
           },
           {
             "fieldPath": "title",
             "columnName": "title",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p1",
             "columnName": "p1",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p2",
             "columnName": "p2",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p3",
             "columnName": "p3",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "p4",
             "columnName": "p4",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "footerBold",
             "columnName": "footerBold",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "footer",
             "columnName": "footer",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": true,
+            "defaultValue": "''"
           },
           {
             "fieldPath": "author",
@@ -122,7 +132,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '915f2cdb57dd103fab42f7c0bd50ac5d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dbf5e627f441d6f8687bb77d61d4a987')"
     ]
   }
 }

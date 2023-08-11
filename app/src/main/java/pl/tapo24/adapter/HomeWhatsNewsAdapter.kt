@@ -68,9 +68,9 @@ class HomeWhatsNewsAdapter(
             if (item.p2.isEmpty()) {
                 p2.visibility = GONE
             }
-//            if (item.p3.isEmpty()) {
-//                p3.visibility = GONE
-//            }
+            if (item.p3.isEmpty()) {
+                p3.visibility = GONE
+            }
             if (item.p4.isEmpty()) {
                 p4.visibility = GONE
             }
@@ -81,8 +81,6 @@ class HomeWhatsNewsAdapter(
             if (item.footer.isEmpty()) {
                 footer.visibility = GONE
             }
-            p3.text = "1xxxxxxxxx\n2xxx\n3xxxx\n4xxxx\n5xxxxxxxxx\n6xxxxxxxxxxxxxxx\n1\n1\n1\n1\n1\n"
-           // p3.movementMethod= ScrollingMovementMethod()
 
 
         }

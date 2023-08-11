@@ -10,18 +10,27 @@
             android:name="pl.tapo24.ui.home.HomeFragment"
             android:label="@string/menu_home"
             tools:layout="@layout/fragment_home"/>
+    <fragment android:id="@+id/nav_helpers"
+              android:name="pl.tapo24.ui.helpers.HelpersFragment"
+              android:label="@string/menu_helpers"
+              tools:layout="@layout/fragment_helpers"/>
+    <fragment android:id="@+id/nav_category_driving_licence"
+              android:name="pl.tapo24.ui.categoryDrivingLicence.CategoryDrivingLicenceFragment"
+              android:label="@string/CategodyDrivingLicence"
+              tools:layout="@layout/fragment_category_driving_licence"/>
+    <fragment android:id="@+id/nav_road"
+              android:name="pl.tapo24.ui.road.RoadFragment"
+              android:label="@string/menu_road"
+              tools:layout="@layout/fragment_helpers">
+        <action android:id="@+id/action_nav_road_to_nav_category_driving_licence"
+                app:destination="@id/nav_category_driving_licence"/>
+    </fragment>
 
     <fragment
             android:id="@+id/nav_gallery"
             android:name="pl.tapo24.ui.gallery.GalleryFragment"
             android:label="@string/menu_gallery"
             tools:layout="@layout/fragment_gallery"/>
-
-    <fragment
-            android:id="@+id/nav_slideshow"
-            android:name="pl.tapo24.ui.slideshow.SlideshowFragment"
-            android:label="@string/menu_slideshow"
-            tools:layout="@layout/fragment_slideshow"/>
 
     <fragment
             android:id="@+id/nav_tariff"
@@ -38,4 +47,17 @@
             android:name="pl.tapo24.ui.aboutApplication.AboutApplicationFragment"
             android:label="@string/info_version"
             tools:layout="@layout/fragment_about_application"/>
+
+    <fragment android:id="@+id/nav_login"
+              android:name="pl.tapo24.ui.login.LoginFragment"
+              android:label="@string/login"
+              tools:layout="@layout/fragment_login">
+        <action android:id="@+id/action_nav_login_to_nav_register" app:destination="@id/nav_register"/>
+    </fragment>
+    <fragment android:id="@+id/nav_register"
+              android:name="pl.tapo24.ui.login.register.RegisterFragment"
+              android:label="@string/register"
+              tools:layout="@layout/fragment_register">
+        <action android:id="@+id/action_nav_register_to_nav_login" app:destination="@id/nav_login"/>
+    </fragment>
 </navigation>

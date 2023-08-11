@@ -37,12 +37,16 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    dataBinding {
+        enabled = true
+    }
     buildFeatures {
         viewBinding true
     }
 }
 
 dependencies {
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
     def room_version = "2.5.2"
     def retrofit_version = "2.9.0"
 

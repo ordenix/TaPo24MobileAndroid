@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import pl.tapo24.R
 import pl.tapo24.databinding.FragmentRoadBinding
 import pl.tapo24.ui.tariff.TariffViewModel
 
@@ -24,15 +26,21 @@ class RoadFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val roadViewModel =
-            ViewModelProvider(this).get(TariffViewModel::class.java)
+            ViewModelProvider(this).get(RoadViewModel::class.java)
 
         _binding = FragmentRoadBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textViewRoad
-        roadViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        binding.CategoryDrivingLicence.setOnClickListener {view->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_category_driving_licence
+            )
         }
+
+//        val textView: TextView = binding.textViewRoad
+//        roadViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 

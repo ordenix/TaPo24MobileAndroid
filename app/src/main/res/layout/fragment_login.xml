@@ -2,12 +2,108 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                                    android:layout_height="match_parent">
-
-    <TextView
-            android:text="TextView"
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/textViewLogin"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:minWidth="280dp" android:maxWidth="300dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:background="@drawable/style_social_media_button"
+                android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/constraintLayout3">
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlinedTextField"
+                    app:startIconDrawable="@drawable/user_solid"
+                    style="@style/Widget.App.TextInputLayout"
+                    app:startIconTint="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hintLoginOrEmail"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="16dp"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlinedTextField2"
+                    android:textColor="@color/white"
+
+                    app:startIconDrawable="@drawable/key_solid"
+                    app:startIconTint="@color/white"
+                    style="@style/Widget.App.TextInputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hintPassword"
+                    app:endIconMode="password_toggle"
+                    app:layout_constraintTop_toBottomOf="@+id/button5"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            >
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:inputType="textPassword"
+                        android:layout_height="wrap_content"
+                />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                    android:text="@string/loginToService"
+                    app:icon="@drawable/right_to_bracket_solid"
+                    app:iconGravity="textEnd"
+                    style="@style/Widget.Material3.Button"
+                    android:backgroundTint="@color/orange_tapo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button"
+                    app:layout_constraintTop_toBottomOf="@+id/outlinedTextField2"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <Button
+                    android:text="@string/forgotPassword"
+                    style="@style/Widget.Material3.Button"
+                    app:icon="@drawable/circle_question_solid10"
+                    android:backgroundTint="@color/orange_tapo"
+                    android:textSize="10sp"
+                    app:iconSize="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button5"
+                    app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/style_social_media_button"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="16dp" android:id="@+id/ButtonRegister">
+
+            <TextView
+                    android:text="@string/newInTapo"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView20"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="8dp"/>
+            <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp" app:srcCompat="@drawable/hand_pointer_regular"
+                    android:id="@+id/imageView9"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toEndOf="@+id/textView20"
+                    android:layout_marginStart="8dp"
+                    app:tint="@color/white"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

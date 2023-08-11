@@ -38,4 +38,44 @@
     <string name="after09">Po wrześniu 2022 (obecne)</string>
     <string name="WarnEngine">Uwaga!! Zmiana silnika wpływa na wyświetlanie wykroczeń w całej aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian. Przeznaczona głównie dla osób prowadzących sprawy z przez zmiany przepisów. Wyłącznie wsparcia tej opcji planowane jest w 2025 roku</string>
     <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera!</string>
+
+
+<!--    LOGIN-->
+    <string name="newInTapo">Nowy w TaPo24.pl Załóż konto</string>
+    <string name="hintLoginOrEmail">Wprowadź login lub email</string>
+    <string name="hintPassword">Wprowadź hasło</string>
+    <string name="forgotPassword">Zapomniałeś hasła?</string>
+    <string name="loginToService">Zaloguj</string>
+    <string name="register">Rejestracja</string>
+
+<!--    ROAD MODULE-->
+    <string name="roadSign">Znaki drogowe</string>
+    <string name="Accident">Kwalifikacja zdarzenia</string>
+    <string name="ControleAlcohol">Kontrola Trzeźwości</string>
+    <string name="CodeFailure">Kody usterek</string>
+    <string name="CategodyDrivingLicence">Kategorie prawa jazdy</string>
+    <string name="CodeDisallowedDringLicence">Kody ograniczeń prawa jazdy</string>
+    <string name="OtherCountryDrivingLicence">Honorowane zagraniczne PJ</string>
+    <string name="HoldingDocuments">Zatrzymywanie dokumentów</string>
+    <string name="StausDrivingLicenceKSIP">Statusy Prawa Jazdy KSIP</string>
+    <string name="Lights">Oświetlenie pojazdu</string>
+    <string name="Towing">Holowanie pojazdu</string>
+    <string name="uto">UTO</string>
+    <string name="roadTransport">Transport drogowy</string>
+    <string name="codePoints">Kody czynów</string>
+    <string name="recidive">Recydywa</string>
+
+    <!--    Code Driving licence-->
+    <string name="categoryDrivingLicencetopic">Kategoria prawa jazdy:</string>
+
+    <string name="requements">Wymagania:</string>
+    <string name="rights">Uprawnienia:</string>
+    <string name="Remarks">Uwagi:</string>
+
+
+    <!--    Util-->
+    <string name="expand">Rozwiń</string>
+    <string name="colapse">Zwiń</string>
+
+
 </resources>

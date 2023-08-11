@@ -14,9 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
-import com.google.android.material.badge.BadgeDrawable
-import com.google.android.material.badge.BadgeUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -25,10 +22,11 @@ import kotlinx.coroutines.launch
 import pl.tapo24.data.EnginesType
 import pl.tapo24.data.EnvironmentType
 import pl.tapo24.data.State
-import pl.tapo24.data.Uid
 import pl.tapo24.databinding.ActivityMainBinding
 import pl.tapo24.db.TapoDb
 import pl.tapo24.db.entity.Setting
+import pl.tapo24.dbData.DataTapoDb
+import pl.tapo24.dbData.entity.DataBaseVersion
 import pl.tapo24.infrastructure.NetworkClient
 import javax.inject.Inject
 
@@ -37,6 +35,9 @@ class MainActivity: AppCompatActivity() {
 
     @Inject
     lateinit var tapoDb: TapoDb
+    
+    @Inject
+    lateinit var dataTapoDb: DataTapoDb
 
     @Inject
     lateinit var networkClient: NetworkClient
@@ -48,6 +49,8 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getData()
+
         MainScope().launch(Dispatchers.IO) {
             var settingUid: Setting? = null
             async { settingUid = tapoDb.settingDb().getSettingByName("uid") }.await()
@@ -55,7 +58,6 @@ class MainActivity: AppCompatActivity() {
             if (settingUid == null) {
                 async {
                     val response = networkClient.getUid()
-                    println(response)
                     response.onSuccess {
                         val setting = Setting("uid",it.uid!!)
                         tapoDb.settingDb().insert(setting)
@@ -121,7 +123,7 @@ class MainActivity: AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_tariff
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_road, R.id.nav_tariff, R.id.nav_helpers
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -149,11 +151,67 @@ class MainActivity: AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_about_application)
         }
+        if (item.itemId == R.id.action_login) {
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            navController.navigate(R.id.nav_login)
+        }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun getData() {
+        // init
+        // ToDo: Handle error network available
+        MainScope().launch(Dispatchers.IO) {
+            var listDataBaseVersion: List<DataBaseVersion>? = null
+            async { listDataBaseVersion = dataTapoDb.dataBaseVersion().getAll() }.await()
+            var listDataBaseVersionFromDbServer: List<DataBaseVersion>? = null
+            async {
+                val response = networkClient.getAllDataBaseVersion()
+                response.onSuccess {
+                    println(it)
+                    listDataBaseVersionFromDbServer = it
+                }
+            }.await()
+            println(listDataBaseVersion)
+            println(listDataBaseVersionFromDbServer)
+            if (listDataBaseVersion == null || listDataBaseVersion!!.isEmpty() && listDataBaseVersionFromDbServer != null){
+                //insert all database version list
+                async {
+                    dataTapoDb.dataBaseVersion().insertList(listDataBaseVersionFromDbServer!!)
+                }.await()
+
+                //get all data
+                getCodeDrivingLicence()
+            } else {
+                listDataBaseVersionFromDbServer?.forEach {
+                    val element = listDataBaseVersion!!.find { el -> el.id == it.id }
+                    if (element?.version!! < it.version) {
+                        // different versions
+                        if (it.id == "code_driving_licence"){
+                            getCodeDrivingLicence()
+                        }
+                        async { dataTapoDb.dataBaseVersion().insert(it) }.await()
+                    }
+                }
+            }
+
+        }
+    }
+
+    private fun getCodeDrivingLicence() {
+        MainScope().launch(Dispatchers.IO) {
+            async {
+                val response = networkClient.getCodeDrivingLicence()
+                response.onSuccess {
+                    dataTapoDb.codeDrivingLicence().insertList(it)
+                }
+            }.await()
+        }
+
     }
 }

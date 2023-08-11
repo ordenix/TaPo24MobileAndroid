@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import pl.tapo24.R
 import pl.tapo24.databinding.FragmentLoginBinding
 import pl.tapo24.ui.tariff.TariffViewModel
 
@@ -24,15 +26,21 @@ class LoginFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val loginViewModel =
-            ViewModelProvider(this).get(TariffViewModel::class.java)
+            ViewModelProvider(this).get(LoginViewModel::class.java)
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textViewLogin
-        loginViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        binding.ButtonRegister.setOnClickListener{view->
+            view.findNavController().navigate(
+                R.id.action_nav_login_to_nav_register
+            )
         }
+
+//        val textView: TextView = binding.textViewLogin
+//        loginViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
