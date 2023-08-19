@@ -1,9 +1,6 @@
-package pl.tapo24.ui.categoryDrivingLicence
+package pl.tapo24.ui.road.categoryDrivingLicence
 
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.style.BulletSpan
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +12,7 @@ import kotlinx.coroutines.withContext
 import pl.tapo24.adapter.CategoryDrivingLicenceAdapter
 import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.dbData.entity.CodeDrivingLicence
+import pl.tapo24.utils.UlListBuilder
 import javax.inject.Inject
 
 
@@ -41,22 +39,7 @@ class CategoryDrivingLicenceViewModel @Inject constructor(
     }
 
     fun getSpannableText(text: String?): SpannableStringBuilder {
-        val ssb = SpannableStringBuilder()
-        if (text == null) return ssb
-        val array: List<String> = text.split("/n").toList()
-
-        array.forEach{
-            val ss = SpannableString(it)
-            ss.setSpan(BulletSpan(10), 0, it.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            ssb.append(ss)
-
-            //avoid last "\n"
-
-            //avoid last "\n"
-             ssb.append("\n")
-        }
-        return ssb
-
+        return UlListBuilder().getSpannableTextBullet(text)
     }
     fun expand(position: Int) {
         data.value!![position].expand = !data.value!![position].expand

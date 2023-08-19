@@ -21,5 +21,5 @@ data class Towing(
     @ColumnInfo(defaultValue = "")
     var cost: String = "",
     @ColumnInfo(defaultValue = "true")
-    var permission: Boolean = true,
+    var permission: Boolean? = true,
 )

@@ -1,7 +1,6 @@
 package pl.tapo24.adapter
 
 import android.icu.text.SimpleDateFormat
-import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -19,7 +18,7 @@ class HomeWhatsNewsAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeWhatsNewsHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.whats_news_rv_element, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_element_whats_news, parent, false)
         return HomeWhatsNewsHolder(view)
     }
 

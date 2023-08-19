@@ -37,6 +37,28 @@ class RoadFragment: Fragment() {
             )
         }
 
+        binding.countryDrivingLicence.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_country_driving_licence
+            )
+        }
+
+        binding.status.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_status
+            )
+        }
+        binding.towing.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_towing
+            )
+        }
+        binding.lights.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_lights
+            )
+        }
+
 //        val textView: TextView = binding.textViewRoad
 //        roadViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it

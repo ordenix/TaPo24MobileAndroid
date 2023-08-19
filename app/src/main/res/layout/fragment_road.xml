@@ -148,7 +148,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/id_card_solid"
                                 android:id="@+id/imageView8314"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
@@ -195,7 +195,7 @@
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/countryDrivingLicence">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -206,10 +206,10 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp"
                                 android:id="@+id/imageView8344"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
+                                app:layout_constraintStart_toStartOf="parent" app:srcCompat="@drawable/flag_solid"/>
                         <TextView
                                 android:text="@string/OtherCountryDrivingLicence"
                                 style="@style/gridText"
@@ -253,7 +253,7 @@
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/status">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -264,10 +264,10 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp"
                                 android:id="@+id/imageView8399"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
+                                app:layout_constraintStart_toStartOf="parent" app:srcCompat="@drawable/info_solid"/>
                         <TextView
                                 android:text="@string/StausDrivingLicenceKSIP"
                                 style="@style/gridText"
@@ -282,7 +282,7 @@
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/lights">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -293,7 +293,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/lightbulb_solid"
                                 android:id="@+id/imageView8300"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
@@ -311,7 +311,7 @@
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/towing">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -322,7 +322,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/truck_ramp_box_solid"
                                 android:id="@+id/imageView83221"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>

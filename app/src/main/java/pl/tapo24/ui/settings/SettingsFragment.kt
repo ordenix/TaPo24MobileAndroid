@@ -1,5 +1,6 @@
 package pl.tapo24.ui.settings
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.MainActivity
 import pl.tapo24.data.EnginesType
 import pl.tapo24.data.EnvironmentType
 import pl.tapo24.databinding.FragmentRoadBinding
@@ -21,6 +24,7 @@ class SettingsFragment: Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private var context2: Context? = null
 
 
     override fun onCreateView(
@@ -30,6 +34,7 @@ class SettingsFragment: Fragment() {
     ): View {
         val settingsViewModel =
             ViewModelProvider(this).get(SettingsViewModel::class.java)
+        context2 = container?.context
 
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -65,18 +70,21 @@ class SettingsFragment: Fragment() {
             binding.radioButtonProduction.isChecked = true
             settingsViewModel.environment.value = EnvironmentType.Master
             settingsViewModel.saveSettings()
+            context2?.let { it1 -> settingsViewModel.getData(it1) }
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
         binding.radioButtonFeature.setOnClickListener {
             binding.radioButtonFeature.isChecked = true
             settingsViewModel.environment.value = EnvironmentType.Feature
             settingsViewModel.saveSettings()
+            context2?.let { it1 -> settingsViewModel.getData(it1) }
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
         binding.radioButtonTest.setOnClickListener {
             binding.radioButtonTest.isChecked = true
             settingsViewModel.environment.value = EnvironmentType.Beta
             settingsViewModel.saveSettings()
+            context2?.let { it1 -> settingsViewModel.getData(it1) }
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
 

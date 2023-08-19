@@ -1,8 +1,10 @@
 package pl.tapo24
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
@@ -12,13 +14,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.dialog.MaterialDialogs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import pl.tapo24.data.EnginesType
 import pl.tapo24.data.EnvironmentType
 import pl.tapo24.data.State
@@ -29,7 +32,15 @@ import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.dbData.entity.DataBaseVersion
 import pl.tapo24.infrastructure.NetworkClient
 import javax.inject.Inject
-
+@BindingMethods(
+    value = [
+        BindingMethod(
+            type = ImageView::class,
+            attribute = "app:srcCompat",
+            method = "setImageDrawable"
+        )
+    ]
+)
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
 
@@ -46,10 +57,17 @@ class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     var test = MutableLiveData<Boolean>(false)
 
+    private var downloadDataDialogClose = MutableLiveData<Boolean>(false)
+    private var downloadText = MutableLiveData<String>("Proszę czekać")
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
 
-        getData()
+        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
 
         MainScope().launch(Dispatchers.IO) {
             var settingUid: Setting? = null
@@ -161,57 +179,5 @@ class MainActivity: AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    private fun getData() {
-        // init
-        // ToDo: Handle error network available
-        MainScope().launch(Dispatchers.IO) {
-            var listDataBaseVersion: List<DataBaseVersion>? = null
-            async { listDataBaseVersion = dataTapoDb.dataBaseVersion().getAll() }.await()
-            var listDataBaseVersionFromDbServer: List<DataBaseVersion>? = null
-            async {
-                val response = networkClient.getAllDataBaseVersion()
-                response.onSuccess {
-                    println(it)
-                    listDataBaseVersionFromDbServer = it
-                }
-            }.await()
-            println(listDataBaseVersion)
-            println(listDataBaseVersionFromDbServer)
-            if (listDataBaseVersion == null || listDataBaseVersion!!.isEmpty() && listDataBaseVersionFromDbServer != null){
-                //insert all database version list
-                async {
-                    dataTapoDb.dataBaseVersion().insertList(listDataBaseVersionFromDbServer!!)
-                }.await()
-
-                //get all data
-                getCodeDrivingLicence()
-            } else {
-                listDataBaseVersionFromDbServer?.forEach {
-                    val element = listDataBaseVersion!!.find { el -> el.id == it.id }
-                    if (element?.version!! < it.version) {
-                        // different versions
-                        if (it.id == "code_driving_licence"){
-                            getCodeDrivingLicence()
-                        }
-                        async { dataTapoDb.dataBaseVersion().insert(it) }.await()
-                    }
-                }
-            }
-
-        }
-    }
-
-    private fun getCodeDrivingLicence() {
-        MainScope().launch(Dispatchers.IO) {
-            async {
-                val response = networkClient.getCodeDrivingLicence()
-                response.onSuccess {
-                    dataTapoDb.codeDrivingLicence().insertList(it)
-                }
-            }.await()
-        }
-
     }
 }

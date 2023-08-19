@@ -1,5 +1,6 @@
 package pl.tapo24.ui.settings
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,17 +10,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pl.tapo24.DataUpdater
 import pl.tapo24.data.EnginesType
 import pl.tapo24.data.EnvironmentType
 import pl.tapo24.data.State
 import pl.tapo24.db.TapoDb
 import pl.tapo24.db.entity.Setting
+import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.infrastructure.NetworkClient
 import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel@Inject constructor(
     private val tapoDb: TapoDb,
-    private val networkClient: NetworkClient
+    private val networkClient: NetworkClient,
+    private val dataTapoDb: DataTapoDb
 ) : ViewModel() {
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
@@ -36,6 +40,12 @@ class SettingsViewModel@Inject constructor(
             }
 
         }
+    }
+    fun getData(context: Context){
+        environment.value?.let { networkClient.rebuild(it.url) }
+        val dataupdate = DataUpdater(tapoDb,dataTapoDb,networkClient,context)
+        dataupdate.deleteData()
+        dataupdate.getData()
     }
     fun saveSettings () {
         var envSettingToDb: Setting? = Setting("settingEnvironment")

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" >
+    <data>
+        <import type="android.view.View"/>
+        <variable name="position"
+                  type="java.lang.Integer"/>
+        <variable name="size"
+                  type="java.lang.Integer"/>
+        <variable name="data"
+                  type="pl.tapo24.dbData.entity.LightsFront"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <TextView
+                android:text="@{data.code}"
+                style="@style/textStyleOrangeMediumWarpXl"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" android:id="@+id/textView44"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/textView45"/>
+        <TextView
+                android:text="@{data.name}"
+                android:layout_width="0dp"
+                style="@style/textStyleWhiteSmallInContainer"
+                android:layout_height="wrap_content" android:id="@+id/textView46"
+                app:layout_constraintStart_toEndOf="@+id/textView44" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"/>
+        <TextView
+                android:text="@{`Uwaga: `+data.remarks}"
+                style="@style/textStyleWhiteSmallInContainer"
+                android:textColor="@color/orange_tapo"
+                android:visibility="@{data.remarks == null ? View.GONE : View.VISIBLE}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/textView45"
+                app:layout_constraintTop_toBottomOf="@+id/textView46" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <View
+                android:visibility="@{size-1 == position ? View.GONE : View.VISIBLE}"
+                android:id="@+id/divider5"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/style_orange_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView45"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

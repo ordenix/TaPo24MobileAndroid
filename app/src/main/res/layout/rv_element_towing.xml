@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   >
+    <data>
+        <import type="android.view.View"/>
+        <variable name="data"
+                  type="pl.tapo24.dbData.entity.Towing"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container">
+
+        <TextView
+                android:text="@{data.name}"
+                style="@style/textStyleOrangeMediumWarpXl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView36"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+                android:text="@{data.law}"
+                android:layout_width="0dp"
+                style="@style/textStyleWhiteSmallInContainer"
+
+                android:layout_height="wrap_content" android:id="@+id/textView37"
+                app:layout_constraintTop_toBottomOf="@+id/textView36" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="8dp"/>
+        <View
+                android:id="@+id/divider5"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/style_orange_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView37" android:layout_marginTop="8dp"/>
+        <TextView
+                android:text="@{`Rodzaj: `+ data.type}"
+                style="@style/textStyleWhiteSmallInContainer"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView38"
+                app:layout_constraintTop_toBottomOf="@+id/divider5" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"/>
+        <TextView
+                android:text="@{`Konieczność: `+ data.necessity}"
+                android:visibility="@{data.necessity != null ? View.VISIBLE : View.GONE}"
+
+                style="@style/textStyleWhiteSmallInContainer"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView39"
+                app:layout_constraintTop_toBottomOf="@+id/textView38" app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:text="@{`Holowanie na koszt: `+ data.cost}"
+                style="@style/textStyleWhiteSmallInContainer"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView40"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:text="@{data.permission == true ? `Odbiór pojazdu wymaga zezwolenia` : `Odbiór pojazdu NIE wymaga zezwolenia`}"
+                android:visibility="@{data.permission != null ? View.VISIBLE : View.GONE}"
+
+                android:layout_width="wrap_content"
+                style="@style/textStyleWhiteSmallInContainer"
+
+                android:layout_height="wrap_content" android:id="@+id/textView41"
+                app:layout_constraintTop_toBottomOf="@+id/textView40" app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

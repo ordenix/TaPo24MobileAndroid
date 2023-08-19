@@ -15,15 +15,20 @@
               android:label="@string/menu_helpers"
               tools:layout="@layout/fragment_helpers"/>
     <fragment android:id="@+id/nav_category_driving_licence"
-              android:name="pl.tapo24.ui.categoryDrivingLicence.CategoryDrivingLicenceFragment"
+              android:name="pl.tapo24.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
               android:label="@string/CategodyDrivingLicence"
               tools:layout="@layout/fragment_category_driving_licence"/>
     <fragment android:id="@+id/nav_road"
               android:name="pl.tapo24.ui.road.RoadFragment"
               android:label="@string/menu_road"
-              tools:layout="@layout/fragment_helpers">
+              tools:layout="@layout/fragment_road">
         <action android:id="@+id/action_nav_road_to_nav_category_driving_licence"
                 app:destination="@id/nav_category_driving_licence"/>
+        <action android:id="@+id/action_nav_road_to_nav_country_driving_licence"
+                app:destination="@id/nav_country_driving_licence"/>
+        <action android:id="@+id/action_nav_road_to_nav_status" app:destination="@id/nav_status"/>
+        <action android:id="@+id/action_nav_road_to_nav_towing" app:destination="@id/nav_towing"/>
+        <action android:id="@+id/action_nav_road_to_nav_lights" app:destination="@id/nav_lights"/>
     </fragment>
 
     <fragment
@@ -60,4 +65,37 @@
               tools:layout="@layout/fragment_register">
         <action android:id="@+id/action_nav_register_to_nav_login" app:destination="@id/nav_login"/>
     </fragment>
+    <fragment android:id="@+id/nav_country_driving_licence"
+              android:name="pl.tapo24.ui.road.countryDrivingLicence.CountryDrivingLicenceFragment"
+              android:label="@string/OtherCountryDrivingLicence"
+    tools:layout="@layout/fragment_country_driving_licence"/>
+    <fragment android:id="@+id/nav_status"
+              android:name="pl.tapo24.ui.road.status.StatusFragment"
+              android:label="@string/StausDrivingLicenceKSIP"
+              tools:layout="@layout/fragment_status"/>
+    <fragment android:id="@+id/nav_towing"
+              android:name="pl.tapo24.ui.road.towing.TowingFragment"
+              android:label="@string/Towing"
+              tools:layout="@layout/fragment_towing"/>
+    <fragment android:id="@+id/nav_lights"
+              android:name="pl.tapo24.ui.road.lights.LightsFragment"
+              android:label="@string/Lights"
+              tools:layout="@layout/fragment_lights">
+        <action android:id="@+id/action_nav_lights_to_nav_lights_front" app:destination="@id/nav_lights_front"/>
+        <action android:id="@+id/action_nav_lights_to_nav_lights_code_country"
+                app:destination="@id/nav_lights_code_country"/>
+        <action android:id="@+id/action_nav_lights_to_nav_lights_others" app:destination="@id/nav_lights_others"/>
+    </fragment>
+    <fragment android:id="@+id/nav_lights_code_country"
+              android:name="pl.tapo24.ui.road.lights.lightsCodeCountry.LightsCodeCountryFragment"
+              android:label="@string/LightsCodeCountry"
+              tools:layout="@layout/fragment_lights_code_country"/>
+    <fragment android:id="@+id/nav_lights_front"
+              android:name="pl.tapo24.ui.road.lights.lightsFront.LightsFrontFragment"
+              android:label="@string/LightsFront"
+              tools:layout="@layout/fragment_lights_front"/>
+    <fragment android:id="@+id/nav_lights_others"
+              android:name="pl.tapo24.ui.road.lights.lightsOthres.LightsOthersFragment"
+              android:label="@string/LightsOthers"
+              tools:layout="@layout/fragment_lights_others"/>
 </navigation>

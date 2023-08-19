@@ -14,7 +14,9 @@ data class Status(
     var status: String = "",
     @ColumnInfo(defaultValue = "")
     var stateDescription: String = "",
-    @ColumnInfo(defaultValue = "")
-    var remarks: String = "",
+    @ColumnInfo(defaultValue = "null")
+    var remarks: String? = null,
+    @ColumnInfo(defaultValue = "false")
+    var expand: Boolean = false,
 ) {
 }

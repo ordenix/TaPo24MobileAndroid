@@ -1,15 +1,10 @@
 package pl.tapo24.adapter
 
-import android.graphics.Color
-import android.text.SpannableString
-import android.text.style.BackgroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.badge.BadgeUtils
 import pl.tapo24.R
 import pl.tapo24.db.entity.Tariff
 
@@ -20,7 +15,7 @@ class TariffDataAdapter(
 ): RecyclerView.Adapter<TariffDataAdapter.TariffDataHolder>() {
     var onItemClick: ((Tariff) -> Unit)? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TariffDataHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.tariff_rv_element, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_element_tariff, parent, false)
         return TariffDataHolder(view)
     }
 

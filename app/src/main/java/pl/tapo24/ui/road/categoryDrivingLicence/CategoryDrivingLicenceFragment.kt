@@ -1,4 +1,4 @@
-package pl.tapo24.ui.categoryDrivingLicence
+package pl.tapo24.ui.road.categoryDrivingLicence
 
 import android.os.Bundle
 import android.view.LayoutInflater

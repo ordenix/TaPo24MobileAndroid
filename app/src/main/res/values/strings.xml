@@ -37,7 +37,7 @@
     <string name="before09">Przed wrześńiem 2022</string>
     <string name="after09">Po wrześniu 2022 (obecne)</string>
     <string name="WarnEngine">Uwaga!! Zmiana silnika wpływa na wyświetlanie wykroczeń w całej aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian. Przeznaczona głównie dla osób prowadzących sprawy z przez zmiany przepisów. Wyłącznie wsparcia tej opcji planowane jest w 2025 roku</string>
-    <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera!</string>
+    <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera! Jeżeli udało ci się zmienić gratulacje ;), lecz pamiętaj wszystkie środowiska poza produkcyjnym zawierają dane testowe</string>
 
 
 <!--    LOGIN-->
@@ -59,6 +59,9 @@
     <string name="HoldingDocuments">Zatrzymywanie dokumentów</string>
     <string name="StausDrivingLicenceKSIP">Statusy Prawa Jazdy KSIP</string>
     <string name="Lights">Oświetlenie pojazdu</string>
+    <string name="LightsCodeCountry">Kody homologacji</string>
+    <string name="LightsFront">Reflektory</string>
+    <string name="LightsOthers">Pozostałe światła</string>
     <string name="Towing">Holowanie pojazdu</string>
     <string name="uto">UTO</string>
     <string name="roadTransport">Transport drogowy</string>
@@ -76,6 +79,9 @@
     <!--    Util-->
     <string name="expand">Rozwiń</string>
     <string name="colapse">Zwiń</string>
+    <string name="searchCountry">Wyszukaj kraj</string>
+    <string name="search">Wyszukaj</string>
+
 
 
 </resources>

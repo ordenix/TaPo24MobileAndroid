@@ -13,6 +13,7 @@
             android:theme="@style/Theme.TaPo24.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
+                app:layout_scrollFlags="scroll|enterAlways|snap"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:background="?attr/colorPrimary"

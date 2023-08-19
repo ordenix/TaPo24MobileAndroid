@@ -1,16 +1,14 @@
 package pl.tapo24.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.R
 import pl.tapo24.BR
 import pl.tapo24.dbData.entity.CodeDrivingLicence
-import pl.tapo24.ui.categoryDrivingLicence.CategoryDrivingLicenceViewModel
+import pl.tapo24.ui.road.categoryDrivingLicence.CategoryDrivingLicenceViewModel
 
 class CategoryDrivingLicenceAdapter(
     var items: List<CodeDrivingLicence>,
@@ -22,7 +20,7 @@ class CategoryDrivingLicenceAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryDrivingLicenceDataHolder {
         val view = LayoutInflater.from(parent.context)
         // var binding = DataBindingUtil.inflate<ViewDataBinding>(view, layout, parent, false)
-       val binding =  DataBindingUtil.inflate<ViewDataBinding>(view, R.layout.category_driving_licence_rv_element, parent, false)
+       val binding =  DataBindingUtil.inflate<ViewDataBinding>(view, R.layout.rv_element_category_driving_licence, parent, false)
         return CategoryDrivingLicenceDataHolder(binding)
     }
 
