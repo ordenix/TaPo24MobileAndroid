@@ -49,7 +49,6 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_towing")
     fun getTowingData(): Call<List<Towing>>
-//
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_code_limits_driving_licence")
     fun getCodeLimitsDrivingLicence(): Call<List<CodeLimitsDrivingLicence>>
@@ -68,4 +67,7 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_story")
     fun getStory(): Call<List<Story>>
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_uto")
+    fun getUto(): Call<List<Uto>>
 }

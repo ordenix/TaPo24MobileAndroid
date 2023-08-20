@@ -67,10 +67,12 @@
     <string name="roadTransport">Transport drogowy</string>
     <string name="codePoints">Kody czynów</string>
     <string name="recidive">Recydywa</string>
+    <string name="onHere">Badany na miejscu</string>
+    <string name="fromFar">Badany oddalił się</string>
+
 
     <!--    Code Driving licence-->
     <string name="categoryDrivingLicencetopic">Kategoria prawa jazdy:</string>
-
     <string name="requements">Wymagania:</string>
     <string name="rights">Uprawnienia:</string>
     <string name="Remarks">Uwagi:</string>
@@ -81,6 +83,7 @@
     <string name="colapse">Zwiń</string>
     <string name="searchCountry">Wyszukaj kraj</string>
     <string name="search">Wyszukaj</string>
+    <string name="back">Wstecz</string>
 
 
 

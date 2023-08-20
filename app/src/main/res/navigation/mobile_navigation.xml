@@ -29,6 +29,9 @@
         <action android:id="@+id/action_nav_road_to_nav_status" app:destination="@id/nav_status"/>
         <action android:id="@+id/action_nav_road_to_nav_towing" app:destination="@id/nav_towing"/>
         <action android:id="@+id/action_nav_road_to_nav_lights" app:destination="@id/nav_lights"/>
+        <action android:id="@+id/action_nav_road_to_nav_story" app:destination="@id/nav_story">
+        </action>
+        <action android:id="@+id/action_nav_road_to_nav_alcohol" app:destination="@id/nav_alcohol"/>
     </fragment>
 
     <fragment
@@ -98,4 +101,17 @@
               android:name="pl.tapo24.ui.road.lights.lightsOthres.LightsOthersFragment"
               android:label="@string/LightsOthers"
               tools:layout="@layout/fragment_lights_others"/>
+    <fragment android:id="@+id/nav_story"
+              android:name="pl.tapo24.ui.story.StoryFragment"
+              android:label="@string/LightsOthers"
+              tools:layout="@layout/fragment_story">
+        <argument android:name="name" app:argType="string"/>
+        <argument android:name="storyType" app:argType="string"/>
+    </fragment>
+    <fragment android:id="@+id/nav_alcohol"
+              tools:layout="@layout/fragment_alcohol"
+              android:name="pl.tapo24.ui.road.alcohol.AlcoholFragment"
+              android:label="AlcoholFragment">
+        <action android:id="@+id/action_nav_alcohol_to_nav_story" app:destination="@id/nav_story"/>
+    </fragment>
 </navigation>

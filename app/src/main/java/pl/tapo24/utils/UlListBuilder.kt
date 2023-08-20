@@ -7,30 +7,30 @@ import android.text.style.BulletSpan
 import java.util.*
 
 class UlListBuilder {
-    fun getSpannableTextBullet(text: String?): SpannableStringBuilder {
+    fun getSpannableTextBullet(text: String?, forceFirst: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
         val array: List<String> = text.split("/n").toList()
-
-        array.forEach{
-            val ss = SpannableString(it)
-            ss.setSpan(BulletSpan(10), 0, it.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-            ssb.append(ss)
-
-            //avoid last "\n"
-
-            //avoid last "\n"
-            ssb.append("\n")
+        if (array.size == 1 && !forceFirst) {
+            ssb.append(text.trimStart().replaceFirstChar{it.uppercase()})
+        } else {
+            array.forEach{ element ->
+                val textTrim = element.trimStart().replaceFirstChar{it.uppercase()}
+                val ss = SpannableString(textTrim)
+                ss.setSpan(BulletSpan(10), 0, textTrim.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ssb.append(ss)
+                ssb.append("\n")
+            }
         }
         return ssb
 
     }
 
-    fun getTextNumerator(text: String?): SpannableStringBuilder {
+    fun getTextNumerator(text: String?, forceFirst: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
         val array: List<String> = text.split("/n").toList()
-        if (array.size == 1) {
+        if (array.size == 1 && !forceFirst) {
             ssb.append(text.trimStart().replaceFirstChar{it.uppercase()})
         } else {
             var numerator: Int = 1

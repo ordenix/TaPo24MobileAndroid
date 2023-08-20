@@ -39,7 +39,7 @@ class CategoryDrivingLicenceViewModel @Inject constructor(
     }
 
     fun getSpannableText(text: String?): SpannableStringBuilder {
-        return UlListBuilder().getSpannableTextBullet(text)
+        return UlListBuilder().getSpannableTextBullet(text, true)
     }
     fun expand(position: Int) {
         data.value!![position].expand = !data.value!![position].expand

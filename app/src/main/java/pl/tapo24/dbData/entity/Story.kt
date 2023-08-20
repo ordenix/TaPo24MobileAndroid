@@ -9,6 +9,9 @@ data class Story(
     @PrimaryKey(autoGenerate = false)
     val id: Long = 0,
 
+    @ColumnInfo(defaultValue = "0")
+    var link: Int = 0,
+
     @ColumnInfo(defaultValue = "")
     var type: String = "",
 

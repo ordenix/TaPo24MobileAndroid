@@ -227,6 +227,18 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetHoldingDocuments.message))
     }
 
+    fun getUtoData(): Result<List<Uto>>{
+        try {
+            val response = service.getUto().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetHoldingDocuments.message))
+    }
+
 
 
     fun login() {

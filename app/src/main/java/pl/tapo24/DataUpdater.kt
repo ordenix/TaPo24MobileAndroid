@@ -86,6 +86,8 @@ class DataUpdater(
                 getControlList()
                 Thread.sleep(delay)
                 getCodeLimitsDrivingLicence()
+                Thread.sleep(delay)
+                getUto()
 
             } else {
                 //getCodeDrivingLicence()
@@ -149,6 +151,10 @@ class DataUpdater(
                         }
                         if (it.id == "control_list"){
                             getControlList()
+                            Thread.sleep(delay)
+                        }
+                        if (it.id == "uto"){
+                            getUto()
                             Thread.sleep(delay)
                         }
                         async { dataTapoDb.dataBaseVersion().insert(it) }.await()
@@ -330,6 +336,19 @@ class DataUpdater(
                 val response = networkClient.getCodePointsNewData()
                 response.onSuccess {
                     dataTapoDb.codePointsNew().insertList(it)
+                }
+            }.await()
+        }
+    }
+    private fun getUto() {
+        MainScope().launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                dialog.setMessage("Pobieranie danych UTO")
+            }
+            async {
+                val response = networkClient.getUtoData()
+                response.onSuccess {
+                    dataTapoDb.uto().insertList(it)
                 }
             }.await()
         }

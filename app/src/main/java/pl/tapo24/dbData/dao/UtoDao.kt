@@ -4,14 +4,15 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import pl.tapo24.dbData.entity.Story
+
+import pl.tapo24.dbData.entity.Uto
+
 @Dao
+interface UtoDao {
 
-interface StoryDao {
-
-    @Query("SELECT * FROM story where type = :type")
-    fun getAllByType(type: String): List<Story>
+    @Query("SELECT * FROM uto where id = :id")
+    fun getAllById(id: Int): List<Uto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertList(items: List<Story>)
+    fun insertList(items: List<Uto>)
 }
