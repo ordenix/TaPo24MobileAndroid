@@ -11,7 +11,7 @@ import pl.tapo24.dbData.entity.Uto
 interface UtoDao {
 
     @Query("SELECT * FROM uto where id = :id")
-    fun getAllById(id: Int): List<Uto>
+    fun getById(id: Int): Uto
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Uto>)

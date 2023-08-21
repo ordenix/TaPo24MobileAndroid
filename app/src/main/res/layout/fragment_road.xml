@@ -340,7 +340,7 @@
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/uto">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -351,7 +351,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/skateboarding_bold"
                                 android:id="@+id/imageView83223"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>

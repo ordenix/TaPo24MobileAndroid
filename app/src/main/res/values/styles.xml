@@ -43,6 +43,11 @@
         <item name="android:textSize">14sp</item>
         <item name="android:maxLines">10</item>
     </style>
+    <style name="textStyleWhiteSmallInContainerCenter" parent="@style/textStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:maxLines">10</item>
+    </style>
     <style name="remarksKsipStatus" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/orange_tapo</item>

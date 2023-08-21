@@ -32,6 +32,7 @@
         <action android:id="@+id/action_nav_road_to_nav_story" app:destination="@id/nav_story">
         </action>
         <action android:id="@+id/action_nav_road_to_nav_alcohol" app:destination="@id/nav_alcohol"/>
+        <action android:id="@+id/action_nav_road_to_nav_uto" app:destination="@id/nav_uto"/>
     </fragment>
 
     <fragment
@@ -113,5 +114,15 @@
               android:name="pl.tapo24.ui.road.alcohol.AlcoholFragment"
               android:label="AlcoholFragment">
         <action android:id="@+id/action_nav_alcohol_to_nav_story" app:destination="@id/nav_story"/>
+    </fragment>
+    <fragment android:id="@+id/nav_uto" android:name="pl.tapo24.ui.road.uto.UtoFragment"
+              android:label="fragment_uto" tools:layout="@layout/fragment_uto">
+        <action android:id="@+id/action_utoFragment_to_nav_utoComponent"
+                app:destination="@id/nav_utoComponent"/>
+    </fragment>
+    <fragment android:id="@+id/nav_utoComponent"
+              android:name="pl.tapo24.ui.road.uto.utoComponent.UtoComponentFragment"
+              android:label="fragment_uto_component" tools:layout="@layout/fragment_uto_component">
+        <argument android:name="id" app:argType="integer"/>
     </fragment>
 </navigation>

@@ -70,6 +70,19 @@
     <string name="onHere">Badany na miejscu</string>
     <string name="fromFar">Badany oddalił się</string>
 
+    <!--    UTO -->
+    <string name="utoElectric">Urządzenie transportu osobistego</string>
+    <string name="utoStrenght">Urządzenie wspomagające ruch</string>
+    <string name="utoScooter">Hulajnoga elektryczna</string>
+    <string name="utoRights">Uprawnienia:</string>
+    <string name="utoWhereAllowed">Poruszanie się:"</string>
+    <string name="utoSpeed">Prędkość:</string>
+    <string name="utoProhibition">Zabrania się:</string>
+    <string name="utoBechavior">Zachowanie wobec pieszego:</string>
+    <string name="utoStop">Postój:</string>
+
+
+
 
     <!--    Code Driving licence-->
     <string name="categoryDrivingLicencetopic">Kategoria prawa jazdy:</string>
