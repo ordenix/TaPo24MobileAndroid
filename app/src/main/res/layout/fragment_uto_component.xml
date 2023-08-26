@@ -4,12 +4,14 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.road.uto.utoComponent.UtoComponentFragment">
+        tools:context=".ui.road.uto.utoComponent.UtoComponentFragment" android:paddingBottom="40dp">
     <ScrollView
             android:layout_width="match_parent"
             style="@style/smallContainer"
             android:background="@drawable/style_small_container"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            tools:layout_editor_absoluteX="5dp" app:layout_constraintTop_toTopOf="parent"
+    >
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical">
             <TextView
@@ -72,16 +74,316 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <TextView
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:textAlignment="textStart"
                     android:text="Persecuti tale antiopam noster magna efficiantur malorum. Quisque petentium gloriatur fames rutrum ludus possit latine. Natum appareat mazim velit sea ac. Phasellus his gubergren veri postulant oratio etiam."
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textRights"
             />
             <View
-                    android:id="@+id/divider"
+                    android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
                     android:background="@drawable/style_orange_container"
                     android:layout_marginBottom="2dp"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="@string/utoWhereAllowed"
+                        style="@style/textStyleOrangeMediumWarp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView474518"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/button_small_orange"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/expandWhereAllowed"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="Rozwiń"
+                            style="@style/blackSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textExpandWhereAllowed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toStartOf="@+id/imageExpandWhereAllowed"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/angles_down_solid"
+                            android:id="@+id/imageExpandWhereAllowed"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textExpandWhereAllowed"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:textAlignment="textStart"
+                    android:text="Persecuti tale antiopam noster magna efficiantur malorum. Quisque petentium gloriatur fames rutrum ludus possit latine. Natum appareat mazim velit sea ac. Phasellus his gubergren veri postulant oratio etiam."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textWhereAllowed"
+            />
+            <View
+                    android:id="@+id/divider6"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container"
+                    android:layout_marginBottom="2dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="@string/utoSpeed"
+                        style="@style/textStyleOrangeMediumWarp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView48852"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/button_small_orange"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/expandSpeed"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="Rozwiń"
+                            style="@style/blackSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textExpandSpeed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toStartOf="@+id/imageExpandSpeed"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/angles_down_solid"
+                            android:id="@+id/imageExpandSpeed"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textExpandSpeed"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:textAlignment="textStart"
+                    android:text="Persecuti tale antiopam noster magna efficiantur malorum. Quisque petentium gloriatur fames rutrum ludus possit latine. Natum appareat mazim velit sea ac. Phasellus his gubergren veri postulant oratio etiam."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textSpeed"
+            />
+            <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container"
+                    android:layout_marginBottom="2dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="@string/utoProhibition"
+                        style="@style/textStyleOrangeMediumWarp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView4895148"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/button_small_orange"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/expandProhibition"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="Rozwiń"
+                            style="@style/blackSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textExpandProhibition"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toStartOf="@+id/imageExpandProhibition"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/angles_down_solid"
+                            android:id="@+id/imageExpandProhibition"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textExpandProhibition"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:textAlignment="textStart"
+                    android:text="Persecuti tale antiopam noster magna efficiantur malorum. Quisque petentium gloriatur fames rutrum ludus possit latine. Natum appareat mazim velit sea ac. Phasellus his gubergren veri postulant oratio etiam."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textProhibition"
+            />
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container"
+                    android:layout_marginBottom="2dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="@string/utoBechavior"
+                        style="@style/textStyleOrangeMediumWarp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView4875481"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/button_small_orange"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/expandBehavior"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="Rozwiń"
+                            style="@style/blackSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textExpandBehavior"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toStartOf="@+id/imageExpandBehavior"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/angles_down_solid"
+                            android:id="@+id/imageExpandBehavior"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textExpandBehavior"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:textAlignment="textStart"
+                    android:text="Persecuti tale antiopam noster magna efficiantur malorum. Quisque petentium gloriatur fames rutrum ludus possit latine. Natum appareat mazim velit sea ac. Phasellus his gubergren veri postulant oratio etiam."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textBehavior"
+            />
+            <View
+                    android:id="@+id/divider7"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container"
+                    android:layout_marginBottom="2dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:text="@string/utoStop"
+                        style="@style/textStyleOrangeMediumWarp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView48741845"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/button_small_orange"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/expandStop"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="Rozwiń"
+                            style="@style/blackSmallText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textExpandStop"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:gravity="center"
+                            app:layout_constraintEnd_toStartOf="@+id/imageExpandStop"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+                    <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/angles_down_solid"
+                            android:id="@+id/imageExpandStop"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textExpandStop"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:textAlignment="textStart"
+                    android:text="Persecuti tale antiopam noster magna efficiantur malorum. Quisque petentium gloriatur fames rutrum ludus possit latine. Natum appareat mazim velit sea ac. Phasellus his gubergren veri postulant oratio etiam."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textStop"
+            />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/button_small_orange"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/expandAll"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" android:layout_gravity="center_horizontal">
+
+                <TextView
+                        android:text="Rozwiń wszytsko"
+                        style="@style/blackSmallText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textExpandAll"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:gravity="center"
+                        app:layout_constraintEnd_toStartOf="@+id/imageExpandAll"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        app:srcCompat="@drawable/angles_down_solid"
+                        android:id="@+id/imageExpandAll"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textExpandAll"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

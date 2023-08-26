@@ -32,6 +32,7 @@
         <action android:id="@+id/action_nav_road_to_nav_story" app:destination="@id/nav_story">
         </action>
         <action android:id="@+id/action_nav_road_to_nav_alcohol" app:destination="@id/nav_alcohol"/>
+        <action android:id="@+id/action_nav_road_to_nav_sign" app:destination="@id/nav_sign"/>
         <action android:id="@+id/action_nav_road_to_nav_uto" app:destination="@id/nav_uto"/>
     </fragment>
 
@@ -114,6 +115,25 @@
               android:name="pl.tapo24.ui.road.alcohol.AlcoholFragment"
               android:label="AlcoholFragment">
         <action android:id="@+id/action_nav_alcohol_to_nav_story" app:destination="@id/nav_story"/>
+    </fragment>
+    <fragment android:id="@+id/nav_sign"
+              android:name="pl.tapo24.ui.road.sign.SignFragment"
+              android:label="fragment_sign"
+              tools:layout="@layout/fragment_sign">
+        <action android:id="@+id/action_nav_sign_to_nav_signList" app:destination="@id/nav_signList"/>
+    </fragment>
+    <fragment android:id="@+id/nav_signDetails"
+              android:name="pl.tapo24.ui.road.sign.signDetails.SignDetailsFragment"
+              android:label="fragment_sign_details"
+              tools:layout="@layout/fragment_sign_details">
+        <argument android:name="signDetails" app:argType="pl.tapo24.dbData.entity.Sign"/>
+    </fragment>
+    <fragment android:id="@+id/nav_signList"
+              android:name="pl.tapo24.ui.road.sign.signList.SignListFragment"
+              android:label="fragment_sign_list"
+              tools:layout="@layout/fragment_sign_list">
+        <action android:id="@+id/action_nav_signList_to_nav_signDetails" app:destination="@id/nav_signDetails"/>
+        <argument android:name="signCategory" app:argType="string"/>
     </fragment>
     <fragment android:id="@+id/nav_uto" android:name="pl.tapo24.ui.road.uto.UtoFragment"
               android:label="fragment_uto" tools:layout="@layout/fragment_uto">

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   style="@style/smallContainer"
+                                                   android:background="@drawable/style_small_container"
+                                                   android:id="@+id/signelement">
+    <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp" app:srcCompat="@drawable/a1" android:id="@+id/imageSign"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+            android:text="A-1"
+            style="@style/textStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView43"
+            app:layout_constraintTop_toBottomOf="@+id/imageSign" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+            android:text="Niebezpieczny zakręt w prawo"
+            android:layout_width="wrap_content"
+            style="@style/textStyle"
+            android:textAlignment="center"
+            android:layout_height="wrap_content" android:id="@+id/textView47"
+            app:layout_constraintTop_toBottomOf="@+id/textView43" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:maxLines="20"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

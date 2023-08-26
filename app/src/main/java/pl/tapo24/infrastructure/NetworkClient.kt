@@ -236,9 +236,20 @@ class NetworkClient(var url: String) {
         } catch (ex: Throwable) {
             return Result.failure(ex)
         }
-        return Result.failure(InternalException(InternalMessage.InternalGetHoldingDocuments.message))
+        return Result.failure(InternalException(InternalMessage.InternalGetUtoDocuments.message))
     }
 
+    fun getSignData(): Result<List<Sign>>{
+        try {
+            val response = service.getSign().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetSignDocuments.message))
+    }
 
 
     fun login() {

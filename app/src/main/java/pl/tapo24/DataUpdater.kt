@@ -74,7 +74,6 @@ class DataUpdater(
                 Thread.sleep(delay)
                 getTowing()
                 Thread.sleep(delay)
-
                 getStory()
                 Thread.sleep(delay)
                 getCodePointsOld()
@@ -88,6 +87,8 @@ class DataUpdater(
                 getCodeLimitsDrivingLicence()
                 Thread.sleep(delay)
                 getUto()
+                Thread.sleep(delay)
+                getSign()
 
             } else {
                 //getCodeDrivingLicence()
@@ -155,6 +156,10 @@ class DataUpdater(
                         }
                         if (it.id == "uto"){
                             getUto()
+                            Thread.sleep(delay)
+                        }
+                        if (it.id == "sign"){
+                            getSign()
                             Thread.sleep(delay)
                         }
                         async { dataTapoDb.dataBaseVersion().insert(it) }.await()
@@ -349,6 +354,20 @@ class DataUpdater(
                 val response = networkClient.getUtoData()
                 response.onSuccess {
                     dataTapoDb.uto().insertList(it)
+                }
+            }.await()
+        }
+    }
+
+    private fun getSign() {
+        MainScope().launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                dialog.setMessage("Pobieranie danych Znaków")
+            }
+            async {
+                val response = networkClient.getSignData()
+                response.onSuccess {
+                    dataTapoDb.sign().insertList(it)
                 }
             }.await()
         }

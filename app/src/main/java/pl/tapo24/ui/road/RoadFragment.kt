@@ -71,6 +71,11 @@ class RoadFragment: Fragment() {
                 R.id.action_nav_road_to_nav_alcohol
             )
         }
+        binding.sign.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_sign
+            )
+        }
 
         binding.accident.setOnClickListener { view ->
             view.findNavController().navigate(

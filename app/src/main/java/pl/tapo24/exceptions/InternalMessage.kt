@@ -16,6 +16,9 @@ enum class InternalMessage(val message: String) {
     InternalGetControlList("Internal exception during get data control list"),
     InternalGetCodeLimits("Internal exception during get data code limits"),
     InternalGetHoldingDocuments("Internal exception during get data holding documents"),
+    InternalGetUtoDocuments("Internal exception during get data uto "),
+    InternalGetSignDocuments("Internal exception during get data sign"),
+
 
 
 
