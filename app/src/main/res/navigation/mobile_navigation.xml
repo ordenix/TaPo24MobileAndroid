@@ -34,6 +34,7 @@
         <action android:id="@+id/action_nav_road_to_nav_alcohol" app:destination="@id/nav_alcohol"/>
         <action android:id="@+id/action_nav_road_to_nav_sign" app:destination="@id/nav_sign"/>
         <action android:id="@+id/action_nav_road_to_nav_uto" app:destination="@id/nav_uto"/>
+        <action android:id="@+id/action_nav_road_to_nav_controlList" app:destination="@id/nav_controlList"/>
     </fragment>
 
     <fragment
@@ -145,4 +146,8 @@
               android:label="fragment_uto_component" tools:layout="@layout/fragment_uto_component">
         <argument android:name="id" app:argType="integer"/>
     </fragment>
+    <fragment android:id="@+id/nav_controlList"
+              android:name="pl.tapo24.ui.road.controlList.ControlListFragment"
+              android:label="ControlListFragment"
+              tools:layout="@layout/fragment_control_list"/>
 </navigation>

@@ -81,6 +81,15 @@
     <string name="utoBechavior">Zachowanie wobec pieszego:</string>
     <string name="utoStop">Postój:</string>
 
+    <!--    Control list -->
+    <string name="searchControl">Wyszukaj usterkę</string>
+    <string name="howToCheck">Sposób sprawdzenia:</string>
+    <string name="priority1">DROBNA</string>
+    <string name="priority2">POWAŻNA</string>
+    <string name="priority3">NIEBEZPIECZNA</string>
+
+
+
 
 
 

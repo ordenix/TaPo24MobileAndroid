@@ -25,7 +25,7 @@ import pl.tapo24.dbData.entity.*
         Uto::class,
         Sign::class
 
-    ], version = 10,
+    ], version = 11,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -36,7 +36,9 @@ import pl.tapo24.dbData.entity.*
         AutoMigration (from = 6, to = 7),
         AutoMigration (from = 7, to = 8),
         AutoMigration (from = 8, to = 9),
-        AutoMigration (from = 9, to = 10)
+        AutoMigration (from = 9, to = 10),
+        AutoMigration (from = 10, to = 11)
+
 
 
     ]

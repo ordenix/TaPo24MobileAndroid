@@ -90,6 +90,12 @@ class RoadFragment: Fragment() {
             )
         }
 
+        binding.controlList.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_controlList
+            )
+        }
+
 //        val textView: TextView = binding.textViewRoad
 //        roadViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it

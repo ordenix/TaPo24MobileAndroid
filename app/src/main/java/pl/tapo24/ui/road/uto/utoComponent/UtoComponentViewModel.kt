@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.acra.ACRA
 import pl.tapo24.dbData.DataTapoDb
 
 import pl.tapo24.dbData.entity.Uto
@@ -28,6 +29,7 @@ class UtoComponentViewModel @Inject constructor(
 
 
     fun getData(id: Int) {
+        //ACRA.errorReporter.putCustomData("myKey", "myValue")
         viewModelScope.launch(Dispatchers.IO){
             var dataFromDb: Uto? = null
             async { dataFromDb = dataTapoDb.uto().getById(id) }.await()

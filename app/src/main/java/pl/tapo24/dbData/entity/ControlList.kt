@@ -13,6 +13,9 @@ data class ControlList(
     var titleId: Int? = null,
 
     @ColumnInfo(defaultValue = "")
+    var title: String? = null,
+
+    @ColumnInfo(defaultValue = "")
     var subTitleDepth1Name: String? = null,
 
     @ColumnInfo(defaultValue = "")

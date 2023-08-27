@@ -52,12 +52,16 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def room_version = "2.5.2"
     def retrofit_version = "2.9.0"
+    def acraVersion = "5.11.1"
 
     // room db
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
-
+    // acra
+    implementation("ch.acra:acra-http:$acraVersion")
+    implementation("ch.acra:acra-dialog:$acraVersion")
+    implementation("ch.acra:acra-toast:$acraVersion")
     // hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"

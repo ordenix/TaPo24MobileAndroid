@@ -1,0 +1,1337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <data>
+        <import type="android.view.View"/>
+        <variable name="position"
+                  type="java.lang.Integer"/>
+        <variable name="data"
+                  type="pl.tapo24.dbData.entity.ControlList"/>
+        <variable name="viewModel"
+                  type="pl.tapo24.ui.road.controlList.ControlListViewModel"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_height="wrap_content">
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/linearLayout2">
+            <TextView
+                    android:text="@{data.title}"
+                    style="@style/textStyleOrangeMediumWarpXl"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView50"/>
+            <TextView
+                    android:text="@{data.subTitleDepth1Name}"
+                    android:visibility="@{data.subTitleDepth1Name == null ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    style="@style/textStyleOrangeMediumWarp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content" android:id="@+id/textView51"/>
+            <TextView
+                    android:text="@{data.subTitleDepth2Name}"
+                    android:visibility="@{data.subTitleDepth2Name == null ? View.GONE : View.VISIBLE}"
+                    android:layout_width="match_parent"
+                    style="@style/textStyleOrangeMediumWarp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+            <TextView
+                    android:text="@{data.position}"
+                    android:layout_width="match_parent"
+                    style="@style/textStyleOrangeMediumWarp"
+                    android:textAlignment="center"
+                    android:layout_height="wrap_content"/>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container"/>
+            <TextView
+                    android:text="@string/howToCheck"
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView52"/>
+            <TextView
+                    android:text="@{data.methods}"
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView53"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:visibility="@{data.methodsRemarks == null ? View.GONE : View.VISIBLE}"
+                    android:layout_height="match_parent">
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" app:srcCompat="@drawable/warning"
+                        android:id="@+id/imageView15" app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        app:tint="@color/orange_tapo"/>
+                <TextView
+                        android:text="@{`UWAGA: ` +data.methodsRemarks}"
+                        android:layout_width="0dp"
+                        style="@style/textStyleOrangeSmallWarp"
+                        android:layout_height="wrap_content" android:id="@+id/textView54"
+                        app:layout_constraintStart_toEndOf="@+id/imageView15"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" android:textAlignment="center"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view2"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+                app:layout_constraintStart_toStartOf="parent">
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardA">
+                <TextView
+                        android:text="@{data.positionCode+`.a`}"
+                        android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <TextView
+                        android:text="@{data.positionCode}"
+                        android:visibility="@{viewModel.isVisible(`B`,data) ? View.GONE : View.VISIBLE}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameA1}"
+                            android:visibility="@{data.standardLevelFaultsA1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:visibility="@{data.standardLevelFaultsA1 == null ? View.GONE : View.VISIBLE}"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:visibility="@{(data.standardLevelFaultsA1 != null &amp;&amp; (data.standardLevelFaultsA3 != null || data.standardLevelFaultsA2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameA2}"
+                            android:visibility="@{data.standardLevelFaultsA2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:visibility="@{data.standardLevelFaultsA2 == null ? View.GONE : View.VISIBLE}"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:visibility="@{(data.standardLevelFaultsA2 != null &amp;&amp; data.standardLevelFaultsA3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameA3}"
+                            android:visibility="@{data.standardLevelFaultsA3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsA3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14A" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56A"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14A"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view5"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardB">
+                <TextView
+                        android:text="@{data.positionCode + `.b`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameB1}"
+                            android:visibility="@{data.standardLevelFaultsB1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsB1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:visibility="@{(data.standardLevelFaultsB1 != null &amp;&amp; (data.standardLevelFaultsB3 != null || data.standardLevelFaultsB2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameB2}"
+                            android:visibility="@{data.standardLevelFaultsB2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsB2 == null ? View.GONE : View.VISIBLE}"
+
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsB2 != null &amp;&amp; data.standardLevelFaultsB3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameB3}"
+                            android:visibility="@{data.standardLevelFaultsB3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsB3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14B" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56B"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14B"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:visibility="@{viewModel.isVisible(`C`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view3"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`C`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardC">
+                <TextView
+                        android:text="@{data.positionCode + `.c`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameC1}"
+                            android:visibility="@{data.standardLevelFaultsC1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:visibility="@{data.standardLevelFaultsC1 == null ? View.GONE : View.VISIBLE}"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsC1 != null &amp;&amp; (data.standardLevelFaultsC3 != null || data.standardLevelFaultsC2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameC2}"
+                            android:visibility="@{data.standardLevelFaultsC2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsC2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsC2 != null &amp;&amp; data.standardLevelFaultsC3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"/>
+                    <TextView
+                            android:text="@{data.standardNameC3}"
+                            android:visibility="@{data.standardLevelFaultsC3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsC3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14C" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56C"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14C"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:visibility="@{viewModel.isVisible(`D`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view4"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`D`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardD">
+                <TextView
+                        android:text="@{data.positionCode + `.d`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameD1}"
+                            android:visibility="@{data.standardLevelFaultsD1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsD1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsD1 != null &amp;&amp; (data.standardLevelFaultsD3 != null || data.standardLevelFaultsD2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameD2}"
+                            android:visibility="@{data.standardLevelFaultsD2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsD2 == null ? View.GONE : View.VISIBLE}"
+
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsD2 != null &amp;&amp; data.standardLevelFaultsD3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameD3}"
+                            android:visibility="@{data.standardLevelFaultsD3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsD3 == null ? View.GONE : View.VISIBLE}"
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14D" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56D"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14D"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:visibility="@{viewModel.isVisible(`E`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view6"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`E`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardE">
+                <TextView
+                        android:text="@{data.positionCode + `.e`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameE1}"
+                            android:visibility="@{data.standardLevelFaultsE1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsE1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsE1 != null &amp;&amp; (data.standardLevelFaultsE3 != null || data.standardLevelFaultsE2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameE2}"
+                            android:visibility="@{data.standardLevelFaultsE2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsE2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsE2 != null &amp;&amp; data.standardLevelFaultsE3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameE3}"
+                            android:visibility="@{data.standardLevelFaultsE3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsE3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14E" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56E"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14E"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:visibility="@{viewModel.isVisible(`F`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view10"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`F`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardF">
+                <TextView
+                        android:text="@{data.positionCode + `.f`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameF1}"
+                            android:visibility="@{data.standardLevelFaultsF1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsF1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:visibility="@{(data.standardLevelFaultsF1 != null &amp;&amp; (data.standardLevelFaultsF3 != null || data.standardLevelFaultsF2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameF2}"
+                            android:visibility="@{data.standardLevelFaultsF2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="@{data.standardLevelFaultsF2 == null ? View.GONE : View.VISIBLE}"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsF2 != null &amp;&amp; data.standardLevelFaultsF3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameF3}"
+                            android:visibility="@{data.standardLevelFaultsF3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsF3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14F" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56F"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14F"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:visibility="@{viewModel.isVisible(`G`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view7"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`G`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardG">
+                <TextView
+                        android:text="@{data.positionCode + `.g`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameG1}"
+                            android:visibility="@{data.standardLevelFaultsG1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:visibility="@{data.standardLevelFaultsG1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsG1 != null &amp;&amp; (data.standardLevelFaultsG3 != null || data.standardLevelFaultsG2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameG2}"
+                            android:visibility="@{data.standardLevelFaultsG2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="@{data.standardLevelFaultsG2 == null ? View.GONE : View.VISIBLE}"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsG2 != null &amp;&amp; data.standardLevelFaultsG3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameG3}"
+                            android:visibility="@{data.standardLevelFaultsG3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="@{data.standardLevelFaultsG3 == null ? View.GONE : View.VISIBLE}"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14G" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56G"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14G"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:visibility="@{viewModel.isVisible(`H`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view8"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`H`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardH">
+                <TextView
+                        android:text="@{data.positionCode + `.h`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameH1}"
+                            android:visibility="@{data.standardLevelFaultsH1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="@{data.standardLevelFaultsH1 == null ? View.GONE : View.VISIBLE}"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsH1 != null &amp;&amp; (data.standardLevelFaultsH3 != null || data.standardLevelFaultsH2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                    />
+                    <TextView
+                            android:text="@{data.standardNameH2}"
+                            android:visibility="@{data.standardLevelFaultsH2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsH2 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsH2 != null &amp;&amp; data.standardLevelFaultsH3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameH3}"
+                            android:visibility="@{data.standardLevelFaultsH3 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="@{data.standardLevelFaultsH3 == null ? View.GONE : View.VISIBLE}"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14H" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56H"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14H"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+            <View
+                    android:visibility="@{viewModel.isVisible(`I`,data) ? View.VISIBLE : View.GONE}"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_orange_container" android:id="@+id/view9"/>
+            <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`H`,data) ? View.VISIBLE : View.GONE}"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/standardI">
+                <TextView
+                        android:text="@{data.positionCode + `.i`}"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"/>
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_weight="1">
+                    <TextView
+                            android:text="@{data.standardNameI1}"
+                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_green"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority1"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_green"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsI1 != null &amp;&amp; (data.standardLevelFaultsI3 != null || data.standardLevelFaultsI2 != null)) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameI1}"
+                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_orange"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority2"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_orange"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:visibility="@{(data.standardLevelFaultsI2 != null &amp;&amp; data.standardLevelFaultsI3 != null) ? View.VISIBLE : View.GONE}"
+                            android:layout_height="5dp" app:srcCompat="@drawable/doted"
+                            />
+                    <TextView
+                            android:text="@{data.standardNameI1}"
+                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_width="match_parent"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:textAlignment="textStart"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false" android:maxLines="10"/>
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:layout_height="match_parent"
+                    >
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                app:tint="@color/standard_red"
+                                android:layout_height="wrap_content" app:srcCompat="@drawable/format_list_"
+
+                        />
+                        <TextView
+                                android:text="@string/priority3"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:textColor="@color/standard_red"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:id="@+id/imageView14I" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="Dodaj"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56I"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14I"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
