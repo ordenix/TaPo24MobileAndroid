@@ -87,6 +87,7 @@
     <string name="priority1">DROBNA</string>
     <string name="priority2">POWAŻNA</string>
     <string name="priority3">NIEBEZPIECZNA</string>
+    <string name="prioritySelect">Wybierz priorytet:</string>
 
 
 

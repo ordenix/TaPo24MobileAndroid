@@ -2,12 +2,43 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:background="@color/second_tapo"
+                                                   android:layout_height="wrap_content">
 
     <TextView
-            android:text="TextView"
+            android:text="@string/prioritySelect"
+            style="@style/textStyleWhiteSmallInContainerCenter"
             android:layout_width="wrap_content"
+            android:textSize="20sp"
             android:layout_height="wrap_content" android:id="@+id/textView42"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+    <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@+id/textView42"
+            android:id="@+id/priorityGroup">
+        <RadioButton
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:textColor="@color/standard_green"
+
+                android:buttonTint="@color/standard_green"
+                android:text="@string/priority1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioButton"/>
+        <RadioButton
+                android:buttonTint="@color/standard_orange"
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:textColor="@color/standard_orange"
+                android:text="@string/priority2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioButton2"/>
+        <RadioButton
+                style="@style/textStyleWhiteSmallInContainerCenter"
+            android:textColor="@color/standard_red"
+                android:buttonTint="@color/standard_red"
+                android:text="@string/priority3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioButton3"/>
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

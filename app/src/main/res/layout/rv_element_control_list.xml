@@ -213,6 +213,8 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
+                        android:onClick="@{()->(viewModel.standardClicked(data,`a`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -221,16 +223,42 @@
 
                     <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" app:srcCompat="@drawable/add_box"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@{data.standardAddA == true ? @drawable/disabled : @drawable/add_box}"
                             android:id="@+id/imageView14A" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddA ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/textView56A"
                             app:layout_constraintTop_toBottomOf="@+id/imageView14A"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:visibility="@{viewModel.isVisible(`B`,data) ? View.GONE : View.VISIBLE}"
+                        android:onClick="@{()->(viewModel.standardClicked(data,``))}"
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/style_orange_container"
+                        android:layout_height="wrap_content" android:layout_gravity="center_vertical"
+                        android:clipToPadding="true"
+                        android:padding="2dp">
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:srcCompat="@{data.standardAddA == true ? @drawable/disabled : @drawable/add_box}"
+
+                            android:id="@+id/imageView14AA" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                    <TextView
+                            android:text="@{data.standardAddA ? `Usuń` : `Dodaj`}"
+                            android:textColor="@color/black"
+                            style="@style/textStyleWhiteSmallInContainerCenter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView56AA"
+                            app:layout_constraintTop_toBottomOf="@+id/imageView14AA"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
@@ -351,6 +379,8 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`b`))}"
+
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -363,7 +393,7 @@
                             android:id="@+id/imageView14B" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddB ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -487,6 +517,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`c`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -499,7 +530,7 @@
                             android:id="@+id/imageView14C" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddC ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -626,6 +657,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`d`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -638,7 +670,7 @@
                             android:id="@+id/imageView14D" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddD ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -763,6 +795,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`e`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -775,7 +808,7 @@
                             android:id="@+id/imageView14E" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddE ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -900,6 +933,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`f`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -912,7 +946,7 @@
                             android:id="@+id/imageView14F" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddF ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -1037,6 +1071,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`g`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -1049,7 +1084,7 @@
                             android:id="@+id/imageView14G" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddG ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -1174,6 +1209,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`h`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -1186,7 +1222,7 @@
                             android:id="@+id/imageView14H" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddH ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"
@@ -1311,6 +1347,7 @@
                     </LinearLayout>
                 </LinearLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
+                        android:onClick="@{()->(viewModel.standardClicked(data,`i`))}"
                         android:layout_width="wrap_content"
                         android:background="@drawable/style_orange_container"
                         android:layout_height="wrap_content" android:layout_gravity="center_vertical"
@@ -1323,7 +1360,7 @@
                             android:id="@+id/imageView14I" app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="Dodaj"
+                            android:text="@{data.standardAddI ? `Usuń` : `Dodaj`}"
                             android:textColor="@color/black"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:layout_width="wrap_content"

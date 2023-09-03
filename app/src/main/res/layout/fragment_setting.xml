@@ -27,11 +27,13 @@
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
             <RadioButton
                     android:text="@string/after09"
+                    android:buttonTint="@drawable/check_box"
                     style="@style/textStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonAfter"/>
             <RadioButton
                     android:text="@string/before09"
+                    android:buttonTint="@drawable/check_box"
                     style="@style/textStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonBefore"/>
@@ -58,20 +60,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/radioGroupEnviroment"
+
                 tools:layout_editor_absoluteX="10dp" android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/textView4">
             <RadioButton
                     android:text="@string/EnvProd"
+                    android:buttonTint="@drawable/check_box"
+
                     style="@style/textStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonProduction"/>
             <RadioButton
                     android:text="@string/EnvTest"
+                    android:buttonTint="@drawable/check_box"
+
                     style="@style/textStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonTest"/>
             <RadioButton
                     android:text="@string/EnvFeature"
+                    android:buttonTint="@drawable/check_box"
+
                     style="@style/textStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonFeature"/>

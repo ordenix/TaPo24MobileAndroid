@@ -6,12 +6,63 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import pl.tapo24.R
+import pl.tapo24.data.PriorityList
+import pl.tapo24.databinding.DialogControlListBinding
+import pl.tapo24.databinding.FragmentControlListBinding
 
 class ControlListDialog: DialogFragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.dialog_control_list, container)
+    private var _binding: DialogControlListBinding? = null
+    private val binding get() = _binding!!
 
-        return view
+    var priorityList = PriorityList()
+
+    var onOkClick: (priorityLvl: Int) -> Unit = {
+        it
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        _binding = DialogControlListBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+        dialog?.setCanceledOnTouchOutside(false)
+
+        if (!priorityList.p1) {
+            binding.radioButton.visibility = View.GONE
+        }
+        if (!priorityList.p2) {
+            binding.radioButton2.visibility = View.GONE
+        }
+        if (!priorityList.p3) {
+            binding.radioButton3.visibility = View.GONE
+        }
+        binding.radioButton.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                onOkClick(1)
+                binding.radioButton.isChecked = false
+
+                this.dismiss()
+
+            }
+        }
+        binding.radioButton2.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                onOkClick(2)
+                binding.radioButton2.isChecked = false
+
+                this.dismiss()
+            }
+        }
+        binding.radioButton3.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                onOkClick(3)
+                binding.radioButton3.isChecked = false
+                this.dismiss()
+
+            }
+        }
+
+
+        return root
     }
 }

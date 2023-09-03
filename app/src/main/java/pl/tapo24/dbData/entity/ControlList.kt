@@ -211,6 +211,36 @@ data class ControlList(
     var standardNameJ3: String? = null,
 
     @ColumnInfo(defaultValue = "")
-    var standardLevelFaultsJ3: Int? = null
+    var standardLevelFaultsJ3: Int? = null,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddA: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddB: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddC: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddD: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddE: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddF: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddG: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddH: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddI: Boolean = false,
+
+    @ColumnInfo(defaultValue = "false")
+    var standardAddJ: Boolean = false,
 ) {
 }
