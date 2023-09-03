@@ -18,6 +18,7 @@ enum class InternalMessage(val message: String) {
     InternalGetHoldingDocuments("Internal exception during get data holding documents"),
     InternalGetUtoDocuments("Internal exception during get data uto "),
     InternalGetSignDocuments("Internal exception during get data sign"),
+    InternalImpossibleState("Internal IMPOSSIBLE STATE"),
 
 
 

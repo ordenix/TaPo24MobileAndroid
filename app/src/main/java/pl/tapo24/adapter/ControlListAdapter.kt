@@ -10,9 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.R
 import pl.tapo24.BR
 import pl.tapo24.dbData.entity.ControlList
-import pl.tapo24.dbData.entity.CountryDrivingLicence
 import pl.tapo24.ui.road.controlList.ControlListViewModel
-import java.util.*
 
 class ControlListAdapter(
     var items: List<ControlList>,

@@ -90,6 +90,7 @@ class ControlListFragment : Fragment() {
             }
         })
         binding.queryText.addTextChangedListener {
+            viewModel.searchText = binding.queryText.text.toString()
             viewModel.adapter.filter.filter(binding.queryText.text)
         }
         binding.rv.setOnTouchListener(View.OnTouchListener { v, event ->

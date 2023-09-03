@@ -1,19 +1,30 @@
 package pl.tapo24.ui.road.controlList
 
 import android.app.Dialog
+import android.graphics.Color
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
+import android.view.View
+import androidx.databinding.ObservableInt
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.acra.ACRA
+import pl.tapo24.R
 import pl.tapo24.adapter.ControlListAdapter
 import pl.tapo24.data.PriorityList
 import pl.tapo24.data.Standard
+import pl.tapo24.data.State
 import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.dbData.entity.ControlList
+import pl.tapo24.exceptions.InternalException
+import pl.tapo24.exceptions.InternalMessage
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +36,7 @@ class ControlListViewModel @Inject constructor(
     val standardList = MutableLiveData<List<Standard>>()
     val priorityList = PriorityList()
     var codeToInsert = ""
+    var searchText: String = ""
     val showDialog = MutableLiveData<Boolean>(false)
     val emptyResults = MutableLiveData<Boolean>(false)
 
@@ -391,6 +403,37 @@ class ControlListViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun getSpanText(text: String?): SpannableString? {
+        // VIP
+        if (text == null) return null
+        val str = SpannableString(text)
+        return if (State.premiumVersion && searchText.isNotEmpty()) {
+            val start = text.indexOf(searchText)
+            val end = start + searchText.length
+            if (start == -1) return str
+            str.setSpan(BackgroundColorSpan(Color.rgb(238, 108, 77)), start, end, 0)
+            str
+
+        } else {
+            str
+        }
+    }
+
+    fun getVisibilityOfItem(text: String?): Int {
+        if (text == null) return View.GONE
+        return if (State.premiumVersion && searchText.isNotEmpty()) {
+            // search
+            if (text.contains(searchText,true)) {
+                return View.VISIBLE
+            } else {
+                View.GONE
+            }
+        } else {
+            View.VISIBLE
+        }
+       // ACRA.errorReporter.handleSilentException(InternalException(InternalMessage.InternalImpossibleState.message));
     }
 
     fun isVisible(point: String, item: ControlList): Boolean {

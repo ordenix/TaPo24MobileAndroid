@@ -118,8 +118,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameA1}"
-                            android:visibility="@{data.standardLevelFaultsA1 == null ? View.GONE : View.VISIBLE}"
+                            android:text="@{viewModel.getSpanText(data.standardNameA1)}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameA1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -151,7 +151,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameA2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameA2)}"
                             android:visibility="@{data.standardLevelFaultsA2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -184,7 +184,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameA3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameA3)}"
                             android:visibility="@{data.standardLevelFaultsA3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -283,7 +283,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameB1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameB1)}"
                             android:visibility="@{data.standardLevelFaultsB1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -316,7 +316,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameB2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameB2)}"
                             android:visibility="@{data.standardLevelFaultsB2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -350,7 +350,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameB3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameB3)}"
                             android:visibility="@{data.standardLevelFaultsB3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -423,7 +423,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameC1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameC1)}"
                             android:visibility="@{data.standardLevelFaultsC1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -456,7 +456,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameC2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameC2)}"
                             android:visibility="@{data.standardLevelFaultsC2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -488,7 +488,7 @@
                             android:visibility="@{(data.standardLevelFaultsC2 != null &amp;&amp; data.standardLevelFaultsC3 != null) ? View.VISIBLE : View.GONE}"
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"/>
                     <TextView
-                            android:text="@{data.standardNameC3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameC3)}"
                             android:visibility="@{data.standardLevelFaultsC3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -560,7 +560,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameD1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameD1)}"
                             android:visibility="@{data.standardLevelFaultsD1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -593,7 +593,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameD2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameD2)}"
                             android:visibility="@{data.standardLevelFaultsD2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -627,7 +627,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameD3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameD3)}"
                             android:visibility="@{data.standardLevelFaultsD3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -700,7 +700,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameE1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameE1)}"
                             android:visibility="@{data.standardLevelFaultsE1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -733,7 +733,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameE2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameE2)}"
                             android:visibility="@{data.standardLevelFaultsE2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -766,7 +766,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameE3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameE3)}"
                             android:visibility="@{data.standardLevelFaultsE3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -838,7 +838,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameF1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameF1)}"
                             android:visibility="@{data.standardLevelFaultsF1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -871,7 +871,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameF2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameF2)}"
                             android:visibility="@{data.standardLevelFaultsF2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -904,7 +904,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameF3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameF3)}"
                             android:visibility="@{data.standardLevelFaultsF3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -976,7 +976,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameG1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameG1)}"
                             android:visibility="@{data.standardLevelFaultsG1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1009,7 +1009,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameG2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameG2)}"
                             android:visibility="@{data.standardLevelFaultsG2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1042,7 +1042,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameG3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameG3)}"
                             android:visibility="@{data.standardLevelFaultsG3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1114,7 +1114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameH1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameH1)}"
                             android:visibility="@{data.standardLevelFaultsH1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1147,7 +1147,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                     />
                     <TextView
-                            android:text="@{data.standardNameH2}"
+                            android:text="@{viewModel.getSpanText(data.standardNameH2)}"
                             android:visibility="@{data.standardLevelFaultsH2 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1180,7 +1180,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameH3}"
+                            android:text="@{viewModel.getSpanText(data.standardNameH3)}"
                             android:visibility="@{data.standardLevelFaultsH3 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1252,7 +1252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
-                            android:text="@{data.standardNameI1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameI1)}"
                             android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1285,7 +1285,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameI1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameI2)}"
                             android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
@@ -1318,7 +1318,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"
                             />
                     <TextView
-                            android:text="@{data.standardNameI1}"
+                            android:text="@{viewModel.getSpanText(data.standardNameI3)}"
                             android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
