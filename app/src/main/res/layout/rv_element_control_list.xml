@@ -96,19 +96,20 @@
                 android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 app:layout_constraintStart_toStartOf="parent">
             <LinearLayout
+                    android:visibility="@{viewModel.isVisible(`A`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/standardA">
                 <TextView
                         android:text="@{data.positionCode+`.a`}"
-                        android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
+                        android:visibility="@{viewModel.isVisible(`B2`,data) ? View.VISIBLE : View.GONE}"
                         style="@style/textStyleWhiteSmallInContainerCenter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|center_vertical"/>
                 <TextView
                         android:text="@{data.positionCode}"
-                        android:visibility="@{viewModel.isVisible(`B`,data) ? View.GONE : View.VISIBLE}"
+                        android:visibility="@{viewModel.isVisible(`B2`,data) ? View.GONE : View.VISIBLE}"
                         style="@style/textStyleWhiteSmallInContainerCenter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -126,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
-                            android:visibility="@{data.standardLevelFaultsA1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameA1)}"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -152,14 +153,14 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameA2)}"
-                            android:visibility="@{data.standardLevelFaultsA2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameA2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
                             android:layout_height="wrap_content"
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
-                            android:visibility="@{data.standardLevelFaultsA2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameA2)}"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -185,7 +186,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameA3)}"
-                            android:visibility="@{data.standardLevelFaultsA3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameA3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -193,7 +194,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsA3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameA3)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -263,8 +264,9 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
             <View
+
                     android:layout_width="match_parent"
-                    android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
+                    android:visibility="@{(viewModel.isVisible(`B`,data) &amp;&amp; viewModel.isVisible(`A`,data)) ? View.VISIBLE : View.GONE}"
                     android:layout_height="3dp"
                     android:background="@drawable/style_orange_container" android:id="@+id/view5"/>
             <LinearLayout
@@ -284,7 +286,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameB1)}"
-                            android:visibility="@{data.standardLevelFaultsB1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameB1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -292,7 +294,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsB1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameB1)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -317,7 +319,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameB2)}"
-                            android:visibility="@{data.standardLevelFaultsB2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameB2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -326,7 +328,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsB2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameB2)}"
 
                             android:layout_height="match_parent"
                     >
@@ -351,7 +353,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameB3)}"
-                            android:visibility="@{data.standardLevelFaultsB3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameB3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -359,7 +361,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsB3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameB3)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -424,14 +426,14 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameC1)}"
-                            android:visibility="@{data.standardLevelFaultsC1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameC1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
                             android:layout_height="wrap_content"
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
-                            android:visibility="@{data.standardLevelFaultsC1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameC1)}"
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -457,7 +459,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameC2)}"
-                            android:visibility="@{data.standardLevelFaultsC2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameC2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -465,7 +467,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsC2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameC2)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -489,7 +491,7 @@
                             android:layout_height="5dp" app:srcCompat="@drawable/doted"/>
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameC3)}"
-                            android:visibility="@{data.standardLevelFaultsC3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameC3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -497,7 +499,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsC3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameC3)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -561,7 +563,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameD1)}"
-                            android:visibility="@{data.standardLevelFaultsD1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameD1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -569,7 +571,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsD1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameD1)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -594,7 +596,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameD2)}"
-                            android:visibility="@{data.standardLevelFaultsD2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameD2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -603,7 +605,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsD2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameD2)}"
 
                             android:layout_height="match_parent"
                     >
@@ -628,7 +630,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameD3)}"
-                            android:visibility="@{data.standardLevelFaultsD3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameD3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -636,7 +638,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsD3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameD3)}"
 
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -701,7 +703,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameE1)}"
-                            android:visibility="@{data.standardLevelFaultsE1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameE1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -709,7 +711,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsE1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameE1)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -734,7 +736,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameE2)}"
-                            android:visibility="@{data.standardLevelFaultsE2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameE2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -743,7 +745,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsE2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameE2)}"
                             android:layout_height="match_parent"
                     >
                         <ImageView
@@ -767,7 +769,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameE3)}"
-                            android:visibility="@{data.standardLevelFaultsE3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameE3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -775,7 +777,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsE3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameE3)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -839,7 +841,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameF1)}"
-                            android:visibility="@{data.standardLevelFaultsF1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameF1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -847,7 +849,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsF1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameF1)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -872,7 +874,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameF2)}"
-                            android:visibility="@{data.standardLevelFaultsF2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameF2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -882,7 +884,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="@{data.standardLevelFaultsF2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameF2)}"
                     >
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -905,7 +907,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameF3)}"
-                            android:visibility="@{data.standardLevelFaultsF3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameF3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -914,7 +916,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsF3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameF3)}"
                             android:layout_height="match_parent"
                     >
                         <ImageView
@@ -977,7 +979,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameG1)}"
-                            android:visibility="@{data.standardLevelFaultsG1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameG1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -985,7 +987,7 @@
                             android:singleLine="false" android:maxLines="10"/>
                     <LinearLayout
                             android:orientation="horizontal"
-                            android:visibility="@{data.standardLevelFaultsG1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameG1)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                     >
@@ -1010,7 +1012,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameG2)}"
-                            android:visibility="@{data.standardLevelFaultsG2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameG2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1020,7 +1022,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="@{data.standardLevelFaultsG2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameG2)}"
                     >
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -1043,7 +1045,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameG3)}"
-                            android:visibility="@{data.standardLevelFaultsG3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameG3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1053,7 +1055,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="@{data.standardLevelFaultsG3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameG3)}"
                     >
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -1115,7 +1117,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameH1)}"
-                            android:visibility="@{data.standardLevelFaultsH1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameH1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1125,7 +1127,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="@{data.standardLevelFaultsH1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameH1)}"
                     >
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -1148,7 +1150,7 @@
                     />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameH2)}"
-                            android:visibility="@{data.standardLevelFaultsH2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameH2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1157,7 +1159,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsH2 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameH2)}"
                             android:layout_height="match_parent"
                     >
                         <ImageView
@@ -1181,7 +1183,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameH3)}"
-                            android:visibility="@{data.standardLevelFaultsH3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameH3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1191,7 +1193,7 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:visibility="@{data.standardLevelFaultsH3 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameH3)}"
                     >
                         <ImageView
                                 android:layout_width="wrap_content"
@@ -1253,7 +1255,7 @@
                         android:layout_height="wrap_content" android:layout_weight="1">
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameI1)}"
-                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameI1)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1262,7 +1264,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameI1)}"
                             android:layout_height="match_parent"
                     >
                         <ImageView
@@ -1286,7 +1288,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameI2)}"
-                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameI2)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1295,7 +1297,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameI2)}"
                             android:layout_height="match_parent"
                     >
                         <ImageView
@@ -1319,7 +1321,7 @@
                             />
                     <TextView
                             android:text="@{viewModel.getSpanText(data.standardNameI3)}"
-                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameI3)}"
                             android:layout_width="match_parent"
                             style="@style/textStyleWhiteSmallInContainerCenter"
                             android:textAlignment="textStart"
@@ -1328,7 +1330,7 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:visibility="@{data.standardLevelFaultsI1 == null ? View.GONE : View.VISIBLE}"
+                            android:visibility="@{viewModel.getVisibilityOfItem(data.standardNameI3)}"
                             android:layout_height="match_parent"
                     >
                         <ImageView

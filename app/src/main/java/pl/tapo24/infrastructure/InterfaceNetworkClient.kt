@@ -73,4 +73,8 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_sign")
     fun getSign(): Call<List<Sign>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_law")
+    fun getLaw(): Call<List<Law>>
 }

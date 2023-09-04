@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Context.DOWNLOAD_SERVICE
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
@@ -44,7 +45,7 @@ class ControlListFragment : Fragment() {
         val root: View = binding.root
 
 
-//        val value = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+//        val value = "https://ewyszukiwarka.pue.uprp.gov.pl/search/simple-search?lng=pl"
 //        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(value))
 //
 //        // start activity

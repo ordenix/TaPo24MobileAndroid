@@ -1,14 +1,17 @@
 package pl.tapo24
 
+import android.app.DownloadManager
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
+import android.net.Uri
+import android.os.Environment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import pl.tapo24.db.TapoDb
 import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.dbData.entity.DataBaseVersion
+import pl.tapo24.dbData.entity.Law
 import pl.tapo24.infrastructure.NetworkClient
+import java.io.File
 
 
 class DataUpdater(
@@ -33,6 +36,54 @@ class DataUpdater(
 
             }.await()
         }
+    }
+
+    fun getPDF() {
+        // ToDo: Handle error network available
+        MainScope().launch(Dispatchers.IO) {
+            var listLawFromServer :List<Law>? = null
+            var listLawFromDb :List<Law>? = null
+            async { listLawFromDb = dataTapoDb.law().getAll() }.await()
+            async {
+                val response = networkClient.getLawData()
+                response.onSuccess {
+                    listLawFromServer = it
+                }
+            }.await()
+            listLawFromServer?.forEach {element ->
+                val elementFromDb = listLawFromDb?.find { el -> el.id == element.id }
+                if (element.version!! > (elementFromDb?.version ?: 0)) {
+
+                    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.type}/${element.fileName}")
+
+                    file.delete()
+
+                    val request = DownloadManager.Request(Uri.parse(element.url))
+                    request.setDescription("Plik pdf ${element.alias} jest w trakcie pobierania")
+                    request.allowScanningByMediaScanner()
+                    request.setTitle("Pobieranie pliku ${element.alias}")
+                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    //Set the local destination for the downloaded file to a path within the application's external files directory
+                    //Set the local destination for the downloaded file to a path within the application's external files directory
+                    //request.set
+                    request.setDestinationInExternalFilesDir(
+                        context,
+                        Environment.DIRECTORY_DOWNLOADS,
+                        "${element.type}/${element.fileName}"
+                    ) //To Store file in External Public Directory use "setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)"
+                    val downloadManager =
+                        context.getSystemService(Context.DOWNLOAD_SERVICE)  as DownloadManager?
+                    downloadManager!!.enqueue(request)
+
+                    async { dataTapoDb.law().insert(element) }.await()
+
+                }
+
+            }
+        }
+
+
+
     }
 
     fun getData() {

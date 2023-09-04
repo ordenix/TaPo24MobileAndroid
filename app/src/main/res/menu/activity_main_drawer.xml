@@ -21,6 +21,10 @@
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="@string/menu_tariff"/>
         <item
+                android:id="@+id/nav_law"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="@string/menu_law"/>
+        <item
                 android:id="@+id/nav_helpers"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="@string/menu_helpers"/>

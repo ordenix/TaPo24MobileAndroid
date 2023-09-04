@@ -251,6 +251,18 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetSignDocuments.message))
     }
 
+    fun getLawData(): Result<List<Law>>{
+        try {
+            val response = service.getLaw().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetLawDocuments.message))
+    }
+
 
     fun login() {
 

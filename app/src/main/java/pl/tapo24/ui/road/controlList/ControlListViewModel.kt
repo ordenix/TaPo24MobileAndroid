@@ -439,48 +439,71 @@ class ControlListViewModel @Inject constructor(
     fun isVisible(point: String, item: ControlList): Boolean {
         var isVisible = false
         when (point) {
-            "B" -> {
+            "A" -> {
+                if ((item.standardLevelFaultsA1 != null && (!State.premiumVersion || item.standardNameA1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsA2 != null && (!State.premiumVersion || item.standardNameA2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsA3 != null && (!State.premiumVersion || item.standardNameA3?.contains(searchText, true) != false))) {
+                    isVisible = true
+                }
+            }
+            "B2" -> {
                 if (item.standardLevelFaultsB1 != null || item.standardLevelFaultsB2 != null || (item.standardLevelFaultsB3 != null)) {
                     isVisible = true
                 }
             }
+            "B" -> {
+                if ((item.standardLevelFaultsB1 != null && (!State.premiumVersion || item.standardNameB1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsB2 != null && (!State.premiumVersion || item.standardNameB2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsB3 != null && (!State.premiumVersion || item.standardNameB3?.contains(searchText, true) != false))) {
+                    isVisible = true
+                }
+            }
             "C" -> {
-                if (item.standardLevelFaultsC1 != null || item.standardLevelFaultsC2 != null || (item.standardLevelFaultsC3 != null)) {
+                if ((item.standardLevelFaultsC1 != null && (!State.premiumVersion || item.standardNameC1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsC2 != null && (!State.premiumVersion || item.standardNameC2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsC3 != null && (!State.premiumVersion || item.standardNameC3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }
             "D" -> {
-                if (item.standardLevelFaultsD1 != null || item.standardLevelFaultsD2 != null || (item.standardLevelFaultsD3 != null)) {
+                if ((item.standardLevelFaultsD1 != null && (!State.premiumVersion || item.standardNameD1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsD2 != null && (!State.premiumVersion || item.standardNameD2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsD3 != null && (!State.premiumVersion || item.standardNameD3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }
             "E" -> {
-                if (item.standardLevelFaultsE1 != null || item.standardLevelFaultsE2 != null || (item.standardLevelFaultsE3 != null)) {
+                if ((item.standardLevelFaultsE1 != null && (!State.premiumVersion || item.standardNameE1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsE2 != null && (!State.premiumVersion || item.standardNameE2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsE3 != null && (!State.premiumVersion || item.standardNameE3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }
             "F" -> {
-                if (item.standardLevelFaultsF1 != null || item.standardLevelFaultsF2 != null || (item.standardLevelFaultsF3 != null)) {
+                if ((item.standardLevelFaultsF1 != null && (!State.premiumVersion || item.standardNameF1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsF2 != null && (!State.premiumVersion || item.standardNameF2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsF3 != null && (!State.premiumVersion || item.standardNameF3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }
             "G" -> {
-                if (item.standardLevelFaultsG1 != null || item.standardLevelFaultsG2 != null || (item.standardLevelFaultsG3 != null)) {
+                if ((item.standardLevelFaultsG1 != null && (!State.premiumVersion || item.standardNameG1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsG2 != null && (!State.premiumVersion || item.standardNameG2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsG3 != null && (!State.premiumVersion || item.standardNameG3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }
             "H" -> {
-                if (item.standardLevelFaultsH1 != null || item.standardLevelFaultsH2 != null || (item.standardLevelFaultsH3 != null)) {
+                if ((item.standardLevelFaultsH1 != null && (!State.premiumVersion || item.standardNameH1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsH2 != null && (!State.premiumVersion || item.standardNameH2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsH3 != null && (!State.premiumVersion || item.standardNameH3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }
             "I" -> {
-                if (item.standardLevelFaultsI1 != null || item.standardLevelFaultsI2 != null || (item.standardLevelFaultsI3 != null)) {
-                    isVisible = true
-                }
-            }
-            "J" -> {
-                if (item.standardLevelFaultsJ1 != null || item.standardLevelFaultsJ2 != null || (item.standardLevelFaultsJ3 != null)) {
+                if ((item.standardLevelFaultsI1 != null && (!State.premiumVersion || item.standardNameI1?.contains(searchText, true) != false))
+                    || (item.standardLevelFaultsI2 != null && (!State.premiumVersion || item.standardNameI2?.contains(searchText, true) != false)) ||
+                    (item.standardLevelFaultsI3 != null && (!State.premiumVersion || item.standardNameI3?.contains(searchText, true) != false))) {
                     isVisible = true
                 }
             }

@@ -68,6 +68,7 @@ class MainActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
+        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getPDF()
 
         MainScope().launch(Dispatchers.IO) {
             var settingUid: Setting? = null
@@ -141,7 +142,7 @@ class MainActivity: AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_road, R.id.nav_tariff, R.id.nav_helpers
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_road, R.id.nav_tariff,R.id.nav_law ,R.id.nav_helpers
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

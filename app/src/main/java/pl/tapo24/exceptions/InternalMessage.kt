@@ -19,7 +19,7 @@ enum class InternalMessage(val message: String) {
     InternalGetUtoDocuments("Internal exception during get data uto "),
     InternalGetSignDocuments("Internal exception during get data sign"),
     InternalImpossibleState("Internal IMPOSSIBLE STATE"),
-
+    InternalGetLawDocuments("Internal exception during get data law"),
 
 
 

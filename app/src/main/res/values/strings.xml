@@ -117,7 +117,24 @@
     <string name="signATBT">Znaki (ATBT)</string>
     <string name="searchSign">Wyszukaj znak</string>
 
-
+    <!--    HELPER MODULE-->
+    <string name="postalCode">Kody pocztowe</string>
+    <string name="OC">Link do sprawdzenia OC w UFG</string>
+    <string name="checkRights">Link do sprawdzenia uprawnień</string>
+    <string name="carHistory">Link do sprawdzenia historii pojazdu</string>
+    <string name="payUs">Wesprzyj nas</string>
+    <string name="protocolPattern">Wzory protokołów</string>
+    <string name="checkValidate">Kontrola autentyczności dokumentów</string>
+    <string name="telephoneBook">Link do książki telefonicznej (Policja)</string>
+    <string name="disallow12t">Link do ograniczeń ruchu pow. 12t</string>
+    <string name="shop">Sklep mundurowy</string>
+    <string name="spb">ŚPB</string>
+    <string name="calculatorSpeed">Kalkulator prędkości</string>
+    <string name="note">Notatnik</string>
+    <string name="calculatorAlco">Przelicznik mn/l - ‰</string>
+    <string name="blog">Blog #HoldTheLine</string>
+    <string name="translator">Słowniczek</string>
+    <string name="healthCreator">Kod RABATOTWOY TODO</string>
 
 
 

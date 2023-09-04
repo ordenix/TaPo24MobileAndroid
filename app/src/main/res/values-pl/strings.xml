@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TaPo24</string>
+    <string name="app_name_long">TAryfikator POlicyjny24</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Tapo24.pl</string>
@@ -20,6 +20,131 @@
     <string name="menu_helpers">Pomoce</string>
     <string name="menu_about">O aplikacji</string>
 
+    <string name="uid">Uid aplikacji:</string>
+    <string name="vCode">Wersja kodu:</string>
+    <string name="vName">Nazwa wersji kodu:</string>
+    <string name="vBase">Baza wykroczeń:</string>
+    <string name="vServer">Wersje na serwerze</string>
+    <string name="checkUpdate">Sprawdź aktualizacje</string>
+
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="enviroment">Środowisko:</string>
+    <string name="EnvTest">Testowe</string>
+    <string name="EnvProd">Produkcyjne</string>
+    <string name="EnvFeature">Beta</string>
+    <string name="engine">Silnik wykroczeń:</string>
+    <string name="before09">Przed wrześńiem 2022</string>
+    <string name="after09">Po wrześniu 2022 (obecne)</string>
+    <string name="WarnEngine">Uwaga!! Zmiana silnika wpływa na wyświetlanie wykroczeń w całej aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian. Przeznaczona głównie dla osób prowadzących sprawy z przez zmiany przepisów. Wyłącznie wsparcia tej opcji planowane jest w 2025 roku</string>
+    <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera! Jeżeli udało ci się zmienić gratulacje ;), lecz pamiętaj wszystkie środowiska poza produkcyjnym zawierają dane testowe</string>
+
+
+    <!--    LOGIN-->
+    <string name="newInTapo">Nowy w TaPo24.pl Załóż konto</string>
+    <string name="hintLoginOrEmail">Wprowadź login lub email</string>
+    <string name="hintPassword">Wprowadź hasło</string>
+    <string name="forgotPassword">Zapomniałeś hasła?</string>
+    <string name="loginToService">Zaloguj</string>
+    <string name="register">Rejestracja</string>
+
+    <!--    ROAD MODULE-->
+    <string name="roadSign">Znaki drogowe</string>
+    <string name="Accident">Kwalifikacja zdarzenia</string>
+    <string name="ControleAlcohol">Kontrola Trzeźwości</string>
+    <string name="CodeFailure">Kody usterek</string>
+    <string name="CategodyDrivingLicence">Kategorie prawa jazdy</string>
+    <string name="CodeDisallowedDringLicence">Kody ograniczeń prawa jazdy</string>
+    <string name="OtherCountryDrivingLicence">Honorowane zagraniczne PJ</string>
+    <string name="HoldingDocuments">Zatrzymywanie dokumentów</string>
+    <string name="StausDrivingLicenceKSIP">Statusy Prawa Jazdy KSIP</string>
+    <string name="Lights">Oświetlenie pojazdu</string>
+    <string name="LightsCodeCountry">Kody homologacji</string>
+    <string name="LightsFront">Reflektory</string>
+    <string name="LightsOthers">Pozostałe światła</string>
+    <string name="Towing">Holowanie pojazdu</string>
+    <string name="uto">UTO</string>
+    <string name="roadTransport">Transport drogowy</string>
+    <string name="codePoints">Kody czynów</string>
+    <string name="recidive">Recydywa</string>
+    <string name="onHere">Badany na miejscu</string>
+    <string name="fromFar">Badany oddalił się</string>
+
+    <!--    UTO -->
+    <string name="utoElectric">Urządzenie transportu osobistego</string>
+    <string name="utoStrenght">Urządzenie wspomagające ruch</string>
+    <string name="utoScooter">Hulajnoga elektryczna</string>
+    <string name="utoRights">Uprawnienia:</string>
+    <string name="utoWhereAllowed">Poruszanie się:</string>
+    <string name="utoSpeed">Prędkość:</string>
+    <string name="utoProhibition">Zabrania się:</string>
+    <string name="utoBechavior">Zachowanie wobec pieszego:</string>
+    <string name="utoStop">Postój:</string>
+
+    <!--    Control list -->
+    <string name="searchControl">Wyszukaj usterkę</string>
+    <string name="howToCheck">Sposób sprawdzenia:</string>
+    <string name="priority1">DROBNA</string>
+    <string name="priority2">POWAŻNA</string>
+    <string name="priority3">NIEBEZPIECZNA</string>
+    <string name="prioritySelect">Wybierz priorytet:</string>
+
+
+
+
+
+
+    <!--    Code Driving licence-->
+    <string name="categoryDrivingLicencetopic">Kategoria prawa jazdy:</string>
+    <string name="requements">Wymagania:</string>
+    <string name="rights">Uprawnienia:</string>
+    <string name="Remarks">Uwagi:</string>
+
+
+    <!--    Sign  -->
+    <string name="signA">Znaki ostrzegawcze (A)</string>
+    <string name="signB">Znaki zakazu (B)</string>
+    <string name="signC">Znaki nakazu (C)</string>
+    <string name="signD">Znaki informacyjne (D)</string>
+    <string name="signE">Znaki kierunku i miejscowości (E)</string>
+    <string name="signF">Znaki uzupełniające (F)</string>
+    <string name="signP">Znaki poziome (P)</string>
+    <string name="signS">Sygnały drogowe (S)</string>
+    <string name="signT">Tablicznki do znaków drogowych (T)</string>
+    <string name="signG">Znaki dodatkowe (G)</string>
+    <string name="signR">Dodatkowe znaki szlaków rowerowych (R)</string>
+    <string name="signW">Znaki (W)</string>
+    <string name="signATBT">Znaki (ATBT)</string>
+    <string name="searchSign">Wyszukaj znak</string>
+
+    <!--    HELPER MODULE-->
+    <string name="postalCode">Kody pocztowe</string>
+    <string name="OC">Link do sprawdzenia OC w UFG</string>
+    <string name="checkRights">Link do sprawdzenia uprawnień</string>
+    <string name="carHistory">Link do sprawdzenia historii pojazdu</string>
+    <string name="payUs">Wesprzyj nas</string>
+    <string name="protocolPattern">Wzory protokołów</string>
+    <string name="checkValidate">Kontrola autentyczności dokumentów</string>
+    <string name="telephoneBook">Link do książki telefonicznej (Policja)</string>
+    <string name="disallow12t">Link do ograniczeń ruchu pow. 12t</string>
+    <string name="shop">Sklep mundurowy</string>
+    <string name="spb">ŚPB</string>
+    <string name="calculatorSpeed">Kalkulator prędkości</string>
+    <string name="note">Notatnik</string>
+    <string name="calculatorAlco">Przelicznik mn/l - ‰</string>
+    <string name="blog">Blog #HoldTheLine</string>
+    <string name="translator">Słowniczek</string>
+    <string name="healthCreator">Kod RABATOTWOY TODO</string>
+
+
+
+    <!--    Util-->
+    <string name="expand">Rozwiń</string>
+    <string name="colapse">Zwiń</string>
+    <string name="searchCountry">Wyszukaj kraj</string>
+    <string name="search">Wyszukaj</string>
+    <string name="back">Wstecz</string>
+
+
+
 </resources>

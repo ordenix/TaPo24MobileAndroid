@@ -23,9 +23,10 @@ import pl.tapo24.dbData.entity.*
         CodeLimitsDrivingLicence::class,
         HoldingDocuments::class,
         Uto::class,
-        Sign::class
+        Sign::class,
+        Law::class
 
-    ], version = 12,
+    ], version = 13,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -38,7 +39,8 @@ import pl.tapo24.dbData.entity.*
         AutoMigration (from = 8, to = 9),
         AutoMigration (from = 9, to = 10),
         AutoMigration (from = 10, to = 11),
-        AutoMigration (from = 11, to = 12)
+        AutoMigration (from = 11, to = 12),
+        AutoMigration (from = 12, to = 13)
 
 
 
@@ -70,5 +72,7 @@ abstract class DataTapoDb: RoomDatabase() {
     abstract fun uto(): UtoDao
 
     abstract fun sign(): SignDao
+
+    abstract fun law(): LawDao
 
 }

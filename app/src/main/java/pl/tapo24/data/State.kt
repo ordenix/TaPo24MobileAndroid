@@ -12,9 +12,9 @@ object State {
     val userName: String = ""
     var uid: String = ""
 
-    val versionName = BuildConfig.VERSION_NAME
-    val versionCode = BuildConfig.VERSION_CODE
+    const val versionName = BuildConfig.VERSION_NAME
+    const val versionCode = BuildConfig.VERSION_CODE
 
-    val premiumVersion: Boolean = false
+    val premiumVersion: Boolean = true
     var isLogin: Boolean = false
 }
