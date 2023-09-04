@@ -52,9 +52,10 @@ class DataUpdater(
             }.await()
             listLawFromServer?.forEach {element ->
                 val elementFromDb = listLawFromDb?.find { el -> el.id == element.id }
-                if (element.version!! > (elementFromDb?.version ?: 0)) {
+                if (element.version!! >= (elementFromDb?.version ?: 0)) {
 
                     val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.type}/${element.fileName}")
+                   // val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${element.type}/${element.fileName}")
 
                     file.delete()
 
@@ -66,6 +67,10 @@ class DataUpdater(
                     //Set the local destination for the downloaded file to a path within the application's external files directory
                     //Set the local destination for the downloaded file to a path within the application's external files directory
                     //request.set
+//                    request.setDestinationInExternalPublicDir(
+//                        Environment.DIRECTORY_DOWNLOADS,
+//                        "tapo24/pdf/${element.type}/${element.fileName}"
+//                    )
                     request.setDestinationInExternalFilesDir(
                         context,
                         Environment.DIRECTORY_DOWNLOADS,
@@ -73,8 +78,9 @@ class DataUpdater(
                     ) //To Store file in External Public Directory use "setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)"
                     val downloadManager =
                         context.getSystemService(Context.DOWNLOAD_SERVICE)  as DownloadManager?
-                    downloadManager!!.enqueue(request)
-
+                    val downoloadID = downloadManager!!.enqueue(request)
+                    // TODO: progres and notify https://stackoverflow.com/questions/65164785/using-progressbar-with-downloadmanager
+                    println(downoloadID)
                     async { dataTapoDb.law().insert(element) }.await()
 
                 }
@@ -87,7 +93,6 @@ class DataUpdater(
     }
 
     fun getData() {
-
 
         // ToDo: Handle error network available
         MainScope().launch(Dispatchers.IO) {

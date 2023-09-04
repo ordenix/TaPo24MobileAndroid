@@ -90,6 +90,12 @@ class RoadFragment: Fragment() {
             )
         }
 
+        binding.CodeLimitsDrivingLicence.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_codeLimitsDrivingLicence
+            )
+        }
+
         binding.controlList.setOnClickListener { view ->
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_controlList

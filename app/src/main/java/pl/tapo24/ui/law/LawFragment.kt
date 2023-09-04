@@ -2,7 +2,6 @@ package pl.tapo24.ui.law
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
@@ -51,6 +50,7 @@ class LawFragment: Fragment() {
         })
         viewModel.adapter.onItemClick = {
             val file: File = File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${it.type}/${it.fileName}")
+            //  val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${it.type}/${it.fileName}")
             val target = Intent(Intent.ACTION_VIEW)
 
             val photoURI = FileProvider.getUriForFile(
@@ -58,11 +58,11 @@ class LawFragment: Fragment() {
                 requireContext().applicationContext.packageName + ".provider",
                 file
             )
-            target.setDataAndType(photoURI, "application/pdf")
             target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            target.setDataAndType(photoURI, "application/pdf")
+            target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or  Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
-            val intent = Intent.createChooser(target, "Open File")
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            val intent = Intent.createChooser(target, "Otwórz plik w: (nastąpi przekierowanie do zewnętrznej przeglądarki plików pdf")
             try {
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {

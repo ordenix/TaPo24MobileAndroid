@@ -35,6 +35,9 @@
         <action android:id="@+id/action_nav_road_to_nav_sign" app:destination="@id/nav_sign"/>
         <action android:id="@+id/action_nav_road_to_nav_uto" app:destination="@id/nav_uto"/>
         <action android:id="@+id/action_nav_road_to_nav_controlList" app:destination="@id/nav_controlList"/>
+        <action android:id="@+id/action_nav_road_to_nav_codeLimitsDrivingLicence"
+                app:destination="@id/nav_codeLimitsDrivingLicence"/>
+        <action android:id="@+id/action_nav_road_to_nav_codePoints" app:destination="@id/nav_codePoints"/>
     </fragment>
 
     <fragment
@@ -154,4 +157,16 @@
               tools:layout="@layout/fragment_law"
               android:name="pl.tapo24.ui.law.LawFragment"
               android:label="LawFragment"/>
+    <fragment android:id="@+id/nav_codeLimitsDrivingLicence"
+              android:name="pl.tapo24.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceFragment"
+              android:label="fragment_code_limits_driving_licence"
+              tools:layout="@layout/fragment_code_limits_driving_licence"/>
+    <fragment android:id="@+id/nav_codePoints"
+              android:name="pl.tapo24.ui.codePoints.CodePointsFragment"
+              android:label="fragment_code_points"
+              tools:layout="@layout/fragment_code_points"/>
+    <fragment android:id="@+id/nav_holdingDocumentsChose"
+              android:name="pl.tapo24.ui.road.holdingDocuments.HoldingDocumentsChoseFragment"
+              android:label="fragment_holding_documents_chose"
+              tools:layout="@layout/fragment_holding_documents_chose"/>
 </navigation>

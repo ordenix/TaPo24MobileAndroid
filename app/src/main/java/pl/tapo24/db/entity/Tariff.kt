@@ -20,9 +20,6 @@ data class Tariff(
     @ColumnInfo(defaultValue = "")
     val law: String?,
 
-    @ColumnInfo(defaultValue = "")
-    val lawSub: String?,
-
     @ColumnInfo(defaultValue = "0")
     val maxSpeed: Int?,
 
@@ -34,9 +31,6 @@ data class Tariff(
 
     @ColumnInfo(defaultValue = "")
     val paragraph: String?,
-
-    @ColumnInfo(defaultValue = "")
-    val paragraphSub: String?,
 
     @ColumnInfo(defaultValue = "")
     val path: String?,
@@ -53,7 +47,7 @@ data class Tariff(
     @ColumnInfo(defaultValue = "")
     val taxRecidive: String?,
 
-    @ColumnInfo(defaultValue = "")
+    @ColumnInfo(defaultValue = "false")
     val recidive: Boolean?,
 
     @ColumnInfo(defaultValue = "")
@@ -63,5 +57,14 @@ data class Tariff(
     val visible: Boolean = true,
 
     @ColumnInfo(defaultValue = "1")
-    val enginesType: EnginesType = EnginesType.New
+    val enginesType: EnginesType = EnginesType.New,
+
+    @ColumnInfo(defaultValue = "false")
+    val favorites: Boolean = false,
+
+    @ColumnInfo(defaultValue = "")
+    val color: String = "",
+
+    @ColumnInfo(defaultValue = "")
+    val customCategory: String = "",
 )
