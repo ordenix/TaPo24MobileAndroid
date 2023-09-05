@@ -2,10 +2,10 @@ package pl.tapo24.infrastructure
 
 import okhttp3.OkHttpClient
 import pl.tapo24.data.Uid
+import pl.tapo24.db.entity.Tariff
 import pl.tapo24.dbData.entity.*
 import pl.tapo24.exceptions.InternalException
 import pl.tapo24.exceptions.InternalMessage
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -261,6 +261,18 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalGetLawDocuments.message))
+    }
+
+    fun getTariffData(): Result<List<Tariff>>{
+        try {
+            val response = service.getTariffData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetLawTariff.message))
     }
 
 

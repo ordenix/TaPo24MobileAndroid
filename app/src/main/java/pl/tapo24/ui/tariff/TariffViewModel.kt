@@ -1,10 +1,7 @@
 package pl.tapo24.ui.tariff
 
 import android.provider.ContactsContract.Data
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -28,7 +25,10 @@ class TariffViewModel @Inject constructor(
     private val networkClient: NetworkClient,
     private val networkClientElastic: NetworkClientElastic
 ) : ViewModel() {
-    val tariffData: MutableLiveData<List<Tariff>> = MutableLiveData()
+
+    //val sss = tapoDb.tariffDb().getAll()
+    private val _tariffData: MutableLiveData<List<Tariff>> = MutableLiveData()
+    val tariffData: LiveData<List<Tariff>> = _tariffData
     val clickedSuggestion = MutableLiveData(false)
     val suggestionData: MutableLiveData<List<LastSearch>> = MutableLiveData()
     lateinit var adapter: TariffDataAdapter
@@ -83,29 +83,21 @@ class TariffViewModel @Inject constructor(
     fun startApp() {
         // TODO: delete it for production
         viewModelScope.launch(Dispatchers.IO) {
-            var list: List<Tariff> = listOf()
-            async { list =tapoDb.tariffDb().getAll() }.await()
-            if (list.isEmpty()) {
-                val e1 = Tariff("doc1","Kategoria","H09", "art 118 KK",0,0,"Kto śmieci ten jest śmieciorz","Artykuł ustawy o ustawie ustaw jest w suatwaie","",10,"","100","100",false,"TET FIELD",true,EnginesType.New)
-                val e2 = Tariff("doc2","Kategoria","H09", "art 118 KK",0,0,"Kto śmieci ten jest śmieciorz","Artykuł ustawy o ustawie ustaw jest w suatwaie","",10,"","100","100",false,"TET FIELD",true,EnginesType.New)
-                val e3 = Tariff("doc3","Kategoria","H09", "art 118 KK",0,0,"Kto śmieci ten jest śmieciorz","Artykuł ustawy o ustawie ustaw jest w suatwaie","",10,"","100","100",false,"TET FIELD",true,EnginesType.New)
-                val e4 = Tariff("doc4","Kategoria","H09", "art 118 KK",0,0,"Kto śmieci ten jest śmieciorz","Artykuł ustawy o ustawie ustaw jest w suatwaie","",10,"","100","100",false,"TET FIELD",true,EnginesType.New)
-                val e5 = Tariff("doc5","Kategoria","H09", "art 118 KK",0,0,"Kto śmieci ten jest śmieciorz","Artykuł ustawy o ustawie ustaw jest w suatwaie","",10,"","100","100",false,"TET FIELD",true,EnginesType.New)
-                async { tapoDb.tariffDb().insert(e1) }.await()
-                async { tapoDb.tariffDb().insert(e2) }.await()
-                async { tapoDb.tariffDb().insert(e3) }.await()
-                async { tapoDb.tariffDb().insert(e4) }.await()
-                async { tapoDb.tariffDb().insert(e5) }.await()
+            async {
+                _tariffData.postValue(tapoDb.tariffDb().getAll())
 
             }
-            async { list =tapoDb.tariffDb().getAll() }.await()
-            withContext(Dispatchers.Main) {
-                if (!list.isEmpty()) {
-                    tariffData.value = list
-                }
 
-            }
         }
+            var list: List<Tariff> = listOf()
+//            async { list =tapoDb.tariffDb().getAll() }.await()
+//            withContext(Dispatchers.Main) {
+//                if (!list.isEmpty()) {
+//                    _tariffData.value = list
+//                }
+//
+//            }
+
 
     }
 }

@@ -33,6 +33,7 @@ class DataUpdater(
 
             async {
                 dataTapoDb.clearAllTables()
+                tapoDb.tariffDb().nukeTable()
 
             }.await()
         }
@@ -145,6 +146,8 @@ class DataUpdater(
                 getUto()
                 Thread.sleep(delay)
                 getSign()
+                Thread.sleep(delay)
+                getTaiff()
 
             } else {
                 //getCodeDrivingLicence()
@@ -216,6 +219,10 @@ class DataUpdater(
                         }
                         if (it.id == "sign"){
                             getSign()
+                            Thread.sleep(delay)
+                        }
+                        if (it.id == "tariff"){
+                            getTaiff()
                             Thread.sleep(delay)
                         }
                         async { dataTapoDb.dataBaseVersion().insert(it) }.await()
@@ -424,6 +431,20 @@ class DataUpdater(
                 val response = networkClient.getSignData()
                 response.onSuccess {
                     dataTapoDb.sign().insertList(it)
+                }
+            }.await()
+        }
+    }
+
+    private fun getTaiff() {
+        MainScope().launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                dialog.setMessage("Pobieranie danych Taryfikatora")
+            }
+            async {
+                val response = networkClient.getTariffData()
+                response.onSuccess {
+                    tapoDb.tariffDb().insertList(it)
                 }
             }.await()
         }

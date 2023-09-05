@@ -10,9 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import pl.tapo24.R
 import pl.tapo24.adapter.QuerySuggestionAdapter
 import pl.tapo24.adapter.TariffDataAdapter
+import pl.tapo24.data.State
 import pl.tapo24.databinding.FragmentTariffBinding
 
 
@@ -43,11 +45,15 @@ class TariffFragment: Fragment() {
         rv.layoutManager = LinearLayoutManager(activity)
         viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty())
         rv. adapter = viewModel.adapter
-        viewModel.tariffData.observe(viewLifecycleOwner, Observer{
+        viewModel.tariffData.observe(viewLifecycleOwner, Observer {
             viewModel.adapter.items = it
             viewModel.adapter.notifyDataSetChanged()
-
         })
+//        viewModel.tariffData.observe(viewLifecycleOwner, Observer{
+//            viewModel.adapter.items = it
+//            viewModel.adapter.notifyDataSetChanged()
+//
+//        })
         ///// search sugestion section
         val searchBar = binding.searchBar
         val searchView = binding.searchView

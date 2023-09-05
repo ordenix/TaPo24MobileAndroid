@@ -20,6 +20,8 @@ enum class InternalMessage(val message: String) {
     InternalGetSignDocuments("Internal exception during get data sign"),
     InternalImpossibleState("Internal IMPOSSIBLE STATE"),
     InternalGetLawDocuments("Internal exception during get data law"),
+    InternalGetLawTariff("Internal exception during get data Tariff"),
+
 
 
 

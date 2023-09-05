@@ -36,7 +36,7 @@ data class Tariff(
     val path: String?,
 
     @ColumnInfo(defaultValue = "0")
-    val points: Int?,
+    val points: String?,
 
     @ColumnInfo(defaultValue = "")
     val subName: String?,
@@ -52,9 +52,6 @@ data class Tariff(
 
     @ColumnInfo(defaultValue = "")
     val text: String?,
-
-    @ColumnInfo(defaultValue = "true")
-    val visible: Boolean = true,
 
     @ColumnInfo(defaultValue = "1")
     val enginesType: EnginesType = EnginesType.New,

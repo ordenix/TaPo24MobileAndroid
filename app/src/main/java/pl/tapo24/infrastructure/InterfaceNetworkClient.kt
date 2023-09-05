@@ -1,6 +1,7 @@
 package pl.tapo24.infrastructure
 
 import pl.tapo24.data.Uid
+import pl.tapo24.db.entity.Tariff
 import pl.tapo24.dbData.entity.*
 import retrofit2.Call
 import retrofit2.http.GET
@@ -77,4 +78,8 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_law")
     fun getLaw(): Call<List<Law>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_tariff")
+    fun getTariffData(): Call<List<Tariff>>
 }

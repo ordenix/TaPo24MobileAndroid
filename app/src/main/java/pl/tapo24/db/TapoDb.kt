@@ -21,7 +21,7 @@ import pl.tapo24.db.entity.WhatsNews
     ], version = 1,
     exportSchema = true,
     autoMigrations = [
-//        AutoMigration (from = 1, to = 2),
+  //      AutoMigration (from = 1, to = 2),
 //        AutoMigration (from = 2, to = 3)
 
     ]
