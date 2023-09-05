@@ -1,23 +1,20 @@
 package pl.tapo24.ui.tariff
 
-import android.R
-import android.opengl.Visibility
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.VISIBLE
-import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.R
+import pl.tapo24.adapter.QuerySuggestionAdapter
 import pl.tapo24.adapter.TariffDataAdapter
 import pl.tapo24.databinding.FragmentTariffBinding
+
 
 @AndroidEntryPoint
 
@@ -27,6 +24,8 @@ class TariffFragment: Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var viewModel: TariffViewModel
+    //private lateinit var searchView: SearchView
 
 
     override fun onCreateView(
@@ -34,23 +33,72 @@ class TariffFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val tariffViewModel =
+        viewModel =
             ViewModelProvider(this).get(TariffViewModel::class.java)
 
         _binding = FragmentTariffBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        tariffViewModel.startApp()
+        viewModel.startApp()
         val rv = binding.RvTariffData
         rv.layoutManager = LinearLayoutManager(activity)
-        tariffViewModel.adapter = TariffDataAdapter(tariffViewModel.tariffData.value.orEmpty())
-        rv. adapter = tariffViewModel.adapter
-        tariffViewModel.tariffData.observe(viewLifecycleOwner, Observer{
-            tariffViewModel.adapter.items = it
-            tariffViewModel.adapter.notifyDataSetChanged()
+        viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty())
+        rv. adapter = viewModel.adapter
+        viewModel.tariffData.observe(viewLifecycleOwner, Observer{
+            viewModel.adapter.items = it
+            viewModel.adapter.notifyDataSetChanged()
 
         })
+        ///// search sugestion section
+        val searchBar = binding.searchBar
+        val searchView = binding.searchView
+        searchView.setupWithSearchBar(searchBar)
+        val editTestInSearchView = searchView.editText
+        //editTestInSearchView.back
+//searchView.setOn
+        editTestInSearchView.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
 
-        tariffViewModel.adapter.onItemClick = {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                viewModel.sendQuerySuggestion(s.toString())
+            }
+        })
+        searchView.inflateMenu(R.menu.menu_search)
+//        val menu = root.findViewById<TextView>(R.menu.menu_search)
+        searchView.setOnMenuItemClickListener { menuItem: MenuItem? ->
+            println(menuItem)
+            menuItem?.setIcon(android.R.drawable.arrow_up_float)
+            true }
+        editTestInSearchView.setOnEditorActionListener { v, actionId, event ->
+            searchBar.text = searchView.text;
+            searchView.hide();
+            false
+
+
+        }
+
+        val rvSuggestion = binding.rvSuggestion
+
+        //viewModel.getData()
+        rvSuggestion.layoutManager = LinearLayoutManager(activity)
+        viewModel.adapterSuggestion = QuerySuggestionAdapter(viewModel.suggestionData.value.orEmpty())
+        rvSuggestion.adapter = viewModel.adapterSuggestion
+//
+        viewModel.suggestionData.observe(viewLifecycleOwner, Observer {
+            viewModel.adapterSuggestion.items = it
+            viewModel.adapterSuggestion.notifyDataSetChanged()
+        })
+
+
+        viewModel.adapter.onItemClick = {
             println(it.id)
         }
 
@@ -85,10 +133,10 @@ class TariffFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
     fun startApp() {
 
     }
+
 
 
 }

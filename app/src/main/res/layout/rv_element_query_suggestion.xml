@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+    <data>
+        <import type="android.view.View"/>
+        <variable name="data"
+                  type="pl.tapo24.db.entity.LastSearch"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        <ImageView
+                app:tint="@android:color/secondary_text_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/history"
+                android:id="@+id/imageView12" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="16dp"/>
+        <TextView
+                android:text="@{data.query}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/textView56"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                app:layout_constraintEnd_toStartOf="@+id/imageView13" app:layout_constraintTop_toTopOf="parent"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:srcCompat="@drawable/close"
+                android:id="@+id/imageView13" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="16dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
