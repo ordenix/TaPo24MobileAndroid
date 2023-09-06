@@ -1,20 +1,20 @@
 package pl.tapo24.ui.tariff
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
-import android.widget.TextView
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import pl.tapo24.R
 import pl.tapo24.adapter.QuerySuggestionAdapter
 import pl.tapo24.adapter.TariffDataAdapter
-import pl.tapo24.data.State
 import pl.tapo24.databinding.FragmentTariffBinding
 
 
@@ -25,16 +25,24 @@ class TariffFragment: Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
+
     private val binding get() = _binding!!
     private lateinit var viewModel: TariffViewModel
-    //private lateinit var searchView: SearchView
 
+    private val dialogMore = DialogTariffMore()
+    //private lateinit var searchView: SearchView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+//        val dialog =AlertDialog.Builder(requireContext())
+//            .show()
+
+       // dialog.setContentView(R.layout.dialog_overlay_loading,)
+        dialogMore.show(childFragmentManager, "More")
+
         viewModel =
             ViewModelProvider(this).get(TariffViewModel::class.java)
 
@@ -43,12 +51,20 @@ class TariffFragment: Fragment() {
         viewModel.startApp()
         val rv = binding.RvTariffData
         rv.layoutManager = LinearLayoutManager(activity)
-        viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty())
+        viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty(),viewModel)
         rv. adapter = viewModel.adapter
         viewModel.tariffData.observe(viewLifecycleOwner, Observer {
             viewModel.adapter.items = it
             viewModel.adapter.notifyDataSetChanged()
         })
+//        rv.getViewTreeObserver().addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+//            override fun onGlobalLayout() {
+//                //dialog.dismiss()
+//                println("ACTIONNN")
+//                rv.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+//            }
+//        })
+        //dialog.dismiss()
 //        viewModel.tariffData.observe(viewLifecycleOwner, Observer{
 //            viewModel.adapter.items = it
 //            viewModel.adapter.notifyDataSetChanged()
@@ -140,7 +156,6 @@ class TariffFragment: Fragment() {
         _binding = null
     }
     fun startApp() {
-
     }
 
 

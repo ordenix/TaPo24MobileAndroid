@@ -7,6 +7,7 @@ import android.os.Environment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import pl.tapo24.db.TapoDb
+import pl.tapo24.db.entity.Tariff
 import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.dbData.entity.DataBaseVersion
 import pl.tapo24.dbData.entity.Law
@@ -441,12 +442,58 @@ class DataUpdater(
             withContext(Dispatchers.Main) {
                 dialog.setMessage("Pobieranie danych Taryfikatora")
             }
-            async {
-                val response = networkClient.getTariffData()
-                response.onSuccess {
-                    tapoDb.tariffDb().insertList(it)
+            var responseFromDb: List<Tariff>? = null
+            async { responseFromDb = tapoDb.tariffDb().getAll() }.await()
+            val response = networkClient.getTariffData()
+
+            if (responseFromDb != null) {
+                response.onSuccess { element ->
+                    element.forEach {
+                       val elementFind =  responseFromDb!!.find { element-> element.id == it.id }
+                        if (elementFind != null) {
+                            elementFind.category = it.category
+                            elementFind.code = it.code
+                            elementFind.law = it.law
+                            elementFind.maxSpeed = it.maxSpeed
+                            elementFind.minSpeed = it.minSpeed
+                            elementFind.name = it.name
+                            elementFind.paragraph = it.paragraph
+                            elementFind.path = it.path
+                            elementFind.points = it.points
+                            elementFind.subName = it.subName
+                            elementFind.tax = it.tax
+                            elementFind.taxRecidive = it.taxRecidive
+                            elementFind.recidive = it.recidive
+                            elementFind.tax = it.tax
+                            elementFind.enginesType = it.enginesType
+                            async { tapoDb.tariffDb().insert(elementFind) }.await()
+
+                        } else {
+                            //dont exist
+                            async { tapoDb.tariffDb().insert(it) }.await()
+                        }
+
+                    }
+                    responseFromDb!!.forEach { elementFromDb ->
+                       if ( element.find { el -> el.id == elementFromDb.id } == null) {
+                           async { tapoDb.tariffDb().deleteElement(elementFromDb) }.await()
+                       }
+                    }
+
                 }
-            }.await()
+
+
+            } else {
+                async {
+                    response.onSuccess {
+                        tapoDb.tariffDb().insertList(it)
+                    }
+                }.await()
+
+            }
+
+
+
         }
     }
 }

@@ -79,6 +79,16 @@ class TariffViewModel @Inject constructor(
     fun sendQuery() {
 
     }
+    fun clickMore(item: Tariff) {
+
+    }
+    fun clickOnFavorites(item: Tariff, position: Int) {
+        item.favorites = !item.favorites
+        viewModelScope.launch(Dispatchers.IO) {
+            async {tapoDb.tariffDb().insert(item) }
+        }
+        adapter.notifyItemChanged(position)
+    }
 
     fun startApp() {
         // TODO: delete it for production

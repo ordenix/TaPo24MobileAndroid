@@ -38,6 +38,7 @@
         <action android:id="@+id/action_nav_road_to_nav_codeLimitsDrivingLicence"
                 app:destination="@id/nav_codeLimitsDrivingLicence"/>
         <action android:id="@+id/action_nav_road_to_nav_codePoints" app:destination="@id/nav_codePoints"/>
+        <action android:id="@+id/action_nav_road_to_nav_tariff" app:destination="@id/nav_tariff"/>
     </fragment>
 
     <fragment

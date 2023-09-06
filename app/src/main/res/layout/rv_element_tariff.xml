@@ -10,8 +10,8 @@
         <variable name="position"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.CodeDrivingLicence"/>
-        <variable name="viewModel" type="pl.tapo24.ui.road.categoryDrivingLicence.CategoryDrivingLicenceViewModel"/>
+                  type="pl.tapo24.db.entity.Tariff"/>
+        <variable name="viewModel" type="pl.tapo24.ui.tariff.TariffViewModel"/>
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
                                                    android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:background="@drawable/style_social_media_button">
 
         <TextView
-                android:text="Naruszenie przez kierującego pojazdem zakazu objeżdżania opuszczonych zapór lub półzapór oraz wjeżdżania na przejazd, jeśli opuszczanie ich zostało rozpoczęte lub podnoszenie ich nie zostało zakończone."
+                android:text="@{data.name}"
                 style="@style/textStyleOrangeMediumWarp"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -81,10 +81,10 @@
                 app:layout_constraintEnd_toStartOf="@+id/button4">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView12"
-                    app:layout_constraintStart_toStartOf="@+id/textView12" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
                     android:id="@+id/constraintLayout2">
 
                 <ImageView
@@ -99,7 +99,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView12"
                         app:layout_constraintStart_toEndOf="@+id/imageView4" android:layout_marginStart="4dp"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:background="#FF0000"
@@ -110,7 +110,9 @@
                     <ImageView
                             style="@style/iconTariff"
                             app:srcCompat="@drawable/repeat_solid"
-                            android:id="@+id/imageView7"/>
+                            android:id="@+id/imageView7"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
                             android:text="6000 zł"
                             style="@style/textStyleWhiteCode"
@@ -129,7 +131,8 @@
             <ImageView
                     style="@style/iconTariff"
                     app:srcCompat="@drawable/book_solid"
-                    android:id="@+id/imageView6" app:layout_constraintTop_toBottomOf="@+id/textView14"/>
+                    android:id="@+id/imageView6" app:layout_constraintTop_toBottomOf="@+id/textView14"
+                    app:layout_constraintStart_toStartOf="parent"/>
             <TextView
                     android:text="10 pkt"
                     android:layout_width="wrap_content"
@@ -162,10 +165,13 @@
                 android:textSize="10dp" app:layout_constraintVertical_bias="1.0"/>
         <ImageView
                 android:layout_width="25dp"
-                android:layout_height="25dp" app:srcCompat="@drawable/star_regular"
+                android:onClick="@{()->(viewModel.clickOnFavorites(data,position))}"
+                android:layout_height="25dp"
+                app:srcCompat="@{data.favorites == false ? @drawable/star_regular : @drawable/star_solid}"
                 android:id="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                android:tint="#FFFFFF"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:tint="#FFFFFF"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

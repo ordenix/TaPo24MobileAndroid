@@ -12,52 +12,52 @@ data class Tariff(
     val id: String,
 
     @ColumnInfo(defaultValue = "")
-    val category: String?,
+    var category: String?,
 
     @ColumnInfo(defaultValue = "")
-    val code: String?,
+    var code: String?,
 
     @ColumnInfo(defaultValue = "")
-    val law: String?,
+    var law: String?,
 
     @ColumnInfo(defaultValue = "0")
-    val maxSpeed: Int?,
+    var maxSpeed: Int?,
 
     @ColumnInfo(defaultValue = "0")
-    val minSpeed: Int?,
+    var minSpeed: Int?,
 
     @ColumnInfo(defaultValue = "")
-    val name: String?,
+    var name: String?,
 
     @ColumnInfo(defaultValue = "")
-    val paragraph: String?,
+    var paragraph: String?,
 
     @ColumnInfo(defaultValue = "")
-    val path: String?,
+    var path: String?,
 
     @ColumnInfo(defaultValue = "0")
-    val points: String?,
+    var points: String?,
 
     @ColumnInfo(defaultValue = "")
-    val subName: String?,
+    var subName: String?,
 
     @ColumnInfo(defaultValue = "")
-    val tax: String?,
+    var tax: String?,
 
     @ColumnInfo(defaultValue = "")
-    val taxRecidive: String?,
+    var taxRecidive: String?,
 
     @ColumnInfo(defaultValue = "false")
-    val recidive: Boolean?,
+    var recidive: Boolean?,
 
     @ColumnInfo(defaultValue = "")
     val text: String?,
 
     @ColumnInfo(defaultValue = "1")
-    val enginesType: EnginesType = EnginesType.New,
+    var enginesType: EnginesType = EnginesType.New,
 
     @ColumnInfo(defaultValue = "false")
-    val favorites: Boolean = false,
+    var favorites: Boolean = false,
 
     @ColumnInfo(defaultValue = "")
     val color: String = "",

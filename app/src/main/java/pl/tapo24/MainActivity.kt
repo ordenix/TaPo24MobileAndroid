@@ -4,11 +4,14 @@ package pl.tapo24
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -32,6 +35,7 @@ import pl.tapo24.db.TapoDb
 import pl.tapo24.db.entity.Setting
 import pl.tapo24.dbData.DataTapoDb
 import pl.tapo24.infrastructure.NetworkClient
+import pl.tapo24.ui.tariff.TariffFragment
 import pl.tapo24.utils.CheckConnection
 import javax.inject.Inject
 
@@ -156,10 +160,44 @@ class MainActivity: AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        drawerLayout.addDrawerListener(object : DrawerListener {
+            override fun onDrawerSlide(view: View, v: Float) {}
+            override fun onDrawerOpened(view: View) {}
+            override fun onDrawerClosed(view: View) {
+                supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .commit();
+
+            }
+            override fun onDrawerStateChanged(i: Int) {}
+        })
+
+
+
+        navView.setNavigationItemSelectedListener{
+            if (it.itemId == R.id.nav_tariff) {
+                drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
+                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+                    override fun onDrawerOpened(drawerView: View) {}
+                    override fun onDrawerStateChanged(newState: Int) {}
+                    override fun onDrawerClosed(drawerView: View) {
+                        navController.navigate(it.itemId)
+                        drawerLayout.removeDrawerListener(this)
+                    }
+                })
+                drawerLayout.closeDrawer(GravityCompat.START)
+
+            } else {
+                navController.navigate(it.itemId)
+                drawerLayout.closeDrawer(GravityCompat.START)
+
+            }
+            true
+        }
+
 
 
     }
-
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -145,6 +145,8 @@
     <string name="search">Wyszukaj</string>
     <string name="searchCodeDrivingLimits">Wprowadź kod lub nazwę ograniczenia</string>
     <string name="back">Wstecz</string>
+    <string name="viewLoading">Ładowanie widoku</string>
+    <string name="pleaseWait">proszę czekać</string>
 
 
 
