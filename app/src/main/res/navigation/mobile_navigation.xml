@@ -7,19 +7,19 @@
 
     <fragment
             android:id="@+id/nav_home"
-            android:name="pl.tapo24.ui.home.HomeFragment"
+            android:name="pl.tapo24.twa.ui.home.HomeFragment"
             android:label="@string/menu_home"
             tools:layout="@layout/fragment_home"/>
     <fragment android:id="@+id/nav_helpers"
-              android:name="pl.tapo24.ui.helpers.HelpersFragment"
+              android:name="pl.tapo24.twa.ui.helpers.HelpersFragment"
               android:label="@string/menu_helpers"
               tools:layout="@layout/fragment_helpers"/>
     <fragment android:id="@+id/nav_category_driving_licence"
-              android:name="pl.tapo24.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
+              android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
               android:label="@string/CategodyDrivingLicence"
               tools:layout="@layout/fragment_category_driving_licence"/>
     <fragment android:id="@+id/nav_road"
-              android:name="pl.tapo24.ui.road.RoadFragment"
+              android:name="pl.tapo24.twa.ui.road.RoadFragment"
               android:label="@string/menu_road"
               tools:layout="@layout/fragment_road">
         <action android:id="@+id/action_nav_road_to_nav_category_driving_licence"
@@ -43,52 +43,52 @@
 
     <fragment
             android:id="@+id/nav_gallery"
-            android:name="pl.tapo24.ui.gallery.GalleryFragment"
+            android:name="pl.tapo24.twa.ui.gallery.GalleryFragment"
             android:label="@string/menu_gallery"
             tools:layout="@layout/fragment_gallery"/>
 
     <fragment
             android:id="@+id/nav_tariff"
-            android:name="pl.tapo24.ui.tariff.TariffFragment"
+            android:name="pl.tapo24.twa.ui.tariff.TariffFragment"
             android:label="@string/menu_tariff"
             tools:layout="@layout/fragment_tariff"/>
     <fragment
             android:id="@+id/nav_settings"
-            android:name="pl.tapo24.ui.settings.SettingsFragment"
+            android:name="pl.tapo24.twa.ui.settings.SettingsFragment"
             android:label="@string/settings"
             tools:layout="@layout/fragment_setting"/>
     <fragment
             android:id="@+id/nav_about_application"
-            android:name="pl.tapo24.ui.aboutApplication.AboutApplicationFragment"
+            android:name="pl.tapo24.twa.ui.aboutApplication.AboutApplicationFragment"
             android:label="@string/info_version"
             tools:layout="@layout/fragment_about_application"/>
 
     <fragment android:id="@+id/nav_login"
-              android:name="pl.tapo24.ui.login.LoginFragment"
+              android:name="pl.tapo24.twa.ui.login.LoginFragment"
               android:label="@string/login"
               tools:layout="@layout/fragment_login">
         <action android:id="@+id/action_nav_login_to_nav_register" app:destination="@id/nav_register"/>
     </fragment>
     <fragment android:id="@+id/nav_register"
-              android:name="pl.tapo24.ui.login.register.RegisterFragment"
+              android:name="pl.tapo24.twa.ui.login.register.RegisterFragment"
               android:label="@string/register"
               tools:layout="@layout/fragment_register">
         <action android:id="@+id/action_nav_register_to_nav_login" app:destination="@id/nav_login"/>
     </fragment>
     <fragment android:id="@+id/nav_country_driving_licence"
-              android:name="pl.tapo24.ui.road.countryDrivingLicence.CountryDrivingLicenceFragment"
+              android:name="pl.tapo24.twa.ui.road.countryDrivingLicence.CountryDrivingLicenceFragment"
               android:label="@string/OtherCountryDrivingLicence"
     tools:layout="@layout/fragment_country_driving_licence"/>
     <fragment android:id="@+id/nav_status"
-              android:name="pl.tapo24.ui.road.status.StatusFragment"
+              android:name="pl.tapo24.twa.ui.road.status.StatusFragment"
               android:label="@string/StausDrivingLicenceKSIP"
               tools:layout="@layout/fragment_status"/>
     <fragment android:id="@+id/nav_towing"
-              android:name="pl.tapo24.ui.road.towing.TowingFragment"
+              android:name="pl.tapo24.twa.ui.road.towing.TowingFragment"
               android:label="@string/Towing"
               tools:layout="@layout/fragment_towing"/>
     <fragment android:id="@+id/nav_lights"
-              android:name="pl.tapo24.ui.road.lights.LightsFragment"
+              android:name="pl.tapo24.twa.ui.road.lights.LightsFragment"
               android:label="@string/Lights"
               tools:layout="@layout/fragment_lights">
         <action android:id="@+id/action_nav_lights_to_nav_lights_front" app:destination="@id/nav_lights_front"/>
@@ -97,19 +97,19 @@
         <action android:id="@+id/action_nav_lights_to_nav_lights_others" app:destination="@id/nav_lights_others"/>
     </fragment>
     <fragment android:id="@+id/nav_lights_code_country"
-              android:name="pl.tapo24.ui.road.lights.lightsCodeCountry.LightsCodeCountryFragment"
+              android:name="pl.tapo24.twa.ui.road.lights.lightsCodeCountry.LightsCodeCountryFragment"
               android:label="@string/LightsCodeCountry"
               tools:layout="@layout/fragment_lights_code_country"/>
     <fragment android:id="@+id/nav_lights_front"
-              android:name="pl.tapo24.ui.road.lights.lightsFront.LightsFrontFragment"
+              android:name="pl.tapo24.twa.ui.road.lights.lightsFront.LightsFrontFragment"
               android:label="@string/LightsFront"
               tools:layout="@layout/fragment_lights_front"/>
     <fragment android:id="@+id/nav_lights_others"
-              android:name="pl.tapo24.ui.road.lights.lightsOthres.LightsOthersFragment"
+              android:name="pl.tapo24.twa.ui.road.lights.lightsOthres.LightsOthersFragment"
               android:label="@string/LightsOthers"
               tools:layout="@layout/fragment_lights_others"/>
     <fragment android:id="@+id/nav_story"
-              android:name="pl.tapo24.ui.story.StoryFragment"
+              android:name="pl.tapo24.twa.ui.story.StoryFragment"
               android:label="@string/LightsOthers"
               tools:layout="@layout/fragment_story">
         <argument android:name="name" app:argType="string"/>
@@ -117,57 +117,57 @@
     </fragment>
     <fragment android:id="@+id/nav_alcohol"
               tools:layout="@layout/fragment_alcohol"
-              android:name="pl.tapo24.ui.road.alcohol.AlcoholFragment"
+              android:name="pl.tapo24.twa.ui.road.alcohol.AlcoholFragment"
               android:label="AlcoholFragment">
         <action android:id="@+id/action_nav_alcohol_to_nav_story" app:destination="@id/nav_story"/>
     </fragment>
     <fragment android:id="@+id/nav_sign"
-              android:name="pl.tapo24.ui.road.sign.SignFragment"
+              android:name="pl.tapo24.twa.ui.road.sign.SignFragment"
               android:label="fragment_sign"
               tools:layout="@layout/fragment_sign">
         <action android:id="@+id/action_nav_sign_to_nav_signList" app:destination="@id/nav_signList"/>
     </fragment>
     <fragment android:id="@+id/nav_signDetails"
-              android:name="pl.tapo24.ui.road.sign.signDetails.SignDetailsFragment"
+              android:name="pl.tapo24.twa.ui.road.sign.signDetails.SignDetailsFragment"
               android:label="fragment_sign_details"
               tools:layout="@layout/fragment_sign_details">
-        <argument android:name="signDetails" app:argType="pl.tapo24.dbData.entity.Sign"/>
+        <argument android:name="signDetails" app:argType="pl.tapo24.twa.dbData.entity.Sign"/>
     </fragment>
     <fragment android:id="@+id/nav_signList"
-              android:name="pl.tapo24.ui.road.sign.signList.SignListFragment"
+              android:name="pl.tapo24.twa.ui.road.sign.signList.SignListFragment"
               android:label="fragment_sign_list"
               tools:layout="@layout/fragment_sign_list">
         <action android:id="@+id/action_nav_signList_to_nav_signDetails" app:destination="@id/nav_signDetails"/>
         <argument android:name="signCategory" app:argType="string"/>
     </fragment>
-    <fragment android:id="@+id/nav_uto" android:name="pl.tapo24.ui.road.uto.UtoFragment"
+    <fragment android:id="@+id/nav_uto" android:name="pl.tapo24.twa.ui.road.uto.UtoFragment"
               android:label="fragment_uto" tools:layout="@layout/fragment_uto">
         <action android:id="@+id/action_utoFragment_to_nav_utoComponent"
                 app:destination="@id/nav_utoComponent"/>
     </fragment>
     <fragment android:id="@+id/nav_utoComponent"
-              android:name="pl.tapo24.ui.road.uto.utoComponent.UtoComponentFragment"
+              android:name="pl.tapo24.twa.ui.road.uto.utoComponent.UtoComponentFragment"
               android:label="fragment_uto_component" tools:layout="@layout/fragment_uto_component">
         <argument android:name="id" app:argType="integer"/>
     </fragment>
     <fragment android:id="@+id/nav_controlList"
-              android:name="pl.tapo24.ui.road.controlList.ControlListFragment"
+              android:name="pl.tapo24.twa.ui.road.controlList.ControlListFragment"
               android:label="ControlListFragment"
               tools:layout="@layout/fragment_control_list"/>
     <fragment android:id="@+id/nav_law"
               tools:layout="@layout/fragment_law"
-              android:name="pl.tapo24.ui.law.LawFragment"
+              android:name="pl.tapo24.twa.ui.law.LawFragment"
               android:label="LawFragment"/>
     <fragment android:id="@+id/nav_codeLimitsDrivingLicence"
-              android:name="pl.tapo24.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceFragment"
+              android:name="pl.tapo24.twa.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceFragment"
               android:label="fragment_code_limits_driving_licence"
               tools:layout="@layout/fragment_code_limits_driving_licence"/>
     <fragment android:id="@+id/nav_codePoints"
-              android:name="pl.tapo24.ui.codePoints.CodePointsFragment"
+              android:name="pl.tapo24.twa.ui.codePoints.CodePointsFragment"
               android:label="fragment_code_points"
               tools:layout="@layout/fragment_code_points"/>
     <fragment android:id="@+id/nav_holdingDocumentsChose"
-              android:name="pl.tapo24.ui.road.holdingDocuments.HoldingDocumentsChoseFragment"
+              android:name="pl.tapo24.twa.ui.road.holdingDocuments.HoldingDocumentsChoseFragment"
               android:label="fragment_holding_documents_chose"
               tools:layout="@layout/fragment_holding_documents_chose"/>
 </navigation>

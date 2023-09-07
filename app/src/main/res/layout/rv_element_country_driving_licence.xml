@@ -7,8 +7,8 @@
         <variable name="position"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.CountryDrivingLicence"/>
-        <variable name="viewModel" type="pl.tapo24.ui.road.countryDrivingLicence.CountryDrivingLicenceViewModel"/>
+                  type="pl.tapo24.twa.dbData.entity.CountryDrivingLicence"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.road.countryDrivingLicence.CountryDrivingLicenceViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

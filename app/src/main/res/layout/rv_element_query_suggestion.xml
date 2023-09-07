@@ -5,8 +5,8 @@
     <data>
         <import type="android.view.View"/>
         <variable name="data"
-                  type="pl.tapo24.db.entity.LastSearch"/>
-        <variable name="viewModel" type="pl.tapo24.ui.tariff.TariffViewModel"/>
+                  type="pl.tapo24.twa.db.entity.LastSearch"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.tariff.TariffViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

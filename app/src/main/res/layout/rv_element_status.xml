@@ -7,8 +7,8 @@
         <variable name="position"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.Status"/>
-        <variable name="viewModel" type="pl.tapo24.ui.road.status.StatusViewModel"/>
+                  type="pl.tapo24.twa.dbData.entity.Status"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.road.status.StatusViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

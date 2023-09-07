@@ -5,7 +5,7 @@
     <data>
         <import type="android.view.View"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.Towing"/>
+                  type="pl.tapo24.twa.dbData.entity.Towing"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

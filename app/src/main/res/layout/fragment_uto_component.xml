@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.road.uto.utoComponent.UtoComponentFragment">
+        tools:context="pl.tapo24.twa.ui.road.uto.utoComponent.UtoComponentFragment">
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             style="@style/smallContainer"

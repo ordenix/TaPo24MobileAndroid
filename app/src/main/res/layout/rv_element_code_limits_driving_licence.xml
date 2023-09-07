@@ -9,9 +9,9 @@
         <variable name="size"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.CodeLimitsDrivingLicence"/>
+                  type="pl.tapo24.twa.dbData.entity.CodeLimitsDrivingLicence"/>
         <variable name="viewModel"
-                  type="pl.tapo24.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceViewModel"/>
+                  type="pl.tapo24.twa.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

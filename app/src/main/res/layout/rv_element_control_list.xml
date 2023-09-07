@@ -7,9 +7,9 @@
         <variable name="position"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.ControlList"/>
+                  type="pl.tapo24.twa.dbData.entity.ControlList"/>
         <variable name="viewModel"
-                  type="pl.tapo24.ui.road.controlList.ControlListViewModel"/>
+                  type="pl.tapo24.twa.ui.road.controlList.ControlListViewModel"/>
 
     </data>
 

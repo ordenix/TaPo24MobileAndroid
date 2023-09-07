@@ -10,8 +10,8 @@
         <variable name="position"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.db.entity.Tariff"/>
-        <variable name="viewModel" type="pl.tapo24.ui.tariff.TariffViewModel"/>
+                  type="pl.tapo24.twa.db.entity.Tariff"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.tariff.TariffViewModel"/>
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
                                                    android:layout_width="match_parent"

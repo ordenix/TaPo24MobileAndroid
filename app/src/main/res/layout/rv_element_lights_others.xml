@@ -9,7 +9,7 @@
         <variable name="size"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.dbData.entity.LightsOthers"/>
+                  type="pl.tapo24.twa.dbData.entity.LightsOthers"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
