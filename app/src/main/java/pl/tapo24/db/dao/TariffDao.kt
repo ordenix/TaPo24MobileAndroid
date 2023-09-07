@@ -9,8 +9,8 @@ import pl.tapo24.db.entity.Tariff
 
 @Dao
 interface TariffDao {
-
-    @Query("SELECT * FROM tariff ORDER BY id ASC limit 10")
+//limit 10
+    @Query("SELECT * FROM tariff ORDER BY id ASC")
     fun getAll(): List<Tariff>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

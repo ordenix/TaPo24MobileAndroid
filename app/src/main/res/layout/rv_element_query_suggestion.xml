@@ -6,13 +6,16 @@
         <import type="android.view.View"/>
         <variable name="data"
                   type="pl.tapo24.db.entity.LastSearch"/>
+        <variable name="viewModel" type="pl.tapo24.ui.tariff.TariffViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="@{()->viewModel.clickOnSuggestion(data)}"
             >
 
         <ImageView
+                android:visibility="@{data.history == true ? View.VISIBLE : View.GONE}"
                 app:tint="@android:color/secondary_text_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/history"
@@ -25,6 +28,7 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView12"
                 app:layout_constraintEnd_toStartOf="@+id/imageView13" app:layout_constraintTop_toTopOf="parent"/>
         <ImageView
+                android:visibility="@{data.history == true ? View.VISIBLE : View.GONE}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" app:srcCompat="@drawable/close"
                 android:id="@+id/imageView13" app:layout_constraintEnd_toEndOf="parent"

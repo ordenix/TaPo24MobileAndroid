@@ -152,6 +152,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         <Button
                 android:text="Więcej"
+                android:onClick="@{()->(viewModel.clickMore(data,position))}"
                 android:theme="@style/OrangeBtn"
                 android:backgroundTint="@color/orange_tapo"
                 android:layout_width="wrap_content"

@@ -1,13 +1,13 @@
 package pl.tapo24.infrastructure
 
 import okhttp3.OkHttpClient
-import pl.tapo24.data.Uid
+import pl.tapo24.data.State
 import pl.tapo24.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.data.elastic.DataQueryToSuggestion
-import pl.tapo24.dbData.entity.*
+import pl.tapo24.data.elastic.queryToElasticForTariffList.DataToElasticForTariffList
+import pl.tapo24.data.elastic.resultClasFromElastic.DataTariffListFromElastic
 import pl.tapo24.exceptions.InternalException
 import pl.tapo24.exceptions.InternalMessage
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -36,13 +36,10 @@ class NetworkClientElastic(var url: String) {
 
 
 
-
-
-
-    fun getSuggestionList(suggestions: DataQueryToSuggestion): Result<DataQueryFromSuggestion> {
+    fun getTariffDataList(suggestions: DataToElasticForTariffList): Result<DataTariffListFromElastic> {
         try {
             // TODO: BEARER
-            val response = service.getQuerySuggestion(suggestions, "Bearer search-gwuqjnb5u2je9vnc6e7i5gnd").execute()
+            val response = service.getTariffList(suggestions, State.enginesType.bearer).execute()
             println(response)
             if (response.isSuccessful) {
                 return Result.success(response.body()!!)
@@ -50,7 +47,22 @@ class NetworkClientElastic(var url: String) {
         } catch (ex: Throwable) {
             return Result.failure(ex)
         }
-        return Result.failure(InternalException(InternalMessage.InternalGetBaseVersion.message))
+        return Result.failure(InternalException(InternalMessage.InternalGetElastic.message))
+    }
+
+
+    fun getSuggestionList(suggestions: DataQueryToSuggestion): Result<DataQueryFromSuggestion> {
+        try {
+            // TODO: BEARER
+            val response = service.getQuerySuggestion(suggestions, State.enginesType.bearer).execute()
+            println(response)
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetElastic.message))
     }
 
 

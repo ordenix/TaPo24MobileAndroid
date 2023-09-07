@@ -21,4 +21,8 @@ object State {
     val premiumVersion: Boolean = true
     var isLogin: Boolean = false
 
+
+    // CONFIG
+    var maxVisibleItem: Int = 50
+
 }

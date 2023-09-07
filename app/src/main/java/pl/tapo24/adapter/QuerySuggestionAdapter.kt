@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.R
 import pl.tapo24.BR
 import pl.tapo24.db.entity.LastSearch
+import pl.tapo24.ui.tariff.TariffViewModel
 import java.util.*
 
 class QuerySuggestionAdapter(
-    var items: List<LastSearch>
+    var items: List<LastSearch>,
+    var viewModel: TariffViewModel
 ): RecyclerView.Adapter<QuerySuggestionAdapter.QuerySuggestionAdapterHolder>() {
 
 
@@ -37,6 +39,7 @@ class QuerySuggestionAdapter(
 
         fun bind(item: LastSearch) {
             binding.setVariable(BR.data, item)
+            binding.setVariable(BR.viewModel, viewModel)
             binding.executePendingBindings()
 
 

@@ -21,6 +21,7 @@ enum class InternalMessage(val message: String) {
     InternalImpossibleState("Internal IMPOSSIBLE STATE"),
     InternalGetLawDocuments("Internal exception during get data law"),
     InternalGetLawTariff("Internal exception during get data Tariff"),
+    InternalGetElastic("Internal exception during get data from elastic"),
 
 
 

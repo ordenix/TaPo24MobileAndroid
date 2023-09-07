@@ -147,7 +147,8 @@
     <string name="back">Wstecz</string>
     <string name="viewLoading">Ładowanie widoku</string>
     <string name="pleaseWait">proszę czekać</string>
-
+    <string name="removeFav">Usuń z ulubionych</string>
+    <string name="addFav">Dodaj do ulubionych</string>
 
 
 </resources>

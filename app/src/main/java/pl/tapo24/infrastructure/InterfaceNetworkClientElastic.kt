@@ -1,8 +1,9 @@
 package pl.tapo24.infrastructure
 
-import pl.tapo24.data.Uid
 import pl.tapo24.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.data.elastic.DataQueryToSuggestion
+import pl.tapo24.data.elastic.queryToElasticForTariffList.DataToElasticForTariffList
+import pl.tapo24.data.elastic.resultClasFromElastic.DataTariffListFromElastic
 import pl.tapo24.dbData.entity.*
 import retrofit2.Call
 import retrofit2.http.*
@@ -13,6 +14,11 @@ interface InterfaceNetworkClientElastic {
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("query_suggestion")
     fun getQuerySuggestion(@Body body: DataQueryToSuggestion, @Header("Authorization") authorization:String): Call<DataQueryFromSuggestion>
+
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("search.json")
+    fun getTariffList(@Body body: DataToElasticForTariffList, @Header("Authorization") authorization:String): Call<DataTariffListFromElastic>
 
    // Bearer search-gwuqjnb5u2je9vnc6e7i5gnd -before
     //Bearer search-gwuqjnb5u2je9vnc6e7i5gnd new
