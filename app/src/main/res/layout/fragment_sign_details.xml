@@ -6,8 +6,13 @@
         android:layout_height="match_parent"
         tools:context="pl.tapo24.twa.ui.road.sign.signDetails.SignDetailsFragment">
     <TextView
-            android:text="TextView"
+            android:text="Szczegóły znaku A-1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView48"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" tools:src="@tools:sample/avatars" android:id="@+id/imageView16"
+            app:layout_constraintTop_toBottomOf="@+id/textView48" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

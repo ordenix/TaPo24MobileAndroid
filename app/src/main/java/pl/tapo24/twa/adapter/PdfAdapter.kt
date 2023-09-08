@@ -3,6 +3,7 @@ package pl.tapo24.twa.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.twa.R
@@ -30,7 +31,10 @@ class PdfAdapter(
 
     inner class PdfAdapterHolder(val view: View): RecyclerView.ViewHolder(view) {
         val container:ConstraintLayout = view.findViewById<ConstraintLayout>(R.id.container)
+        val name:TextView = view.findViewById<TextView>(R.id.pdfName)
+
         fun bind(item: Law) {
+            name.text = item.name
             container.setOnClickListener {
                 onItemClick?.invoke(item)
             }

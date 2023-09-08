@@ -86,8 +86,44 @@ class DataUpdater(
                     async { dataTapoDb.law().insert(element) }.await()
 
                 }
-
+            dialog.dismiss()
             }
+        }
+    }
+
+    fun getGraphics() {
+        // ToDo: Handle error network available
+        MainScope().launch(Dispatchers.IO) {
+
+                    // val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.type}/${element.fileName}")
+                    // val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${element.type}/${element.fileName}")
+
+                    // file.delete()
+
+                    val request = DownloadManager.Request(Uri.parse("https://tapo24.pl/img/A-3.69a26903.png"))
+                    request.setDescription("Plik zdj1 jest w trakcie pobierania")
+                    request.allowScanningByMediaScanner()
+                    request.setTitle("Pobieranie pliku ddd")
+                    // request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    //Set the local destination for the downloaded file to a path within the application's external files directory
+                    //Set the local destination for the downloaded file to a path within the application's external files directory
+                    //request.set
+//                    request.setDestinationInExternalPublicDir(
+//                        Environment.DIRECTORY_DOWNLOADS,
+//                        "tapo24/pdf/${element.type}/${element.fileName}"
+//                    )
+                    request.setDestinationInExternalFilesDir(
+                        context,
+                        Environment.DIRECTORY_DOWNLOADS,
+                        "test/a1.png"
+                    ) //To Store file in External Public Directory use "setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)"
+                    val downloadManager =
+                        context.getSystemService(Context.DOWNLOAD_SERVICE)  as DownloadManager?
+                    val downoloadID = downloadManager!!.enqueue(request)
+
+
+
+
         }
 
 

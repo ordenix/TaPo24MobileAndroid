@@ -30,7 +30,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/signs_post_solid"
                                 android:id="@+id/imageView8"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
@@ -148,9 +148,11 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/id_card_solid"
+                                android:layout_height="50dp"
+                                app:srcCompat="@drawable/id_card_solid"
                                 android:id="@+id/imageView8314"
-                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
                         <TextView
                                 android:text="@string/CategodyDrivingLicence"
@@ -177,7 +179,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/glasses_solid"
                                 android:id="@+id/imageView8355"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>

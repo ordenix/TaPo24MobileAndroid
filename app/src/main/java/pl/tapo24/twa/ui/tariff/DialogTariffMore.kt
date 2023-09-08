@@ -40,6 +40,22 @@ class DialogTariffMore: DialogFragment() {
             // Portrait
         }
         if (item !=null) {
+            //binding  here
+            if (item!!.code != null) {
+                binding.codeContainer.visibility = View.VISIBLE
+                binding.textView64.text = "${item!!.points} pkt"
+                binding.textView65.text = item!!.code
+
+            } else {
+                binding.codeContainer.visibility = View.GONE
+            }
+            binding.textView62.text = "${item!!.tax} zł"
+            if (item!!.recidive == true) {
+                binding.recidive.visibility = View.VISIBLE
+                binding.textView63.text = "${item!!.taxRecidive} zł"
+            } else {
+                binding.recidive.visibility = View.GONE
+            }
             binding.textView66.text = item!!.name
             setFav(binding, item!!)
             binding.constraintLayout6.setOnClickListener {

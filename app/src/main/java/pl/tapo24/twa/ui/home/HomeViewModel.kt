@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
             // TODO: DELETE IT IN PRODUCITON
             async { list = tapoDb.whatsNewsDb().getAll() }.await()
             if (list.isEmpty()) {
-                val e1 = WhatsNews(1,1688548351, "Co nowego?", "-dodano pierdoły", "", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
+                val e1 = WhatsNews(1,1694172197, "Witamy w testowej aplikacji Tapo24", "Jest to wersja testowa aplikacji TaPo24. Zwracamy się z prośbą aby zgłaszać wszelkiego rodzaju błędy na email TRZEBA DODAĆ EMAIL !!!! dev@tapo24.pl", "Moduły na szaro są aktualnie nie działającymi i będą dodawane na bieżąco", "","","Dziękujemy za udział w testach", "", "Ordenix")
                 val e2 = WhatsNews(2,1688548351, "Co nowego?", "-dodano pierdoły", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
                 val e3 = WhatsNews(3,1688548351, "Co nowego?", "-dodano pierdoły1", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
                 val e4 = WhatsNews(4,1688548351, "Co nowego?", "-dodano pierdoły2", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
@@ -38,12 +38,12 @@ class HomeViewModel @Inject constructor(
                 val e7 = WhatsNews(7,1688548351, "Co nowego?", "-dodano pierdoły5", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
 
                 async { tapoDb.whatsNewsDb().insert(e1) }.await()
-                async { tapoDb.whatsNewsDb().insert(e2) }.await()
-                async { tapoDb.whatsNewsDb().insert(e3) }.await()
-                async { tapoDb.whatsNewsDb().insert(e4) }.await()
-                async { tapoDb.whatsNewsDb().insert(e5) }.await()
-                async { tapoDb.whatsNewsDb().insert(e6) }.await()
-                async { tapoDb.whatsNewsDb().insert(e7) }.await()
+//                async { tapoDb.whatsNewsDb().insert(e2) }.await()
+//                async { tapoDb.whatsNewsDb().insert(e3) }.await()
+//                async { tapoDb.whatsNewsDb().insert(e4) }.await()
+//                async { tapoDb.whatsNewsDb().insert(e5) }.await()
+//                async { tapoDb.whatsNewsDb().insert(e6) }.await()
+//                async { tapoDb.whatsNewsDb().insert(e7) }.await()
             }
             async { list = tapoDb.whatsNewsDb().getAll() }.await()
             withContext(Dispatchers.Main) {

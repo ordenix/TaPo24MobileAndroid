@@ -76,6 +76,10 @@
                 android:maxLines="5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textViewFooter"/>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp" app:srcCompat="@drawable/flask_vial_solid"
+                android:id="@+id/imageView17" android:tint="#FFFFFF"/>
         <TextView
                 android:text="Damian"
                 style="@style/textStyle"

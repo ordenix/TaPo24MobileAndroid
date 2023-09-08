@@ -9,24 +9,20 @@
                 android:icon="@drawable/house_solid"
                 android:title="@string/menu_home"/>
         <item
-                android:id="@+id/nav_gallery"
-                android:icon="@drawable/ic_menu_gallery"
-                android:title="@string/menu_gallery"/>
-        <item
                 android:id="@+id/nav_road"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/road_solid"
                 android:title="@string/menu_road"/>
         <item
                 android:id="@+id/nav_tariff"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/book_open_reader_solid"
                 android:title="@string/menu_tariff"/>
         <item
                 android:id="@+id/nav_law"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/gavel_solid"
                 android:title="@string/menu_law"/>
         <item
                 android:id="@+id/nav_helpers"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/life_ring_solid"
                 android:title="@string/menu_helpers"/>
     </group>
 </menu>

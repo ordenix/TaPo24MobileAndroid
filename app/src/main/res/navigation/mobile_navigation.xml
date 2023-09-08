@@ -42,12 +42,6 @@
     </fragment>
 
     <fragment
-            android:id="@+id/nav_gallery"
-            android:name="pl.tapo24.twa.ui.gallery.GalleryFragment"
-            android:label="@string/menu_gallery"
-            tools:layout="@layout/fragment_gallery"/>
-
-    <fragment
             android:id="@+id/nav_tariff"
             android:name="pl.tapo24.twa.ui.tariff.TariffFragment"
             android:label="@string/menu_tariff"

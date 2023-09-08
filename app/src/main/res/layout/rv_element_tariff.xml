@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/divider4"
                 android:layout_marginEnd="8dp"/>
         <TextView
-                android:text="art. 97 KW w zw. z art. 25 ust. 4 pkt 1 PRD"
+                android:text="@{data.text}"
                 style="@style/textStyleWhiteQualification"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" android:id="@+id/textView10"
@@ -94,7 +94,7 @@
                         app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 <TextView
-                        android:text="3000 zł"
+                        android:text="@{data.tax + ` zł`}"
                         style="@style/textStyleWhiteCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/textView12"
@@ -102,6 +102,7 @@
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
+                        android:visibility="@{data.recidive == true ? View.VISIBLE : View.GONE}"
                         android:layout_height="wrap_content" android:background="#FF0000"
                         app:layout_constraintTop_toBottomOf="@+id/textView12"
                         app:layout_constraintStart_toEndOf="@+id/imageView4" app:layout_constraintEnd_toEndOf="parent"
@@ -114,7 +115,7 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"/>
                     <TextView
-                            android:text="6000 zł"
+                            android:text="@{data.taxRecidive + ` zł`}"
                             style="@style/textStyleWhiteCode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" android:id="@+id/textView17"
@@ -124,17 +125,22 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
             <ImageView
                     style="@style/iconTariff"
+                    android:visibility="@{data.points == null ? View.GONE : View.VISIBLE}"
                     app:srcCompat="@drawable/person_military_pointing_solid"
                     android:id="@+id/imageView5"
                     app:layout_constraintTop_toBottomOf="@id/constraintLayout2"
                     app:layout_constraintStart_toStartOf="parent"/>
             <ImageView
                     style="@style/iconTariff"
+                    android:visibility="@{data.points == null ? View.GONE : View.VISIBLE}"
+
                     app:srcCompat="@drawable/book_solid"
                     android:id="@+id/imageView6" app:layout_constraintTop_toBottomOf="@+id/textView14"
                     app:layout_constraintStart_toStartOf="parent"/>
             <TextView
-                    android:text="10 pkt"
+                    android:visibility="@{data.points == null ? View.GONE : View.VISIBLE}"
+
+                    android:text="@{data.points != `-` ? data.points + ` pkt` : data.points}"
                     android:layout_width="wrap_content"
                     style="@style/textStyleWhiteCode"
                     android:layout_height="wrap_content" android:id="@+id/textView14"
@@ -142,7 +148,9 @@
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toEndOf="@+id/imageView5"
                     android:layout_marginStart="4dp"/>
             <TextView
-                    android:text="H09"
+                    android:text="@{data.code}"
+                    android:visibility="@{data.points == null ? View.GONE : View.VISIBLE}"
+
                     android:layout_width="wrap_content"
                     style="@style/textStyleWhiteCode"
                     android:layout_height="wrap_content" android:id="@+id/textView18"

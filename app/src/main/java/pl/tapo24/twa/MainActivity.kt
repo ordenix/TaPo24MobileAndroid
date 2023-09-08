@@ -80,6 +80,7 @@ class MainActivity: AppCompatActivity() {
 
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getPDF()
+        // DataUpdater(tapoDb,dataTapoDb,networkClient,this).getGraphics()
 
 
         MainScope().launch(Dispatchers.IO) {
@@ -154,7 +155,7 @@ class MainActivity: AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers
+                R.id.nav_home, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -220,10 +221,10 @@ class MainActivity: AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_about_application)
         }
-        if (item.itemId == R.id.action_login) {
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
-            navController.navigate(R.id.nav_login)
-        }
+//        if (item.itemId == R.id.action_login) {
+//            val navController = findNavController(R.id.nav_host_fragment_content_main)
+//            navController.navigate(R.id.nav_login)
+//        }
         return super.onOptionsItemSelected(item)
     }
 
