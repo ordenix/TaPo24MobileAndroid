@@ -146,8 +146,8 @@
     <string name="back">Wstecz</string>
     <string name="viewLoading">Ładowanie widoku</string>
     <string name="pleaseWait">proszę czekać</string>
-
-
+    <string name="sign_desc">Opis znaku:</string>
+    <string name="more">Więcej</string>
 
 
 </resources>
