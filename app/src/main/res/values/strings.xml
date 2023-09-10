@@ -149,6 +149,7 @@
     <string name="pleaseWait">proszę czekać</string>
     <string name="removeFav">Usuń z ulubionych</string>
     <string name="addFav">Dodaj do ulubionych</string>
+    <string name="done">Gotowe</string>
 
 
 </resources>

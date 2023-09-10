@@ -1,9 +1,6 @@
 package pl.tapo24.twa.dbData.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import pl.tapo24.twa.dbData.entity.Law
 
 
@@ -21,4 +18,7 @@ interface LawDao {
 
     @Query("SELECT * FROM law where type = :type")
     fun getAllByType(type: String): List<Law>
+
+    @Delete
+    fun deleteElement(item: Law)
 }

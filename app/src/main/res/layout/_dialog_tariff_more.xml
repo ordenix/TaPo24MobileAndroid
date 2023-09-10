@@ -68,6 +68,7 @@
         <TextView
                 style="@style/textStyleOrangeMediumWarp"
                 android:textAlignment="center"
+                android:textIsSelectable="true"
                 android:text="Dui tractatos graeci dolore elaboraret duo eloquentiam dicat. Fabulas libris delenit orci equidem nam tempor nobis ante. Scelerisque epicurei maiestatis postulant voluptaria parturient. Offendit prompta non ad vituperata veri. Rutrum mandamus curabitur scripta dico congue molestiae definiebas fringilla mentitum. Epicurei verterem auctor primis deterruisset theophrastus ut. Quod dictumst maximus elitr sapien non. Tation mucius porta adolescens vero alienum verear."
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/textView66"
@@ -75,6 +76,7 @@
     </ScrollView>
     <TextView
             android:text="Ultricies iaculis ornare mnesarchum ullamcorper veritus viverra graece nibh nominavi."
+            android:textIsSelectable="true"
             style="@style/textStyleWhiteCode"
             android:textAlignment="center"
             android:textSize="12dp"
@@ -214,6 +216,7 @@
         <TextView
                 style="@style/textStyleWhiteCode"
                 android:maxLines="5000"
+                android:textIsSelectable="true"
                 android:textSize="12sp"
                 android:text="Deserunt elementum cras posse dapibus ornare mandamus. Sadipscing platea regione mattis interdum option propriae quisque. Animal sadipscing hinc praesent iisque. Quam equidem sed erroribus necessitatibus viderer et netus percipit. Suavitate maecenas brute nam id. Sollicitudin partiendo oratio tempor tota per magna. Efficiantur pulvinar error tamquam quisque homero fringilla ponderum. Harum vivendo interdum maximus habeo splendide dictum inceptos varius per. Petentium verear rhoncus ocurreret principes nascetur. Ligula graeci maximus instructior mattis phasellus condimentum verear duis debet. Aenean faucibus doming definitiones dolorem persecuti mei ante quod tota. Percipit cubilia sem inani eripuit affert consectetuer aliquid leo euismod. Ridiculus conclusionemque repudiandae civibus nisl vis verterem decore definitionem. Lorem definiebas suscipit falli sea. Volutpat cras mandamus potenti senserit molestiae vel appareat velit. Legimus has epicurei quam intellegat dui feugait evertitur neglegentur. Nostra sadipscing dico egestas netus mus noluisse varius omittantur id. Cum dictumst malorum definitionem necessitatibus sea suscipiantur vocent. Mazim consetetur reformidans populo prompta ex ad vix natoque docendi. Persequeris autem appareat suscipit similique. Eos porro ridens mi mazim appareat inceptos. Option harum agam luptatum offendit vocibus pericula civibus. Qui pretium expetenda mea nam mauris veritus simul laoreet. Definiebas sapientem taciti mentitum civibus postulant iudicabit doctus. Ac perpetua dolorum venenatis nostra id quidam vocibus nulla."
                 android:layout_width="match_parent"

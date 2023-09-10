@@ -49,7 +49,7 @@ class LawFragment: Fragment() {
             viewModel.adapter.notifyDataSetChanged()
         })
         viewModel.adapter.onItemClick = {
-            val file: File = File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${it.type}/${it.fileName}")
+            val file: File = File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${it.fileName}")
             //  val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${it.type}/${it.fileName}")
             val target = Intent(Intent.ACTION_VIEW)
 

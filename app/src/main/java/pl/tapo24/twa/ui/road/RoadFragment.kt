@@ -1,5 +1,6 @@
 package pl.tapo24.twa.ui.road
 
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,8 +10,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.android.material.snackbar.Snackbar
 import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentRoadBinding
+import pl.tapo24.twa.utils.SwipeListener
 
 class RoadFragment: Fragment() {
     private var _binding: FragmentRoadBinding? = null
@@ -18,6 +21,7 @@ class RoadFragment: Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
 
 
     override fun onCreateView(
@@ -99,7 +103,25 @@ class RoadFragment: Fragment() {
                 R.id.action_nav_road_to_nav_controlList
             )
         }
-
+//        binding.ll.performClick()
+//        binding.ll.setOnTouchListener(object: SwipeListener(context) {
+//
+//            override fun onSwipeRight() {
+//                // https://stackoverflow.com/questions/47107105/android-button-has-setontouchlistener-called-on-it-but-does-not-override-perform
+//                binding.root.findNavController().navigate(
+//                    R.id.action_nav_road_to_nav_tariff
+//                )
+//                super.onSwipeRight()
+//            }
+//
+//            override fun onSwipeLeft() {
+//                super.onSwipeLeft()
+//                binding.root.findNavController().navigate(
+//                    R.id.action_nav_road_to_nav_home
+//                )
+//            }
+//
+//        })
 //        val textView: TextView = binding.textViewRoad
 //        roadViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it

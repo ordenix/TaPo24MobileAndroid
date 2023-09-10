@@ -3,6 +3,7 @@ package pl.tapo24.twa.infrastructure
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
@@ -274,6 +275,19 @@ class NetworkClient(var url: String) {
         }
         return Result.failure(InternalException(InternalMessage.InternalGetLawTariff.message))
     }
+
+    fun getAssetListData(): Result<List<AssetList>>{
+        try {
+            val response = service.getAssetListData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetAssetList.message))
+    }
+
 
 
     fun login() {

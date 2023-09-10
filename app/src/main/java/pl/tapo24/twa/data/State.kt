@@ -20,8 +20,11 @@ object State {
     val premiumVersion: Boolean = true
     var isLogin: Boolean = false
 
+    var networkType = "WiFi"
 
     // CONFIG
     var maxVisibleItem: Int = 50
+
+    var countChangeFragment = 0
 
 }

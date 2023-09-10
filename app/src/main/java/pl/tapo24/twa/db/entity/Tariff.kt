@@ -53,7 +53,7 @@ data class Tariff(
     @ColumnInfo(defaultValue = "")
     val text: String?,
 
-    @ColumnInfo(defaultValue = "1")
+    @ColumnInfo(defaultValue = "New")
     var enginesType: EnginesType = EnginesType.New,
 
     @ColumnInfo(defaultValue = "false")

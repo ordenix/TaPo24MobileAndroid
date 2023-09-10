@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import pl.tapo24.twa.DataUpdater
+import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.db.TapoDb

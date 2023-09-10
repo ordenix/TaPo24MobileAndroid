@@ -20,13 +20,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.data.State
@@ -35,8 +33,9 @@ import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.utils.CheckConnection
-import pl.tapo24.twa.R
+import pl.tapo24.twa.updater.DataUpdater
 import javax.inject.Inject
 
 
@@ -69,7 +68,11 @@ class MainActivity: AppCompatActivity() {
     private var downloadText = MutableLiveData<String>("Proszę czekać")
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
         State.internetStatus = CheckConnection().getConnectionType(applicationContext)
-        println("change destination")
+        if (State.countChangeFragment > 10) {
+            State.countChangeFragment  = 0
+            AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
+        }
+        State.countChangeFragment += 1
     }
 
 
@@ -78,9 +81,11 @@ class MainActivity: AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
-        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
-        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getPDF()
-        // DataUpdater(tapoDb,dataTapoDb,networkClient,this).getGraphics()
+
+
+
+//        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getPDF()
+//        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getGraphics()
 
 
         MainScope().launch(Dispatchers.IO) {
@@ -139,8 +144,72 @@ class MainActivity: AppCompatActivity() {
 //        val uid: Uid = Uid()
 
 
+
+
+
+        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
+       // AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getPDF()
+        val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
+            .setTitle("Wybór połączenia do aktualizacji danych")
+            .setCancelable(false)
+            .setMessage("Nasza aplikacja może pobierać duże ilości danych do aktualizacji zmian przepisów. Z racji, że widzisz ten komunikat to uruchamiasz aplikację po raz pierwszy :). Za chwilę zostaną pobrane wszystkie dane przepisów, grafik etc. - będzie to wynosić około 250MB. Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora w zależności od rodzaju taryfy połączenia")
+            .setNegativeButton("Tylko WiFi") { dialog, which ->
+                // Respond to negative button press
+                MainScope().launch(Dispatchers.IO) {
+                    async {
+                        val setting: Setting = Setting("settingNetwork","WiFi")
+                        tapoDb.settingDb().insert(setting)
+                    }.await()
+                }
+                State.networkType = "WiFi"
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
+
+
+            }
+            .setPositiveButton("WiFi oraz dane sieci") { dialog, which ->
+                // Respond to positive button press
+                MainScope().launch(Dispatchers.IO) {
+                    async {
+                        val setting: Setting = Setting("settingNetwork","All")
+                        tapoDb.settingDb().insert(setting)
+                    }.await()
+
+                }
+                State.networkType = "All"
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
+            }
+            // Add customization options here
+
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        State.internetStatus = CheckConnection().getConnectionType(applicationContext)
+
+            //Snackbar.make(binding.root, "Brak połączenia internetowego, nie można pobrać danych!!", Snackbar.LENGTH_LONG).show()
+        val context = this
+        MainScope().launch(Dispatchers.IO) {
+           var settingNetwork: Setting? = null
+           async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
+           if (settingNetwork == null) {
+               withContext(Dispatchers.Main) {
+                   dialogTypeDownloadData.show()
+
+               }
+           } else {
+               State.networkType = settingNetwork!!.value
+               // DOWNOLOAD DATA
+               AssetUpdater(tapoDb,dataTapoDb,networkClient,context, context.supportFragmentManager).getAllData()
+
+           }
+
+       }
+
+            //AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getPDF()
+            //Snackbar.make(binding.root, "Replace with your own action", Snackbar.LENGTH_LONG).show()
+
+
+
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
