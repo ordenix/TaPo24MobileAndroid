@@ -291,7 +291,13 @@ class AssetUpdater(
                 listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
                 listLawFromServer?.let { dataTapoDb.law().insertList(it) }
             }
-
+            val directory = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package")
+            if (directory.isDirectory){
+                for (listFile in directory.listFiles()) {
+                    listFile.delete()
+                }
+            }
+            directory.delete()
         }
 
 // val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.type}/${element.fileName}")

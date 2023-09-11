@@ -51,6 +51,8 @@
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/constraintLayout9"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
@@ -60,6 +62,7 @@
                 android:layout_height="match_parent">
             <TextView
                     android:text="TextView"
+                    style="@style/textStyleWhiteInContainerCenter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView75"/>
             <View
@@ -81,7 +84,7 @@
                     android:text="@string/more"
                     android:theme="@style/OrangeBtn"
                     android:backgroundTint="@color/orange_tapo"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:id="@+id/button7"
                     app:icon="@drawable/angles_right_solid"
@@ -89,7 +92,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/divider5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                    android:textSize="10dp" app:layout_constraintVertical_bias="1.0"/>
+                    android:textSize="10dp" app:layout_constraintVertical_bias="1.0" android:layout_gravity="center"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

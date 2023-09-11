@@ -15,7 +15,7 @@ import pl.tapo24.twa.dbData.entity.Sign
 import javax.inject.Inject
 @HiltViewModel
 
-class SignListViewModel@Inject constructor(
+class SignListViewModel @Inject constructor(
     private val dataTapoDb: DataTapoDb
 ) : ViewModel() {
     val data = MutableLiveData<List<Sign>>()
