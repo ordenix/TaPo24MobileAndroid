@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
+import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
@@ -149,10 +150,16 @@ class TariffViewModel @Inject constructor(
     }
 
     fun startApp() {
-        // TODO: delete it for production
         viewModelScope.launch(Dispatchers.IO) {
             var dataFromDb: List<Tariff>? = null
-            async { dataFromDb = tapoDb.tariffDb().getAll() }.await()
+            if (State.enginesType == EnginesType.New) {
+                async { dataFromDb = tapoDb.tariffDb().getAllByEngine("New") }.await()
+
+            } else {
+                async { dataFromDb = tapoDb.tariffDb().getAllByEngine("Old") }.await()
+            }
+
+
             withContext(Dispatchers.Main) {
                 if (dataFromDb != null) {
                     tariffDataAll.value = dataFromDb!!

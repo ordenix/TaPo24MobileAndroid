@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.DialogTariffMoreBinding
 import pl.tapo24.twa.db.entity.Tariff
+import pl.tapo24.twa.utils.UlListBuilder
 
 
 class DialogTariffMore: DialogFragment() {
@@ -49,6 +50,7 @@ class DialogTariffMore: DialogFragment() {
             } else {
                 binding.codeContainer.visibility = View.GONE
             }
+            binding.lawContent.text = UlListBuilder().getSpannableTextListWithoutBullet(item!!.law+"/n"+"/n"+item!!.paragraph)
             binding.textView62.text = "${item!!.tax} zł"
             if (item!!.recidive == true) {
                 binding.recidive.visibility = View.VISIBLE

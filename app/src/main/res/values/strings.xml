@@ -142,6 +142,7 @@
     <string name="expand">Rozwiń</string>
     <string name="colapse">Zwiń</string>
     <string name="searchCountry">Wyszukaj kraj</string>
+    <string name="searchLaw">Wyszukaj plik</string>
     <string name="search">Wyszukaj</string>
     <string name="searchCodeDrivingLimits">Wprowadź kod lub nazwę ograniczenia</string>
     <string name="back">Wstecz</string>
@@ -152,6 +153,7 @@
     <string name="done">Gotowe</string>
     <string name="sign_desc">Opis znaku:</string>
     <string name="more">Więcej</string>
+    <string name="roadSignDetails">Szczegóły znaku</string>
 
 
 </resources>

@@ -43,4 +43,24 @@ class UlListBuilder {
         }
         return ssb
     }
+
+
+
+    fun getSpannableTextListWithoutBullet(text: String?): SpannableStringBuilder {
+        val ssb = SpannableStringBuilder()
+        if (text == null) return ssb
+        val array: List<String> = text.split("/n").toList()
+        array.forEach{ element ->
+            val textTrim = element.trimStart().replaceFirstChar{it.uppercase()}
+            if (!textTrim.contains("Null",true)) {
+                ssb.append(textTrim)
+                ssb.append("\n")
+            }
+        }
+
+        return ssb
+
+    }
+
+
 }

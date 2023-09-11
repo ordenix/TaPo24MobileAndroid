@@ -8,11 +8,17 @@ import pl.tapo24.twa.db.entity.Tariff
 @Dao
 interface TariffDao {
 //limit 10
-    @Query("SELECT * FROM tariff  where engineType =: engineType ORDER BY id ASC")
+
+    @Query("SELECT * FROM tariff ORDER BY sortOrder ASC")
+    fun getAll(): List<Tariff>
+
+    @Query("SELECT * FROM tariff  where enginesType =:engineType ORDER BY sortOrder ASC")
     fun getAllByEngine(engineType: String): List<Tariff>
 
-    @Query("SELECT * FROM tariff  where id =: id ORDER BY id ASC")
-    fun getByDocId(id: String): List<Tariff>
+    @Query("SELECT * FROM tariff  where id =:id")
+    fun getByDocId(id: String): Tariff
+    @Query("SELECT * FROM tariff  where sortOrder =:id and enginesType = 'old'")
+    fun getBySortOrderOld(id: Int): Tariff
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(tariff: Tariff)

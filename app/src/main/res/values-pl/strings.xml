@@ -148,6 +148,7 @@
     <string name="pleaseWait">proszę czekać</string>
     <string name="sign_desc">Opis znaku:</string>
     <string name="more">Więcej</string>
+    <string name="roadSignDetails">Szczegóły znaku</string>
 
 
 </resources>

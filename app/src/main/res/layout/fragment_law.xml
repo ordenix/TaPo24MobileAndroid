@@ -18,7 +18,7 @@
                 style="@style/Widget.App.TextInputLayout"
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/magnifying_glass_solid"
-                android:hint="@string/searchCountry">
+                android:hint="@string/searchLaw">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"

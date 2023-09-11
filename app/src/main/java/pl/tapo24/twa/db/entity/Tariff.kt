@@ -64,4 +64,10 @@ data class Tariff(
 
     @ColumnInfo(defaultValue = "")
     val customCategory: String = "",
+
+    @ColumnInfo(defaultValue = "0")
+    val sortOrder: Int = 0,
+
+
+
 )

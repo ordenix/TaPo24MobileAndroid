@@ -1,5 +1,7 @@
 package pl.tapo24.twa.ui.helpers
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,11 +29,32 @@ class HelpersFragment: Fragment() {
         _binding = pl.tapo24.twa.databinding.FragmentHelpersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-//        val textView: TextView = binding.textViewhelpers
-//        viewModelHelpers.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+
+        binding.linkOc.setOnClickListener {
+            openLink("https://www.ufg.pl/infoportal/faces/pages_home-page/Page_4d98135c_14e2b8ace27__7ff1/Pagee0e22f3_14efe6adc05__7ff1/Page4d024e07_14f0a824115__7ff6?_afrLoop=3753003479910681&_afrWindowMode=0&_adf.ctrl-state=182qsvy3xd_29")
+        }
+        binding.linkDrivingLicence.setOnClickListener {
+            openLink("https://moj.gov.pl/uslugi/engine/ng/index?xFormsAppName=UprawnieniaKierowcow&xFormsOrigin=EXTERNAL")
+        }
+        binding.linkTelephoneBook.setOnClickListener {
+            openLink("https://ckt.uc.ost112.gov.pl/")
+        }
+        binding.linkCarHistory.setOnClickListener {
+            openLink("https://historiapojazdu.gov.pl/")
+        }
+        binding.linkLimits.setOnClickListener {
+            openLink("https://www.gov.pl/web/infrastruktura/ograniczenia-w-ruchu")
+
+        }
+
+
+
         return root
+    }
+
+    fun openLink(link: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

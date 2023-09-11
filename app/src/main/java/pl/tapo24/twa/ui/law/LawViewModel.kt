@@ -18,6 +18,8 @@ class LawViewModel @Inject constructor(
     private val dataTapoDb: DataTapoDb
 ): ViewModel() {
     val data = MutableLiveData<List<Law>>()
+
+    var searchText: String = ""
     lateinit var adapter: PdfAdapter
 
     fun getData() {

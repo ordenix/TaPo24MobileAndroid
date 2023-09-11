@@ -36,6 +36,7 @@ import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.updater.DataUpdater
+import pl.tapo24.twa.utils.SwipeListener
 import javax.inject.Inject
 
 

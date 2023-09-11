@@ -39,13 +39,7 @@ class ControlListFragment : Fragment() {
         val root: View = binding.root
 
 
-//        val value = "https://ewyszukiwarka.pue.uprp.gov.pl/search/simple-search?lng=pl"
-//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(value))
-//
-//        // start activity
-//
-//        // start activity
-//        startActivity(intent)
+
 
 
 //        val request = DownloadManager.Request(Uri.parse("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"))
