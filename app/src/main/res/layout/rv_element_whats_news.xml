@@ -38,23 +38,23 @@
         <TextView
                 android:text="p1"
                 style="@style/textStyle"
-                android:maxLines="10"
+                android:maxLines="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewP1"/>
         <TextView
                 android:text="p2"
                 style="@style/textStyle"
-                android:maxLines="10"
+                android:maxLines="100"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/textViewP2"/>
         <TextView
                 android:text="p3"
                 style="@style/textStyle"
-                android:maxLines="10"
+                android:maxLines="100"
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/textViewP3"/>
         <TextView
                 android:text="p4"

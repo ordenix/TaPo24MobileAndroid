@@ -50,6 +50,7 @@ class DialogTariffMore: DialogFragment() {
             } else {
                 binding.codeContainer.visibility = View.GONE
             }
+            binding.textVievText.text = item!!.text
             binding.lawContent.text = UlListBuilder().getSpannableTextListWithoutBullet(item!!.law+"/n"+"/n"+item!!.paragraph)
             binding.textView62.text = "${item!!.tax} zł"
             if (item!!.recidive == true) {

@@ -40,8 +40,11 @@ class DialogDataUpdater: DialogFragment() {
     }
 
     fun setDone() {
-        binding.linearProgressIndicator.setProgressCompat(100, true)
-        binding.description.text = getString(R.string.done)
+        if (this.isVisible) {
+            binding.linearProgressIndicator.setProgressCompat(100, true)
+            binding.description.text = getString(R.string.done)
+        }
+
 
 
     }

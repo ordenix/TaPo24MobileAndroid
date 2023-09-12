@@ -31,7 +31,7 @@
                         <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp" app:srcCompat="@drawable/map_pin_solid"
-                                android:id="@+id/imageView8"
+                                android:id="@+id/imageViewA"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
                         <TextView
@@ -39,7 +39,7 @@
                                 style="@style/gridText"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView19"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView8"
+                                app:layout_constraintTop_toBottomOf="@+id/imageViewA"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>

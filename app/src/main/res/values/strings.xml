@@ -138,7 +138,7 @@
 
 
 
-    <!--    Util-->
+    <!--    Util or to sort-->
     <string name="expand">Rozwiń</string>
     <string name="colapse">Zwiń</string>
     <string name="searchCountry">Wyszukaj kraj</string>
@@ -154,6 +154,7 @@
     <string name="sign_desc">Opis znaku:</string>
     <string name="more">Więcej</string>
     <string name="roadSignDetails">Szczegóły znaku</string>
+    <string name="tariff">Taryfikator:</string>
 
 
 </resources>

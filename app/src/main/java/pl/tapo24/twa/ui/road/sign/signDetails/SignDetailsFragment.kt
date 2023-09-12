@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.data.EnginesType
@@ -66,12 +67,48 @@ class SignDetailsFragment : Fragment() {
         }
 
 
+        viewModel.tariffDetail.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                binding.tariffView.visibility = View.VISIBLE
+
+                binding.textView62.text = "${it.tax} zł"
+                if (it.recidive == true) {
+                    binding.recidive.visibility = View.VISIBLE
+                    binding.textView63.text = "${it.taxRecidive} zł"
+                } else {
+                    binding.recidive.visibility = View.GONE
+                }
+                binding.tariffName.text = it.name
+                binding.tariffText.text = it.text
+
+                if (it.code != null) {
+                    binding.codeContainer.visibility = View.VISIBLE
+                    binding.textView64.text = "${it.points} pkt"
+                    binding.textView65.text = it.code
+
+                } else {
+                    binding.codeContainer.visibility = View.GONE
+                }
+            } else {
+                binding.tariffView.visibility = View.GONE
+            }
+        })
+
+
         return root
 
     }
 
 
+    override fun onPause() {
+        if (dialogMore.isVisible) {
+            dialogMore.dismiss()
+        }
+        super.onPause()
+
+    }
     override fun onDestroyView() {
+
         super.onDestroyView()
         _binding = null
     }
