@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.SignListAdapter
 import pl.tapo24.twa.databinding.FragmentSignListBinding
+import pl.tapo24.twa.ui.road.sign.signDetails.SignDetailsFragmentArgs
 
 @AndroidEntryPoint
 class SignListFragment : Fragment() {
@@ -21,6 +22,13 @@ class SignListFragment : Fragment() {
     private var _binding: FragmentSignListBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: SignListViewModel
+    var signCategory = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        val args = arguments?.let { SignListFragmentArgs.fromBundle(it) }
+        signCategory = args!!.signCategory
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +38,7 @@ class SignListFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(SignListViewModel::class.java)
         _binding = FragmentSignListBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        viewModel.getData()
+        viewModel.getData(signCategory)
         val rv = binding.rv
         rv.layoutManager = GridLayoutManager(activity, 3)
         viewModel.adapter = container?.context?.let { SignListAdapter(viewModel.data.value.orEmpty(), it, viewModel) }!!

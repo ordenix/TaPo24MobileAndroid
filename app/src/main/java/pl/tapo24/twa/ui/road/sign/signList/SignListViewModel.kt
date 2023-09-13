@@ -24,10 +24,10 @@ class SignListViewModel @Inject constructor(
     lateinit var adapter: SignListAdapter
 
 
-    fun getData() {
+    fun getData(signCategory: String) {
         viewModelScope.launch(Dispatchers.IO){
             var dataFromDb: List<Sign>? = null
-            async { dataFromDb = dataTapoDb.sign().getAllBySignCategory("A") }.await()
+            async { dataFromDb = dataTapoDb.sign().getAllBySignCategory(signCategory) }.await()
             withContext(Dispatchers.Main) {
                 data.value = dataFromDb!!
             }

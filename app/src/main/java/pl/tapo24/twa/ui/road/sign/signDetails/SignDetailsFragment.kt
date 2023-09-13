@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.twa.MainActivity
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.FragmentSignDetailsBinding
@@ -94,7 +96,7 @@ class SignDetailsFragment : Fragment() {
             }
         })
 
-
+        requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
         return root
 
     }

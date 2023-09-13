@@ -47,7 +47,7 @@
     </style>
     <style name="textStyleWhiteSmallInContainer" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>
-        <item name="android:maxLines">10</item>
+        <item name="android:maxLines">20</item>
     </style>
     <style name="textStyleWhiteSmallInContainerCenter" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>

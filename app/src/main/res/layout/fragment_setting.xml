@@ -70,9 +70,7 @@
                     android:layout_height="wrap_content" android:id="@+id/radioButtonProduction"/>
             <RadioButton
                     android:text="@string/EnvTest"
-                    android:buttonTint="@drawable/check_box"
-
-                    style="@style/textStyle"
+                    android:enabled="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/radioButtonTest"/>
             <RadioButton

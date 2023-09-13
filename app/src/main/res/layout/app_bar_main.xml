@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:theme="@style/Theme.TaPo24.AppBarOverlay">
+            android:theme="@style/Theme.TaPo24.AppBarOverlay" android:id="@+id/AppBarLayout">
 
         <androidx.appcompat.widget.Toolbar
                 app:layout_scrollFlags="scroll|enterAlways|snap"
