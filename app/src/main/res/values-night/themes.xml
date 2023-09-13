@@ -59,28 +59,5 @@
 
 
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
-
-        <style name="Theme.TaPo24.NoActionBar">
-            <item name="windowActionBar">false</item>
-            <item name="windowNoTitle">true</item>
-        </style>
-        <style name="Theme.TaPo24.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-        <style name="Theme.TaPo24.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
-
-
-        <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-            <item name="colorPrimary">@color/orange_tapo</item>
-            <item name="colorSecondary">@color/second_tapo</item>
-            <item name="colorSurface">@color/second_tapo</item>
-            <item name="colorOnSurface">@color/orange_tapo</item>
-            <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
-            <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
-            <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body</item>
-
-            <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
-            <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
-        </style>
-
     </style>
 </resources>
