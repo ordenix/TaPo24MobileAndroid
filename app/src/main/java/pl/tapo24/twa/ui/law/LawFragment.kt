@@ -1,5 +1,6 @@
 package pl.tapo24.twa.ui.law
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -9,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -30,7 +33,13 @@ class LawFragment: Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-
+//    val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+//        if (result.resultCode == Activity.RESULT_OK) {
+//            val intent = result.data
+//            println("RESULT")
+//            // Handle the Intent
+//        }
+//    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -67,8 +76,13 @@ class LawFragment: Fragment() {
             target.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or  Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
             val intent = Intent.createChooser(target, "Otwórz plik w: (nastąpi przekierowanie do zewnętrznej przeglądarki plików pdf")
+            //val intent = Intent(target).setPackage("com.adobe.reader")
+
+
             try {
+                //startForResult.launch(intent)
                 startActivity(intent)
+
             } catch (e: ActivityNotFoundException) {
                 // Instruct the user to install a PDF reader here, or something
             }
@@ -95,4 +109,6 @@ class LawFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }

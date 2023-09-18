@@ -120,7 +120,10 @@ class AssetUpdater(
                                         val downloadBytes = cursor.getLong(downloadBytesL)
                                         val progres = (downloadBytes * 100 / totalBytes)
                                         withContext(Dispatchers.Main ){
-                                            dialog.setProgres(progres.toInt())
+                                            if (dialog.isVisible) {
+                                                dialog.setProgres(progres.toInt())
+
+                                            }
                                         }
 
                                         println(progres)
@@ -130,7 +133,10 @@ class AssetUpdater(
                             }
                             DownloadManager.STATUS_SUCCESSFUL -> {
                                 withContext(Dispatchers.Main ){
-                                    dialog.setProgres(100)
+                                    if (dialog.isVisible) {
+                                        dialog.setProgres(100)
+
+                                    }
                                 }
 
                                 downloadFinished = true
@@ -186,7 +192,11 @@ class AssetUpdater(
                         file.delete()
 
                         withContext(Dispatchers.Main) {
-                            dialog.setBody("Pobieranie: ${element.name}")
+                            delay(10)
+                            if (dialog.isVisible) {
+                                dialog.setBody("Pobieranie: ${element.name}")
+
+                            }
                         }
                         async { element.fileName?.let { downloadAsset("pdf" , it) } }.await()
 
@@ -201,8 +211,12 @@ class AssetUpdater(
                             dialog.show(childFragmentManager, "Data")
                         }
                         withContext(Dispatchers.Main) {
-                            dialog.setBody("Kasowanie starych plików")
-                            dialog.setIndeterminate()
+                            delay(10)
+                            if (dialog.isVisible) {
+                                dialog.setBody("Kasowanie starych plików")
+                                dialog.setIndeterminate()
+                            }
+
                         }
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${element.fileName}")
                         file.delete()
@@ -231,7 +245,11 @@ class AssetUpdater(
                         file.delete()
 
                         withContext(Dispatchers.Main) {
-                            dialog.setBody("Pobieranie: ${element.name}")
+                            delay(10)
+                            if (dialog.isVisible) {
+                                dialog.setBody("Pobieranie: ${element.name}")
+
+                            }
                         }
                         async { downloadAsset(element.path , element.name) }.await()
                         async { tapoDb.assetListDb().insert(element) }.await()
@@ -245,8 +263,12 @@ class AssetUpdater(
                             dialog.show(childFragmentManager, "Data")
                         }
                         withContext(Dispatchers.Main) {
-                            dialog.setBody("Kasowanie starych plików")
-                            dialog.setIndeterminate()
+                            delay(10)
+                            if (dialog.isVisible) {
+                                dialog.setBody("Kasowanie starych plików")
+                                dialog.setIndeterminate()
+                            }
+
                         }
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.path}/${element.name}")
                         file.delete()
@@ -260,25 +282,32 @@ class AssetUpdater(
 
             } else {
                 // downoload all because init
-                if (!dialog.isVisible) {
-                    dialog.show(childFragmentManager, "Data")
-                }
                 withContext(Dispatchers.Main) {
-                    dialog.setBody("Pobieranie głównej paczki")
+                    if (!dialog.isVisible) {
+                        dialog.show(childFragmentManager, "Data")
+                        delay(10)
+                        dialog.setBody("Pobieranie głównej paczki")
+                    }
+
                 }
 
                 downloadAsset("package" ,"package_main.zip")
                 delay(100)
                 val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
                 withContext(Dispatchers.Main) {
-                    dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
-                    dialog.setIndeterminate()
+                    if (dialog.isVisible) {
+                        dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                        dialog.setIndeterminate()
+                    }
+
                 }
                 context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
 
                 file.delete()
                 withContext(Dispatchers.Main) {
-                    dialog.setDone()
+                    if (dialog.isVisible) {
+                        dialog.setDone()
+                    }
                 }
 
                 delay(1000)
