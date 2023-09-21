@@ -155,6 +155,8 @@
     <string name="more">Więcej</string>
     <string name="roadSignDetails">Szczegóły znaku</string>
     <string name="tariff">Taryfikator:</string>
+    <string name="onlyFavsNotification">Silnik będzie ukazywać tylko ulubione wykroczenia</string>
+    <string name="allNotification">Silnik będzie wyszukiwać w wszystkich wykroczeniach</string>
 
 
 </resources>

@@ -11,8 +11,14 @@ data class LastSearch(
     val query: String,
 
     @ColumnInfo(defaultValue = "0")
-    val lastTime: Int,
+    var lastTime: Long,
 
     @ColumnInfo(defaultValue = "false")
-    val isHistory: Boolean
+    val isHistory: Boolean,
+
+    @ColumnInfo(defaultValue = "0")
+    var count: Int,
+
+    @ColumnInfo(defaultValue = "")
+    var listDocId: String,
 )

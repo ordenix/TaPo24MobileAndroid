@@ -3,7 +3,10 @@ package pl.tapo24.twa.ui.tariff
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -55,6 +58,20 @@ class TariffFragment: Fragment() {
             viewModel.adapter.items = it
             viewModel.adapter.notifyDataSetChanged()
         })
+        viewModel.checkFavourite.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.favsIcon.setImageResource(resources.getIdentifier("star_solid","drawable","pl.tapo24.twa"))
+                Snackbar.make(binding.root, getString(R.string.onlyFavsNotification), Snackbar.LENGTH_LONG)
+                    .show()
+            } else {
+                binding.favsIcon.setImageResource(resources.getIdentifier("star_regular","drawable","pl.tapo24.twa"))
+//                Snackbar.make(binding.root, getString(R.string.allNotification), Snackbar.LENGTH_LONG)
+//                    .show()
+            }
+        })
+        binding.favsIcon.setOnClickListener {
+            viewModel.changeFavState()
+        }
 //        rv.getViewTreeObserver().addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
 //            override fun onGlobalLayout() {
 //                //dialog.dismiss()
@@ -91,11 +108,12 @@ class TariffFragment: Fragment() {
                 viewModel.sendQuerySuggestion(s.toString())
             }
         })
-        searchView.inflateMenu(R.menu.menu_search)
+        // TODO add icon network and filter suggestion history by query
+        searchView.inflateMenu(R.menu.menu_search) //inner menu
 //        val menu = root.findViewById<TextView>(R.menu.menu_search)
         searchView.setOnMenuItemClickListener { menuItem: MenuItem? ->
-            println(menuItem)
-            menuItem?.setIcon(android.R.drawable.arrow_up_float)
+//            println(menuItem)
+//            menuItem?.setIcon(android.R.drawable.arrow_up_float)
             true }
         editTestInSearchView.setOnEditorActionListener { v, actionId, event ->
             //searchBar.text = searchView.text;
@@ -130,7 +148,7 @@ class TariffFragment: Fragment() {
         })
         viewModel.queryTextInSearchBar.observe(viewLifecycleOwner, Observer {
             searchBar.text = it
-            viewModel.sendQueryAndSearchTariffData(it)
+            viewModel.searchTariffData(it)
             // ask viewModel for data
         })
         viewModel.clickedOnSuggestion.observe(viewLifecycleOwner, Observer {
@@ -144,6 +162,7 @@ class TariffFragment: Fragment() {
         if (State.internetStatus == 0) {
             Snackbar.make(binding.root, "Brak połączenia z siecią silnik wyszukiwarki będzie działał statycznie.", Snackbar.LENGTH_LONG)
                 .show()
+            binding.network.visibility = View.VISIBLE
         }
 
 

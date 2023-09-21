@@ -22,15 +22,40 @@
                 android:layout_height="match_parent" android:id="@+id/RvTariffData" android:paddingTop="52dp"/>
     </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.appbar.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:paddingEnd="10dp">
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
             <com.google.android.material.search.SearchBar
                     android:id="@+id/search_bar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
- />
-        </com.google.android.material.appbar.AppBarLayout>
+                    android:layout_weight="1"/>
+            <ImageView
+                    android:src="@drawable/signal_disconnected"
+                    android:layout_width="100dp"
+                    app:tint="@color/white"
+                    android:layout_height="50dp" android:id="@+id/network" android:layout_weight="1"
+                    android:visibility="gone"/>
+            <ImageView
+                    android:src="@drawable/format_list"
+                    android:layout_width="100dp"
+                    app:tint="@color/white"
+                    android:layout_height="50dp" android:id="@+id/imageView18" android:layout_weight="1"
+                    android:layout_marginRight="10dp"/>
+            <ImageView
+                    android:src="@drawable/star_regular"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/favsIcon"
+                    android:layout_weight="1"
+                    android:paddingEnd="0dp"
+                    app:tint="@color/white"/>
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
         <com.google.android.material.search.SearchView

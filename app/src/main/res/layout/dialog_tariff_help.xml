@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:background="@color/second_tapo"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="match_parent">
+    <TextView
+            android:text="Informacje o wyszukiwarce:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView48"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp" app:layout_constraintTop_toBottomOf="@+id/textView48"
+            app:layout_constraintBottom_toTopOf="@+id/button9" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <TextView
+                    android:text="Wyszukiwanie wykroczeń dotyczących znaków. Celem znalezienia interesującego wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 B-2 B-10. Nie należy wpisywać fraz takich jak: B10 B01 B-01"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView76"/>
+            <TextView
+                    android:text="Wyszukiwanie wykroczeń 'po kodzie czynu'. Celem znalezienia wykroczenia należy wpisać kod w formacie np. A02 A10. Nie należy wpisywać formatów takich jak: A010 A 11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView74"/>
+            <TextView
+                    android:text="Wyszukiwarka działa w dwóch trybach pierwszym online oraz drugim offline. Przełączenie trybu następuje automatycznie w zalezności od dostępności sieci."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView67"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView71"/>
+            <TextView
+                    android:text="TextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView72"/>
+        </LinearLayout>
+    </ScrollView>
+    <Button
+            android:text="Zamknij"
+            android:theme="@style/OrangeBtn"
+            android:backgroundTint="@color/orange_tapo"
+            android:layout_height="35dp"
+            app:iconSize="10dp"
+            android:textSize="10dp"
+            app:icon="@drawable/undo_bold"
+
+            android:layout_width="wrap_content"
+            android:id="@+id/button9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
