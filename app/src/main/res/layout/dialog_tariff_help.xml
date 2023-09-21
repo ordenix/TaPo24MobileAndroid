@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
                                                    android:background="@color/second_tapo"
-                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent" android:padding="5dp">
     <TextView
-            android:text="Informacje o wyszukiwarce:"
+            android:text="@string/about_tariff_search"
             android:layout_width="wrap_content"
+            style="@style/textStyleOrangeMediumWarp"
             android:layout_height="wrap_content" android:id="@+id/textView48"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -18,25 +20,41 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical">
             <TextView
-                    android:text="Wyszukiwanie wykroczeń dotyczących znaków. Celem znalezienia interesującego wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 B-2 B-10. Nie należy wpisywać fraz takich jak: B10 B01 B-01"
+                    android:text="@string/tariff_help_search"
                     android:layout_width="match_parent"
+
+                    style="@style/textStyleWhiteSmallInContainer"
                     android:layout_height="wrap_content" android:id="@+id/textView76"/>
             <TextView
-                    android:text="Wyszukiwanie wykroczeń 'po kodzie czynu'. Celem znalezienia wykroczenia należy wpisać kod w formacie np. A02 A10. Nie należy wpisywać formatów takich jak: A010 A 11"
+                    android:text="@string/tariff_help_code"
                     android:layout_width="match_parent"
+                    style="@style/textStyleWhiteSmallInContainer"
+
                     android:layout_height="wrap_content" android:id="@+id/textView74"/>
             <TextView
-                    android:text="Wyszukiwarka działa w dwóch trybach pierwszym online oraz drugim offline. Przełączenie trybu następuje automatycznie w zalezności od dostępności sieci."
+                    android:text="@string/tariff_help_two_type"
                     android:layout_width="match_parent"
+                    style="@style/textStyleWhiteSmallInContainer"
+
                     android:layout_height="wrap_content" android:id="@+id/textView67"/>
             <TextView
-                    android:text="TextView"
+                    android:text="@string/tariff_help_online"
                     android:layout_width="match_parent"
+                    style="@style/textStyleWhiteSmallInContainer"
+
                     android:layout_height="wrap_content" android:id="@+id/textView71"/>
             <TextView
-                    android:text="TextView"
+                    android:text="@string/tariff_help_offline"
                     android:layout_width="match_parent"
+                    style="@style/textStyleWhiteSmallInContainer"
+
                     android:layout_height="wrap_content" android:id="@+id/textView72"/>
+            <TextView
+                    android:text="@string/tariff_help_warning"
+                    android:layout_width="match_parent"
+                    style="@style/textStyleWhiteSmallInContainer"
+
+                    android:layout_height="wrap_content" android:id="@+id/textView77"/>
         </LinearLayout>
     </ScrollView>
     <Button

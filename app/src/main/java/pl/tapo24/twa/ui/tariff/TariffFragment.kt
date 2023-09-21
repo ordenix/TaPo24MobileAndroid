@@ -72,6 +72,10 @@ class TariffFragment: Fragment() {
         binding.favsIcon.setOnClickListener {
             viewModel.changeFavState()
         }
+        binding.moreFilter.setOnClickListener {
+            Snackbar.make(binding.root, getString(R.string.not_implemented), Snackbar.LENGTH_LONG)
+                .show()
+        }
 //        rv.getViewTreeObserver().addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
 //            override fun onGlobalLayout() {
 //                //dialog.dismiss()
@@ -112,6 +116,12 @@ class TariffFragment: Fragment() {
         searchView.inflateMenu(R.menu.menu_search) //inner menu
 //        val menu = root.findViewById<TextView>(R.menu.menu_search)
         searchView.setOnMenuItemClickListener { menuItem: MenuItem? ->
+            if (menuItem != null) {
+                if (menuItem.itemId == R.id.info_tariff) {
+                    val dialogHelp = DialogTariffHelp()
+                    dialogHelp.show(childFragmentManager,"Help")
+                }
+            }
 //            println(menuItem)
 //            menuItem?.setIcon(android.R.drawable.arrow_up_float)
             true }
@@ -122,6 +132,10 @@ class TariffFragment: Fragment() {
             false
 
 
+        }
+        binding.network.setOnClickListener {
+            Snackbar.make(binding.root, getString(R.string.offline_work), Snackbar.LENGTH_LONG)
+                .show()
         }
 
         val rvSuggestion = binding.rvSuggestion
@@ -160,7 +174,7 @@ class TariffFragment: Fragment() {
 
         })
         if (State.internetStatus == 0) {
-            Snackbar.make(binding.root, "Brak połączenia z siecią silnik wyszukiwarki będzie działał statycznie.", Snackbar.LENGTH_LONG)
+            Snackbar.make(binding.root, getString(R.string.offline_work), Snackbar.LENGTH_LONG)
                 .show()
             binding.network.visibility = View.VISIBLE
         }

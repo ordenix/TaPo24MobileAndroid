@@ -152,16 +152,42 @@ class TariffViewModel @Inject constructor(
                     }
                 } else if (RegexTariff().sign(queryText)) {
                     //its sign
-                    tariffData.value = tariffDataAll.value?.filter { element -> element.name?.contains(queryText, true)
-                        ?: false }
+                    withContext(Dispatchers.Main) {
+                        var q = ""
+                        q = if (queryText.length>3) {
+                            queryText.replaceRange(4,4," ")
+                        } else {
+                            queryText.replaceRange(3,3," ")
+                        }
+
+                        tariffData.value = tariffDataAll.value?.filter { element -> element.name?.contains(q, true)
+                            ?: false }
+                    }
+
                 } else {
                     // other result
-                    var responseFromElastic: DataTariffListFromElastic? = null
+                    var docIdArray = listOf<String>()
+                    var listTariffToPost = mutableListOf<Tariff>()
                     if (State.internetStatus != 0) {
-                        var docIdArray = listOf<String>()
+                        // filter online
+
                         async { docIdArray = sendQueryToElasticAndSave(queryText) }.await()
 
-                        val listTariffToPost = mutableListOf<Tariff>()
+
+
+                    } else {
+                        // FILTER OFFLINE
+                        val lastSearchFromDb = tapoDb.lastSearchDb().getByQuery(queryText)
+                        if (lastSearchFromDb !=null) {
+                            docIdArray = lastSearchFromDb.listDocId.split("/")
+                        } else {
+                            listTariffToPost = tariffDataAll.value?.filter { element -> element.name?.contains(queryText,true)
+                                ?: false } as MutableList<Tariff>
+                        }
+
+                    }
+                    if (docIdArray.size > 1) {
+
                         docIdArray.forEach {
                             tariffDataAll.value?.find { element -> element.id == it }?.let { it1 ->
                                 listTariffToPost.add(
@@ -169,12 +195,16 @@ class TariffViewModel @Inject constructor(
                                 )
                             }
                         }
-                        withContext(Dispatchers.Main) {
-                            tariffData.value = listTariffToPost.take(State.maxVisibleItem)
-                        }
-                    } else {
-                        // FILTER OFFLINE
+
                     }
+
+
+                    withContext(Dispatchers.Main) {
+                        tariffData.value = listTariffToPost.take(State.maxVisibleItem)
+                    }
+
+
+
                 }
 
 

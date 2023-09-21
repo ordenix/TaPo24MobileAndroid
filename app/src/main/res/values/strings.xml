@@ -157,6 +157,21 @@
     <string name="tariff">Taryfikator:</string>
     <string name="onlyFavsNotification">Silnik będzie ukazywać tylko ulubione wykroczenia</string>
     <string name="allNotification">Silnik będzie wyszukiwać w wszystkich wykroczeniach</string>
+    <string name="tariff_help_search">Wyszukiwanie wykroczeń dotyczących znaków. Celem znalezienia interesującego wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 B-2 B-10. Nie należy wpisywać fraz takich jak: B10 B01 B-01
+    </string>
+    <string name="tariff_help_code">Wyszukiwanie wykroczeń \'po kodzie czynu\'. Celem znalezienia wykroczenia należy wpisać kod w formacie np. A02 A10. Nie należy wpisywać formatów takich jak: A010 A 11
+    </string>
+    <string name="tariff_help_two_type">Wyszukiwarka działa w dwóch trybach pierwszym online oraz drugim offline. Przełączenie trybu następuje automatycznie w zależności od dostępności sieci.
+    </string>
+    <string name="tariff_help_online">Tryb online wyszukuje zapomocą dynamicznego silnika wyszukiwaczego. Dopuszcza on wprowadzenie szukanej frazy w sposób niedokładny. Znalezienie wyników odbywa się za pomocą serii obliczeń matematycznych oraz wspomagania wyuczonym modelem AI. Wyszukiwanie następuje w całości wykroczenia- pod uwagę brane są wszystkie pola między innymi: nazwa, opis prawny kwota kod czynu. W tym trybie wpisanie słowa śnieg spowoduje znalezienie wykroczeń, które nie zawierają w żadnym polu frazy \'śnieg\' ale zmapowane są do wykroczeń sugerujących dane zachowanie np \'Kierowanie pojazdem, który nie jest utrzymana w należyty sposób\'. Silnik ten również dopuszcza przy wpisywaniu omyłki pisarskie takie jak pominięcie stosowania znaków diakrytycznych.
+    </string>
+    <string name="tariff_help_offline">Tryb offline wyszukuje* w sposób statyczny szukana jest dokładna fraza zawierająca się w nazwie wykroczenia. Wpisanie słowa śnieg nie zwróci żadnego wyniku. Wpisanie słowa błędnie np bez znaku diakrytycznego również nie zwróci wyniku
+    </string>
+    <string name="tariff_help_warning">*Uwaga. Celem poprawy działania silnika każde wyszukanie dynamiczne zapisuje w pamięci urządzenia zwracane wykroczenia przez dynamiczny silnik oraz wyświetla w momencie wyszukiwania jako historyczne wyszukanie (z ikoną zegara z lewej strony). Tak zapisane historyczne wyszukiwanie jest wykorzystane do wyszukiwania statycznego bez dostępu do sieci- w przypadku gdy dana fraza była już wyszukana zwracane są te wykroczenia. Zastosowanie takiego rozwiązania powoduje, że najczyściej wpisywane przez użytkownika frazy są dostępne w sposób \'dynamiczny\' bez dostępu do sieci
+    </string>
+    <string name="about_tariff_search">Informacje o wyszukiwarce:</string>
+    <string name="offline_work">Brak połączenia z siecią silnik wyszukiwarki będzie działał statycznie.</string>
+    <string name="not_implemented">NOT IMPLEMENTED YET!!! :(</string>
 
 
 </resources>

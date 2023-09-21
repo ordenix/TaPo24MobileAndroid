@@ -44,7 +44,7 @@
                     android:src="@drawable/format_list"
                     android:layout_width="100dp"
                     app:tint="@color/white"
-                    android:layout_height="50dp" android:id="@+id/imageView18" android:layout_weight="1"
+                    android:layout_height="50dp" android:id="@+id/moreFilter" android:layout_weight="1"
                     android:layout_marginRight="10dp"/>
             <ImageView
                     android:src="@drawable/star_regular"
