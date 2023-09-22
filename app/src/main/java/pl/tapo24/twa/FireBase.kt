@@ -14,4 +14,5 @@ class FireBase: FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         println("NEWWWWW")
     }
+    // https://medium.com/@Codeible/android-notifications-with-firebase-cloud-messaging-914623716dea
 }
