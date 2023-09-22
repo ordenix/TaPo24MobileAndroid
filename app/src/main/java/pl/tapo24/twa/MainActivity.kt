@@ -1,11 +1,14 @@
 package pl.tapo24.twa
 
 
+import android.R.attr.name
+import android.R.id
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.BindingMethod
@@ -20,9 +23,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.inappmessaging.FirebaseInAppMessaging
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.EnginesType
@@ -34,9 +42,8 @@ import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.updater.AssetUpdater
-import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.updater.DataUpdater
-import pl.tapo24.twa.utils.SwipeListener
+import pl.tapo24.twa.utils.CheckConnection
 import javax.inject.Inject
 
 
@@ -51,6 +58,7 @@ import javax.inject.Inject
 )
 @AndroidEntryPoint
 class MainActivity: AppCompatActivity() {
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     @Inject
     lateinit var tapoDb: TapoDb
@@ -81,14 +89,35 @@ class MainActivity: AppCompatActivity() {
 
 
         super.onCreate(savedInstanceState)
+        //firebaseAnalytics.setUserProperty("favorite_food", food)
+       // FirebaseDatabase.getInstance().setPersistenceEnabled(false);
 
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+               // Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            val token = task.result
 
+            // Log and toast
+            //Log.d(TAG, msg)
+            println(token)
+            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+        })
+//        firebaseAnalytics = Firebase.analytics
+//        val bundle = Bundle()
+//        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
+//        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name")
+//        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
+//        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+        //FirebaseInAppMessaging.getInstance().setAutomaticDataCollectionEnabled(true);
 //        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getPDF()
 //        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getGraphics()
 
-
+        //FirebaseInAppMessaging.getInstance().on
         MainScope().launch(Dispatchers.IO) {
             var settingUid: Setting? = null
             async { settingUid = tapoDb.settingDb().getSettingByName("uid") }.await()

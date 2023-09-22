@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "268792039367",
+    "project_id": "tapo24-225e1",
+    "storage_bucket": "tapo24-225e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268792039367:android:92cfaf0437c680a315fbe2",
+        "android_client_info": {
+          "package_name": "pl.tapo24.twa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP89zr65AOl_fcJBpXx95v9t3o3Z75ajE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
