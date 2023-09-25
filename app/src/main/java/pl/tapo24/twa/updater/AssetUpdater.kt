@@ -118,7 +118,10 @@ class AssetUpdater(
                                     val downloadBytesL = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR)
                                     if (downloadBytesL > 0) {
                                         val downloadBytes = cursor.getLong(downloadBytesL)
-                                        val progres = (downloadBytes * 100 / totalBytes)
+                                        var progres: Long = 0
+                                        if (totalBytes > 0) {
+                                            progres = (downloadBytes * 100 / totalBytes)
+                                        }
                                         withContext(Dispatchers.Main ){
                                             if (dialog.isVisible) {
                                                 dialog.setProgres(progres.toInt())
@@ -307,11 +310,9 @@ class AssetUpdater(
                 withContext(Dispatchers.Main) {
                     if (dialog.isVisible) {
                         dialog.setDone()
-                    }
-                }
 
-                delay(1000)
-                withContext(Dispatchers.Main) {
+                    }
+                    delay(1000)
                     if (dialog.isVisible) {
                         dialog.dismiss()
 

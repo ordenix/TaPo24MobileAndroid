@@ -186,7 +186,7 @@ class TariffViewModel @Inject constructor(
                         }
 
                     }
-                    if (docIdArray.size > 1) {
+                    if (docIdArray.isNotEmpty()) {
 
                         docIdArray.forEach {
                             tariffDataAll.value?.find { element -> element.id == it }?.let { it1 ->
