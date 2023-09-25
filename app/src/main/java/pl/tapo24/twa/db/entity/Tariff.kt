@@ -68,6 +68,9 @@ data class Tariff(
     @ColumnInfo(defaultValue = "0")
     val sortOrder: Int = 0,
 
+    @ColumnInfo(defaultValue = "0")
+    var sortOrderFav: Int = 0,
+
 
 
 )

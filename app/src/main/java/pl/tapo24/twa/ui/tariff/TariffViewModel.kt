@@ -50,7 +50,18 @@ class TariffViewModel @Inject constructor(
     val querySuggestionList = MutableLiveData<DataQueryFromSuggestion?>()
 
 
+    fun saveShiftedItems() {
+        viewModelScope.launch(Dispatchers.IO) {
+            tariffDataAll.value!!.forEachIndexed { index, tariff ->
+                tariff.sortOrderFav = index
 
+            }
+            async { tapoDb.tariffDb().insertList(tariffDataAll.value!!) }.await()
+            withContext(Dispatchers.Main) {
+                tariffData.value = tariffDataAll.value
+            }
+        }
+    }
 
     fun sendQuerySuggestion(suggestion: String) {
         viewModelScope.launch(Dispatchers.IO) {

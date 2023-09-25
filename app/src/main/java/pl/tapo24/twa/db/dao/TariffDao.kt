@@ -14,8 +14,8 @@ interface TariffDao {
 
     @Query("SELECT * FROM tariff  where enginesType =:engineType ORDER BY sortOrder ASC")
     fun getAllByEngine(engineType: String): List<Tariff>
-
-    @Query("SELECT * FROM tariff  where enginesType =:engineType AND favorites = true ORDER BY sortOrder ASC")
+    // TODO remeber if develop premium version change this sort to sort order !
+    @Query("SELECT * FROM tariff  where enginesType =:engineType AND favorites = true ORDER BY sortOrderFav ASC")
     fun getFavByEngine(engineType: String): List<Tariff>
 
     @Query("SELECT * FROM tariff  where id =:id")

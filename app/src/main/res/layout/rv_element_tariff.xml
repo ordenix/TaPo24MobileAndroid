@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:background="@drawable/style_social_media_button">
+            android:background="@drawable/style_social_media_button" android:id="@+id/ss">
 
         <TextView
                 android:text="@{data.name}"
