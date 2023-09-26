@@ -15,7 +15,7 @@ import pl.tapo24.twa.ui.tariff.TariffViewModel
 
 class TariffDataAdapter(
     var items: List<Tariff>,
-    var viewModel: TariffViewModel
+    var viewModel: TariffViewModel?
 
 ): RecyclerView.Adapter<TariffDataAdapter.TariffDataHolder>() {
     var onItemClick: ((Tariff) -> Unit)? = null

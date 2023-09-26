@@ -20,6 +20,8 @@
         <action android:id="@+id/action_nav_helpers_to_nav_home" app:destination="@id/nav_home"/>
         <action android:id="@+id/action_nav_helpers_to_nav_home2" app:destination="@id/nav_home"/>
         <action android:id="@+id/action_nav_helpers_to_nav_law" app:destination="@id/nav_law"/>
+        <action android:id="@+id/action_nav_helpers_to_nav_note" app:destination="@id/nav_note"/>
+        <action android:id="@+id/action_nav_helpers_to_nav_postalCode" app:destination="@id/nav_postalCode"/>
     </fragment>
     <fragment android:id="@+id/nav_category_driving_licence"
               android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
@@ -47,6 +49,7 @@
         <action android:id="@+id/action_nav_road_to_nav_codePoints" app:destination="@id/nav_codePoints"/>
         <action android:id="@+id/action_nav_road_to_nav_tariff" app:destination="@id/nav_tariff"/>
         <action android:id="@+id/action_nav_road_to_nav_home" app:destination="@id/nav_home"/>
+        <action android:id="@+id/action_nav_road_to_nav_recidivism" app:destination="@+id/nav_recidivism"/>
     </fragment>
 
     <fragment
@@ -179,4 +182,10 @@
               android:name="pl.tapo24.twa.ui.road.holdingDocuments.HoldingDocumentsChoseFragment"
               android:label="fragment_holding_documents_chose"
               tools:layout="@layout/fragment_holding_documents_chose"/>
+    <fragment android:id="@+id/nav_note" android:name="pl.tapo24.twa.ui.helpers.note.NoteFragment"
+              android:label="@string/note" tools:layout="@layout/fragment_note"/>
+    <fragment android:id="@+id/nav_recidivism" android:name="pl.tapo24.twa.ui.road.recidivism.RecidivismFragment"
+              android:label="@string/recidive" tools:layout="@layout/fragment_recidivism"/>
+    <fragment android:id="@+id/nav_postalCode" android:name="pl.tapo24.twa.ui.helpers.postalCode.PostalCodeFragment"
+              android:label="fragment_postal_code" tools:layout="@layout/fragment_postal_code"/>
 </navigation>

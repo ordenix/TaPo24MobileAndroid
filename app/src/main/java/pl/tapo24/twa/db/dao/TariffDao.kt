@@ -12,6 +12,8 @@ interface TariffDao {
     @Query("SELECT * FROM tariff ORDER BY sortOrder ASC")
     fun getAll(): List<Tariff>
 
+    @Query("SELECT * from tariff where enginesType = 'New' AND recidive = true ORDER BY sortOrder")
+    fun getAllRecidivism(): List<Tariff>
     @Query("SELECT * FROM tariff  where enginesType =:engineType ORDER BY sortOrder ASC")
     fun getAllByEngine(engineType: String): List<Tariff>
     // TODO remeber if develop premium version change this sort to sort order !

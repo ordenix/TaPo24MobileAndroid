@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentHelpersBinding
 
 class HelpersFragment: Fragment() {
@@ -45,6 +47,13 @@ class HelpersFragment: Fragment() {
         binding.linkLimits.setOnClickListener {
             openLink("https://www.gov.pl/web/infrastruktura/ograniczenia-w-ruchu")
 
+        }
+
+        binding.note.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_note
+            )
         }
 
 

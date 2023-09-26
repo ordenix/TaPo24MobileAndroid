@@ -14,6 +14,7 @@ import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.Law
 import pl.tapo24.twa.infrastructure.NetworkClient
 import java.io.File
+import java.lang.IllegalStateException
 import kotlin.system.exitProcess
 
 class AssetUpdater(
@@ -314,7 +315,12 @@ class AssetUpdater(
                     }
                     delay(1000)
                     if (dialog.isVisible) {
-                        dialog.dismiss()
+                        try {
+                            dialog.dismiss()
+                        } catch (_: IllegalStateException) {
+
+                        }
+
 
                     }
                 }

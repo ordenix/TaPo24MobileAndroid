@@ -172,6 +172,8 @@
     <string name="about_tariff_search">Informacje o wyszukiwarce:</string>
     <string name="offline_work">Brak połączenia z siecią silnik wyszukiwarki będzie działał statycznie.</string>
     <string name="not_implemented">NOT IMPLEMENTED YET!!! :(</string>
+    <string name="enter_number">Wprowadź liczby np. przebieg</string>
+    <string name="enter_text">Wprowadź tekst</string>
 
 
 </resources>
