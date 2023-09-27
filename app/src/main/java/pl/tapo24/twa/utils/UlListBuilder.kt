@@ -6,6 +6,13 @@ import android.text.Spanned
 import android.text.style.BulletSpan
 
 class UlListBuilder {
+
+    /**
+     * Prepare bullet spannable string. Use for slice [/n] [forceFirst].
+     *
+     * @param forceFirst Define bullet for fist element.
+
+     */
     fun getSpannableTextBullet(text: String?, forceFirst: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
@@ -14,6 +21,29 @@ class UlListBuilder {
             ssb.append(text.trimStart().replaceFirstChar{it.uppercase()})
         } else {
             array.forEach{ element ->
+                val textTrim = element.trimStart().replaceFirstChar{it.uppercase()}
+                val ss = SpannableString(textTrim)
+                ss.setSpan(BulletSpan(10), 0, textTrim.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ssb.append(ss)
+                ssb.append("\n")
+            }
+        }
+        return ssb
+
+    }
+    /**
+     * Prepare bullet spannable string. Use for slice [/n] [forceFirst].
+     *
+     * @param forceFirst Define bullet for fist element.
+
+     */
+    fun getSpannableTextBullet(list: List<String>, forceFirst: Boolean = false): SpannableStringBuilder {
+        val ssb = SpannableStringBuilder()
+        if (list.isEmpty()) return ssb
+        if (list.size == 1 && !forceFirst) {
+            ssb.append(list[0].trimStart().replaceFirstChar{it.uppercase()})
+        } else {
+            list.forEach{ element ->
                 val textTrim = element.trimStart().replaceFirstChar{it.uppercase()}
                 val ss = SpannableString(textTrim)
                 ss.setSpan(BulletSpan(10), 0, textTrim.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)

@@ -5,139 +5,190 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.helpers.postalCode.PostalCodeFragment" android:id="@+id/frameLayout">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             style="@style/smallContainer"
             android:background="@drawable/style_small_container"
-            android:layout_height="match_parent">
-        <com.google.android.material.button.MaterialButtonToggleGroup
-                android:id="@+id/toggleButton"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
-            <Button
-                    style="@style/Widget.App.Button.OutlinedButton"
-                    android:id="@+id/simple"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/simple"
-                    android:enabled="true"/>
-            <Button
-                    style="@style/Widget.App.Button.OutlinedButton"
-                    android:id="@+id/advenced"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/adv"
-            />
-        </com.google.android.material.button.MaterialButtonToggleGroup>
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="5dp" app:layout_constraintTop_toTopOf="parent"
+    >
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:orientation="vertical">
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/toggleButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" android:id="@+id/constraintLayout10">
-
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField1"
-                    app:startIconDrawable="@drawable/_123"
-                    style="@style/Widget.App.TextInputLayout"
-                    app:startIconTint="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_postal_code_hint"
-                    app:endIconMode="clear_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="16dp"
-            >
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:digits="0123456789-"
-                        android:inputType="number|numberDecimal|text" android:id="@+id/postal_code"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/outlinedTextField"
-                    app:startIconDrawable="@drawable/location_city"
-                    style="@style/Widget.App.TextInputLayout"
-                    app:startIconTint="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/enter_city_hint"
-                    app:endIconMode="clear_text"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/outlinedTextField1">
-
-                <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/postal_city"/>
-                "/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                    android:text="@string/search"
-                    style="@style/Widget.App.Button.Orange"
-                    app:icon="@drawable/magnifying_glass_solid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/searchPostal"
-                    app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-
-                android:background="@drawable/style_orange_outline_container"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
-                android:paddingStart="10dp" android:paddingTop="10dp" android:paddingEnd="10dp"
-                android:paddingBottom="10dp">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" android:id="@+id/constraintLayout11">
-
-                <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    <TextView
-                            style="@style/textStyleWhiteSmallInContainer"
-                            android:text="@string/postal_miej"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/textView79"/>
-                    <TextView
-                            style="@style/textStyleWhiteSmallInContainer"
-                            android:text="@string/postal_gmina"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/textView81"/>
-                    <TextView
-                            style="@style/textStyleWhiteSmallInContainer"
-                            android:text="@string/postal_powiat"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/textView83"/>
-                    <TextView
-                            style="@style/textStyleWhiteSmallInContainer"
-                            android:text="@string/postal_woj"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:id="@+id/textView82"/>
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <LinearLayout
-                    android:orientation="vertical"
+                android:layout_height="wrap_content">
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/toggleButton"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent" app:layout_constraintStart_toEndOf="@+id/constraintLayout11"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent">
-                <TextView
-                        android:text="TextView"
+                    android:layout_height="wrap_content" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+                <Button
+                        style="@style/Widget.App.Button.OutlinedButton"
+                        android:id="@+id/simple"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/simple"
+                        android:enabled="true"/>
+                <Button
+                        style="@style/Widget.App.Button.OutlinedButton"
+                        android:id="@+id/advenced"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/textView80"/>
-            </LinearLayout>
+                        android:layout_height="wrap_content"
+                        android:text="@string/adv"
+                />
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/toggleButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" android:id="@+id/constraintLayout10">
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/outlinedTextField1"
+                        app:startIconDrawable="@drawable/_123"
+                        style="@style/Widget.App.TextInputLayout"
+                        app:startIconTint="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_postal_code_hint"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="16dp"
+                >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="0123456789-"
+                            android:inputType="number|numberDecimal|text" android:id="@+id/postal_code"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/outlinedTextField"
+                        app:startIconDrawable="@drawable/location_city"
+                        style="@style/Widget.App.TextInputLayout"
+                        app:startIconTint="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_city_hint"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/postal_city"/>
+                    "/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <Button
+                        android:text="@string/search"
+                        style="@style/Widget.App.Button.Orange"
+                        app:icon="@drawable/magnifying_glass_solid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/searchPostal"
+                        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+
+                    android:background="@drawable/style_orange_outline_container"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout10"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:paddingStart="10dp" android:paddingTop="10dp" android:paddingEnd="10dp"
+                    android:paddingBottom="10dp" android:id="@+id/postalCityWidnow"
+                    android:foregroundGravity="center|center_horizontal">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/constraintLayout11" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent">
+                            <TextView
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:text="@string/postal_miej"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/textView79"/>
+                            <TextView
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:text="@string/postal_gmina"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/textView81"/>
+                            <TextView
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:text="@string/postal_powiat"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/textView83"/>
+                            <TextView
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:text="@string/postal_woj"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/textView82"/>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:layout_constraintStart_toEndOf="@+id/constraintLayout11"
+                            android:layout_marginStart="8dp">
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        >
+                            <TextView
+                                    android:text="TextView"
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:maxLines="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/tv_msc"/>
+                            <TextView
+                                    android:text="TextView"
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:maxLines="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/tv_gm"/>
+                            <TextView
+                                    android:text="TextView"
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:maxLines="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/tv_pow"/>
+                            <TextView
+                                    android:text="TextView"
+                                    style="@style/textStyleWhiteSmallInContainer"
+                                    android:maxLines="1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" android:id="@+id/tv_woj"/>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" app:layout_constraintTop_toBottomOf="@+id/postalCityWidnow"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/rv"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

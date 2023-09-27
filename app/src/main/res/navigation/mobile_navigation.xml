@@ -187,5 +187,5 @@
     <fragment android:id="@+id/nav_recidivism" android:name="pl.tapo24.twa.ui.road.recidivism.RecidivismFragment"
               android:label="@string/recidive" tools:layout="@layout/fragment_recidivism"/>
     <fragment android:id="@+id/nav_postalCode" android:name="pl.tapo24.twa.ui.helpers.postalCode.PostalCodeFragment"
-              android:label="fragment_postal_code" tools:layout="@layout/fragment_postal_code"/>
+              android:label="@string/postalCode" tools:layout="@layout/fragment_postal_code"/>
 </navigation>

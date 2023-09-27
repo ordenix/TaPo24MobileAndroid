@@ -8,7 +8,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pl.tapo24.twa.adapter.PostalCodeSequenceAdapter
 import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCodeSequence
+import pl.tapo24.twa.data.postal.ResponseCodeSequenceContent
 import pl.tapo24.twa.infrastructure.NetworkClient
 
 import javax.inject.Inject
@@ -23,11 +26,36 @@ class PostalCodeViewModel @Inject constructor(
 
     val responseCity: MutableLiveData<ResponseCity> = MutableLiveData()
 
+    val responseCodeSequence: MutableLiveData<List<ResponseCodeSequenceContent>> = MutableLiveData()
+
+
+    lateinit var adapter: PostalCodeSequenceAdapter
 
     fun getCodeSequenceByCity(city: String) {
         busy.value = true
         viewModelScope.launch(Dispatchers.IO) {
+            var responseData: ResponseCodeSequence?= null
+            async {
+                val response = networkClient.getPostalCodeSequenceByCity(city)
+                response.onSuccess {
+                    responseData = it
+                }
+                response.onFailure {
+                    withContext(Dispatchers.Main) {
+                        errorMessage = it.message.toString()
+                        showError.value = true
+                        busy.value = false
+                    }
 
+                }
+            }.await()
+            withContext(Dispatchers.Main) {
+                if (responseData != null) {
+                    responseCodeSequence.value = responseData!!.r
+                    busy.value = false
+                }
+
+            }
         }
 
     }
@@ -55,9 +83,11 @@ class PostalCodeViewModel @Inject constructor(
                 }
             }.await()
             withContext(Dispatchers.Main) {
-                if (responseList != null)
-                responseCity.value = responseList!!
-                busy.value = false
+                if (responseList != null) {
+                    responseCity.value = responseList!!
+                    busy.value = false
+                }
+
             }
         }
     }

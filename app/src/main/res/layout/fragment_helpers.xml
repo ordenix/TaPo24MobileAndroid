@@ -15,7 +15,7 @@
                     app:columnCount="3">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
+                        android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/postalCode">
@@ -30,7 +30,7 @@
                         <ImageView
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                app:srcCompat="@drawable/book_solid"
+                                app:srcCompat="@drawable/envelope_solid"
                                 android:id="@+id/imageViewA"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
