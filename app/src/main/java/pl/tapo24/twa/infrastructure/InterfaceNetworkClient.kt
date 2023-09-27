@@ -2,6 +2,9 @@ package pl.tapo24.twa.infrastructure
 
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCodeSequence
+import pl.tapo24.twa.db.entity.AppVersion
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.dbData.entity.*
@@ -89,4 +92,19 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_asset_list")
     fun getAssetListData(): Call<List<AssetList>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_app_version")
+    fun getAppVersionData(): Call<List<AppVersion>>
+
+    // endpoints for module
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_city_code_sequence_by_city_name/")
+    fun getPostalCodeSequenceByCity(@Query("city") city: String): Call<ResponseCodeSequence>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_city_by_code/")
+    fun getPostalCityByCode(@Query("code") code: String): Call<ResponseCity>
+
+    // endpoints for login
 }

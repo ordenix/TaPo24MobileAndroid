@@ -3,8 +3,13 @@ package pl.tapo24.twa.infrastructure
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCodeSequence
+import pl.tapo24.twa.db.entity.AppVersion
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
+import pl.tapo24.twa.exceptions.HttpException
+import pl.tapo24.twa.exceptions.HttpMessage
 import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import retrofit2.Retrofit
@@ -286,6 +291,47 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalGetAssetList.message))
+    }
+
+    fun getAppVersionData(): Result<List<AppVersion>>{
+        try {
+            val response = service.getAppVersionData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetAppVersion.message))
+    }
+
+
+    fun getPostalCodeSequenceByCity(city: String): Result<ResponseCodeSequence>{
+        try {
+            val response = service.getPostalCodeSequenceByCity(city).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }else if (response.code() == 404) {
+                return Result.failure(HttpException(HttpMessage.PostalCityNotFound.message))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+    fun getPostalCityByCode(code: String): Result<ResponseCity>{
+        try {
+            val response = service.getPostalCityByCode(code).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }else if (response.code() == 404) {
+                return Result.failure(HttpException(HttpMessage.PostalCityNotFound.message))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
     }
 
 

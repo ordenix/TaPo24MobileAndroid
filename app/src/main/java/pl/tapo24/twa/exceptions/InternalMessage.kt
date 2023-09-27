@@ -22,7 +22,9 @@ enum class InternalMessage(val message: String) {
     InternalGetLawDocuments("Internal exception during get data law"),
     InternalGetLawTariff("Internal exception during get data Tariff"),
     InternalGetElastic("Internal exception during get data from elastic"),
-    InternalGetAssetList("Internal exception during get data Asset Lis"),
+    InternalGetAssetList("Internal exception during get data Asset List"),
+    InternalGetAppVersion("Internal exception during get data App Version"),
+    InternalGetPostal("Internal exception during get postal code data")
 
 
 

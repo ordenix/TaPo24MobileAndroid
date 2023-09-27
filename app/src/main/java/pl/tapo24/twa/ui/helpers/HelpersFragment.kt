@@ -56,6 +56,13 @@ class HelpersFragment: Fragment() {
             )
         }
 
+        binding.postalCode.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_postalCode
+            )
+        }
+
 
 
         return root

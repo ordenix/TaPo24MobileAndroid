@@ -174,6 +174,19 @@
     <string name="not_implemented">NOT IMPLEMENTED YET!!! :(</string>
     <string name="enter_number">Wprowadź liczby np. przebieg</string>
     <string name="enter_text">Wprowadź tekst</string>
+    <string name="enter_city_or_code">Wprowadź kod np 41-500, 41500 lub miasto</string>
+    <string name="error">Błąd</string>
+    <string name="ok">Ok</string>
+    <string name="enter_valid_postal_code">Wprowadź prawidłowy kod np 41-500, 41500</string>
+    <string name="wait_for_response">Poczekaj na odpowiedź z serwera</string>
+    <string name="enter_postal_code_hint">Wprowadź kod pocztowy</string>
+    <string name="adv">Zaawansowana</string>
+    <string name="simple">Prosta</string>
+    <string name="enter_city_hint">Wprowadź miasto</string>
+    <string name="postal_miej">Miejscowość:</string>
+    <string name="postal_gmina">Gmina:</string>
+    <string name="postal_powiat">Powiat:</string>
+    <string name="postal_woj">Wojewódźtwo:</string>
 
 
 </resources>

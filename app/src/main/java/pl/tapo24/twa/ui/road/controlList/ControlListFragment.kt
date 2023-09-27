@@ -38,22 +38,6 @@ class ControlListFragment : Fragment() {
         _binding = FragmentControlListBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-
-
-
-//        val request = DownloadManager.Request(Uri.parse("https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"))
-//        request.setTitle("fileName")
-//        request.setMimeType("application/pdf")
-//        request.allowScanningByMediaScanner()
-//        request.setAllowedOverMetered(true)
-//        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-//        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "AldoFiles/fileName")
-//        val downloadManager =
-//            requireContext().getSystemService(Context.DOWNLOAD_SERVICE)  as DownloadManager?
-//        downloadManager!!.enqueue(request)
-
-
         viewModel = ViewModelProvider(this).get(ControlListViewModel::class.java)
         if (viewModel.data.value.isNullOrEmpty()) {
             viewModel.getData()
