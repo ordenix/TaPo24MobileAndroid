@@ -175,7 +175,7 @@
               android:label="@string/CodeDisallowedDringLicence"
               tools:layout="@layout/fragment_code_limits_driving_licence"/>
     <fragment android:id="@+id/nav_codePoints"
-              android:name="pl.tapo24.twa.ui.codePoints.CodePointsFragment"
+              android:name="pl.tapo24.twa.ui.road.codePoints.CodePointsFragment"
               android:label="fragment_code_points"
               tools:layout="@layout/fragment_code_points"/>
     <fragment android:id="@+id/nav_holdingDocumentsChose"

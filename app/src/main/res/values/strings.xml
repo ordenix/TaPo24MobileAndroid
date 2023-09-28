@@ -188,6 +188,7 @@
     <string name="postal_powiat">Powiat:</string>
     <string name="postal_woj">Wojewódźtwo:</string>
     <string name="postal_code_list">Spis kodów:</string>
+    <string name="searchCode">Wyszukaj kod czynu lub nazwę</string>
 
 
 </resources>

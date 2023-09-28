@@ -1,14 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="pl.tapo24.twa.ui.codePoints.CodePointsFragment">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:id="@+id/ss">
 
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
+            android:backgroundTint="@color/second_tapo"
+            android:background="@drawable/style_contol_list_top"
+            android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            android:id="@+id/topCodePoints" android:visibility="gone">
 
-</FrameLayout>
+        <TextView
+                android:text="TextView"
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/topTextConrolList"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingBottom="5dp"
+            android:paddingTop="5dp" android:id="@+id/appBarLayout">
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField"
+                android:layout_width="match_parent"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/magnifying_glass_solid"
+                android:hint="@string/searchCode">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                    android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/queryText"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clickable="true"
+            android:focusableInTouchMode="true"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/rv" android:focusable="true" app:layout_constraintTop_toBottomOf="@+id/topCodePoints"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
