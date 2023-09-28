@@ -1,11 +1,14 @@
 package pl.tapo24.twa.ui.road.codePoints
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,12 +37,22 @@ class CodePointsFragment : Fragment() {
         viewModel.getData()
         val rv = binding.rv
         rv.layoutManager = LinearLayoutManager(activity)
-        viewModel.adapter = CodePointsAdapter(viewModel.data.value.orEmpty(), viewModel)
+        viewModel.adapter = CodePointsAdapter(viewModel.data.value.orEmpty(),viewModel.data.value.orEmpty(), viewModel)
         rv.adapter = viewModel.adapter
 //
         viewModel.data.observe(viewLifecycleOwner, Observer {
-            viewModel.adapter.items = it
+            viewModel.adapter.items = it.orEmpty()
+            viewModel.adapter.filterResult = it.orEmpty()
             viewModel.adapter.notifyDataSetChanged()
+        })
+        binding.queryText.addTextChangedListener {
+            viewModel.adapter.filter.filter(binding.queryText.text)
+        }
+        binding.rv.setOnTouchListener(View.OnTouchListener { v, event ->
+            val inputManager: InputMethodManager =
+                context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.hideSoftInputFromWindow(requireView().windowToken, 0)
+            false
         })
 
         return root

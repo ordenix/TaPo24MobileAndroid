@@ -402,7 +402,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
+                        android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/codePoints">
