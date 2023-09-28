@@ -13,6 +13,15 @@ data class CodePointsNew(
     var description: String? = null,
 
     @ColumnInfo(defaultValue = "0")
-    var points: Int? = null
+    var points: Int? = null,
+
+    @ColumnInfo(defaultValue = "")
+    var remarks: String? = null,
+
+    @ColumnInfo(defaultValue = "")
+    var type: String? = null,
+
+    @ColumnInfo(defaultValue = "false")
+    var addToCalc: Boolean? = null,
 ) {
 }

@@ -187,6 +187,7 @@
     <string name="postal_gmina">Gmina:</string>
     <string name="postal_powiat">Powiat:</string>
     <string name="postal_woj">Wojewódźtwo:</string>
+    <string name="searchCode">Wyszukaj kod czynu lub nazwę</string>
 
 
 </resources>

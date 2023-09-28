@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:background="@drawable/style_orange_container"
                 style="@style/textStyle"
-                android:layout_height="wrap_content" android:id="@+id/textView6"
+                android:layout_height="wrap_content" android:id="@+id/tvInfo"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupEngine" app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" android:maxLines="10" android:textAlignment="center"
                 android:layout_marginTop="1dp"/>
@@ -50,8 +50,8 @@
                 style="@style/textStyleLarge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                android:id="@+id/tvEnvir"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
         <RadioGroup
@@ -60,7 +60,7 @@
                 android:id="@+id/radioGroupEnviroment"
 
                 tools:layout_editor_absoluteX="10dp" android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView4">
+                app:layout_constraintTop_toBottomOf="@+id/tvEnvir">
             <RadioButton
                     android:text="@string/EnvProd"
                     android:buttonTint="@drawable/check_box"
@@ -84,7 +84,7 @@
                 android:background="@drawable/style_orange_container"
                 style="@style/textStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/textView9"
+                android:layout_height="wrap_content" android:id="@+id/tvDevelop"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroupEnviroment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" android:maxLines="5" android:textAlignment="center"
