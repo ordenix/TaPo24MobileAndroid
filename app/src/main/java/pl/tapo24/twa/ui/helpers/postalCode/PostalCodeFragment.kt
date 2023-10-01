@@ -76,14 +76,14 @@ class PostalCodeFragment : Fragment() {
                     // search
                     if (binding.postalCode.text.isNullOrEmpty()) {
                         // search city get sequence
-                        viewModel.getCodeSequenceByCity(binding.postalCity.text.toString())
+                        viewModel.getCodeSequenceByCity(binding.postalCity.text.toString().trim())
                     }
                     if (binding.postalCity.text.isNullOrEmpty()) {
                         // search code to get city
                         val code = binding.postalCode.text.toString()
                         if(viewModel.validCode(code)) {
                             // valid ok
-                            viewModel.getCityByCode(code)
+                            viewModel.getCityByCode(code.trim())
                         } else {
                             showDialog(getString(R.string.enter_valid_postal_code))
 
@@ -126,7 +126,7 @@ class PostalCodeFragment : Fragment() {
         })
         binding.postalCityWidnow.visibility = View.GONE
         viewModel.responseCity.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
+            if (it != null && it.r.isNotEmpty()) {
                 binding.postalCityWidnow.visibility = View.VISIBLE
                 binding.tvGm.text = it.r[0].gmina
                 binding.tvMsc.text = it.r[0].miejscowosc
