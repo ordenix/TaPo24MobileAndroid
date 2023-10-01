@@ -22,6 +22,11 @@
         <action android:id="@+id/action_nav_helpers_to_nav_law" app:destination="@id/nav_law"/>
         <action android:id="@+id/action_nav_helpers_to_nav_note" app:destination="@id/nav_note"/>
         <action android:id="@+id/action_nav_helpers_to_nav_postalCode" app:destination="@id/nav_postalCode"/>
+        <action android:id="@+id/action_nav_helpers_to_nav_law_with_args" app:destination="@id/nav_law">
+            <argument android:name="type" android:defaultValue="pattern"/>
+            <argument android:name="title" android:defaultValue="Wzory protokołów"/>
+        </action>
+        <action android:id="@+id/action_nav_helpers_to_nav_validDocument" app:destination="@id/nav_validDocument"/>
     </fragment>
     <fragment android:id="@+id/nav_category_driving_licence"
               android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
@@ -164,11 +169,13 @@
               android:label="@string/CodeFailure"
               tools:layout="@layout/fragment_control_list"/>
     <fragment android:id="@+id/nav_law"
-              tools:layout="@layout/fragment_law"
-              android:name="pl.tapo24.twa.ui.law.LawFragment"
+              tools:layout="@layout/fragment_pdf_file_view"
+              android:name="pl.tapo24.twa.ui.pdfFileView.PdfFileViewFragment"
               android:label="@string/menu_law">
         <action android:id="@+id/action_nav_law_to_nav_helpers" app:destination="@id/nav_helpers"/>
         <action android:id="@+id/action_nav_law_to_nav_tariff" app:destination="@id/nav_tariff"/>
+        <argument android:name="type" app:argType="string" android:defaultValue="law"/>
+        <argument android:name="title" app:argType="string" android:defaultValue="Przepisy"/>
     </fragment>
     <fragment android:id="@+id/nav_codeLimitsDrivingLicence"
               android:name="pl.tapo24.twa.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceFragment"
@@ -176,7 +183,7 @@
               tools:layout="@layout/fragment_code_limits_driving_licence"/>
     <fragment android:id="@+id/nav_codePoints"
               android:name="pl.tapo24.twa.ui.road.codePoints.CodePointsFragment"
-              android:label="fragment_code_points"
+              android:label="@string/codePoints"
               tools:layout="@layout/fragment_code_points"/>
     <fragment android:id="@+id/nav_holdingDocumentsChose"
               android:name="pl.tapo24.twa.ui.road.holdingDocuments.HoldingDocumentsChoseFragment"
@@ -188,4 +195,8 @@
               android:label="@string/recidive" tools:layout="@layout/fragment_recidivism"/>
     <fragment android:id="@+id/nav_postalCode" android:name="pl.tapo24.twa.ui.helpers.postalCode.PostalCodeFragment"
               android:label="@string/postalCode" tools:layout="@layout/fragment_postal_code"/>
+    <fragment android:id="@+id/nav_validDocument"
+              android:name="pl.tapo24.twa.ui.helpers.validDocument.ValidDocumentFragment"
+              tools:layout="@layout/fragment_valid_document"
+              android:label="@string/checkValidate"/>
 </navigation>

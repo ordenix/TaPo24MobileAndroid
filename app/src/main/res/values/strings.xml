@@ -189,6 +189,10 @@
     <string name="postal_woj">Wojewódźtwo:</string>
     <string name="postal_code_list">Spis kodów:</string>
     <string name="searchCode">Wyszukaj kod czynu lub nazwę</string>
+    <string name="prado">PRADO (autentycznosć dokumentów)</string>
+    <string name="id_verify">Weryfikacja dowodu osobistego</string>
+    <string name="verify_driving_licence_ue">Weryfikacja praw jazdy na terenie UE</string>
+    <string name="passport_verify">Weryfikacja paszportu</string>
 
 
 </resources>

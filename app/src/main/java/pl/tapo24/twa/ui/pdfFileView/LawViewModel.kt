@@ -1,4 +1,4 @@
-package pl.tapo24.twa.ui.law
+package pl.tapo24.twa.ui.pdfFileView
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,10 +22,10 @@ class LawViewModel @Inject constructor(
     var searchText: String = ""
     lateinit var adapter: PdfAdapter
 
-    fun getData() {
+    fun getData(type: String) {
         viewModelScope.launch(Dispatchers.IO) {
             var dataFromDb: List<Law>? = null
-            async{dataFromDb = dataTapoDb.law().getAllByType("law")}.await()
+            async{dataFromDb = dataTapoDb.law().getAllByType(type)}.await()
             withContext(Dispatchers.Main) {
                 if (dataFromDb != null) {
                     data.value = dataFromDb!!
