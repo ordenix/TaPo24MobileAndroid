@@ -2,6 +2,7 @@ package pl.tapo24.twa.infrastructure
 
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.db.entity.AppVersion
@@ -9,8 +10,10 @@ import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.dbData.entity.*
 import retrofit2.Call
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface InterfaceNetworkClient {
@@ -107,4 +110,8 @@ interface InterfaceNetworkClient {
     fun getPostalCityByCode(@Query("code") code: String): Call<ResponseCity>
 
     // endpoints for login
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("login/normal_login_user/")
+    fun basicLogin(@Body login: ToLoginData): Call<String>
+
 }

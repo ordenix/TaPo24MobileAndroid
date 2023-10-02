@@ -37,7 +37,6 @@ import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.updater.DataUpdater
-import pl.tapo24.twa.utils.SwipeListener
 import javax.inject.Inject
 
 
@@ -186,7 +185,6 @@ class MainActivity: AppCompatActivity() {
            }
 
        }
-
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
@@ -249,9 +247,16 @@ class MainActivity: AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        val sss = menu.findItem(R.id.action_settings)
-        test.observe(this, Observer {
-                sss.isVisible = !it
+        val menuLogin = menu.findItem(R.id.action_login)
+        val menuLogOut = menu.findItem(R.id.action_logout)
+        State.isLogin.observe(this, Observer {
+            if (it == true) {
+                menuLogOut.isVisible = true
+                menuLogin.isVisible = false
+            } else {
+                menuLogOut.isVisible = false
+                menuLogin.isVisible = true
+            }
         })
         return true
     }
@@ -266,10 +271,10 @@ class MainActivity: AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_about_application)
         }
-//        if (item.itemId == R.id.action_login) {
-//            val navController = findNavController(R.id.nav_host_fragment_content_main)
-//            navController.navigate(R.id.nav_login)
-//        }
+        if (item.itemId == R.id.action_login) {
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            navController.navigate(R.id.nav_login)
+        }
         return super.onOptionsItemSelected(item)
     }
 

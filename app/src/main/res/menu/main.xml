@@ -16,14 +16,14 @@
 <!--          android:orderInCategory="200"-->
 <!--          android:icon="@drawable/house_solid"-->
 <!--          app:showAsAction="never"/>-->
-<!--    <item android:id="@+id/action_login"-->
-<!--          android:title="@string/login"-->
-<!--          android:icon="@drawable/house_solid"-->
-<!--          android:orderInCategory="250"-->
-<!--          app:showAsAction="never"/>-->
-<!--    <item android:id="@+id/action_logout"-->
-<!--          android:title="@string/logout"-->
-<!--          android:icon="@drawable/house_solid"-->
-<!--          android:orderInCategory="300"-->
-<!--          app:showAsAction="never"/>-->
+    <item android:id="@+id/action_login"
+          android:title="@string/login"
+          android:icon="@drawable/house_solid"
+          android:orderInCategory="250"
+          app:showAsAction="never"/>
+    <item android:id="@+id/action_logout"
+          android:title="@string/logout"
+          android:icon="@drawable/house_solid"
+          android:orderInCategory="300"
+          app:showAsAction="never"/>
 </menu>

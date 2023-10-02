@@ -193,6 +193,7 @@
     <string name="id_verify">Weryfikacja dowodu osobistego</string>
     <string name="verify_driving_licence_ue">Weryfikacja praw jazdy na terenie UE</string>
     <string name="passport_verify">Weryfikacja paszportu</string>
+    <string name="enter_login_or_passwd">Wprowadź login lub hasło</string>
 
 
 </resources>

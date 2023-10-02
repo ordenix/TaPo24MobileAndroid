@@ -3,6 +3,7 @@ package pl.tapo24.twa.infrastructure
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.db.entity.AppVersion
@@ -326,7 +327,7 @@ class NetworkClient(var url: String) {
             if (response.isSuccessful) {
                 return Result.success(response.body()!!)
             }else if (response.code() == 404) {
-                return Result.failure(HttpException(HttpMessage.PostalCityNotFound.message))
+                return Result.failure(HttpException(HttpMessage.PostalCodeNotFound.message))
             }
         } catch (ex: Throwable) {
             return Result.failure(ex)
@@ -336,8 +337,44 @@ class NetworkClient(var url: String) {
 
 
 
-    fun login() {
+    fun login(loginData: ToLoginData): Result<String> {
+        try {
+            val response = service.basicLogin(loginData).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                if (response.code() == 409 && errorMessage == "User not found") {
+                    // not found
+                    return Result.failure(HttpException(HttpMessage.WrongPasswordOrAccountNotFound.message))
 
+                }
+                else if (response.code() == 409 && errorMessage == "User was banned") {
+                    // baned
+                    return Result.failure(HttpException(HttpMessage.AccountWasBanned.message))
+
+                }
+                else if (response.code() == 409 && errorMessage == "User have not activated account") {
+                    // notActivated
+                    return Result.failure(HttpException(HttpMessage.AccountNotActivated.message))
+
+                }else if (response.code() == 409 && errorMessage == "User haven't confirmed email") {
+                    // not email confirm
+                    return Result.failure(HttpException(HttpMessage.AccountNotEmailConfirmed.message))
+
+                }
+                else if (response.code() == 401) {
+                    // wrong password
+                    return Result.failure(HttpException(HttpMessage.WrongPasswordOrAccountNotFound.message))
+                }
+            }
+
+
+
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalLogin.message))
     }
 
 }

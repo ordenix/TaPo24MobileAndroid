@@ -1,13 +1,47 @@
 package pl.tapo24.twa.ui.login
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import pl.tapo24.twa.data.login.ToLoginData
+import pl.tapo24.twa.db.TapoDb
+import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.utils.SessionProvider
+import javax.inject.Inject
 
-class LoginViewModel: ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val tapoDb: TapoDb,
+    private val networkClient: NetworkClient
+): ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is LOGIN"
+    val showError: MutableLiveData<Boolean> = MutableLiveData(false)
+    var errorMessage = ""
+//    private val _text = MutableLiveData<String>().apply {
+//        value = "This is LOGIN"
+//    }
+//    val text: LiveData<String> = _text
+
+    fun login(loginData: ToLoginData) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = networkClient.login(loginData)
+            response.onSuccess {
+                withContext(Dispatchers.Main) {
+                    SessionProvider(tapoDb,networkClient).createSession(it)
+
+                }
+            }
+            response.onFailure {
+                withContext(Dispatchers.Main) {
+                    errorMessage = it.message.toString()
+                    showError.value = true
+                }
+            }
+        }
     }
-    val text: LiveData<String> = _text
+
 }
