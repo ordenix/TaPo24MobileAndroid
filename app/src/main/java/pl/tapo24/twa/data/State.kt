@@ -9,7 +9,7 @@ object State {
     var environmentType: EnvironmentType = EnvironmentType.Master
     var enginesType: EnginesType = EnginesType.New
 
-    var internetStatus: Int = 0
+    var internetStatus:  MutableLiveData<Int> = MutableLiveData(0)
 
     var jwtToken:String = ""
     var userName: String = ""
@@ -20,6 +20,7 @@ object State {
 
     var premiumVersion: Boolean = true
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isChecked: Boolean = false
 
     var networkType = "WiFi"
 

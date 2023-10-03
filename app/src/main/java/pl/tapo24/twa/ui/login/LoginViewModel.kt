@@ -10,16 +10,16 @@ import kotlinx.coroutines.withContext
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
-import pl.tapo24.twa.utils.SessionProvider
+import pl.tapo24.twa.SessionProvider
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val tapoDb: TapoDb,
-    private val networkClient: NetworkClient
+    private val sessionProvider: SessionProvider
 ): ViewModel() {
 
     val showError: MutableLiveData<Boolean> = MutableLiveData(false)
+    val successLogin: MutableLiveData<Boolean> = MutableLiveData(false)
     var errorMessage = ""
 //    private val _text = MutableLiveData<String>().apply {
 //        value = "This is LOGIN"
@@ -28,20 +28,24 @@ class LoginViewModel @Inject constructor(
 
     fun login(loginData: ToLoginData) {
         viewModelScope.launch(Dispatchers.IO) {
-            val response = networkClient.login(loginData)
-            response.onSuccess {
-                withContext(Dispatchers.Main) {
-                    SessionProvider(tapoDb,networkClient).createSession(it)
+            val statusLogin = sessionProvider.loginToService(loginData)
 
+            statusLogin.onSuccess {
+                withContext(Dispatchers.Main) {
+                    successLogin.value = true
                 }
             }
-            response.onFailure {
+            statusLogin.onFailure {
                 withContext(Dispatchers.Main) {
                     errorMessage = it.message.toString()
                     showError.value = true
                 }
             }
         }
+
+
+
+
     }
 
 }

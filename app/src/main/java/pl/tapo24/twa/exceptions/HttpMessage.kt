@@ -6,5 +6,6 @@ enum class HttpMessage(val message: String) {
     AccountNotActivated("Konto nie jest aktywowane"),
     AccountWasBanned("Konto zbanowano"),
     AccountNotEmailConfirmed("Konto nie jest aktywowane"),
-    WrongPasswordOrAccountNotFound("Błędny login lub hasło")
+    WrongPasswordOrAccountNotFound("Błędny login lub hasło"),
+    TokenExpired("Token stracił ważność ")
 }

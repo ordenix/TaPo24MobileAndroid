@@ -8,8 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import pl.tapo24.twa.R
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.databinding.FragmentLoginBinding
@@ -43,7 +46,7 @@ class LoginFragment: Fragment() {
             if (binding.login.text.isNullOrEmpty() || binding.password.text.isNullOrEmpty()) {
                 showDialog(getString(R.string.enter_login_or_passwd))
             } else {
-                val loginData = ToLoginData(binding.login.text.toString(),binding.password.text.toString())
+                val loginData = ToLoginData(binding.login.text.toString().trim(),binding.password.text.toString())
                 viewModel.login(loginData)
             }
         }
@@ -52,6 +55,16 @@ class LoginFragment: Fragment() {
             if (it) {
                 viewModel.showError.value = false
                 showDialog(viewModel.errorMessage)
+            }
+        })
+        viewModel.successLogin.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                Snackbar.make(binding.root, "Poprawnie zalogowano", Snackbar.LENGTH_LONG).show()
+
+
+                    findNavController().popBackStack()
+
+
             }
         })
 
@@ -78,4 +91,5 @@ class LoginFragment: Fragment() {
             }
             .show()
     }
+
 }

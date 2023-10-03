@@ -12,6 +12,7 @@ import pl.tapo24.twa.dbData.entity.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -113,5 +114,9 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("login/normal_login_user/")
     fun basicLogin(@Body login: ToLoginData): Call<String>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("login/test_token_valid_and_account_baned_status/")
+    fun checkValidToken(@Header("Authorization")header: String): Call<String>
 
 }

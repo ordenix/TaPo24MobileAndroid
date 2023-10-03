@@ -67,7 +67,7 @@ class TariffViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             var responseBody: DataQueryFromSuggestion? =null
             val listLastSearch: MutableList<LastSearch> = mutableListOf()
-            if (State.internetStatus != 0) {
+            if (State.internetStatus.value != 0) {
                 async {
                     val body = DataQueryToSuggestion(suggestion)
                     val response = networkClientElastic.getSuggestionList(body)
@@ -179,7 +179,7 @@ class TariffViewModel @Inject constructor(
                     // other result
                     var docIdArray = listOf<String>()
                     var listTariffToPost = mutableListOf<Tariff>()
-                    if (State.internetStatus != 0) {
+                    if (State.internetStatus.value != 0) {
                         // filter online
 
                         async { docIdArray = sendQueryToElasticAndSave(queryText) }.await()

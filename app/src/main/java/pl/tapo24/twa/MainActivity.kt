@@ -53,6 +53,9 @@ import javax.inject.Inject
 class MainActivity: AppCompatActivity() {
 
     @Inject
+    lateinit var sessionProvider: SessionProvider
+
+    @Inject
     lateinit var tapoDb: TapoDb
     
     @Inject
@@ -66,9 +69,10 @@ class MainActivity: AppCompatActivity() {
     var test = MutableLiveData<Boolean>(false)
 
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-        State.internetStatus = CheckConnection().getConnectionType(applicationContext)
-        if (State.countChangeFragment > 10 && State.internetStatus != 0) {
+        State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
+        if (State.countChangeFragment > 10 && State.internetStatus.value != 0) {
             State.countChangeFragment  = 0
+            //SessionProvider(tapoDb,networkClient).restoreSession()
             CheckVersion(tapoDb,networkClient,this).checkVersion()
             AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
         }
@@ -128,6 +132,8 @@ class MainActivity: AppCompatActivity() {
             }
         }
 
+
+
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
 
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
@@ -165,7 +171,14 @@ class MainActivity: AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        State.internetStatus = CheckConnection().getConnectionType(applicationContext)
+        State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
+
+        State.internetStatus.observe(this, Observer {
+            if (it != 0 ) {
+                // to do execute offline stacks
+                sessionProvider.restoreSession()
+            }
+        })
 
         val context = this
         MainScope().launch(Dispatchers.IO) {
@@ -274,6 +287,10 @@ class MainActivity: AppCompatActivity() {
         if (item.itemId == R.id.action_login) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_login)
+        }
+        if (item.itemId == R.id.action_logout) {
+            sessionProvider.clearSession()
+            Snackbar.make(window.decorView.rootView, "Wylogowano z serwisu", Snackbar.LENGTH_LONG).show()
         }
         return super.onOptionsItemSelected(item)
     }

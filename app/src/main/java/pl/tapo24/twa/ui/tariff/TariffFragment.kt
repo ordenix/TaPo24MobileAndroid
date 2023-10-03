@@ -191,7 +191,7 @@ class TariffFragment: Fragment() {
             }
 
         })
-        if (State.internetStatus == 0) {
+        if (State.internetStatus.value == 0) {
             Snackbar.make(binding.root, getString(R.string.offline_work), Snackbar.LENGTH_LONG)
                 .show()
             binding.network.visibility = View.VISIBLE

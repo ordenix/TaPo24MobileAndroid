@@ -31,13 +31,13 @@ class AssetUpdater(
         MainScope().launch(Dispatchers.IO) {
             var existAssetList = false
             async { existAssetList = tapoDb.assetListDb().exist() }.await()
-            if (State.internetStatus != 0) {
+            if (State.internetStatus.value != 0) {
                 // Network available
                 if (State.networkType == "All") {
                     // download because all
                     getAssets()
 
-                } else if (State.networkType == "WiFi" && State.internetStatus == 2) {
+                } else if (State.networkType == "WiFi" && State.internetStatus.value == 2) {
                     // download because condition valid uesr have network WiFi
                     getAssets()
                 } else if (!existAssetList) {

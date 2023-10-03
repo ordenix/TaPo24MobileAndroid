@@ -1,7 +1,7 @@
 package pl.tapo24.twa.infrastructure
 
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
-import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
@@ -9,6 +9,7 @@ import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.db.entity.AppVersion
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
+import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.exceptions.HttpException
 import pl.tapo24.twa.exceptions.HttpMessage
 import pl.tapo24.twa.exceptions.InternalException
@@ -16,11 +17,26 @@ import pl.tapo24.twa.exceptions.InternalMessage
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class NetworkClient(var url: String) {
 
     private val client: OkHttpClient = OkHttpClient.Builder().apply {
-
+        addInterceptor{
+                chain ->
+            val request = chain.request()
+            val response = chain.proceed(request)
+            if (response.code() == 401) {
+                println("ssss")
+            }
+            response
+        }
     }.build()
+//    val gson = GsonBuilder()
+//        .setLenient()
+//        .create()
+
+
+
 
 
     private var retro = Retrofit.Builder()
@@ -38,7 +54,10 @@ class NetworkClient(var url: String) {
             .client(client)
             .build()
         service = retro.create(InterfaceNetworkClient::class.java)
+
     }
+
+
 
     fun getUid(): Result<Uid> {
         try {
@@ -375,6 +394,22 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalLogin.message))
+    }
+
+    fun checkValidToken(token: String): Result<String> {
+        try {
+            val response = service.checkValidToken("Bearer $token").execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            } else if (response.code() == 500) {
+                return Result.failure(HttpException(HttpMessage.TokenExpired.message))
+            }
+
+        }
+        catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalTestToken.message))
     }
 
 }
