@@ -5,6 +5,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.infrastructure.NetworkClient
@@ -33,9 +34,15 @@ class FavouriteModule @Inject constructor(private var tapoDb: TapoDb, private va
     }
 
     private suspend fun receivedFavListToServer() {
-        var responseList
+        var responseList: BodyOffenses? = null
         MainScope().launch(Dispatchers.IO) {
-            async {  }.await()
+            async { val response =  networkClient.getFavoritesOffenses(State.jwtToken)
+
+                response.onSuccess {
+                    responseList = it
+                }
+
+            }.await()
         }
     }
 

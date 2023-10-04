@@ -5,6 +5,7 @@ import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
+import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.entity.AppVersion
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
@@ -122,11 +123,11 @@ interface InterfaceNetworkClient {
     // response profile
     @Headers("Content-Type: application/json; charset=UTF-8")
     @GET("profile/favorites_offenses/")
-    fun getFavoritesOffenses(@Header("Authorization")header: String): Call<String>
+    fun getFavoritesOffenses(@Header("Authorization")header: String): Call<BodyOffenses>
 
     @Headers("Content-Type: application/json; charset=UTF-8")
     @PUT("profile/favorites_offenses/")
-    fun putFavoritesOffenses(@Header("Authorization")header: String): Call<String>
+    fun putFavoritesOffenses(@Header("Authorization")header: String, @Body data: BodyOffenses): Call<String>
 
 
 }
