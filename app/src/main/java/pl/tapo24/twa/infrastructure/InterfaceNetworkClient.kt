@@ -15,6 +15,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface InterfaceNetworkClient {
@@ -118,5 +119,14 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=UTF-8")
     @GET("login/test_token_valid_and_account_baned_status/")
     fun checkValidToken(@Header("Authorization")header: String): Call<String>
+    // response profile
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("profile/favorites_offenses/")
+    fun getFavoritesOffenses(@Header("Authorization")header: String): Call<String>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @PUT("profile/favorites_offenses/")
+    fun putFavoritesOffenses(@Header("Authorization")header: String): Call<String>
+
 
 }

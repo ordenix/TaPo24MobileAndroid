@@ -24,8 +24,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
 
  {
 
-// to do tyhat offline restore! and in login check connection and notify no internet !!!
-    fun //restoreSession() {
+
+    fun restoreSession() {
         MainScope().launch(Dispatchers.IO) {
             var jwtFromDb: Setting? = null
             async { jwtFromDb = tapoDb.settingDb().getSettingByName("jwtToken") }.await()
@@ -35,6 +35,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                     response = networkClient.checkValidToken(jwtFromDb!!.value)
                     response.onSuccess {
                         withContext(Dispatchers.Main) {
+                            State.isSessionConfirm = true
                             createSession(jwtFromDb!!.value)
                         }
                     }
@@ -45,6 +46,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                     }
                 } else {
                     withContext(Dispatchers.Main) {
+                        State.isSessionConfirm = false
                         createSession(jwtFromDb!!.value)
                     }
                 }

@@ -2,10 +2,12 @@ package pl.tapo24.twa.infrastructure
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
+import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
+import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.entity.AppVersion
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
@@ -410,6 +412,26 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalTestToken.message))
+    }
+
+    fun getFavoritesOffenses(token: String): Result<BodyOffenses> {
+        try {
+
+        }
+        catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalFavOffenseToken.message))
+    }
+
+    fun putFavoritesOffenses(token: String, data: BodyOffenses):Result<String> {
+        try {
+
+        }
+        catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalFavOffenseToken.message))
     }
 
 }

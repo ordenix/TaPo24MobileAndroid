@@ -20,7 +20,7 @@ object State {
 
     var premiumVersion: Boolean = true
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
-    var isChecked: Boolean = false
+    var isSessionConfirm: Boolean = false
 
     var networkType = "WiFi"
 

@@ -172,11 +172,13 @@ class MainActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
-
+        sessionProvider.restoreSession()
         State.internetStatus.observe(this, Observer {
             if (it != 0 ) {
                 // to do execute offline stacks
-                sessionProvider.restoreSession()
+                if (!State.isSessionConfirm) {
+                    sessionProvider.restoreSession()
+                }
             }
         })
 
