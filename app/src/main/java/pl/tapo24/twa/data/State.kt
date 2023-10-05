@@ -21,6 +21,8 @@ object State {
     var premiumVersion: Boolean = true
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
     var isSessionConfirm: Boolean = false
+    var isSessionRestored: Boolean = false
+    var isFavouritesSynchronized: Boolean = false
 
     var networkType = "WiFi"
 

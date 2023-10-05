@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
@@ -86,5 +87,12 @@ object AppModule {
     @Singleton
     fun bindSessionProvider(tapoDb: TapoDb, networkClient: NetworkClient): SessionProvider {
         return SessionProvider(tapoDb, networkClient)
+    }
+
+
+    @Provides
+    @Singleton
+    fun bindFavouriteModule(tapoDb: TapoDb, networkClient: NetworkClient): FavouriteModule {
+        return FavouriteModule(tapoDb, networkClient)
     }
 }

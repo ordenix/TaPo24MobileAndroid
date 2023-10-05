@@ -53,6 +53,9 @@ import javax.inject.Inject
 class MainActivity: AppCompatActivity() {
 
     @Inject
+    lateinit var favouriteModule: FavouriteModule
+
+    @Inject
     lateinit var sessionProvider: SessionProvider
 
     @Inject
@@ -172,13 +175,24 @@ class MainActivity: AppCompatActivity() {
         setContentView(binding.root)
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
-        sessionProvider.restoreSession()
+        if (State.isLogin.value == false && !State.isSessionRestored) {
+            sessionProvider.restoreSession()
+        }
         State.internetStatus.observe(this, Observer {
             if (it != 0 ) {
                 // to do execute offline stacks
-                if (!State.isSessionConfirm) {
+                if (!State.isSessionConfirm && State.isLogin.value == true) {
                     sessionProvider.restoreSession()
+
                 }
+                if (State.isLogin.value == true) {
+                    favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
+                }
+            }
+        })
+        State.isLogin.observe(this, Observer {
+            if (it && State.internetStatus.value != 0) {
+                favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
             }
         })
 

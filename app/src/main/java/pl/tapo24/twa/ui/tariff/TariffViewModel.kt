@@ -3,6 +3,7 @@ package pl.tapo24.twa.ui.tariff
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.EnginesType
@@ -25,7 +26,8 @@ import javax.inject.Inject
 class TariffViewModel @Inject constructor(
     private val tapoDb: TapoDb,
     private val networkClient: NetworkClient,
-    private val networkClientElastic: NetworkClientElastic
+    private val networkClientElastic: NetworkClientElastic,
+    private val favouriteModule: FavouriteModule
 ) : ViewModel() {
 
     //val sss = tapoDb.tariffDb().getAll()
@@ -60,6 +62,7 @@ class TariffViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 tariffData.value = tariffDataAll.value
             }
+            favouriteModule.performSendFavList()
         }
     }
 
@@ -242,6 +245,7 @@ class TariffViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             async {tapoDb.tariffDb().insert(item) }
         }
+        favouriteModule.performSendFavList()
         adapter.notifyItemChanged(position)
     }
     fun changeFavState() {

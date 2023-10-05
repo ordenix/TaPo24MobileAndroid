@@ -416,7 +416,7 @@ class NetworkClient(var url: String) {
 
     fun getFavoritesOffenses(token: String): Result<BodyOffenses> {
         try {
-            val response = service.getFavoritesOffenses(token).execute()
+            val response = service.getFavoritesOffenses("Bearer $token").execute()
             return if (response.isSuccessful) {
                 Result.success(response.body()!!)
             } else {
@@ -431,7 +431,7 @@ class NetworkClient(var url: String) {
 
     fun putFavoritesOffenses(token: String, data: BodyOffenses):Result<String> {
         try {
-            val response = service.putFavoritesOffenses(token, data).execute()
+            val response = service.putFavoritesOffenses("Bearer $token", data).execute()
             return if (response.isSuccessful) {
                 Result.success(response.body()!!)
             } else {

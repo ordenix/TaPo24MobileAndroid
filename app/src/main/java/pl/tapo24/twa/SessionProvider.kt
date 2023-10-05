@@ -26,6 +26,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
 
 
     fun restoreSession() {
+        State.isSessionRestored = true
         MainScope().launch(Dispatchers.IO) {
             var jwtFromDb: Setting? = null
             async { jwtFromDb = tapoDb.settingDb().getSettingByName("jwtToken") }.await()
