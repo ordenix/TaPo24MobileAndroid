@@ -79,7 +79,6 @@ class FavouriteModule @Inject constructor(private var tapoDb: TapoDb, private va
                         var stringToServer: String  = ""
                         stringToServer = "[${listToSend.joinToString(",")}]"
                         val bodyToPut = BodyOffenses(stringToServer)
-                        println(stringToServer)
                         val response = networkClient.putFavoritesOffenses(State.jwtToken, bodyToPut)
                         response.onSuccess {
                             State.isFavouritesSynchronized  = true

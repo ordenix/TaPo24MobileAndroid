@@ -227,10 +227,14 @@ class AssetUpdater(
                         async { dataTapoDb.law().deleteElement(element) }.await()
                     }
                 }
-                if (dialog.isVisible) {
+                try {
                     dialog.dismiss()
+                } catch (_: Throwable) {
 
                 }
+
+
+
 
             }
 
