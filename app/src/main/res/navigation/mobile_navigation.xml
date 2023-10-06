@@ -55,6 +55,8 @@
         <action android:id="@+id/action_nav_road_to_nav_tariff" app:destination="@id/nav_tariff"/>
         <action android:id="@+id/action_nav_road_to_nav_home" app:destination="@id/nav_home"/>
         <action android:id="@+id/action_nav_road_to_nav_recidivism" app:destination="@+id/nav_recidivism"/>
+        <action android:id="@+id/action_nav_road_to_nav_holdingDocumentsChose"
+                app:destination="@id/nav_holdingDocumentsChose"/>
     </fragment>
 
     <fragment
@@ -187,8 +189,11 @@
               tools:layout="@layout/fragment_code_points"/>
     <fragment android:id="@+id/nav_holdingDocumentsChose"
               android:name="pl.tapo24.twa.ui.road.holdingDocuments.HoldingDocumentsChoseFragment"
-              android:label="fragment_holding_documents_chose"
-              tools:layout="@layout/fragment_holding_documents_chose"/>
+              android:label="@string/HoldingDocuments"
+              tools:layout="@layout/fragment_holding_documents_chose">
+        <action android:id="@+id/action_nav_holdingDocumentsChose_to_holdingDocumentsFragment"
+                app:destination="@id/nav_holdingDocuments"/>
+    </fragment>
     <fragment android:id="@+id/nav_note" android:name="pl.tapo24.twa.ui.helpers.note.NoteFragment"
               android:label="@string/note" tools:layout="@layout/fragment_note"/>
     <fragment android:id="@+id/nav_recidivism" android:name="pl.tapo24.twa.ui.road.recidivism.RecidivismFragment"
@@ -199,4 +204,10 @@
               android:name="pl.tapo24.twa.ui.helpers.validDocument.ValidDocumentFragment"
               tools:layout="@layout/fragment_valid_document"
               android:label="@string/checkValidate"/>
+    <fragment android:id="@+id/nav_holdingDocuments"
+              android:name="pl.tapo24.twa.ui.road.holdingDocuments.type.HoldingDocumentsFragment"
+              android:label="fragment_holding_documents" tools:layout="@layout/fragment_holding_documents">
+        <argument android:name="title" app:argType="string"/>
+        <argument android:name="type" app:argType="string"/>
+    </fragment>
 </navigation>

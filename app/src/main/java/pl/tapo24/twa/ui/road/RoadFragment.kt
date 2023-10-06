@@ -126,6 +126,12 @@ class RoadFragment: Fragment() {
                 R.id.action_nav_road_to_nav_codePoints
             )
         }
+        binding.holdingDocuments.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_holdingDocumentsChose
+            )
+        }
 //        binding.ll.performClick()
 //        binding.ll.setOnTouchListener(object: SwipeListener(context) {
 //
