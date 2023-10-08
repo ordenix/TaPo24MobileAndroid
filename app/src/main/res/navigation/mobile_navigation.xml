@@ -27,6 +27,7 @@
             <argument android:name="title" android:defaultValue="Wzory protokołów"/>
         </action>
         <action android:id="@+id/action_nav_helpers_to_nav_validDocument" app:destination="@id/nav_validDocument"/>
+        <action android:id="@+id/action_nav_helpers_to_nav_spbChose" app:destination="@id/nav_spbChose"/>
     </fragment>
     <fragment android:id="@+id/nav_category_driving_licence"
               android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
@@ -208,6 +209,19 @@
               android:name="pl.tapo24.twa.ui.road.holdingDocuments.type.HoldingDocumentsFragment"
               android:label="fragment_holding_documents" tools:layout="@layout/fragment_holding_documents">
         <argument android:name="title" app:argType="string"/>
+        <argument android:name="type" app:argType="string"/>
+        <argument android:name="otherCountry" app:argType="boolean"/>
+    </fragment>
+    <fragment android:id="@+id/nav_spbChose" android:name="pl.tapo24.twa.ui.helpers.spb.SpbChoseFragment"
+              android:label="@string/spb" tools:layout="@layout/fragment_spb_chose">
+        <action android:id="@+id/action_nav_spbChose_to_nav_spbViewer" app:destination="@id/nav_spbViewer"/>
+        <argument android:name="isSpb" app:argType="boolean" android:defaultValue="false"/>
+        <action android:id="@+id/action_nav_spbChose_self" app:destination="@id/nav_spbChose">
+            <argument android:name="isSpb" android:defaultValue="true"/>
+        </action>
+    </fragment>
+    <fragment android:id="@+id/nav_spbViewer" android:name="pl.tapo24.twa.ui.helpers.spb.viewer.SpbViewerFragment"
+              android:label="fragment_spb_viewer" tools:layout="@layout/fragment_spb_viewer">
         <argument android:name="type" app:argType="string"/>
     </fragment>
 </navigation>

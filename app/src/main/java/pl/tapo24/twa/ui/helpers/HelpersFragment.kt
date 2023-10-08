@@ -76,6 +76,13 @@ class HelpersFragment: Fragment() {
 
         }
 
+        binding.spb.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_spbChose
+            )
+        }
+
 
 
         return root

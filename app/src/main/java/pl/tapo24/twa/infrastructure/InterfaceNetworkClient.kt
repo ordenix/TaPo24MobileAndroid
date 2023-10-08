@@ -103,6 +103,10 @@ interface InterfaceNetworkClient {
     @GET("data/data_app_version")
     fun getAppVersionData(): Call<List<AppVersion>>
 
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_spb")
+    fun getSpbData(): Call<List<Spb>>
+
     // endpoints for module
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("postal/get_city_code_sequence_by_city_name/")

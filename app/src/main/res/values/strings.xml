@@ -199,6 +199,7 @@
     <string name="holdingDocumentsProofOfRegistration">Zatrzymywanie dowodów rejestracyjnych</string>
     <string name="holdingDocumentsDrivingLicenceOtherCounty">Zatrzymywanie prawa jazdy zagranicznego</string>
     <string name="holdingDocumentsDrivingLicence">Zatrzymywanie prawa jazdy</string>
+    <string name="search_description">Wyszukaj opis</string>
 
 
 </resources>

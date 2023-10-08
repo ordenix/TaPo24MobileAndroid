@@ -14,6 +14,9 @@ interface HoldingDocumentsDao {
     @Query("SELECT * FROM holdingDocuments")
     fun getAll(): List<HoldingDocuments>
 
+    @Query("SELECT * FROM holdingDocuments where type = :type AND otherCountry = :otherCountry")
+    fun getAllByTypeAndCountry(type: String, otherCountry: Boolean): List<HoldingDocuments>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<HoldingDocuments>)
 }

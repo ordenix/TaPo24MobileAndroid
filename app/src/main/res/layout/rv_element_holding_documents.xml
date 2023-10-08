@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools" >
+    <data>
+        <import type="android.view.View"/>
+        <variable name="data"
+                  type="pl.tapo24.twa.dbData.entity.HoldingDocuments"/>
+        <variable name="visibleRemarks"
+                  type="java.lang.Boolean"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        <TextView
+                android:text="@{data.law}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleOrangeMediumWarpXl"
+                android:layout_height="wrap_content" android:id="@+id/textView80"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:text="@{data.description}"
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView84"
+                app:layout_constraintTop_toBottomOf="@+id/textView80" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:text="@{data.lawText}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleWhiteSmallInContainer"
+                android:layout_height="wrap_content" android:id="@+id/textView85"
+                app:layout_constraintTop_toBottomOf="@+id/textView84" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent" android:gravity="center_horizontal"/>
+        <TextView
+                android:text="@{data.time}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleOrangeSmallWarp"
+                android:layout_height="wrap_content" android:id="@+id/textView86"
+                app:layout_constraintTop_toBottomOf="@+id/textView87" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:gravity="center_horizontal"/>
+        <TextView
+                android:text="@{data.remarks}"
+                android:visibility="@{visibleRemarks == true ? View.VISIBLE : View.GONE}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleOrangeSmallWarp"
+                android:layout_height="wrap_content" android:id="@+id/textView87"
+                app:layout_constraintTop_toBottomOf="@+id/textView85" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:gravity="center_horizontal"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

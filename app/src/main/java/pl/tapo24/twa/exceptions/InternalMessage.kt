@@ -27,7 +27,8 @@ enum class InternalMessage(val message: String) {
     InternalGetPostal("Internal exception during get postal code data"),
     InternalLogin("Internal exception during login"),
     InternalTestToken("Internal exception during test token"),
-    InternalFavOffenseToken("Internal exception during process favourite offense")
+    InternalFavOffenseToken("Internal exception during process favourite offense"),
+    InternalGetSpb("Internal exception during get data Spb"),
 
 
 

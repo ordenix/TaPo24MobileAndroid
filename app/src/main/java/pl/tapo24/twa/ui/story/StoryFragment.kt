@@ -19,9 +19,7 @@ class StoryFragment : Fragment() {
     private var _binding: FragmentStoryBinding? = null
     private val binding get() = _binding!!
     var title: String = ""
-    companion object {
-        fun newInstance() = StoryFragment()
-    }
+
 
     private lateinit var viewModel: StoryViewModel
     override fun onResume() {

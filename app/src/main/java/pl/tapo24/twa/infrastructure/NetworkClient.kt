@@ -327,6 +327,18 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetAppVersion.message))
     }
 
+    fun getSpbData(): Result<List<Spb>>{
+        try {
+            val response = service.getSpbData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetSpb.message))
+    }
+
 
     fun getPostalCodeSequenceByCity(city: String): Result<ResponseCodeSequence>{
         try {

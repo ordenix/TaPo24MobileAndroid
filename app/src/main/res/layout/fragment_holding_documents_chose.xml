@@ -18,7 +18,7 @@
                     android:layout_width="match_parent"
                     app:useDefaultMargins="true"
                     android:layout_height="match_parent"
-                    app:columnCount="3" android:id="@+id/grid">
+                    app:columnCount="2" android:id="@+id/grid">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:background="@drawable/style_grid_element"
@@ -63,9 +63,9 @@
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
                         <ImageView
-                                android:src="@drawable/flag"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/imageView19"
+                                android:src="@drawable/flag_solid"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp" android:id="@+id/imageView19"
                                 app:layout_constraintBottom_toTopOf="@+id/textView191456456"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
@@ -76,9 +76,9 @@
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
                         <ImageView
-                                android:src="@drawable/flag"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/imageView18"
+                                android:src="@drawable/flag_solid"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp" android:id="@+id/imageView18"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toTopOf="@+id/textView191456456"
                                 app:layout_constraintTop_toTopOf="parent"/>
@@ -135,9 +135,9 @@
                             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
 
                         <ImageView
-                                android:src="@drawable/flag"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/imageView21"
+                                android:src="@drawable/flag_solid"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp" android:id="@+id/imageView21"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintBottom_toTopOf="@+id/textView1937896"
                                 app:layout_constraintTop_toTopOf="parent"/>
@@ -148,9 +148,9 @@
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
                         <ImageView
-                                android:src="@drawable/flag"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" android:id="@+id/imageView20"
+                                android:src="@drawable/flag_solid"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp" android:id="@+id/imageView20"
                                 app:layout_constraintBottom_toTopOf="@+id/textView1937896"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
@@ -164,9 +164,6 @@
                                 app:layout_constraintStart_toStartOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
             </androidx.gridlayout.widget.GridLayout>

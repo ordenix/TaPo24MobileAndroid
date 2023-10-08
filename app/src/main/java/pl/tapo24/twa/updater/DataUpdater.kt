@@ -91,6 +91,8 @@ class DataUpdater(
                 getSign()
                 Thread.sleep(delay)
                 getTaiff()
+                Thread.sleep(delay)
+                getSpb()
 
             } else {
                 //getCodeDrivingLicence()
@@ -166,6 +168,10 @@ class DataUpdater(
                         }
                         if (it.id == "tariff"){
                             getTaiff()
+                            Thread.sleep(delay)
+                        }
+                        if (it.id == "spb"){
+                            getSpb()
                             Thread.sleep(delay)
                         }
                         async { dataTapoDb.dataBaseVersion().insert(it) }.await()
@@ -378,7 +384,20 @@ class DataUpdater(
             }.await()
         }
     }
-
+    private fun getSpb() {
+        MainScope().launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                dialog.setMessage("Pobieranie danych Spb")
+            }
+            async { dataTapoDb.spb().nukeTable() }.await()
+            async {
+                val response = networkClient.getSpbData()
+                response.onSuccess {
+                    dataTapoDb.spb().insertList(it)
+                }
+            }.await()
+        }
+    }
     private fun getTaiff() {
         MainScope().launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {

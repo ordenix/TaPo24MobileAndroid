@@ -24,13 +24,14 @@ import pl.tapo24.twa.dbData.entity.*
         HoldingDocuments::class,
         Uto::class,
         Sign::class,
-        Law::class
+        Law::class,
+        Spb::class
 
-    ], version = 2,
+    ], version = 3,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
-//        AutoMigration (from = 2, to = 3),
+        AutoMigration (from = 2, to = 3),
 //        AutoMigration (from = 3, to = 4),
 //        AutoMigration (from = 4, to = 5),
 //        AutoMigration (from = 5, to = 6),
@@ -74,5 +75,7 @@ abstract class DataTapoDb: RoomDatabase() {
     abstract fun sign(): SignDao
 
     abstract fun law(): LawDao
+
+    abstract fun spb(): SpbDao
 
 }
