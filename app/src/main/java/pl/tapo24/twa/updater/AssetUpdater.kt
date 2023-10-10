@@ -56,7 +56,20 @@ class AssetUpdater(
 
         }
     }
+    private fun dialogErrorDuringMainPackage() {
 
+        val dialogClose = MaterialAlertDialogBuilder(context)
+            .setTitle("UWAGA BŁĄD PRZY POBIERANIU GŁÓWNEJ PACZKI")
+            .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później (problem może być spowodowany niewystarczającą jakością połączenia z siecią), jeżeli się powtarza skontaktuj się z nami.")
+            .setCancelable(false)
+            .setPositiveButton("Zamknij") { dialog, which ->
+                exitProcess(0)
+
+            }
+            .show()
+
+
+    }
     private fun dialogCloseApp() {
 
         val dialogClose = MaterialAlertDialogBuilder(context)
@@ -318,40 +331,55 @@ class AssetUpdater(
                     }
 
                 }
-                //TODO HANDLE RESULT ERROR
-                async { downloadAsset("package" ,"package_main.zip") }.await()
-
-                delay(500)
-                val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
-                withContext(Dispatchers.Main) {
-                    if (dialog.isVisible) {
-                        dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
-                        dialog.setIndeterminate()
-                    }
-
-                }
-                context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
-
-                file.delete()
-                withContext(Dispatchers.Main) {
-                    if (dialog.isVisible) {
-                        dialog.setDone()
-
-                    }
-                    delay(1000)
-                    if (dialog.isVisible) {
-                        try {
-                            dialog.dismiss()
-                        } catch (_: IllegalStateException) {
-
+                var response: Result<String>? = null
+                async { response = downloadAsset("package" ,"package_main.zip") }.await()
+                response?.onSuccess {
+                    delay(500)
+                    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
+                    withContext(Dispatchers.Main) {
+                        if (dialog.isVisible) {
+                            dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                            dialog.setIndeterminate()
                         }
 
-
                     }
+                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
+
+                    file.delete()
+                    withContext(Dispatchers.Main) {
+                        if (dialog.isVisible) {
+                            dialog.setDone()
+
+                        }
+                        delay(1000)
+                        if (dialog.isVisible) {
+                            try {
+                                dialog.dismiss()
+                            } catch (_: IllegalStateException) {
+
+                            }
+
+
+                        }
+                    }
+                    listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
+                    listLawFromServer?.let { dataTapoDb.law().insertList(it) }
                 }
-                listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
-                listLawFromServer?.let { dataTapoDb.law().insertList(it) }
+                response?.onFailure {
+                    withContext(Dispatchers.Main) {
+                        dialogErrorDuringMainPackage()
+                    }
+
+                }
+                if (response == null) {
+                    withContext(Dispatchers.Main) {
+                        dialogErrorDuringMainPackage()
+                    }
+
+                }
+
             }
+            // force clear other package file
             val directory = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package")
             if (directory.isDirectory){
                 for (listFile in directory.listFiles()) {

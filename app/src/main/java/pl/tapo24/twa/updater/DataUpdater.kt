@@ -407,7 +407,7 @@ class DataUpdater(
             async { responseFromDb = tapoDb.tariffDb().getAll() }.await()
             val response = networkClient.getTariffData()
 
-            if (responseFromDb != null) {
+            if (responseFromDb?.isNotEmpty() == true) {
                 response.onSuccess { element ->
                     element.forEach {
                        val elementFind =  responseFromDb!!.find { element-> element.id == it.id }
