@@ -82,6 +82,18 @@ class HelpersFragment: Fragment() {
                 R.id.action_nav_helpers_to_nav_spbChose
             )
         }
+        binding.speedCalc.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_speedCalc
+            )
+        }
+        binding.alcoCalc.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_alcoholCalc
+            )
+        }
 
 
 

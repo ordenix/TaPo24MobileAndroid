@@ -7,11 +7,14 @@ import android.os.Environment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
+import org.acra.ACRA
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.Law
+import pl.tapo24.twa.exceptions.InternalException
+import pl.tapo24.twa.exceptions.InternalMessage
 import pl.tapo24.twa.infrastructure.NetworkClient
 import java.io.File
 import java.lang.IllegalStateException
@@ -71,7 +74,10 @@ class AssetUpdater(
 
 
 
-    private suspend fun downloadAsset(type: String, name: String) {
+    private suspend fun downloadAsset(type: String, name: String): Result<String> {
+        var downloadFinished: Boolean = false
+        var errorMessage: String =""
+        var isError: Boolean = false
         MainScope().async {
             // TODO: CHANGE IT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             val request = DownloadManager.Request(Uri.parse("https://develop.api3.tapo24.pl/api/data/resources/?type=$type&name=$name"))
@@ -100,15 +106,18 @@ class AssetUpdater(
             val downloadId: Long = downloadManager.enqueue(request)
             val q = DownloadManager.Query().setFilterById(downloadId)
 
-            var downloadFinished = false
+
             while (!downloadFinished) {
                 val cursor = downloadManager.query(q)
                 if (cursor.moveToFirst()) {
                     val colStatus = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
-
                     if (colStatus > 0) {
                         when (cursor.getInt(colStatus)) {
-                            DownloadManager.STATUS_FAILED -> {downloadFinished = true }
+                            DownloadManager.STATUS_FAILED -> {
+                                downloadFinished = true
+                                isError = true
+                                errorMessage = "STATUS_FAILED"
+                            }
                             DownloadManager.STATUS_PAUSED -> { }
                             DownloadManager.STATUS_PENDING -> { }
                             DownloadManager.STATUS_RUNNING -> {
@@ -144,21 +153,28 @@ class AssetUpdater(
                                 }
 
                                 downloadFinished = true
+                                errorMessage = "OK"
                             }
                         }
-
-
-
                     }
 
                 }  else {
                     downloadFinished = true
+                    errorMessage = "INTERNAL ERROR"
+                    isError = true
+                    ACRA.errorReporter.handleSilentException(InternalException(InternalMessage.InternalImpossibleState.message));
+
 
                 }
                 delay(10L)
                 cursor.close()
             }
         }.await()
+        if (isError) {
+           return Result.failure(InternalException(errorMessage))
+        }
+        return Result.success(errorMessage)
+
     }
 
     private fun getAssets() {
@@ -259,8 +275,12 @@ class AssetUpdater(
 
                             }
                         }
-                        async { downloadAsset(element.path , element.name) }.await()
-                        async { tapoDb.assetListDb().insert(element) }.await()
+                        var downloadResult: Result<String>? = null
+                        async { downloadResult = downloadAsset(element.path , element.name) }.await()
+                        downloadResult?.onSuccess {
+                            async { tapoDb.assetListDb().insert(element) }.await()
+                        }
+
 
                     }
                     // dialog.dismiss()
@@ -298,9 +318,10 @@ class AssetUpdater(
                     }
 
                 }
+                //TODO HANDLE RESULT ERROR
+                async { downloadAsset("package" ,"package_main.zip") }.await()
 
-                downloadAsset("package" ,"package_main.zip")
-                delay(100)
+                delay(500)
                 val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
                 withContext(Dispatchers.Main) {
                     if (dialog.isVisible) {

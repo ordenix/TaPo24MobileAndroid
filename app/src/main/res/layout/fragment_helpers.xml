@@ -335,10 +335,11 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
+                        android:background="@drawable/style_grid_element"
+
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/speedCalc">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -349,7 +350,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/gauge_high_solid"
                                 android:id="@+id/imageView83005"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>
@@ -393,10 +394,11 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
+                        android:background="@drawable/style_grid_element"
+
                         app:layout_columnWeight="1"
                         app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/alcoCalc">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -407,7 +409,7 @@
 
                         <ImageView
                                 android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
+                                android:layout_height="50dp" app:srcCompat="@drawable/calculator_solid"
                                 android:id="@+id/imageView83003"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"/>

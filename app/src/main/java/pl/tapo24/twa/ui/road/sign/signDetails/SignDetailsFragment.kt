@@ -121,14 +121,7 @@ class SignDetailsFragment : Fragment() {
 
     private fun showDialog() {
         dialogMore.item = viewModel.tariffDetail.value
-        //dialogMore.position = viewModel.positionToDialog
         dialogMore.show(childFragmentManager, "More")
-//        dialogMore.onAddFavClick = {
-//            viewModel.itemToDialog?.let { it1 -> viewModel.clickOnFavorites(it1, viewModel.positionToDialog) }
-//        }
-//        dialogMore.closeClick = {
-//            viewModel.showDialog.value = false
-//        }
     }
 
 

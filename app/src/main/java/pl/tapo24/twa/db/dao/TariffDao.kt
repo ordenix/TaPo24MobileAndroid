@@ -25,6 +25,8 @@ interface TariffDao {
     @Query("SELECT * FROM tariff  where sortOrder =:id and enginesType = 'old'")
     fun getBySortOrderOld(id: Int): Tariff
 
+    @Query("SELECT * FROM tariff where enginesType = :engine and maxSpeed >= :speed and minSpeed <= :speed")
+    fun getBySpeedAndEngine(speed: Int, engine: String): Tariff
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(tariff: Tariff)
 

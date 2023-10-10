@@ -138,19 +138,73 @@
 
 
 
-    <!--    Util-->
+    <!--    Util or to sort-->
     <string name="expand">Rozwiń</string>
     <string name="colapse">Zwiń</string>
     <string name="searchCountry">Wyszukaj kraj</string>
+    <string name="searchLaw">Wyszukaj plik</string>
     <string name="search">Wyszukaj</string>
+    <string name="searchCodeDrivingLimits">Wprowadź kod lub nazwę ograniczenia</string>
     <string name="back">Wstecz</string>
     <string name="viewLoading">Ładowanie widoku</string>
     <string name="pleaseWait">proszę czekać</string>
+    <string name="removeFav">Usuń z ulubionych</string>
+    <string name="addFav">Dodaj do ulubionych</string>
+    <string name="done">Gotowe</string>
     <string name="sign_desc">Opis znaku:</string>
     <string name="more">Więcej</string>
     <string name="roadSignDetails">Szczegóły znaku</string>
     <string name="tariff">Taryfikator:</string>
+    <string name="onlyFavsNotification">Silnik będzie ukazywać tylko ulubione wykroczenia</string>
+    <string name="allNotification">Silnik będzie wyszukiwać w wszystkich wykroczeniach</string>
+    <string name="tariff_help_search">Wyszukiwanie wykroczeń dotyczących znaków. Celem znalezienia interesującego wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 B-2 B-10. Nie należy wpisywać fraz takich jak: B10 B01 B-01
+    </string>
+    <string name="tariff_help_code">Wyszukiwanie wykroczeń \'po kodzie czynu\'. Celem znalezienia wykroczenia należy wpisać kod w formacie np. A02 A10. Nie należy wpisywać formatów takich jak: A010 A 11
+    </string>
+    <string name="tariff_help_two_type">Wyszukiwarka działa w dwóch trybach pierwszym online oraz drugim offline. Przełączenie trybu następuje automatycznie w zależności od dostępności sieci.
+    </string>
+    <string name="tariff_help_online">Tryb online wyszukuje zapomocą dynamicznego silnika wyszukiwaczego. Dopuszcza on wprowadzenie szukanej frazy w sposób niedokładny. Znalezienie wyników odbywa się za pomocą serii obliczeń matematycznych oraz wspomagania wyuczonym modelem AI. Wyszukiwanie następuje w całości wykroczenia- pod uwagę brane są wszystkie pola między innymi: nazwa, opis prawny kwota kod czynu. W tym trybie wpisanie słowa śnieg spowoduje znalezienie wykroczeń, które nie zawierają w żadnym polu frazy \'śnieg\' ale zmapowane są do wykroczeń sugerujących dane zachowanie np \'Kierowanie pojazdem, który nie jest utrzymana w należyty sposób\'. Silnik ten również dopuszcza przy wpisywaniu omyłki pisarskie takie jak pominięcie stosowania znaków diakrytycznych.
+    </string>
+    <string name="tariff_help_offline">Tryb offline wyszukuje* w sposób statyczny szukana jest dokładna fraza zawierająca się w nazwie wykroczenia. Wpisanie słowa śnieg nie zwróci żadnego wyniku. Wpisanie słowa błędnie np bez znaku diakrytycznego również nie zwróci wyniku
+    </string>
+    <string name="tariff_help_warning">*Uwaga. Celem poprawy działania silnika każde wyszukanie dynamiczne zapisuje w pamięci urządzenia zwracane wykroczenia przez dynamiczny silnik oraz wyświetla w momencie wyszukiwania jako historyczne wyszukanie (z ikoną zegara z lewej strony). Tak zapisane historyczne wyszukiwanie jest wykorzystane do wyszukiwania statycznego bez dostępu do sieci- w przypadku gdy dana fraza była już wyszukana zwracane są te wykroczenia. Zastosowanie takiego rozwiązania powoduje, że najczyściej wpisywane przez użytkownika frazy są dostępne w sposób \'dynamiczny\' bez dostępu do sieci
+    </string>
+    <string name="about_tariff_search">Informacje o wyszukiwarce:</string>
+    <string name="offline_work">Brak połączenia z siecią silnik wyszukiwarki będzie działał statycznie.</string>
     <string name="not_implemented">NOT IMPLEMENTED YET!!! :(</string>
+    <string name="enter_number">Wprowadź liczby np. przebieg</string>
+    <string name="enter_text">Wprowadź tekst</string>
+    <string name="enter_city_or_code">Wprowadź kod np 41-500, 41500 lub miasto</string>
+    <string name="error">Błąd</string>
+    <string name="ok">Ok</string>
+    <string name="enter_valid_postal_code">Wprowadź prawidłowy kod np 41-500, 41500</string>
+    <string name="wait_for_response">Poczekaj na odpowiedź z serwera</string>
+    <string name="enter_postal_code_hint">Wprowadź kod pocztowy</string>
+    <string name="adv">Zaawansowana</string>
+    <string name="simple">Prosta</string>
+    <string name="enter_city_hint">Wprowadź miasto</string>
+    <string name="postal_miej">Miejscowość:</string>
+    <string name="postal_gmina">Gmina:</string>
+    <string name="postal_powiat">Powiat:</string>
+    <string name="postal_woj">Wojewódźtwo:</string>
+    <string name="postal_code_list">Spis kodów:</string>
+    <string name="searchCode">Wyszukaj kod czynu lub nazwę</string>
+    <string name="prado">PRADO (autentycznosć dokumentów)</string>
+    <string name="id_verify">Weryfikacja dowodu osobistego</string>
+    <string name="verify_driving_licence_ue">Weryfikacja praw jazdy na terenie UE</string>
+    <string name="passport_verify">Weryfikacja paszportu</string>
+    <string name="enter_login_or_passwd">Wprowadź login lub hasło</string>
+    <string name="holdingDocumentsProofOfRegistrationOtherCountry">Zatrzymywanie dowodów rejestracyjnych zagranicznych
+    </string>
+    <string name="holdingDocumentsProofOfRegistration">Zatrzymywanie dowodów rejestracyjnych</string>
+    <string name="holdingDocumentsDrivingLicenceOtherCounty">Zatrzymywanie prawa jazdy zagranicznego</string>
+    <string name="holdingDocumentsDrivingLicence">Zatrzymywanie prawa jazdy</string>
+    <string name="search_description">Wyszukaj opis</string>
+    <string name="enter_speed_limit">Wprowadź ograniczenie prędkości</string>
+    <string name="enter_speed">Wprowadź prędkość</string>
+    <string name="calculate">Oblicz</string>
+    <string name="mg_l">Wprowadź wartość mg/l</string>
+    <string name="convert">Przelicz</string>
 
 
 </resources>

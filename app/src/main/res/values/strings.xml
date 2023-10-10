@@ -200,6 +200,11 @@
     <string name="holdingDocumentsDrivingLicenceOtherCounty">Zatrzymywanie prawa jazdy zagranicznego</string>
     <string name="holdingDocumentsDrivingLicence">Zatrzymywanie prawa jazdy</string>
     <string name="search_description">Wyszukaj opis</string>
+    <string name="enter_speed_limit">Wprowadź ograniczenie prędkości</string>
+    <string name="enter_speed">Wprowadź prędkość</string>
+    <string name="calculate">Oblicz</string>
+    <string name="mg_l">Wprowadź wartość mg/l</string>
+    <string name="convert">Przelicz</string>
 
 
 </resources>
