@@ -21,6 +21,8 @@ class SettingsFragment: Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private var context2: Context? = null
+    private var clickedOnInfo = false
+    private var clickedOnDevInfo = false
 
 
     override fun onCreateView(
@@ -83,12 +85,22 @@ class SettingsFragment: Fragment() {
             context2?.let { it1 -> settingsViewModel.getData(it1) }
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
+        binding.tvDevelop.setOnClickListener {
+            if (!clickedOnInfo) {
+                clickedOnDevInfo = true
+            }
 
-
-//        val textView: TextView = binding.textViewSetting
-//        settingsViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+         }
+        binding.tvInfo.setOnClickListener {
+            clickedOnInfo = true
+        }
+        binding.tvEnvir.setOnClickListener {
+            if (clickedOnDevInfo && clickedOnInfo) {
+                binding.radioButtonTest.isEnabled = true
+                binding.radioButtonFeature.isEnabled = true
+                Snackbar.make(it, "Gratulacje możesz dołączyć do zespołu Tapo24.pl ;)", Snackbar.LENGTH_LONG).show()
+            }
+        }
         return root
     }
 

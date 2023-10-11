@@ -162,10 +162,54 @@
         <item name="android:fontFamily">@font/itim</item>
 
     </style>
+    <style name="Widget.App.ButtonOrange" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/orange_tapo</item>
+        <item name="android:fontFamily">@font/itim</item>
+
+    </style>
 
     <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
+
+
+
+    <style name="Widget.App.Button.OutlinedButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.TextButton</item>
+        <item name="android:textAppearance">@style/TextAppearance.App.Button</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="android:textColor">@color/button_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorOnSurface"  >@color/white</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
+    </style>
+    <style name="ThemeOverlay.App.Button.TextButton" parent="ThemeOverlay.Material3.Button.TextButton">
+        <item name="colorOnContainer">@color/orange_tapo</item>
+    </style>
+    <style name="TextAppearance.App.Button" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/itim</item>
+
+        <item name="android:fontFamily">@font/itim</item>
+    </style>
+
+
+    <style name="Widget.App.Button.Orange" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Button.Orange</item>
+        <item name="android:textAppearance">@style/TextAppearance.App.Button</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="iconSize">24dp</item>
+        <item name="iconTint">@color/black</item>
+        <item name="colorOnSurface"  >@color/white</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Button.Orange" parent="ThemeOverlay.Material3.Button.TextButton">
+        <item name="colorContainer">@color/orange_tapo</item>
+    </style>
+
 
 </resources>

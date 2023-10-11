@@ -12,13 +12,16 @@ import pl.tapo24.twa.db.entity.*
         WhatsNews::class,
         Tariff::class,
         LastSearch::class,
-        AssetList::class
-    ], version = 4,
+        AssetList::class,
+        AppVersion::class
+    ], version = 6,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
         AutoMigration (from = 2, to = 3),
-        AutoMigration (from = 3, to = 4)
+        AutoMigration (from = 3, to = 4),
+        AutoMigration (from = 4, to = 5),
+        AutoMigration (from = 5, to = 6)
 
 
     ]
@@ -30,4 +33,6 @@ abstract class TapoDb: RoomDatabase() {
     abstract fun tariffDb(): TariffDao
     abstract fun  lastSearchDb(): LastSearchDao
     abstract fun assetListDb(): AssetListDao
+
+    abstract fun appVersionDb(): AppVersionDao
 }

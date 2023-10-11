@@ -1,20 +1,44 @@
 package pl.tapo24.twa.infrastructure
 
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
-import pl.tapo24.twa.dbData.entity.*
+import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.login.ToLoginData
+import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCodeSequence
+import pl.tapo24.twa.data.profile.BodyOffenses
+import pl.tapo24.twa.db.entity.AppVersion
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.db.entity.Tariff
+import pl.tapo24.twa.dbData.entity.*
+import pl.tapo24.twa.exceptions.HttpException
+import pl.tapo24.twa.exceptions.HttpMessage
 import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class NetworkClient(var url: String) {
 
     private val client: OkHttpClient = OkHttpClient.Builder().apply {
-
+        addInterceptor{
+                chain ->
+            val request = chain.request()
+            val response = chain.proceed(request)
+            if (response.code() == 401) {
+                println("ssss")
+            }
+            response
+        }
     }.build()
+//    val gson = GsonBuilder()
+//        .setLenient()
+//        .create()
+
+
+
 
 
     private var retro = Retrofit.Builder()
@@ -32,7 +56,10 @@ class NetworkClient(var url: String) {
             .client(client)
             .build()
         service = retro.create(InterfaceNetworkClient::class.java)
+
     }
+
+
 
     fun getUid(): Result<Uid> {
         try {
@@ -288,10 +315,145 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetAssetList.message))
     }
 
+    fun getAppVersionData(): Result<List<AppVersion>>{
+        try {
+            val response = service.getAppVersionData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetAppVersion.message))
+    }
+
+    fun getSpbData(): Result<List<Spb>>{
+        try {
+            val response = service.getSpbData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetSpb.message))
+    }
 
 
-    fun login() {
+    fun getPostalCodeSequenceByCity(city: String): Result<ResponseCodeSequence>{
+        try {
+            val response = service.getPostalCodeSequenceByCity(city).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }else if (response.code() == 404) {
+                return Result.failure(HttpException(HttpMessage.PostalCityNotFound.message))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
 
+    fun getPostalCityByCode(code: String): Result<ResponseCity>{
+        try {
+            val response = service.getPostalCityByCode(code).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }else if (response.code() == 404) {
+                return Result.failure(HttpException(HttpMessage.PostalCodeNotFound.message))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+
+
+    fun login(loginData: ToLoginData): Result<String> {
+        try {
+            val response = service.basicLogin(loginData).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                if (response.code() == 409 && errorMessage == "User not found") {
+                    // not found
+                    return Result.failure(HttpException(HttpMessage.WrongPasswordOrAccountNotFound.message))
+
+                }
+                else if (response.code() == 409 && errorMessage == "User was banned") {
+                    // baned
+                    return Result.failure(HttpException(HttpMessage.AccountWasBanned.message))
+
+                }
+                else if (response.code() == 409 && errorMessage == "User have not activated account") {
+                    // notActivated
+                    return Result.failure(HttpException(HttpMessage.AccountNotActivated.message))
+
+                }else if (response.code() == 409 && errorMessage == "User haven't confirmed email") {
+                    // not email confirm
+                    return Result.failure(HttpException(HttpMessage.AccountNotEmailConfirmed.message))
+
+                }
+                else if (response.code() == 401) {
+                    // wrong password
+                    return Result.failure(HttpException(HttpMessage.WrongPasswordOrAccountNotFound.message))
+                }
+            }
+
+
+
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalLogin.message))
+    }
+
+    fun checkValidToken(token: String): Result<String> {
+        try {
+            val response = service.checkValidToken("Bearer $token").execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            } else if (response.code() == 500) {
+                return Result.failure(HttpException(HttpMessage.TokenExpired.message))
+            }
+
+        }
+        catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalTestToken.message))
+    }
+
+    fun getFavoritesOffenses(token: String): Result<BodyOffenses> {
+        try {
+            val response = service.getFavoritesOffenses("Bearer $token").execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        }
+        catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalFavOffenseToken.message))
+    }
+
+    fun putFavoritesOffenses(token: String, data: BodyOffenses):Result<String> {
+        try {
+            val response = service.putFavoritesOffenses("Bearer $token", data).execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        }
+        catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalFavOffenseToken.message))
     }
 
 }

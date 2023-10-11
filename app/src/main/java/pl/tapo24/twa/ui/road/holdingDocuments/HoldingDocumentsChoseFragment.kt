@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentHoldingDocumentsChoseBinding
 
 class HoldingDocumentsChoseFragment : Fragment() {
@@ -23,6 +26,31 @@ class HoldingDocumentsChoseFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(HoldingDocumentsChoseViewModel::class.java)
         _binding = FragmentHoldingDocumentsChoseBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.holdingDocumentsProofOfRegistration.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_holdingDocumentsChose_to_holdingDocumentsFragment,
+                bundleOf("title" to "ZDR","type" to "proof_of_registration", "otherCountry" to false)
+            )
+        }
+        binding.holdingDocumentsProofOfRegistrationOther.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_holdingDocumentsChose_to_holdingDocumentsFragment,
+                bundleOf("title" to "ZDR zagraniczne","type" to "proof_of_registration", "otherCountry" to true)
+            )
+        }
+        binding.holdingDrivingLicence.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_holdingDocumentsChose_to_holdingDocumentsFragment,
+                bundleOf("title" to "ZPJ","type" to "driving_licence", "otherCountry" to false)
+            )
+        }
+        binding.holdingDrivingLicenceOther.setOnClickListener { view ->
+            view.findNavController().navigate(
+                R.id.action_nav_holdingDocumentsChose_to_holdingDocumentsFragment,
+                bundleOf("title" to "ZPJ zagraniczne","type" to "driving_licence", "otherCountry" to true)
+            )
+        }
         return root
     }
 

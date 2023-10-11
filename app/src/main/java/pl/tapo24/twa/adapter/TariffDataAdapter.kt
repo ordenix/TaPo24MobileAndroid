@@ -1,7 +1,9 @@
 package pl.tapo24.twa.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +15,7 @@ import pl.tapo24.twa.ui.tariff.TariffViewModel
 
 class TariffDataAdapter(
     var items: List<Tariff>,
-    var viewModel: TariffViewModel
+    var viewModel: TariffViewModel?
 
 ): RecyclerView.Adapter<TariffDataAdapter.TariffDataHolder>() {
     var onItemClick: ((Tariff) -> Unit)? = null
@@ -33,8 +35,9 @@ class TariffDataAdapter(
     }
     inner class TariffDataHolder(val binding: ViewDataBinding): RecyclerView.ViewHolder(binding.root) {
 //        val textView: TextView = view.findViewById(R.id.textView2)
-
+    private var onItemClickListener: ((View) -> Unit)? = null
         fun bind (item: Tariff, position: Int) {
+            binding.root.findViewById<ConstraintLayout>(R.id.ss).setOnClickListener(onItemClickListener)
             binding.setVariable(BR.data, item)
             binding.setVariable(BR.viewModel,viewModel)
             binding.setVariable(BR.position, position)

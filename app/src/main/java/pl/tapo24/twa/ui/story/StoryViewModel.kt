@@ -28,7 +28,9 @@ class StoryViewModel @Inject constructor(
             var dataFromDb: List<Story>? = null
             async { dataFromDb = dataTapoDb.story().getAllByType(storyType) }.await()
             withContext(Dispatchers.Main) {
-                data.value = dataFromDb!!
+                if (dataFromDb != null) {
+                    data.value = dataFromDb!!
+                }
             }
         }
 

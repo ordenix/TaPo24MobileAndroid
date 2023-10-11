@@ -81,7 +81,8 @@
         <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body</item>
 
         <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Widget.App.ButtonOrange</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.ButtonOrange</item>
     </style>
 
 </resources>

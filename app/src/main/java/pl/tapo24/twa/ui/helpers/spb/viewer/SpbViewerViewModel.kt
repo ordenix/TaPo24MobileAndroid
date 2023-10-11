@@ -1,4 +1,4 @@
-package pl.tapo24.twa.ui.law
+package pl.tapo24.twa.ui.helpers.spb.viewer
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,30 +8,29 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import pl.tapo24.twa.adapter.PdfAdapter
 import pl.tapo24.twa.dbData.DataTapoDb
-import pl.tapo24.twa.dbData.entity.Law
+import pl.tapo24.twa.dbData.entity.Spb
 import javax.inject.Inject
+
 @HiltViewModel
-
-class LawViewModel @Inject constructor(
+class SpbViewerViewModel @Inject constructor(
     private val dataTapoDb: DataTapoDb
-): ViewModel() {
-    val data = MutableLiveData<List<Law>>()
+) : ViewModel() {
+    val data: MutableLiveData<Spb> = MutableLiveData()
 
-    var searchText: String = ""
-    lateinit var adapter: PdfAdapter
+    fun getData(type: String) {
+        var listFromDb: Spb? = null
 
-    fun getData() {
         viewModelScope.launch(Dispatchers.IO) {
-            var dataFromDb: List<Law>? = null
-            async{dataFromDb = dataTapoDb.law().getAllByType("law")}.await()
+            async {listFromDb = dataTapoDb.spb().getSpbByType(type)}.await()
+
             withContext(Dispatchers.Main) {
-                if (dataFromDb != null) {
-                    data.value = dataFromDb!!
+                if (listFromDb != null) {
+                    data.value = listFromDb!!
                 }
             }
         }
     }
+
 
 }

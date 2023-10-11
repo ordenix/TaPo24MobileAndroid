@@ -3,6 +3,7 @@ package pl.tapo24.twa.ui.tariff
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.EnginesType
@@ -25,7 +26,8 @@ import javax.inject.Inject
 class TariffViewModel @Inject constructor(
     private val tapoDb: TapoDb,
     private val networkClient: NetworkClient,
-    private val networkClientElastic: NetworkClientElastic
+    private val networkClientElastic: NetworkClientElastic,
+    private val favouriteModule: FavouriteModule
 ) : ViewModel() {
 
     //val sss = tapoDb.tariffDb().getAll()
@@ -50,13 +52,25 @@ class TariffViewModel @Inject constructor(
     val querySuggestionList = MutableLiveData<DataQueryFromSuggestion?>()
 
 
+    fun saveShiftedItems() {
+        viewModelScope.launch(Dispatchers.IO) {
+            tariffDataAll.value!!.forEachIndexed { index, tariff ->
+                tariff.sortOrderFav = index
 
+            }
+            async { tapoDb.tariffDb().insertList(tariffDataAll.value!!) }.await()
+            withContext(Dispatchers.Main) {
+                tariffData.value = tariffDataAll.value
+            }
+            favouriteModule.performSendFavList()
+        }
+    }
 
     fun sendQuerySuggestion(suggestion: String) {
         viewModelScope.launch(Dispatchers.IO) {
             var responseBody: DataQueryFromSuggestion? =null
             val listLastSearch: MutableList<LastSearch> = mutableListOf()
-            if (State.internetStatus != 0) {
+            if (State.internetStatus.value != 0) {
                 async {
                     val body = DataQueryToSuggestion(suggestion)
                     val response = networkClientElastic.getSuggestionList(body)
@@ -168,7 +182,7 @@ class TariffViewModel @Inject constructor(
                     // other result
                     var docIdArray = listOf<String>()
                     var listTariffToPost = mutableListOf<Tariff>()
-                    if (State.internetStatus != 0) {
+                    if (State.internetStatus.value != 0) {
                         // filter online
 
                         async { docIdArray = sendQueryToElasticAndSave(queryText) }.await()
@@ -186,7 +200,7 @@ class TariffViewModel @Inject constructor(
                         }
 
                     }
-                    if (docIdArray.size > 1) {
+                    if (docIdArray.isNotEmpty()) {
 
                         docIdArray.forEach {
                             tariffDataAll.value?.find { element -> element.id == it }?.let { it1 ->
@@ -231,6 +245,7 @@ class TariffViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             async {tapoDb.tariffDb().insert(item) }
         }
+        favouriteModule.performSendFavList()
         adapter.notifyItemChanged(position)
     }
     fun changeFavState() {

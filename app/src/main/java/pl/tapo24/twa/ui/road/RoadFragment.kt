@@ -42,44 +42,52 @@ class RoadFragment: Fragment() {
         }
 
         binding.CategoryDrivingLicence.setOnClickListener {view->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_category_driving_licence
             )
         }
 
         binding.countryDrivingLicence.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_country_driving_licence
             )
         }
 
         binding.status.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_status
             )
         }
         binding.towing.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_towing
             )
         }
         binding.lights.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_lights
             )
         }
         binding.alcohol.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_alcohol
             )
         }
         binding.sign.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_sign
             )
         }
 
         binding.accident.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_story,
                 bundleOf("name" to "Kwalifikacja zdarzenia","storyType" to "accident")
@@ -87,20 +95,41 @@ class RoadFragment: Fragment() {
         }
 
         binding.uto.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_uto
             )
         }
 
         binding.CodeLimitsDrivingLicence.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_codeLimitsDrivingLicence
             )
         }
 
         binding.controlList.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
             view.findNavController().navigate(
                 R.id.action_nav_road_to_nav_controlList
+            )
+        }
+        binding.recidivism.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_recidivism
+            )
+        }
+        binding.codePoints.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_codePoints
+            )
+        }
+        binding.holdingDocuments.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_road_to_nav_holdingDocumentsChose
             )
         }
 //        binding.ll.performClick()

@@ -7,13 +7,17 @@ import android.os.Environment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
+import org.acra.ACRA
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.AssetList
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.Law
+import pl.tapo24.twa.exceptions.InternalException
+import pl.tapo24.twa.exceptions.InternalMessage
 import pl.tapo24.twa.infrastructure.NetworkClient
 import java.io.File
+import java.lang.IllegalStateException
 import kotlin.system.exitProcess
 
 class AssetUpdater(
@@ -30,13 +34,13 @@ class AssetUpdater(
         MainScope().launch(Dispatchers.IO) {
             var existAssetList = false
             async { existAssetList = tapoDb.assetListDb().exist() }.await()
-            if (State.internetStatus != 0) {
+            if (State.internetStatus.value != 0) {
                 // Network available
                 if (State.networkType == "All") {
                     // download because all
                     getAssets()
 
-                } else if (State.networkType == "WiFi" && State.internetStatus == 2) {
+                } else if (State.networkType == "WiFi" && State.internetStatus.value == 2) {
                     // download because condition valid uesr have network WiFi
                     getAssets()
                 } else if (!existAssetList) {
@@ -52,7 +56,20 @@ class AssetUpdater(
 
         }
     }
+    private fun dialogErrorDuringMainPackage() {
 
+        val dialogClose = MaterialAlertDialogBuilder(context)
+            .setTitle("UWAGA BŁĄD PRZY POBIERANIU GŁÓWNEJ PACZKI")
+            .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później (problem może być spowodowany niewystarczającą jakością połączenia z siecią), jeżeli się powtarza skontaktuj się z nami.")
+            .setCancelable(false)
+            .setPositiveButton("Zamknij") { dialog, which ->
+                exitProcess(0)
+
+            }
+            .show()
+
+
+    }
     private fun dialogCloseApp() {
 
         val dialogClose = MaterialAlertDialogBuilder(context)
@@ -70,7 +87,10 @@ class AssetUpdater(
 
 
 
-    private suspend fun downloadAsset(type: String, name: String) {
+    private suspend fun downloadAsset(type: String, name: String): Result<String> {
+        var downloadFinished: Boolean = false
+        var errorMessage: String =""
+        var isError: Boolean = false
         MainScope().async {
             // TODO: CHANGE IT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             val request = DownloadManager.Request(Uri.parse("https://develop.api3.tapo24.pl/api/data/resources/?type=$type&name=$name"))
@@ -99,15 +119,18 @@ class AssetUpdater(
             val downloadId: Long = downloadManager.enqueue(request)
             val q = DownloadManager.Query().setFilterById(downloadId)
 
-            var downloadFinished = false
+
             while (!downloadFinished) {
                 val cursor = downloadManager.query(q)
                 if (cursor.moveToFirst()) {
                     val colStatus = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
-
                     if (colStatus > 0) {
                         when (cursor.getInt(colStatus)) {
-                            DownloadManager.STATUS_FAILED -> {downloadFinished = true }
+                            DownloadManager.STATUS_FAILED -> {
+                                downloadFinished = true
+                                isError = true
+                                errorMessage = "STATUS_FAILED"
+                            }
                             DownloadManager.STATUS_PAUSED -> { }
                             DownloadManager.STATUS_PENDING -> { }
                             DownloadManager.STATUS_RUNNING -> {
@@ -118,7 +141,10 @@ class AssetUpdater(
                                     val downloadBytesL = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR)
                                     if (downloadBytesL > 0) {
                                         val downloadBytes = cursor.getLong(downloadBytesL)
-                                        val progres = (downloadBytes * 100 / totalBytes)
+                                        var progres: Long = 0
+                                        if (totalBytes > 0) {
+                                            progres = (downloadBytes * 100 / totalBytes)
+                                        }
                                         withContext(Dispatchers.Main ){
                                             if (dialog.isVisible) {
                                                 dialog.setProgres(progres.toInt())
@@ -140,21 +166,28 @@ class AssetUpdater(
                                 }
 
                                 downloadFinished = true
+                                errorMessage = "OK"
                             }
                         }
-
-
-
                     }
 
                 }  else {
                     downloadFinished = true
+                    errorMessage = "INTERNAL ERROR"
+                    isError = true
+                    ACRA.errorReporter.handleSilentException(InternalException(InternalMessage.InternalImpossibleState.message));
+
 
                 }
                 delay(10L)
                 cursor.close()
             }
         }.await()
+        if (isError) {
+           return Result.failure(InternalException(errorMessage))
+        }
+        return Result.success(errorMessage)
+
     }
 
     private fun getAssets() {
@@ -223,10 +256,14 @@ class AssetUpdater(
                         async { dataTapoDb.law().deleteElement(element) }.await()
                     }
                 }
-                if (dialog.isVisible) {
+                try {
                     dialog.dismiss()
+                } catch (_: Throwable) {
 
                 }
+
+
+
 
             }
 
@@ -251,8 +288,12 @@ class AssetUpdater(
 
                             }
                         }
-                        async { downloadAsset(element.path , element.name) }.await()
-                        async { tapoDb.assetListDb().insert(element) }.await()
+                        var downloadResult: Result<String>? = null
+                        async { downloadResult = downloadAsset(element.path , element.name) }.await()
+                        downloadResult?.onSuccess {
+                            async { tapoDb.assetListDb().insert(element) }.await()
+                        }
+
 
                     }
                     // dialog.dismiss()
@@ -290,36 +331,55 @@ class AssetUpdater(
                     }
 
                 }
+                var response: Result<String>? = null
+                async { response = downloadAsset("package" ,"package_main.zip") }.await()
+                response?.onSuccess {
+                    delay(500)
+                    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
+                    withContext(Dispatchers.Main) {
+                        if (dialog.isVisible) {
+                            dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                            dialog.setIndeterminate()
+                        }
 
-                downloadAsset("package" ,"package_main.zip")
-                delay(100)
-                val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
-                withContext(Dispatchers.Main) {
-                    if (dialog.isVisible) {
-                        dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
-                        dialog.setIndeterminate()
+                    }
+                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
+
+                    file.delete()
+                    withContext(Dispatchers.Main) {
+                        if (dialog.isVisible) {
+                            dialog.setDone()
+
+                        }
+                        delay(1000)
+                        if (dialog.isVisible) {
+                            try {
+                                dialog.dismiss()
+                            } catch (_: IllegalStateException) {
+
+                            }
+
+
+                        }
+                    }
+                    listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
+                    listLawFromServer?.let { dataTapoDb.law().insertList(it) }
+                }
+                response?.onFailure {
+                    withContext(Dispatchers.Main) {
+                        dialogErrorDuringMainPackage()
                     }
 
                 }
-                context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
-
-                file.delete()
-                withContext(Dispatchers.Main) {
-                    if (dialog.isVisible) {
-                        dialog.setDone()
+                if (response == null) {
+                    withContext(Dispatchers.Main) {
+                        dialogErrorDuringMainPackage()
                     }
+
                 }
 
-                delay(1000)
-                withContext(Dispatchers.Main) {
-                    if (dialog.isVisible) {
-                        dialog.dismiss()
-
-                    }
-                }
-                listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
-                listLawFromServer?.let { dataTapoDb.law().insertList(it) }
             }
+            // force clear other package file
             val directory = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package")
             if (directory.isDirectory){
                 for (listFile in directory.listFiles()) {

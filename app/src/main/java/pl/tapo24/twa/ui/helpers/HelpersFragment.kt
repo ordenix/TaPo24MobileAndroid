@@ -8,13 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentHelpersBinding
 
 class HelpersFragment: Fragment() {
     private var _binding: FragmentHelpersBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 
@@ -26,7 +25,7 @@ class HelpersFragment: Fragment() {
         val viewModelHelpers =
             ViewModelProvider(this).get(HelpersViewModel::class.java)
 
-        _binding = pl.tapo24.twa.databinding.FragmentHelpersBinding.inflate(inflater, container, false)
+        _binding = FragmentHelpersBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
@@ -47,12 +46,61 @@ class HelpersFragment: Fragment() {
 
         }
 
+        binding.note.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_note
+            )
+        }
+
+        binding.postalCode.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_postalCode
+            )
+        }
+
+        binding.pdfPattern.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_law_with_args
+            )
+
+        }
+
+        binding.validDocument.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_validDocument
+            )
+
+        }
+
+        binding.spb.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_spbChose
+            )
+        }
+        binding.speedCalc.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_speedCalc
+            )
+        }
+        binding.alcoCalc.setOnClickListener { view ->
+            requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+            view.findNavController().navigate(
+                R.id.action_nav_helpers_to_nav_alcoholCalc
+            )
+        }
+
 
 
         return root
     }
 
-    fun openLink(link: String) {
+    private fun openLink(link: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
         startActivity(intent)
     }

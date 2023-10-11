@@ -1,4 +1,4 @@
-package pl.tapo24.twa.ui.codePoints
+package pl.tapo24.twa.ui.helpers.dictionary
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -6,28 +6,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import pl.tapo24.twa.databinding.FragmentCodePointsBinding
+import pl.tapo24.twa.R
+import pl.tapo24.twa.databinding.FragmentDictionaryViewBinding
 
-class CodePointsFragment : Fragment() {
+class DictionaryViewFragment : Fragment() {
 
-    private var _binding: FragmentCodePointsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentDictionaryViewBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: CodePointsViewModel
+    private lateinit var viewModel: DictionaryViewViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(CodePointsViewModel::class.java)
-        _binding = FragmentCodePointsBinding.inflate(inflater, container, false)
+        _binding = FragmentDictionaryViewBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        viewModel = ViewModelProvider(this).get(DictionaryViewViewModel::class.java)
         return root
     }
-
 
 
     override fun onDestroyView() {

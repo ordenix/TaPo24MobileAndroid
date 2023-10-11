@@ -95,6 +95,9 @@ class SignDetailsFragment : Fragment() {
                 binding.tariffView.visibility = View.GONE
             }
         })
+        dialogMore.onAddFavClick = {
+            viewModel.tariffDetail.value?.let { viewModel.clickOnFavorites(it) }
+        }
 
         requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
         return root
@@ -118,14 +121,7 @@ class SignDetailsFragment : Fragment() {
 
     private fun showDialog() {
         dialogMore.item = viewModel.tariffDetail.value
-        //dialogMore.position = viewModel.positionToDialog
         dialogMore.show(childFragmentManager, "More")
-//        dialogMore.onAddFavClick = {
-//            viewModel.itemToDialog?.let { it1 -> viewModel.clickOnFavorites(it1, viewModel.positionToDialog) }
-//        }
-//        dialogMore.closeClick = {
-//            viewModel.showDialog.value = false
-//        }
     }
 
 

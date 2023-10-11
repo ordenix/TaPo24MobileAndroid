@@ -72,6 +72,12 @@ class MainActivity: AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     @Inject
+    lateinit var favouriteModule: FavouriteModule
+
+    @Inject
+    lateinit var sessionProvider: SessionProvider
+
+    @Inject
     lateinit var tapoDb: TapoDb
     
     @Inject
@@ -87,9 +93,11 @@ class MainActivity: AppCompatActivity() {
     private var downloadDataDialogClose = MutableLiveData<Boolean>(false)
     private var downloadText = MutableLiveData<String>("Proszę czekać")
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
-        State.internetStatus = CheckConnection().getConnectionType(applicationContext)
-        if (State.countChangeFragment > 10) {
+        State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
+        if (State.countChangeFragment > 10 && State.internetStatus.value != 0) {
             State.countChangeFragment  = 0
+            //SessionProvider(tapoDb,networkClient).restoreSession()
+            CheckVersion(tapoDb,networkClient,this).checkVersion()
             AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
         }
         State.countChangeFragment += 1
@@ -231,7 +239,7 @@ class MainActivity: AppCompatActivity() {
 
 
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
-       // AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getPDF()
+
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
             .setTitle("Wybór połączenia do aktualizacji danych")
             .setCancelable(false)
@@ -267,9 +275,28 @@ class MainActivity: AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        State.internetStatus = CheckConnection().getConnectionType(applicationContext)
+        State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
+        if (State.isLogin.value == false && !State.isSessionRestored) {
+            sessionProvider.restoreSession()
+        }
+        State.internetStatus.observe(this, Observer {
+            if (it != 0 ) {
+                // to do execute offline stacks
+                if (!State.isSessionConfirm && State.isLogin.value == true) {
+                    sessionProvider.restoreSession()
 
-            //Snackbar.make(binding.root, "Brak połączenia internetowego, nie można pobrać danych!!", Snackbar.LENGTH_LONG).show()
+                }
+                if (State.isLogin.value == true) {
+                    favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
+                }
+            }
+        })
+        State.isLogin.observe(this, Observer {
+            if (it && State.internetStatus.value != 0) {
+                favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
+            }
+        })
+
         val context = this
         MainScope().launch(Dispatchers.IO) {
            var settingNetwork: Setting? = null
@@ -287,13 +314,6 @@ class MainActivity: AppCompatActivity() {
            }
 
        }
-
-            //AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getPDF()
-            //Snackbar.make(binding.root, "Replace with your own action", Snackbar.LENGTH_LONG).show()
-
-
-
-
         setSupportActionBar(binding.appBarMain.toolbar)
 
         binding.appBarMain.fab.setOnClickListener { view ->
@@ -356,9 +376,16 @@ class MainActivity: AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
-        val sss = menu.findItem(R.id.action_settings)
-        test.observe(this, Observer {
-                sss.isVisible = !it
+        val menuLogin = menu.findItem(R.id.action_login)
+        val menuLogOut = menu.findItem(R.id.action_logout)
+        State.isLogin.observe(this, Observer {
+            if (it == true) {
+                menuLogOut.isVisible = true
+                menuLogin.isVisible = false
+            } else {
+                menuLogOut.isVisible = false
+                menuLogin.isVisible = true
+            }
         })
         return true
     }
@@ -373,10 +400,14 @@ class MainActivity: AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_about_application)
         }
-//        if (item.itemId == R.id.action_login) {
-//            val navController = findNavController(R.id.nav_host_fragment_content_main)
-//            navController.navigate(R.id.nav_login)
-//        }
+        if (item.itemId == R.id.action_login) {
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            navController.navigate(R.id.nav_login)
+        }
+        if (item.itemId == R.id.action_logout) {
+            sessionProvider.clearSession()
+            Snackbar.make(window.decorView.rootView, "Wylogowano z serwisu", Snackbar.LENGTH_LONG).show()
+        }
         return super.onOptionsItemSelected(item)
     }
 

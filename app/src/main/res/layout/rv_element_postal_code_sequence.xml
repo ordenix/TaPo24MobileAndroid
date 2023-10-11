@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content" android:layout_marginTop="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/style_orange_outline_container"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:paddingStart="10dp" android:paddingTop="10dp" android:paddingEnd="10dp"
+            android:paddingBottom="10dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/constraintLayout12">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/constraintLayout11" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+                    <TextView
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:text="@string/postal_miej"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView79"/>
+                    <TextView
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:text="@string/postal_gmina"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView81"/>
+                    <TextView
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:text="@string/postal_powiat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView83"/>
+                    <TextView
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:text="@string/postal_woj"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/textView82"/>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toEndOf="@+id/constraintLayout11"
+                    android:layout_marginStart="8dp">
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                >
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:maxLines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/rv_tv_msc"/>
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:maxLines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/rv_tv_gm"/>
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:maxLines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/rv_tv_pow"/>
+                    <TextView
+                            android:text="TextView"
+                            style="@style/textStyleWhiteSmallInContainer"
+                            android:maxLines="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" android:id="@+id/rv_tv_woj"/>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="10dp" app:layout_constraintTop_toBottomOf="@+id/textView78">
+            <TextView
+                    android:text="TextView"
+                    style="@style/textStyleWhiteSmallInContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/rv_left" android:layout_weight="1"/>
+            <TextView
+                    android:text="TextView"
+                    style="@style/textStyleWhiteSmallInContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/rv_right" android:layout_weight="1"/>
+        </LinearLayout>
+        <TextView
+                android:text="@string/postal_code_list"
+                style="@style/textStyleWhiteSmallInContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView78"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

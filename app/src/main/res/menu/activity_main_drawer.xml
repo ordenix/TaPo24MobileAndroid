@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+                android:id="@+id/nav_tariff"
+                android:icon="@drawable/book_open_reader_solid"
+                android:title="@string/menu_tariff"/>
+        <item
                 android:id="@+id/nav_home"
                 android:icon="@drawable/house_solid"
                 android:title="@string/menu_home"/>
@@ -12,10 +16,6 @@
                 android:id="@+id/nav_road"
                 android:icon="@drawable/road_solid"
                 android:title="@string/menu_road"/>
-        <item
-                android:id="@+id/nav_tariff"
-                android:icon="@drawable/book_open_reader_solid"
-                android:title="@string/menu_tariff"/>
         <item
                 android:id="@+id/nav_law"
                 android:icon="@drawable/gavel_solid"

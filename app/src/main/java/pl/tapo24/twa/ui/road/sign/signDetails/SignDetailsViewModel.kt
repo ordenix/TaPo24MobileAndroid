@@ -41,4 +41,11 @@ class SignDetailsViewModel @Inject constructor(
         }
 
     }
+
+    fun clickOnFavorites(item: Tariff) {
+        item.favorites = !item.favorites
+        viewModelScope.launch(Dispatchers.IO) {
+            async {tapoDb.tariffDb().insert(item) }
+        }
+    }
 }
