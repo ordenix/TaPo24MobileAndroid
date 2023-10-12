@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   style="@style/smallContainer"
+                                                   android:background="@color/second_tapo"
+                                                   android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/bell_solid"
+            android:id="@+id/imageView22"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/orange_tapo"
+            android:layout_marginTop="16dp"/>
+    <TextView
+            android:text="Bądź na bierząco!"
+            style="@style/textStyleWhiteInContainerCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView88"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView22"/>
+    <TextView
+            style="@style/textStyleWhiteInContainerCenter"
+            android:text="Aby nie przeoczyć, żadnych nowości związanych z naszą aplikacją zezwól na wysyłanie powiadaomień"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" android:id="@+id/textView89"
+            app:layout_constraintTop_toBottomOf="@+id/textView88" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"/>
+    <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp" app:srcCompat="@drawable/woman_news" android:id="@+id/imageView23"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView89"/>
+    <Button
+            android:text="Zezwól"
+            android:backgroundTint="@color/orange_tapo"
+            android:theme="@style/OrangeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/allow" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView23" android:layout_marginEnd="32dp"
+            android:layout_marginTop="32dp" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="32dp"/>
+    <Button
+            android:text="Pomiń"
+            android:textSize="10dp"
+            android:width="15dp"
+            android:height="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/skip"
+            app:layout_constraintTop_toBottomOf="@+id/imageView23" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp" android:layout_marginTop="32dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

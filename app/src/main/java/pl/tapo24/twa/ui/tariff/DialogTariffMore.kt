@@ -37,8 +37,10 @@ class DialogTariffMore: DialogFragment() {
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             // Landscape
             binding.sv2.layoutParams.height = 200
+            binding.scrollView2.layoutParams.height= 200
         } else {
             // Portrait
+            binding.scrollView2.layoutParams.height= 280
         }
         if (item !=null) {
             //binding  here
@@ -95,7 +97,7 @@ class DialogTariffMore: DialogFragment() {
         val dialog = dialog
         if (dialog != null) {
             val width = ViewGroup.LayoutParams.MATCH_PARENT
-            val height = ViewGroup.LayoutParams.MATCH_PARENT
+            val height = ViewGroup.LayoutParams.WRAP_CONTENT
             dialog.window!!.setLayout(width, height)
         }
     }

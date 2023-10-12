@@ -4,6 +4,7 @@ package pl.tapo24.twa
 import android.Manifest
 import android.R.attr.name
 import android.R.id
+import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
@@ -48,11 +49,14 @@ import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.ActivityMainBinding
+import pl.tapo24.twa.databinding.DialogNotifiicationRequestBinding
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.ui.tariff.DialogTariffHelp
 import pl.tapo24.twa.updater.AssetUpdater
+import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.utils.CheckConnection
 import javax.inject.Inject
@@ -88,10 +92,8 @@ class MainActivity: AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    var test = MutableLiveData<Boolean>(false)
+    val dialogNotification = DialogNotificationRequest()
 
-    private var downloadDataDialogClose = MutableLiveData<Boolean>(false)
-    private var downloadText = MutableLiveData<String>("Proszę czekać")
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
         if (State.countChangeFragment > 10 && State.internetStatus.value != 0) {
@@ -103,71 +105,142 @@ class MainActivity: AppCompatActivity() {
         State.countChangeFragment += 1
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1123) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // granted
+                createChannels()
+                saveInitNotification()
+            } else {
+                // not granted
+                saveInitNotification()
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
         super.onCreate(savedInstanceState)
         firebaseAnalytics = Firebase.analytics
-        firebaseAnalytics.setUserProperty("favorite_food2", "food")
-        firebaseAnalytics.setUserProperty("favorite_food", "food")
+//        firebaseAnalytics.setUserProperty("favorite_food2", "food")
+//        firebaseAnalytics.setUserProperty("favorite_food", "food")
        // FirebaseDatabase.getInstance().setPersistenceEnabled(false);
 
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create the NotificationChannel.
-            val name = "TEST"
-            val descriptionText =" getString(R.string.channel_description)"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val mChannel = NotificationChannel("CHANNEL_ID", name, importance)
-            mChannel.description = descriptionText
-            // Register the channel with the system. You can't change the importance
-            // or other notification behaviors after this.
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(mChannel)
+        //// START NOTIFICATION SECTION
+        val activity: Activity = this
+
+
+        MainScope().launch(Dispatchers.IO) {
+            var settingNotificationInitialize: Setting? = null
+            val settingAllowForNotification: Setting? = null
+            val settingAllowForChannelAdv: Setting? = null
+            async {
+                settingNotificationInitialize = tapoDb.settingDb().getSettingByName("NotificationInit")  }.await()
+
+            if (settingNotificationInitialize == null) {
+                // show dialog
+                withContext(Dispatchers.Main) {
+                    dialogNotification.show(supportFragmentManager, "dialog_Permissions")
+                    dialogNotification.allowClick = {
+                        dialogNotification.dismiss()
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                            ActivityCompat.requestPermissions(
+                                activity, arrayOf(
+                                    android.Manifest.permission.POST_NOTIFICATIONS
+                                ), 1123
+                            )
+                        } else {
+                            createChannels()
+                        }
+                    }
+                    dialogNotification.skipClick = {
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                            createChannels(true)
+                        }
+                        saveInitNotification()
+                        dialogNotification.dismiss()
+                    }
+                }
+
+            }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Create the NotificationChannel.
-            val name = "TEST2"
-            val descriptionText =" getString(R.string.channel_description)"
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val mChannel = NotificationChannel("CHANNEL_ID2", name, importance)
-            mChannel.description = descriptionText
-            // Register the channel with the system. You can't change the importance
-            // or other notification behaviors after this.
-            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(mChannel)
-            val ss = notificationManager.notificationChannels
-            println(ss)
-        }
+        // END NOTIFICATION SECTION
+
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            // Create the NotificationChannel.
+//            val name = "TEST"
+//            val descriptionText =" getString(R.string.channel_description)"
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val mChannel = NotificationChannel("CHANNEL_ID", name, importance)
+//            mChannel.description = descriptionText
+//            // Register the channel with the system. You can't change the importance
+//            // or other notification behaviors after this.
+//            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(mChannel)
+//        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//            // Create the NotificationChannel.
+//            val name = "TEST2"
+//            val descriptionText =" getString(R.string.channel_description)"
+//            val importance = NotificationManager.IMPORTANCE_DEFAULT
+//            val mChannel = NotificationChannel("CHANNEL_ID2", name, importance)
+//            mChannel.description = descriptionText
+//            // Register the channel with the system. You can't change the importance
+//            // or other notification behaviors after this.
+//            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+//            notificationManager.createNotificationChannel(mChannel)
+//            val ss = notificationManager.notificationChannels
+//            println(ss)
+//        }
+
+        //        ActivityCompat.requestPermissions(
+//            this, arrayOf(
+//                android.Manifest.permission.POST_NOTIFICATIONS
+//            ), 112
+//        )
 
 //        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
 //            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-//            putExtra(Settings.EXTRA_CHANNEL_ID, "CHANNEL_ID")
+//            putExtra(Settings.EXTRA_CHANNEL_ID, "fcm_fallback_notification_channel")
+//        }
+//        startActivity(intent)
+
+
+        // init notification
+
+
+
+
+
+
+
+//        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
+//            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+//            putExtra(Settings.EXTRA_CHANNEL_ID, "CHANNEL_ID2")
 //        }
 //        startActivity(intent)
 
 
 
-
-
-
-
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-               // Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log and toast
-            //Log.d(TAG, msg)
-            println(token)
-            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
-        })
+//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+//            if (!task.isSuccessful) {
+//               // Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+//                return@OnCompleteListener
+//            }
+//
+//            // Get new FCM registration token
+//            val token = task.result
+//
+//            // Log and toast
+//            //Log.d(TAG, msg)
+//            println(token)
+//            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+//        })
 //        firebaseAnalytics = Firebase.analytics
 //        val bundle = Bundle()
 //        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
@@ -427,6 +500,34 @@ class MainActivity: AppCompatActivity() {
         navController.removeOnDestinationChangedListener(listener)
         super.onPause()
 
+    }
+
+    private fun saveInitNotification() {
+        MainScope().launch(Dispatchers.IO){
+            val settingToInsert = Setting("NotificationInit","",0,state = true)
+            async { tapoDb.settingDb().insert(settingToInsert) }.await()
+        }
+    }
+
+    private fun createChannels(block: Boolean = false) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create the NotificationChannel.
+            val name = "Powiadomienia ogólne"
+            val descriptionText ="W tym kanale są przesyłane powiadomienia dotyczące aplikacji i jej nowości w funkcjonowaniu"
+            var importance = NotificationManager.IMPORTANCE_DEFAULT
+            if (block) {
+                importance = NotificationManager.IMPORTANCE_NONE
+            }
+            val mChannel = NotificationChannel("fcm_fallback_notification_channel", name, importance)
+            mChannel.description = descriptionText
+            // Register the channel with the system. You can't change the importance
+            // or other notification behaviors after this.
+            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(mChannel)
+
+//            val ss = notificationManager.notificationChannels
+//            println(ss)
+        }
     }
 
 }
