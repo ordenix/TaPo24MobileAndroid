@@ -30,6 +30,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -94,7 +95,19 @@ class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val dialogNotification = DialogNotificationRequest()
 
+    private var navController: NavController? = null
+
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
+
+        val fireBase = Firebase.analytics
+
+        val bundle = Bundle()
+        val currentFragmentClassName = (controller.currentDestination as FragmentNavigator.Destination).className
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, destination.label.toString())
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_CLASS, currentFragmentClassName)
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+        //fireBase.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
+
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
         if (State.countChangeFragment > 10 && State.internetStatus.value != 0) {
             State.countChangeFragment  = 0
@@ -123,7 +136,7 @@ class MainActivity: AppCompatActivity() {
 
 
         super.onCreate(savedInstanceState)
-        firebaseAnalytics = Firebase.analytics
+       // firebaseAnalytics = Firebase.analytics
 //        firebaseAnalytics.setUserProperty("favorite_food2", "food")
 //        firebaseAnalytics.setUserProperty("favorite_food", "food")
        // FirebaseDatabase.getInstance().setPersistenceEnabled(false);
@@ -395,7 +408,7 @@ class MainActivity: AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -403,8 +416,8 @@ class MainActivity: AppCompatActivity() {
                 R.id.nav_home, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers
             ), drawerLayout
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupActionBarWithNavController(navController!!, appBarConfiguration)
+        navView.setupWithNavController(navController!!)
 
         drawerLayout.addDrawerListener(object : DrawerListener {
             override fun onDrawerSlide(view: View, v: Float) {}
@@ -427,14 +440,14 @@ class MainActivity: AppCompatActivity() {
                     override fun onDrawerOpened(drawerView: View) {}
                     override fun onDrawerStateChanged(newState: Int) {}
                     override fun onDrawerClosed(drawerView: View) {
-                        navController.navigate(it.itemId)
+                        navController?.navigate(it.itemId)
                         drawerLayout.removeDrawerListener(this)
                     }
                 })
                 drawerLayout.closeDrawer(GravityCompat.START)
 
             } else {
-                navController.navigate(it.itemId)
+                navController?.navigate(it.itemId)
                 drawerLayout.closeDrawer(GravityCompat.START)
 
             }
@@ -528,6 +541,11 @@ class MainActivity: AppCompatActivity() {
 //            val ss = notificationManager.notificationChannels
 //            println(ss)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        navController?.removeOnDestinationChangedListener(listener)
     }
 
 }
