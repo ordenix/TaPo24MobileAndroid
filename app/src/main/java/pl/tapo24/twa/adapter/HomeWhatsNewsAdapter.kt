@@ -1,6 +1,8 @@
 package pl.tapo24.twa.adapter
 
 import android.icu.text.SimpleDateFormat
+import android.os.Build
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.twa.R
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.entity.WhatsNews
+import pl.tapo24.twa.utils.UlListBuilder
 import java.util.*
 
 class HomeWhatsNewsAdapter(
@@ -53,10 +56,18 @@ class HomeWhatsNewsAdapter(
 
 
             topic.text = item.title
-            p1.text = item.p1
-            p2.text = item.p2
-            p3.text = item.p3
-            p4.text = item.p4
+
+//            <p><strong><u><span style="color: rgb(0, 168, 133);">drgffg h s g</span></u></strong></p>
+
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                p4.text = (Html.fromHtml("<h2>Title</h2><br><p>Description here</p>", Html.FROM_HTML_MODE_COMPACT));
+//            } else {
+//                p4.text = (Html.fromHtml("<h2>Title</h2><br><p>Description here</p>"));
+//            }
+            p1.text = UlListBuilder().getTextDash(item.p1, false)
+            p2.text = UlListBuilder().getTextDash(item.p2)
+            p3.text = UlListBuilder().getTextDash(item.p3)
+            p4.text = UlListBuilder().getTextDash(item.p4)
             footerBold.text = item.footerBold
             footer.text = item.footer
             autor.text = item.author

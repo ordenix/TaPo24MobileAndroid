@@ -1,32 +1,26 @@
 package pl.tapo24.twa
 
 
-import android.Manifest
-import android.R.attr.name
-import android.R.id
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.GravityCompat
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.DrawerListener
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -35,27 +29,22 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.inappmessaging.FirebaseInAppMessaging
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.ActivityMainBinding
-import pl.tapo24.twa.databinding.DialogNotifiicationRequestBinding
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
-import pl.tapo24.twa.ui.tariff.DialogTariffHelp
 import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
@@ -168,6 +157,7 @@ class MainActivity: AppCompatActivity() {
                             )
                         } else {
                             createChannels()
+                            saveInitNotification()
                         }
                     }
                     dialogNotification.skipClick = {
@@ -238,7 +228,7 @@ class MainActivity: AppCompatActivity() {
 //        }
 //        startActivity(intent)
 
-
+/// TOKEEN
 
 //        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
 //            if (!task.isSuccessful) {
@@ -408,6 +398,31 @@ class MainActivity: AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewInstagram).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
+            intent.setPackage("com.instagram.android")
+
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
+                startActivity(intent2)
+
+            }
+        }
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewFacebook).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
+            intent.setPackage("com.facebook.katana")
+
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
+                startActivity(intent2)
+
+            }
+        }
+
         navController = findNavController(R.id.nav_host_fragment_content_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.

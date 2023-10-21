@@ -70,7 +70,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/versionName"/>
                     <TextView
-                            android:text="TextView"
+                            android:text="2023-10-21"
                             style="@style/textAboutApplicationRightCol"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" android:id="@+id/versionBase"/>
@@ -80,7 +80,7 @@
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent" android:visibility="gone">
                 <TextView
                         android:text="@string/vServer"
                         android:layout_width="match_parent"
@@ -136,7 +136,8 @@
                         app:iconSize="20dp"
                         android:backgroundTint="@color/orange_tapo"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        android:visibility="gone"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

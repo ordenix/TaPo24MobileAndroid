@@ -24,6 +24,7 @@ class AboutApplicationFragment: Fragment() {
     ): View {
         val viewModelAboutApplication =
             ViewModelProvider(this).get(AboutApplicationViewModel::class.java)
+        // TODO: uncoment in xml check update etc
 
         _binding = pl.tapo24.twa.databinding.FragmentAboutApplicationBinding.inflate(inflater, container, false)
         val root: View = binding.root

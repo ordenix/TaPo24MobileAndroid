@@ -29,7 +29,7 @@ class DialogTariffMore: DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+// todo: Category show and parse
         _binding = DialogTariffMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         dialog?.setCanceledOnTouchOutside(true)

@@ -34,7 +34,7 @@ class PostalCodeFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(PostalCodeViewModel::class.java)
         val root = binding.root
 
-
+// TODO: IMPLEMENT ADVANCE SEARCH
 
         val rv = binding.rv
         rv.layoutManager = LinearLayoutManager(activity)

@@ -74,6 +74,24 @@ class UlListBuilder {
         return ssb
     }
 
+    fun getTextDash(text: String?, forceFirst: Boolean = false): SpannableStringBuilder {
+        val ssb = SpannableStringBuilder()
+        if (text == null) return ssb
+        val array: List<String> = text.split("/n").toList()
+        if (array.size == 1 && !forceFirst) {
+            ssb.append(text.trimStart().replaceFirstChar{it.uppercase()})
+        } else {
+            array.forEach{
+                val ss = SpannableString("- ${it.trimStart().replaceFirstChar{it.uppercase()}}")
+                //ss.setSpan(BulletSpan(10), 0, it.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ssb.append(ss)
+                ssb.append("\n")
+
+            }
+        }
+        return ssb
+    }
+
 
 
     fun getSpannableTextListWithoutBullet(text: String?): SpannableStringBuilder {
