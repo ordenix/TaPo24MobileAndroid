@@ -94,6 +94,8 @@
               android:label="@string/register"
               tools:layout="@layout/fragment_register">
         <action android:id="@+id/action_nav_register_to_nav_login" app:destination="@id/nav_login"/>
+        <action android:id="@+id/action_nav_register_to_nav_error" app:destination="@id/nav_error"/>
+        <action android:id="@+id/action_nav_register_to_nav_success" app:destination="@id/nav_success"/>
     </fragment>
     <fragment android:id="@+id/nav_country_driving_licence"
               android:name="pl.tapo24.twa.ui.road.countryDrivingLicence.CountryDrivingLicenceFragment"
@@ -241,4 +243,14 @@
     <fragment android:id="@+id/nav_dictionaryView"
               android:name="pl.tapo24.twa.ui.helpers.dictionary.DictionaryViewFragment"
               android:label="fragment_dictionary_view" tools:layout="@layout/fragment_dictionary_view"/>
+    <fragment android:id="@+id/nav_error" android:name="pl.tapo24.twa.ui.statusForm.error.ErrorFragment"
+              android:label="fragment_error" tools:layout="@layout/fragment_error">
+        <argument android:name="errorDesc" app:argType="string"/>
+        <action android:id="@+id/action_nav_error_to_nav_home" app:destination="@id/nav_home"/>
+    </fragment>
+    <fragment android:id="@+id/nav_success" android:name="pl.tapo24.twa.ui.statusForm.success.SuccessFragment"
+              android:label="fragment_success" tools:layout="@layout/fragment_success">
+        <argument android:name="successDesc" app:argType="string"/>
+        <action android:id="@+id/action_nav_success_to_nav_home" app:destination="@id/nav_home"/>
+    </fragment>
 </navigation>

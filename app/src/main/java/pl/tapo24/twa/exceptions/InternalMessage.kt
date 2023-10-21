@@ -29,7 +29,7 @@ enum class InternalMessage(val message: String) {
     InternalTestToken("Internal exception during test token"),
     InternalFavOffenseToken("Internal exception during process favourite offense"),
     InternalGetSpb("Internal exception during get data Spb"),
-
+    InternalRegister("Internal exception during register"),
 
 
 

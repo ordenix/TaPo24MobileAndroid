@@ -1,6 +1,264 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+                                                   android:layout_height="match_parent"
+>
 
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/sv1">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                style="@style/smallContainer"
+                android:background="@drawable/style_small_container"
+                android:layout_height="wrap_content"
+        >
+
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/formLogin"
+                        app:startIconDrawable="@drawable/user_solid"
+                        style="@style/Widget.App.TextInputLayout"
+                        app:startIconTint="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enterLogin"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="16dp"
+                >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/inputLogin"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:text="Wprowadź login"
+                            style="@style/textStyleRedSmallInStart"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" android:id="@+id/inputLoginDesc"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/inputLoginDescIco"
+                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                            android:visibility="visible"/>
+                    <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" app:srcCompat="@drawable/triangle_exclamation_solid"
+                            android:id="@+id/inputLoginDescIco" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" android:visibility="visible"
+                            app:tint="@color/standard_red"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/formEmail"
+                        app:startIconDrawable="@drawable/user_solid"
+                        style="@style/Widget.App.TextInputLayout"
+                        app:startIconTint="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enterEmail"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/inputEmail"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:text="Wprowadź email"
+                            style="@style/textStyleRedSmallInStart"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" android:id="@+id/inputEmailDesc"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/inputEmailDescIco"
+                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                            android:visibility="visible"/>
+                    <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" app:srcCompat="@drawable/triangle_exclamation_solid"
+                            android:id="@+id/inputEmailDescIco" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" android:visibility="visible"
+                            app:tint="@color/standard_red"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/formPassword"
+                        app:startIconDrawable="@drawable/key_solid"
+                        style="@style/Widget.App.TextInputLayout"
+                        app:startIconTint="@color/white"
+                        app:endIconMode="password_toggle"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hintPassword"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:id="@+id/inputPassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:text="Wprowadź hasło"
+                            style="@style/textStyleRedSmallInStart"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" android:id="@+id/inputPasswordDesc"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/inputPasswordDescIco"
+                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                            android:visibility="visible"/>
+                    <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" app:srcCompat="@drawable/triangle_exclamation_solid"
+                            android:id="@+id/inputPasswordDescIco" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" android:visibility="visible"
+                            app:tint="@color/standard_red"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/formRePassword"
+                        app:startIconDrawable="@drawable/key_solid"
+                        style="@style/Widget.App.TextInputLayout"
+                        app:startIconTint="@color/white"
+
+                        app:endIconMode="password_toggle"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enterPassword"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPassword"
+                            android:id="@+id/inputRePassword"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:text="Powtórz hasło"
+                            style="@style/textStyleRedSmallInStart"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" android:id="@+id/inputRePasswordDesc"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/inputRePasswordDescIco"
+                            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp"
+                            android:visibility="gone"/>
+                    <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" app:srcCompat="@drawable/triangle_exclamation_solid"
+                            android:id="@+id/inputRePasswordDescIco" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" android:visibility="gone"
+                            app:tint="@color/standard_red"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <CheckBox
+                        style="@style/Widget.App.CheckBox"
+                        android:text="@string/acceptAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/allowAll"
+                        android:layout_gravity="center_horizontal" android:visibility="gone"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:visibility="gone" android:scrollbars="vertical"
+                        android:id="@+id/sv">
+                    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                                  android:orientation="vertical" app:layout_constraintTop_toTopOf="parent"
+                                  app:layout_constraintStart_toStartOf="parent"
+                                  app:layout_constraintEnd_toEndOf="parent">
+                        <CheckBox
+                                style="@style/Widget.App.CheckBox"
+                                android:text="@string/akceptMarketing"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:id="@+id/checkMarket"/>
+                        <TextView
+                                android:text="@string/acceptMarketningDesc"
+                                android:layout_width="match_parent"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:layout_height="wrap_content" android:id="@+id/textView90"/>
+                        <CheckBox
+                                style="@style/Widget.App.CheckBox"
+                                android:text="@string/acceptStatute"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:id="@+id/checkStautePolicy"/>
+                        <TextView
+                                android:text="@string/acceptStatuteDesc"
+                                style="@style/textStyleWhiteSmallInContainerCenter"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/textView91"/>
+                        <Button
+                                android:text="@string/statute"
+                                android:theme="@style/OrangeBtn"
+                                android:backgroundTint="@color/orange_tapo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/buttonStatute"/>
+                        <Button
+                                android:text="@string/policyPrivate"
+                                android:theme="@style/OrangeBtn"
+                                android:backgroundTint="@color/orange_tapo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" android:id="@+id/buttonPolicy"
+                        />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                        android:text="@string/acceptRequired"
+                        style="@style/textStyleWhiteSmallInContainerCenter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/info"
+                        android:visibility="gone"/>
+                <Button
+                        android:text="@string/registerIn"
+                        android:theme="@style/OrangeBtn"
+                        app:icon="@drawable/right_to_bracket_solid"
+                        app:iconSize="20dp"
+                        android:backgroundTint="@color/orange_tapo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/register" android:enabled="false"/>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

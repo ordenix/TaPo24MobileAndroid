@@ -112,7 +112,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
     fun clearSession() {
         State.isLogin.value = false
         State.premiumVersion = false
-        State.uid = ""
+        // State.uid = "" // TODO: SET TATE UID AND DB BY LOGIN UID
         State.userName = ""
         val settingToDb = Setting("jwtToken",)
         MainScope().launch(Dispatchers.IO) {

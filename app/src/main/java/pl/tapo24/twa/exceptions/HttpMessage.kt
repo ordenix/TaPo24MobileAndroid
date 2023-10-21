@@ -7,5 +7,7 @@ enum class HttpMessage(val message: String) {
     AccountWasBanned("Konto zbanowano"),
     AccountNotEmailConfirmed("Konto nie jest aktywowane"),
     WrongPasswordOrAccountNotFound("Błędny login lub hasło"),
-    TokenExpired("Token stracił ważność ")
+    TokenExpired("Token stracił ważność "),
+    LoginExistInService("Login jest już w użyciu, jeżeli uważasz to za błąd napisz do nas"),
+    EmailExistInService("Email jest już w użyciu, jeżeli uważasz to za błąd napisz do nas")
 }

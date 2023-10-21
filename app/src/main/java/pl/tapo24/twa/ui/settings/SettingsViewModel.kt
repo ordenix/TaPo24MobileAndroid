@@ -16,12 +16,14 @@ import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import javax.inject.Inject
 @HiltViewModel
 class SettingsViewModel@Inject constructor(
     private val tapoDb: TapoDb,
     private val networkClient: NetworkClient,
-    private val dataTapoDb: DataTapoDb
+    private val dataTapoDb: DataTapoDb,
+    private val networkClientRegister: NetworkClientRegister
 ) : ViewModel() {
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
@@ -41,6 +43,7 @@ class SettingsViewModel@Inject constructor(
     }
     fun getData(context: Context){
         environment.value?.let { networkClient.rebuild(it.url) }
+        environment.value?.let { networkClientRegister.rebuild(it.url) }
         val dataupdate = DataUpdater(tapoDb,dataTapoDb,networkClient,context)
         dataupdate.deleteData()
         dataupdate.getData()

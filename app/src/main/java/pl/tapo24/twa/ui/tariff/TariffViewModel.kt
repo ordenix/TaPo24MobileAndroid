@@ -252,7 +252,7 @@ class TariffViewModel @Inject constructor(
         checkFavourite.value = !checkFavourite.value!!
         viewModelScope.launch(Dispatchers.IO) {
             val setting: Setting = Setting("checkedFav","",0,checkFavourite.value!!)
-            tapoDb.settingDb().insert(setting)
+            //tapoDb.settingDb().insert(setting) TODO
             async { getAllTariffData() }.await()
             searchTariffData(queryTextInSearchBar.value.orEmpty())
         }

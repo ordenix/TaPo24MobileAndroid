@@ -205,6 +205,24 @@
     <string name="calculate">Oblicz</string>
     <string name="mg_l">Wprowadź wartość mg/l</string>
     <string name="convert">Przelicz</string>
+    <string name="enterLogin">Wprowadź login</string>
+    <string name="enterEmail">Wprowadź email</string>
+    <string name="enterPassword">Powtórz hasło</string>
+    <string name="acceptAll">Zaakceptuj wszystko</string>
+    <string name="akceptMarketing">Zaakceptuj zgody marketnigowe</string>
+    <string name="acceptStatute">Zaakceptuj regulamin oraz politykę prywatności*</string>
+    <string name="acceptMarketningDesc">Wyrażam zgodę na otrzymywanie informacji handlowych od Tapo24.pl dotyczących jej oferty oraz ofert jej partnerów biznesowych poprzez wiadomości typu push w aplikacji oraz z wykorzystaniem adresu email podanego w formularzu, a także zgodę na przetwarzanie moich danych osobowych w tym celu przez Tapo24.pl oraz w celach promocji, reklamy i badania rynku.</string>
+    <string name="acceptStatuteDesc">Wyrażam zgodę na przetwarzanie przez tapo24.pl danych osobowych podanych w formularzu. Podanie danych jest dobrowolne. Administratorem podanych przez Pana/ Panią danych osobowych jest administrator wyznaczony w zakładce kontakt. Pana/Pani dane będą przetwarzane w celach związanych z udzieleniem odpowiedzi, przedstawieniem oferty usług tapo24.pl oraz świadczeniem usług przez administratora danych. Przysługuje Panu/Pani prawo dostępu do treści swoich danych oraz ich poprawiania.</string>
+    <string name="acceptRequired">*Zgoda wymagana</string>
+    <string name="statute">Regulamin</string>
+    <string name="policyPrivate">Polityka prywatności</string>
+    <string name="registerIn">Zarejestruj się</string>
+    <string name="back_to_home">Przejdź na stronę główną</string>
+    <string name="if_again_writ_to_us">Jeżeli błąd się powtarza napisz do nas</string>
+    <string name="success">Sukces</string>
+    <string name="succesRegister">Poprawnie zarejestrowano użytkownika w systemie. Na podany email został wysłany link
+        do aktywacji konta.
+    </string>
 
 
 </resources>

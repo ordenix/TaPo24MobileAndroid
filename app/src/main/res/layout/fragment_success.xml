@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+    >
+
+        <TextView
+                android:textColor="@color/white"
+                android:text="@string/success"
+                style="@style/textStyleOrangeMediumWarpXl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView92"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:text="TextView"
+                android:textColor="@color/white"
+
+                style="@style/textStyleOrangeMediumWarpXl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/description"
+                app:layout_constraintTop_toBottomOf="@+id/textView92" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <ImageView
+                android:src="@drawable/check_solid"
+                android:layout_width="150dp"
+                android:layout_height="150dp" android:id="@+id/imageView24"
+                app:layout_constraintTop_toBottomOf="@+id/description"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:tint="@color/standard_green"/>
+
+        <Button
+                android:text="@string/back_to_home"
+                android:theme="@style/OrangeBtn"
+                app:icon="@drawable/house_solid"
+                app:iconSize="20dp"
+                android:backgroundTint="@color/orange_tapo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/go_home"
+                app:layout_constraintTop_toBottomOf="@+id/imageView24" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

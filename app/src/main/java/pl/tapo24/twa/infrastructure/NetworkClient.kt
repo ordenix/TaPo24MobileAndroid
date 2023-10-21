@@ -368,7 +368,7 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
     }
 
-
+    // login
 
     fun login(loginData: ToLoginData): Result<String> {
         try {
