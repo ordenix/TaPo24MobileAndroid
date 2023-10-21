@@ -17,8 +17,8 @@ android {
         applicationId "pl.tapo24.twa"
         minSdk 24
         targetSdk 33
-        versionCode 18
-        versionName "1.18"
+        versionCode 19
+        versionName "2.19"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {

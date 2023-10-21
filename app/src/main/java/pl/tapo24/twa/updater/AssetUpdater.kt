@@ -25,7 +25,7 @@ class AssetUpdater(
     val dataTapoDb: DataTapoDb,
     val networkClient: NetworkClient,
     val context: Context,
-    val childFragmentManager: FragmentManager
+    val childFragmentManager: FragmentManager?
 ) {
 
     private  val dialog = DialogDataUpdater()
@@ -218,7 +218,9 @@ class AssetUpdater(
                     if (element.version!! > (elementFromDb?.version ?: 0)) {
                         // download updatet or anew dd
                         if (!dialog.isVisible) {
-                            dialog.show(childFragmentManager, "Data")
+                            if (childFragmentManager != null) {
+                                dialog.show(childFragmentManager, "Data")
+                            }
                         }
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${element.fileName}")
                         // val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${element.type}/${element.fileName}")
@@ -241,7 +243,9 @@ class AssetUpdater(
                 listLaw?.forEach { element ->
                     if(listLawFromServer?.find { el -> el.id == element.id } == null) {
                         if (!dialog.isVisible) {
-                            dialog.show(childFragmentManager, "Data")
+                            if (childFragmentManager != null) {
+                                dialog.show(childFragmentManager, "Data")
+                            }
                         }
                         withContext(Dispatchers.Main) {
                             delay(10)
@@ -275,7 +279,9 @@ class AssetUpdater(
                     if (element.version > (elementFromDb?.version ?: 0)) {
                         // download updatet or anew dd
                         if (!dialog.isVisible) {
-                            dialog.show(childFragmentManager, "Data")
+                            if (childFragmentManager != null) {
+                                dialog.show(childFragmentManager, "Data")
+                            }
                         }
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.path}/${element.name}")
                         // val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${element.type}/${element.fileName}")
@@ -301,7 +307,9 @@ class AssetUpdater(
                 listAsset?.forEach { element ->
                     if(listAssetFromServer?.find { el -> el.id == element.id } == null) {
                         if (!dialog.isVisible) {
-                            dialog.show(childFragmentManager, "Data")
+                            if (childFragmentManager != null) {
+                                dialog.show(childFragmentManager, "Data")
+                            }
                         }
                         withContext(Dispatchers.Main) {
                             delay(10)
@@ -325,7 +333,9 @@ class AssetUpdater(
                 // downoload all because init
                 withContext(Dispatchers.Main) {
                     if (!dialog.isVisible) {
-                        dialog.show(childFragmentManager, "Data")
+                        if (childFragmentManager != null) {
+                            dialog.show(childFragmentManager, "Data")
+                        }
                         delay(10)
                         dialog.setBody("Pobieranie głównej paczki")
                     }

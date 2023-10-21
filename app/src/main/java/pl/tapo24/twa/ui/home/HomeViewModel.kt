@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
             // TODO: DELETE IT IN PRODUCITON
             async { list = tapoDb.whatsNewsDb().getAll() }.await()
             if (list.isEmpty()) {
-                val e1 = WhatsNews(1,1694172197, "Witamy w testowej aplikacji Tapo24", "Jest to wersja testowa aplikacji TaPo24. Zwracamy się z prośbą aby zgłaszać wszelkiego rodzaju błędy na email dev@tapo24.pl najlepiej dołączając zrzut ekranu", "Moduły na szaro są aktualnie nie działającymi i będą dodawane na bieżąco", "Do dodania moduły w pomocach oraz drodze, dodanie możliwości wyszukiwania po kategoriach oraz ulubionych w taryfikatorze. Dodanie możliwości logowania rejestracji etc. Dodanie wyszukiwarki offline w taryfikatorze. Dodanie wyszukiwania starych wykroczeń","","Dziękujemy za udział w testach", "", "Ordenix")
+                val e1 = WhatsNews(1,1694172197, "Witamy w aplikacji Tapo24 v2.0", "Jest to nowa rozwojowa wersja aplikacji TaPo24. Zwracamy się z prośbą aby zgłaszać wszelkiego rodzaju błędy podczas działania aplikacji na email kontakt@tapo24.pl najlepiej dołączając zrzut ekranu", "", "","","Dziękujemy, że jesteście z nami.", "", "Ordenix")
                 val e2 = WhatsNews(2,1688548351, "Co nowego?", "-dodano pierdoły", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
                 val e3 = WhatsNews(3,1688548351, "Co nowego?", "-dodano pierdoły1", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")
                 val e4 = WhatsNews(4,1688548351, "Co nowego?", "-dodano pierdoły2", "- i jeszcze poprawono wczesniejsze pierdoły", "","","Stopka nanan", "stopka zwykłą", "Ktoś napewno")

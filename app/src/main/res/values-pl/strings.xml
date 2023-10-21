@@ -36,7 +36,7 @@
     <string name="engine">Silnik wykroczeń:</string>
     <string name="before09">Przed wrześńiem 2022</string>
     <string name="after09">Po wrześniu 2022 (obecne)</string>
-    <string name="WarnEngine">Uwaga!! Zmiana silnika wpływa na wyświetlanie wykroczeń w całej aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian. Przeznaczona głównie dla osób prowadzących sprawy z przez zmiany przepisów. Wyłącznie wsparcia tej opcji planowane jest w 2025 roku</string>
+    <string name="WarnEngine">Zmiana silnika wpływa na wyświetlanie wykroczeń w aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian przepisów. Opcja ta przeznaczona jest głównie dla osób prowadzących czynności wyjaśniające sprzed zmiany przepisów. Dezaktywacja wsparcia tej funkcjonalności planowana jest w 2025 roku.</string>
     <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera! Jeżeli udało ci się zmienić gratulacje ;), lecz pamiętaj wszystkie środowiska poza produkcyjnym zawierają dane testowe</string>
 
 
@@ -155,30 +155,29 @@
     <string name="more">Więcej</string>
     <string name="roadSignDetails">Szczegóły znaku</string>
     <string name="tariff">Taryfikator:</string>
-    <string name="onlyFavsNotification">Silnik będzie ukazywać tylko ulubione wykroczenia</string>
-    <string name="allNotification">Silnik będzie wyszukiwać w wszystkich wykroczeniach</string>
-    <string name="tariff_help_search">Wyszukiwanie wykroczeń dotyczących znaków. Celem znalezienia interesującego wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 B-2 B-10. Nie należy wpisywać fraz takich jak: B10 B01 B-01
+    <string name="onlyFavsNotification">Silnik wyświetli tylko ulubione wykroczenia.</string>
+    <string name="allNotification">Wyszukiwanie we wszystkich wykroczeniach</string>
+    <string name="tariff_help_search">Wyszukiwanie wykroczeń związanych z niestosowaniem się do znaków drogowych. Celem odnalezienia interesującego nas wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 ; B-2 ; B-10. Nie należy wpisywać fraz takich jak: B10 ; B01; B-01.
     </string>
-    <string name="tariff_help_code">Wyszukiwanie wykroczeń \'po kodzie czynu\'. Celem znalezienia wykroczenia należy wpisać kod w formacie np. A02 A10. Nie należy wpisywać formatów takich jak: A010 A 11
+    <string name="tariff_help_code">Aby odnaleźć interesujące nas wykroczenia należy wpisać kod w formacie np. A02 ; A10. Nie należy wpisywać formatów takich jak: A010 ; A 11.
     </string>
-    <string name="tariff_help_two_type">Wyszukiwarka działa w dwóch trybach pierwszym online oraz drugim offline. Przełączenie trybu następuje automatycznie w zależności od dostępności sieci.
+    <string name="tariff_help_two_type">Wyszukiwarka działa w dwóch trybach. Pierwszy tryb - online oraz drugi - offline. Przełączenie trybu następuje automatycznie w zależności od dostępności sieci.</string>
+    <string name="tariff_help_online">W trybie „online” wyszukiwarka działa w sposób za dynamiczny. Dopuszcza on wprowadzenie szukanej frazy w sposób niedokładny. Odnalezienie wyników odbywa się za pomocą serii obliczeń matematycznych oraz wspomagane jest wyuczonym modelem AI. Po wpisaniu danej frazy silnik dokona sprawdzenia w każdym polu danego wykroczenia, pod uwagę brane są wszystkie pozycje między innymi: nazwa, kwalifikacja prawna, kwota czy kod czynu.
+        W tym trybie wpisanie słowa, np. śnieg spowoduje odnalezienie wykroczeń, które nie zawierają w żadnym polu frazy „śnieg” ale powiązane są z wykroczeniami sugerującymi dane zachowanie, n. „Kierowanie pojazdem, który nie jest utrzymany w należyty sposób”. Silnik dopuszcza również pominięcie znaków diakrytycznych (znaki miękkie).</string>
+    <string name="tariff_help_offline">W trybie „offline” wyszukiwarka działa w sposób statyczny. Wyszukiwana jest fraza znajdująca się w nazwie wykroczenia. Wpisanie słowa „śnieg” nie zwróci żadnego wyniku. Błędne wpisanie słowa, np. bez znaku diakrytycznego również nie zwróci żadnego wyniku.
     </string>
-    <string name="tariff_help_online">Tryb online wyszukuje zapomocą dynamicznego silnika wyszukiwaczego. Dopuszcza on wprowadzenie szukanej frazy w sposób niedokładny. Znalezienie wyników odbywa się za pomocą serii obliczeń matematycznych oraz wspomagania wyuczonym modelem AI. Wyszukiwanie następuje w całości wykroczenia- pod uwagę brane są wszystkie pola między innymi: nazwa, opis prawny kwota kod czynu. W tym trybie wpisanie słowa śnieg spowoduje znalezienie wykroczeń, które nie zawierają w żadnym polu frazy \'śnieg\' ale zmapowane są do wykroczeń sugerujących dane zachowanie np \'Kierowanie pojazdem, który nie jest utrzymana w należyty sposób\'. Silnik ten również dopuszcza przy wpisywaniu omyłki pisarskie takie jak pominięcie stosowania znaków diakrytycznych.
-    </string>
-    <string name="tariff_help_offline">Tryb offline wyszukuje* w sposób statyczny szukana jest dokładna fraza zawierająca się w nazwie wykroczenia. Wpisanie słowa śnieg nie zwróci żadnego wyniku. Wpisanie słowa błędnie np bez znaku diakrytycznego również nie zwróci wyniku
-    </string>
-    <string name="tariff_help_warning">*Uwaga. Celem poprawy działania silnika każde wyszukanie dynamiczne zapisuje w pamięci urządzenia zwracane wykroczenia przez dynamiczny silnik oraz wyświetla w momencie wyszukiwania jako historyczne wyszukanie (z ikoną zegara z lewej strony). Tak zapisane historyczne wyszukiwanie jest wykorzystane do wyszukiwania statycznego bez dostępu do sieci- w przypadku gdy dana fraza była już wyszukana zwracane są te wykroczenia. Zastosowanie takiego rozwiązania powoduje, że najczyściej wpisywane przez użytkownika frazy są dostępne w sposób \'dynamiczny\' bez dostępu do sieci
+    <string name="tariff_help_warning">Uwaga! Aby usprawnić działanie silnika każda pozycja wyszukana za pomocą silnika dynamicznego zapisywana będzie w pamięci urządzenia. Zapisane w ten sposób „wyszukiwanie historyczne” wykorzystanie będzie do wyszukiwania statycznego w trybie offline. Przykład: wpisanie słowa „śnieg” w trybie online spowoduje odnalezienie danego wykroczenia. Dzięki „zapisowi historycznemu” ponowne wpisanie słowa „śnieg” w trybie offline spowoduje odnalezienie tego samego wykroczenia.
     </string>
     <string name="about_tariff_search">Informacje o wyszukiwarce:</string>
-    <string name="offline_work">Brak połączenia z siecią silnik wyszukiwarki będzie działał statycznie.</string>
+    <string name="offline_work">Brak połączenia z siecią. Silnik wyszukiwarki będzie działał w trybie statycznym.</string>
     <string name="not_implemented">NOT IMPLEMENTED YET!!! :(</string>
-    <string name="enter_number">Wprowadź liczby np. przebieg</string>
+    <string name="enter_number">Wprowadź liczby np. przebieg.</string>
     <string name="enter_text">Wprowadź tekst</string>
-    <string name="enter_city_or_code">Wprowadź kod np 41-500, 41500 lub miasto</string>
+    <string name="enter_city_or_code">Wprowadź kod, np. 41-500, 41500 lub nazwę miasta.</string>
     <string name="error">Błąd</string>
     <string name="ok">Ok</string>
-    <string name="enter_valid_postal_code">Wprowadź prawidłowy kod np 41-500, 41500</string>
-    <string name="wait_for_response">Poczekaj na odpowiedź z serwera</string>
+    <string name="enter_valid_postal_code">Wprowadź prawidłowy kod, np. 41-500, 41500.</string>
+    <string name="wait_for_response">Poczekaj na odpowiedź z serwera.</string>
     <string name="enter_postal_code_hint">Wprowadź kod pocztowy</string>
     <string name="adv">Zaawansowana</string>
     <string name="simple">Prosta</string>
@@ -188,12 +187,12 @@
     <string name="postal_powiat">Powiat:</string>
     <string name="postal_woj">Wojewódźtwo:</string>
     <string name="postal_code_list">Spis kodów:</string>
-    <string name="searchCode">Wyszukaj kod czynu lub nazwę</string>
+    <string name="searchCode">Wyszukaj kod czynu lub nazwę naruszenia.</string>
     <string name="prado">PRADO (autentycznosć dokumentów)</string>
     <string name="id_verify">Weryfikacja dowodu osobistego</string>
     <string name="verify_driving_licence_ue">Weryfikacja praw jazdy na terenie UE</string>
     <string name="passport_verify">Weryfikacja paszportu</string>
-    <string name="enter_login_or_passwd">Wprowadź login lub hasło</string>
+    <string name="enter_login_or_passwd">Wprowadź login lub hasło.</string>
     <string name="holdingDocumentsProofOfRegistrationOtherCountry">Zatrzymywanie dowodów rejestracyjnych zagranicznych
     </string>
     <string name="holdingDocumentsProofOfRegistration">Zatrzymywanie dowodów rejestracyjnych</string>
@@ -205,6 +204,24 @@
     <string name="calculate">Oblicz</string>
     <string name="mg_l">Wprowadź wartość mg/l</string>
     <string name="convert">Przelicz</string>
+    <string name="enterLogin">Wprowadź login</string>
+    <string name="enterEmail">Wprowadź email</string>
+    <string name="enterPassword">Powtórz hasło</string>
+    <string name="acceptAll">Zaakceptuj wszystko</string>
+    <string name="akceptMarketing">Zaakceptuj zgody marketnigowe</string>
+    <string name="acceptStatute">Zaakceptuj regulamin oraz politykę prywatności*</string>
+    <string name="acceptMarketningDesc">Wyrażam zgodę na otrzymywanie informacji handlowych od Tapo24.pl dotyczących jej oferty oraz ofert jej partnerów biznesowych poprzez wiadomości typu push w aplikacji oraz z wykorzystaniem adresu email podanego w formularzu, a także zgodę na przetwarzanie moich danych osobowych w tym celu przez Tapo24.pl oraz w celach promocji, reklamy i badania rynku.</string>
+    <string name="acceptStatuteDesc">Wyrażam zgodę na przetwarzanie przez tapo24.pl danych osobowych podanych w formularzu. Podanie danych jest dobrowolne. Administratorem podanych przez Pana/ Panią danych osobowych jest administrator wyznaczony w zakładce kontakt. Pana/Pani dane będą przetwarzane w celach związanych z udzieleniem odpowiedzi, przedstawieniem oferty usług tapo24.pl oraz świadczeniem usług przez administratora danych. Przysługuje Panu/Pani prawo dostępu do treści swoich danych oraz ich poprawiania.</string>
+    <string name="acceptRequired">*Zgoda wymagana</string>
+    <string name="statute">Regulamin</string>
+    <string name="policyPrivate">Polityka prywatności</string>
+    <string name="registerIn">Zarejestruj się</string>
+    <string name="back_to_home">Przejdź na stronę główną</string>
+    <string name="if_again_writ_to_us">Jeżeli błąd się powtarza napisz do nas.</string>
+    <string name="success">Sukces</string>
+    <string name="succesRegister">Poprawnie zarejestrowano użytkownika w systemie. Na podany email został wysłany link
+        do aktywacji konta.
+    </string>
 
 
 </resources>

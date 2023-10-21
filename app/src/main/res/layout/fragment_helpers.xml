@@ -131,35 +131,35 @@
                                 app:layout_constraintStart_toStartOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
-                        app:layout_columnWeight="1"
-                        app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:background="@drawable/style_grid_element_disabled"-->
+<!--                        app:layout_columnWeight="1"-->
+<!--                        app:layout_rowWeight="1" android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">-->
 
-                        <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
-                                android:id="@+id/imageView83012"
-                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                        <TextView
-                                android:text="@string/payUs"
-                                style="@style/gridText"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView193012"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView83012"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"-->
+<!--                                android:id="@+id/imageView83012"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                        <TextView-->
+<!--                                android:text="@string/payUs"-->
+<!--                                style="@style/gridText"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:id="@+id/textView193012"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/imageView83012"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
@@ -276,35 +276,35 @@
                                 app:layout_constraintStart_toStartOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
-                        app:layout_columnWeight="1"
-                        app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:background="@drawable/style_grid_element_disabled"-->
+<!--                        app:layout_columnWeight="1"-->
+<!--                        app:layout_rowWeight="1" android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">-->
 
-                        <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
-                                android:id="@+id/imageView83007"
-                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                        <TextView
-                                android:text="@string/shop"
-                                style="@style/gridText"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView193007"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView83007"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"-->
+<!--                                android:id="@+id/imageView83007"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                        <TextView-->
+<!--                                android:text="@string/shop"-->
+<!--                                style="@style/gridText"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:id="@+id/textView193007"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/imageView83007"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:background="@drawable/style_grid_element"
                         app:layout_columnWeight="1"
@@ -423,93 +423,93 @@
                                 app:layout_constraintStart_toStartOf="parent"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
-                        app:layout_columnWeight="1"
-                        app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:background="@drawable/style_grid_element_disabled"-->
+<!--                        app:layout_columnWeight="1"-->
+<!--                        app:layout_rowWeight="1" android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">-->
 
-                        <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
-                                android:id="@+id/imageView83002"
-                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                        <TextView
-                                android:text="@string/blog"
-                                style="@style/gridText"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView193002"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView83002"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
-                        app:layout_columnWeight="1"
-                        app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                        <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"-->
+<!--                                android:id="@+id/imageView83002"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                        <TextView-->
+<!--                                android:text="@string/blog"-->
+<!--                                style="@style/gridText"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:id="@+id/textView193002"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/imageView83002"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:background="@drawable/style_grid_element_disabled"-->
+<!--                        app:layout_columnWeight="1"-->
+<!--                        app:layout_rowWeight="1" android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">-->
 
-                        <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
-                                android:id="@+id/imageView83001"
-                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                        <TextView
-                                android:text="@string/translator"
-                                style="@style/gridText"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView193001"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView83001"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.constraintlayout.widget.ConstraintLayout
-                        android:background="@drawable/style_grid_element_disabled"
-                        app:layout_columnWeight="1"
-                        app:layout_rowWeight="1" android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+<!--                        <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"-->
+<!--                                android:id="@+id/imageView83001"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                        <TextView-->
+<!--                                android:text="@string/translator"-->
+<!--                                style="@style/gridText"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:id="@+id/textView193001"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/imageView83001"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:background="@drawable/style_grid_element_disabled"-->
+<!--                        app:layout_columnWeight="1"-->
+<!--                        app:layout_rowWeight="1" android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content">-->
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"-->
+<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">-->
 
-                        <ImageView
-                                android:layout_width="50dp"
-                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"
-                                android:id="@+id/imageView831212"
-                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                        <TextView
-                                android:text="@string/healthCreator"
-                                style="@style/gridText"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView1931212"
-                                app:layout_constraintTop_toBottomOf="@+id/imageView831212"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"/>
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        <ImageView-->
+<!--                                android:layout_width="50dp"-->
+<!--                                android:layout_height="50dp" app:srcCompat="@drawable/book_solid"-->
+<!--                                android:id="@+id/imageView831212"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                        <TextView-->
+<!--                                android:text="@string/healthCreator"-->
+<!--                                style="@style/gridText"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:id="@+id/textView1931212"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/imageView831212"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"/>-->
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
             </androidx.gridlayout.widget.GridLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
