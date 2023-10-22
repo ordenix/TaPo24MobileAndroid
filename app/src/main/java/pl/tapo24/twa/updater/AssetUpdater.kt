@@ -335,9 +335,9 @@ class AssetUpdater(
                     if (!dialog.isVisible) {
                         if (childFragmentManager != null) {
                             dialog.show(childFragmentManager, "Data")
+                            delay(10)
+                            dialog.setBody("Pobieranie głównej paczki")
                         }
-                        delay(10)
-                        dialog.setBody("Pobieranie głównej paczki")
                     }
 
                 }
