@@ -353,27 +353,35 @@ class AssetUpdater(
                         }
 
                     }
-                    context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
+                    try {
+                        context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
 
-                    file.delete()
-                    withContext(Dispatchers.Main) {
-                        if (dialog.isVisible) {
-                            dialog.setDone()
-
-                        }
-                        delay(1000)
-                        if (dialog.isVisible) {
-                            try {
-                                dialog.dismiss()
-                            } catch (_: IllegalStateException) {
+                        file.delete()
+                        withContext(Dispatchers.Main) {
+                            if (dialog.isVisible) {
+                                dialog.setDone()
 
                             }
+                            delay(1000)
+                            if (dialog.isVisible) {
+                                try {
+                                    dialog.dismiss()
+                                } catch (_: IllegalStateException) {
+
+                                }
 
 
+                            }
+                        }
+                        listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
+                        listLawFromServer?.let { dataTapoDb.law().insertList(it) }
+                    } catch (ex: Throwable) {
+                        ACRA.errorReporter.handleSilentException(ex)
+                        withContext(Dispatchers.Main) {
+                            dialogErrorDuringMainPackage()
                         }
                     }
-                    listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
-                    listLawFromServer?.let { dataTapoDb.law().insertList(it) }
+
                 }
                 response?.onFailure {
                     withContext(Dispatchers.Main) {
