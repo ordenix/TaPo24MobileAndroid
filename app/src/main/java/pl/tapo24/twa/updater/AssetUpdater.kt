@@ -332,6 +332,7 @@ class AssetUpdater(
             } else {
                 // downoload all because init
                 withContext(Dispatchers.Main) {
+                    delay(10)
                     if (!dialog.isVisible) {
                         if (childFragmentManager != null) {
                             dialog.show(childFragmentManager, "Data")
@@ -385,13 +386,23 @@ class AssetUpdater(
                 }
                 response?.onFailure {
                     withContext(Dispatchers.Main) {
-                        dialogErrorDuringMainPackage()
+                        try {
+                            dialogErrorDuringMainPackage()
+
+                        } catch (ex: Throwable) {
+                            ACRA.errorReporter.handleSilentException(ex)
+                        }
                     }
 
                 }
                 if (response == null) {
                     withContext(Dispatchers.Main) {
-                        dialogErrorDuringMainPackage()
+                        try {
+                            dialogErrorDuringMainPackage()
+
+                        } catch (ex: Throwable) {
+                            ACRA.errorReporter.handleSilentException(ex)
+                        }
                     }
 
                 }

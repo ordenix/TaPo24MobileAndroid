@@ -3,6 +3,7 @@ package pl.tapo24.twa.updater
 import android.content.Context
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
+import org.acra.ACRA
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.dbData.DataTapoDb
@@ -179,7 +180,11 @@ class DataUpdater(
                 }
             }
             withContext(Dispatchers.Main) {
-                dialog.dismiss()
+                try {
+                    dialog.dismiss()
+                } catch (ex:Throwable) {
+                    ACRA.errorReporter.handleSilentException(ex)
+                }
             }
 
         }
