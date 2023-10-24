@@ -102,7 +102,9 @@ class MainActivity: AppCompatActivity() {
             State.countChangeFragment  = 0
             //SessionProvider(tapoDb,networkClient).restoreSession()
             CheckVersion(tapoDb,networkClient,this).checkVersion()
-            AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
+        // TODO: this comment is for test
+        // AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, supportFragmentManager).getAllData()
+
         }
         State.countChangeFragment += 1
     }
@@ -313,7 +315,6 @@ class MainActivity: AppCompatActivity() {
 
 
 
-
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
 
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
@@ -329,7 +330,7 @@ class MainActivity: AppCompatActivity() {
                     }.await()
                 }
                 State.networkType = "WiFi"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
 
 
             }
@@ -343,7 +344,7 @@ class MainActivity: AppCompatActivity() {
 
                 }
                 State.networkType = "All"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager).getAllData()
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
             }
             // Add customization options here
 
@@ -385,7 +386,7 @@ class MainActivity: AppCompatActivity() {
            } else {
                State.networkType = settingNetwork!!.value
                // DOWNOLOAD DATA
-               AssetUpdater(tapoDb,dataTapoDb,networkClient,context, context.supportFragmentManager).getAllData()
+               AssetUpdater(tapoDb,dataTapoDb,networkClient,context, context.supportFragmentManager, activity).getAllData()
 
            }
 

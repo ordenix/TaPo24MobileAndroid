@@ -80,7 +80,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             decodedData = Json.decodeFromString(decodedJwt)
             State.userName = decodedData.sub.toString()
             if (decodedData.role == "Admin" || decodedData.role ==  "Vip") {
-                State.premiumVersion = true
+                // TODO: MAT24-36 Wyszukiwarka listy kontrolnej
+                // State.premiumVersion = true
             } else {
                 // TODO UNCOMENT ABOVE
                 //State.premiumVersion = false

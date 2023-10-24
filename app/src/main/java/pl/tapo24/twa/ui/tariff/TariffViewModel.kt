@@ -151,10 +151,7 @@ class TariffViewModel @Inject constructor(
     }
 
     fun searchTariffData(queryText: String) {
-        // TODO
-        // add offline search
-        // first catch a rexex
-        // add filter category
+        // TODO MAT24-23 Rozbudowa wyszukiwarki w taryfikatorze
         viewModelScope.launch(Dispatchers.IO) {
             if (queryText.isNotEmpty()) {
                 if (RegexTariff().code(queryText)) {
@@ -228,6 +225,9 @@ class TariffViewModel @Inject constructor(
                     if (tariffDataAll.value?.isNotEmpty() == true) {
                         tariffData.value = tariffDataAll.value?.take(State.maxVisibleItem)
 
+                    } else {
+                        // MAT24-34 java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+                        tariffData.value = emptyList()
                     }
                 }
             }

@@ -21,7 +21,6 @@ class ErrorFragment : Fragment() {
     ): View {
         _binding = FragmentErrorBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ErrorViewModel::class.java)
-
         val root: View = binding.root
         binding.goHome.setOnClickListener {
             findNavController().navigate(

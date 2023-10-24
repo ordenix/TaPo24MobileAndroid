@@ -18,7 +18,7 @@ object State {
     const val versionName = BuildConfig.VERSION_NAME
     const val versionCode = BuildConfig.VERSION_CODE
 
-    var premiumVersion: Boolean = true
+    var premiumVersion: Boolean = false
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
     var isSessionConfirm: Boolean = false
     var isSessionRestored: Boolean = false

@@ -1,5 +1,6 @@
 package pl.tapo24.twa.updater
 
+import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
@@ -8,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import org.acra.ACRA
+import pl.tapo24.twa.MainActivity
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.AssetList
@@ -25,7 +27,8 @@ class AssetUpdater(
     val dataTapoDb: DataTapoDb,
     val networkClient: NetworkClient,
     val context: Context,
-    val childFragmentManager: FragmentManager?
+    val childFragmentManager: FragmentManager?,
+    val activity: Activity
 ) {
 
     private  val dialog = DialogDataUpdater()
@@ -57,17 +60,17 @@ class AssetUpdater(
         }
     }
     private fun dialogErrorDuringMainPackage() {
+        if (!activity.isFinishing){
+            val dialogClose = MaterialAlertDialogBuilder(context)
+                .setTitle("UWAGA BŁĄD PRZY POBIERANIU GŁÓWNEJ PACZKI")
+                .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później (problem może być spowodowany niewystarczającą jakością połączenia z siecią), jeżeli się powtarza skontaktuj się z nami.")
+                .setCancelable(false)
+                .setPositiveButton("Zamknij") { dialog, which ->
+                    exitProcess(0)
 
-        val dialogClose = MaterialAlertDialogBuilder(context)
-            .setTitle("UWAGA BŁĄD PRZY POBIERANIU GŁÓWNEJ PACZKI")
-            .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później (problem może być spowodowany niewystarczającą jakością połączenia z siecią), jeżeli się powtarza skontaktuj się z nami.")
-            .setCancelable(false)
-            .setPositiveButton("Zamknij") { dialog, which ->
-                exitProcess(0)
-
-            }
-            .show()
-
+                }
+                .show()
+        }
 
     }
     private fun dialogCloseApp() {
@@ -333,6 +336,7 @@ class AssetUpdater(
                 // downoload all because init
                 withContext(Dispatchers.Main) {
                     delay(10)
+                    // MAT24-35 java.lang.NullPointerException
                     if (!dialog.isVisible) {
                         if (childFragmentManager != null) {
                             dialog.show(childFragmentManager, "Data")

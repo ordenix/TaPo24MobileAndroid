@@ -420,6 +420,7 @@ class ControlListViewModel @Inject constructor(
         var isVisible = false
         when (point) {
             "A" -> {
+                // !State.premiumVersion
                 if ((item.standardLevelFaultsA1 != null && (!State.premiumVersion || item.standardNameA1?.contains(searchText, true) != false))
                     || (item.standardLevelFaultsA2 != null && (!State.premiumVersion || item.standardNameA2?.contains(searchText, true) != false)) ||
                     (item.standardLevelFaultsA3 != null && (!State.premiumVersion || item.standardNameA3?.contains(searchText, true) != false))) {
