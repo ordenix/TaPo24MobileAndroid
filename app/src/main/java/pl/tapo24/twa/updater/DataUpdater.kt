@@ -181,6 +181,8 @@ class DataUpdater(
             }
             withContext(Dispatchers.Main) {
                 try {
+                    //////////////////////////////////////////////////////
+                    // MAT24-37 java.lang.IllegalArgumentException: View=DecorView@73477fe[MainActivity] not attached to window manager
                     dialog.dismiss()
                 } catch (ex:Throwable) {
                     ACRA.errorReporter.handleSilentException(ex)

@@ -148,12 +148,15 @@ class AssetUpdater(
                                         if (totalBytes > 0) {
                                             progres = (downloadBytes * 100 / totalBytes)
                                         }
-                                        withContext(Dispatchers.Main ){
-                                            if (dialog.isVisible) {
-                                                dialog.setProgres(progres.toInt())
+                                        if (!activity.isFinishing) {
+                                            withContext(Dispatchers.Main ){
+                                                if (dialog.isVisible) {
+                                                    dialog.setProgres(progres.toInt())
 
+                                                }
                                             }
                                         }
+
 
                                         println(progres)
                                     }
@@ -161,12 +164,15 @@ class AssetUpdater(
 
                             }
                             DownloadManager.STATUS_SUCCESSFUL -> {
-                                withContext(Dispatchers.Main ){
-                                    if (dialog.isVisible) {
-                                        dialog.setProgres(100)
+                                if (!activity.isFinishing) {
+                                    withContext(Dispatchers.Main ){
+                                        if (dialog.isVisible) {
+                                            dialog.setProgres(100)
 
+                                        }
                                     }
                                 }
+
 
                                 downloadFinished = true
                                 errorMessage = "OK"
@@ -220,22 +226,28 @@ class AssetUpdater(
                     val elementFromDb = listLaw?.find { el -> el.id == element.id }
                     if (element.version!! > (elementFromDb?.version ?: 0)) {
                         // download updatet or anew dd
-                        if (!dialog.isVisible) {
-                            if (childFragmentManager != null) {
-                                dialog.show(childFragmentManager, "Data")
+
+                        if (!activity.isFinishing) {
+                            if (!dialog.isVisible) {
+                                if (childFragmentManager != null) {
+                                    dialog.show(childFragmentManager, "Data")
+                                }
                             }
                         }
+
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${element.fileName}")
                         // val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${element.type}/${element.fileName}")
                         file.delete()
+                        if (!activity.isFinishing) {
+                            withContext(Dispatchers.Main) {
+                                delay(10)
+                                if (dialog.isVisible) {
+                                    dialog.setBody("Pobieranie: ${element.name}")
 
-                        withContext(Dispatchers.Main) {
-                            delay(10)
-                            if (dialog.isVisible) {
-                                dialog.setBody("Pobieranie: ${element.name}")
-
+                                }
                             }
                         }
+
                         async { element.fileName?.let { downloadAsset("pdf" , it) } }.await()
 
                         async { dataTapoDb.law().insert(element) }.await()
@@ -245,19 +257,22 @@ class AssetUpdater(
                 }
                 listLaw?.forEach { element ->
                     if(listLawFromServer?.find { el -> el.id == element.id } == null) {
-                        if (!dialog.isVisible) {
-                            if (childFragmentManager != null) {
-                                dialog.show(childFragmentManager, "Data")
+                        if (!activity.isFinishing) {
+                            if (!dialog.isVisible) {
+                                if (childFragmentManager != null) {
+                                    dialog.show(childFragmentManager, "Data")
+                                }
                             }
-                        }
-                        withContext(Dispatchers.Main) {
-                            delay(10)
-                            if (dialog.isVisible) {
-                                dialog.setBody("Kasowanie starych plików")
-                                dialog.setIndeterminate()
-                            }
+                            withContext(Dispatchers.Main) {
+                                delay(10)
+                                if (dialog.isVisible) {
+                                    dialog.setBody("Kasowanie starych plików")
+                                    dialog.setIndeterminate()
+                                }
 
+                            }
                         }
+
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${element.fileName}")
                         file.delete()
                         async { dataTapoDb.law().deleteElement(element) }.await()
@@ -289,14 +304,16 @@ class AssetUpdater(
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.path}/${element.name}")
                         // val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${element.type}/${element.fileName}")
                         file.delete()
+                        if (!activity.isFinishing) {
+                            withContext(Dispatchers.Main) {
+                                delay(10)
+                                if (dialog.isVisible) {
+                                    dialog.setBody("Pobieranie: ${element.name}")
 
-                        withContext(Dispatchers.Main) {
-                            delay(10)
-                            if (dialog.isVisible) {
-                                dialog.setBody("Pobieranie: ${element.name}")
-
+                                }
                             }
                         }
+
                         var downloadResult: Result<String>? = null
                         async { downloadResult = downloadAsset(element.path , element.name) }.await()
                         downloadResult?.onSuccess {
@@ -309,19 +326,22 @@ class AssetUpdater(
                 }
                 listAsset?.forEach { element ->
                     if(listAssetFromServer?.find { el -> el.id == element.id } == null) {
-                        if (!dialog.isVisible) {
-                            if (childFragmentManager != null) {
-                                dialog.show(childFragmentManager, "Data")
+                        if (!activity.isFinishing) {
+                            if (!dialog.isVisible) {
+                                if (childFragmentManager != null) {
+                                    dialog.show(childFragmentManager, "Data")
+                                }
                             }
-                        }
-                        withContext(Dispatchers.Main) {
-                            delay(10)
-                            if (dialog.isVisible) {
-                                dialog.setBody("Kasowanie starych plików")
-                                dialog.setIndeterminate()
-                            }
+                            withContext(Dispatchers.Main) {
+                                delay(10)
+                                if (dialog.isVisible) {
+                                    dialog.setBody("Kasowanie starych plików")
+                                    dialog.setIndeterminate()
+                                }
 
+                            }
                         }
+
                         val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.path}/${element.name}")
                         file.delete()
                         async { tapoDb.assetListDb().deleteElement(element) }.await()
@@ -337,13 +357,17 @@ class AssetUpdater(
                 withContext(Dispatchers.Main) {
                     delay(10)
                     // MAT24-35 java.lang.NullPointerException
-                    if (!dialog.isVisible) {
-                        if (childFragmentManager != null) {
-                            dialog.show(childFragmentManager, "Data")
-                            delay(10)
-                            dialog.setBody("Pobieranie głównej paczki")
+                    if (!activity.isFinishing) {
+                        if (!dialog.isVisible) {
+                            if (childFragmentManager != null) {
+                                dialog.show(childFragmentManager, "Data")
+                                delay(10)
+                                // MAT24-35 java.lang.NullPointerException
+                                dialog.setBody("Pobieranie głównej paczki")
+                            }
                         }
                     }
+
 
                 }
                 var response: Result<String>? = null
@@ -351,33 +375,39 @@ class AssetUpdater(
                 response?.onSuccess {
                     delay(500)
                     val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
-                    withContext(Dispatchers.Main) {
-                        if (dialog.isVisible) {
-                            dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
-                            dialog.setIndeterminate()
-                        }
+                    if (!activity.isFinishing) {
+                        withContext(Dispatchers.Main) {
+                            if (dialog.isVisible) {
+                                dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                                dialog.setIndeterminate()
+                            }
 
+                        }
                     }
+
                     try {
                         context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
 
                         file.delete()
-                        withContext(Dispatchers.Main) {
-                            if (dialog.isVisible) {
-                                dialog.setDone()
-
-                            }
-                            delay(1000)
-                            if (dialog.isVisible) {
-                                try {
-                                    dialog.dismiss()
-                                } catch (_: IllegalStateException) {
+                        if (!activity.isFinishing) {
+                            withContext(Dispatchers.Main) {
+                                if (dialog.isVisible) {
+                                    dialog.setDone()
 
                                 }
+                                delay(1000)
+                                if (dialog.isVisible) {
+                                    try {
+                                        dialog.dismiss()
+                                    } catch (_: IllegalStateException) {
+
+                                    }
 
 
+                                }
                             }
                         }
+
                         listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
                         listLawFromServer?.let { dataTapoDb.law().insertList(it) }
                     } catch (ex: Throwable) {
