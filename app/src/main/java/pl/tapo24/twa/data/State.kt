@@ -29,6 +29,8 @@ object State {
     // CONFIG
     var maxVisibleItem: Int = 50
 
+    var downloadFinishId: Long = 0
+
 
 
 }

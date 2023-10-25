@@ -100,7 +100,7 @@ class AssetUpdater(
             request.setDescription("Plik $name jest w trakcie pobierania")
             request.allowScanningByMediaScanner()
             request.setTitle("Pobieranie pliku $name")
-            // request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+           // request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             //Set the local destination for the downloaded file to a path within the application's external files directory
             //Set the local destination for the downloaded file to a path within the application's external files directory
             //To Store file in External Public Directory use "setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName)"
@@ -184,6 +184,7 @@ class AssetUpdater(
                     downloadFinished = true
                     errorMessage = "INTERNAL ERROR"
                     isError = true
+                    ACRA.errorReporter.putCustomData("Event at ${System.currentTimeMillis()}", State.downloadFinishId.toString())
                     ACRA.errorReporter.handleSilentException(InternalException(InternalMessage.InternalImpossibleState.message));
 
 
@@ -242,7 +243,7 @@ class AssetUpdater(
                             withContext(Dispatchers.Main) {
                                 delay(10)
                                 if (dialog.isVisible) {
-                                    dialog.setBody("Pobieranie: ${element.name}")
+                                    dialog.body.value = ("Pobieranie: ${element.name}")
 
                                 }
                             }
@@ -266,7 +267,7 @@ class AssetUpdater(
                             withContext(Dispatchers.Main) {
                                 delay(10)
                                 if (dialog.isVisible) {
-                                    dialog.setBody("Kasowanie starych plików")
+                                    dialog.body.value = ("Kasowanie starych plików")
                                     dialog.setIndeterminate()
                                 }
 
@@ -308,7 +309,7 @@ class AssetUpdater(
                             withContext(Dispatchers.Main) {
                                 delay(10)
                                 if (dialog.isVisible) {
-                                    dialog.setBody("Pobieranie: ${element.name}")
+                                    dialog.body.value = ("Pobieranie: ${element.name}")
 
                                 }
                             }
@@ -335,7 +336,7 @@ class AssetUpdater(
                             withContext(Dispatchers.Main) {
                                 delay(10)
                                 if (dialog.isVisible) {
-                                    dialog.setBody("Kasowanie starych plików")
+                                    dialog.body.value = ("Kasowanie starych plików")
                                     dialog.setIndeterminate()
                                 }
 
@@ -363,7 +364,7 @@ class AssetUpdater(
                                 dialog.show(childFragmentManager, "Data")
                                 delay(10)
                                 // MAT24-35 java.lang.NullPointerException
-                                dialog.setBody("Pobieranie głównej paczki")
+                                dialog.body.value = ("Pobieranie głównej paczki")
                             }
                         }
                     }
@@ -374,11 +375,18 @@ class AssetUpdater(
                 async { response = downloadAsset("package" ,"package_main.zip") }.await()
                 response?.onSuccess {
                     delay(500)
+                    var steps = 0
+                    while (State.downloadFinishId == 0L && steps < 10) {
+                        delay(500)
+                        steps += 1
+                    }
+                    ACRA.errorReporter.putCustomData("Steps is ", steps.toString())
+                    ACRA.errorReporter.putCustomData("download id is ", State.downloadFinishId.toString())
                     val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
                     if (!activity.isFinishing) {
                         withContext(Dispatchers.Main) {
                             if (dialog.isVisible) {
-                                dialog.setBody("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                                dialog.body.value = ("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
                                 dialog.setIndeterminate()
                             }
 
