@@ -17,7 +17,7 @@
             app:tint="@color/orange_tapo"
             android:layout_marginTop="16dp"/>
     <TextView
-            android:text="Bądź na bieżąco!"
+            android:text="Bądź na bierząco!"
             style="@style/textStyleWhiteInContainerCenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/textView88"

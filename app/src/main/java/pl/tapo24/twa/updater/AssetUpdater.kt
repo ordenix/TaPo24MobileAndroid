@@ -229,7 +229,7 @@ class AssetUpdater(
 
                         if (!activity.isFinishing) {
                             if (!dialog.isVisible) {
-                                if (childFragmentManager != null) {
+                                if (childFragmentManager != null && !childFragmentManager.isDestroyed) {
                                     dialog.show(childFragmentManager, "Data")
                                 }
                             }
@@ -259,7 +259,7 @@ class AssetUpdater(
                     if(listLawFromServer?.find { el -> el.id == element.id } == null) {
                         if (!activity.isFinishing) {
                             if (!dialog.isVisible) {
-                                if (childFragmentManager != null) {
+                                if (childFragmentManager != null && !childFragmentManager.isDestroyed) {
                                     dialog.show(childFragmentManager, "Data")
                                 }
                             }
@@ -297,7 +297,7 @@ class AssetUpdater(
                     if (element.version > (elementFromDb?.version ?: 0)) {
                         // download updatet or anew dd
                         if (!dialog.isVisible) {
-                            if (childFragmentManager != null) {
+                            if (childFragmentManager != null && !childFragmentManager.isDestroyed) {
                                 dialog.show(childFragmentManager, "Data")
                             }
                         }
@@ -328,7 +328,7 @@ class AssetUpdater(
                     if(listAssetFromServer?.find { el -> el.id == element.id } == null) {
                         if (!activity.isFinishing) {
                             if (!dialog.isVisible) {
-                                if (childFragmentManager != null) {
+                                if (childFragmentManager != null && !childFragmentManager.isDestroyed) {
                                     dialog.show(childFragmentManager, "Data")
                                 }
                             }
@@ -359,7 +359,7 @@ class AssetUpdater(
                     // MAT24-35 java.lang.NullPointerException
                     if (!activity.isFinishing) {
                         if (!dialog.isVisible) {
-                            if (childFragmentManager != null) {
+                            if (childFragmentManager != null && !childFragmentManager.isDestroyed && !childFragmentManager.isStateSaved) {
                                 dialog.show(childFragmentManager, "Data")
                                 delay(10)
                                 // MAT24-35 java.lang.NullPointerException
@@ -384,34 +384,47 @@ class AssetUpdater(
 
                         }
                     }
+                    var countRetries: Int = 0
+                    var successExtract: Boolean = false
+                    var lastEx: Throwable? = null
+                    while (countRetries < 5 && !successExtract) {
+                        successExtract = true
+                        countRetries += 1
+                        try {
+                            context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
 
-                    try {
-                        context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
-
-                        file.delete()
-                        if (!activity.isFinishing) {
-                            withContext(Dispatchers.Main) {
-                                if (dialog.isVisible) {
-                                    dialog.setDone()
-
-                                }
-                                delay(1000)
-                                if (dialog.isVisible) {
-                                    try {
-                                        dialog.dismiss()
-                                    } catch (_: IllegalStateException) {
+                            file.delete()
+                            if (!activity.isFinishing) {
+                                withContext(Dispatchers.Main) {
+                                    if (dialog.isVisible) {
+                                        dialog.setDone()
 
                                     }
+                                    delay(1000)
+                                    if (dialog.isVisible) {
+                                        try {
+                                            dialog.dismiss()
+                                        } catch (_: IllegalStateException) {
+
+                                        }
 
 
+                                    }
                                 }
                             }
-                        }
 
-                        listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
-                        listLawFromServer?.let { dataTapoDb.law().insertList(it) }
-                    } catch (ex: Throwable) {
-                        ACRA.errorReporter.handleSilentException(ex)
+                            listAssetFromServer?.let { tapoDb.assetListDb().insertList(it) }
+                            listLawFromServer?.let { dataTapoDb.law().insertList(it) }
+                        } catch (ex: Throwable) {
+                            successExtract = false
+                            lastEx = ex
+
+
+                        }
+                        delay(5000)
+                    }
+                    if (!successExtract) {
+                        ACRA.errorReporter.handleSilentException(lastEx)
                         withContext(Dispatchers.Main) {
                             dialogErrorDuringMainPackage()
                         }
