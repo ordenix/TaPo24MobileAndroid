@@ -4,12 +4,14 @@ import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
+import android.os.StatFs
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import org.acra.ACRA
-import pl.tapo24.twa.MainActivity
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.AssetList
@@ -19,8 +21,8 @@ import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import pl.tapo24.twa.infrastructure.NetworkClient
 import java.io.File
-import java.lang.IllegalStateException
 import kotlin.system.exitProcess
+
 
 class AssetUpdater(
     val tapoDb: TapoDb,
@@ -62,8 +64,8 @@ class AssetUpdater(
     private fun dialogErrorDuringMainPackage() {
         if (!activity.isFinishing){
             val dialogClose = MaterialAlertDialogBuilder(context)
-                .setTitle("UWAGA BŁĄD PRZY POBIERANIU GŁÓWNEJ PACZKI")
-                .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później (problem może być spowodowany niewystarczającą jakością połączenia z siecią), jeżeli się powtarza skontaktuj się z nami.")
+                .setTitle("UWAGA, BŁĄD PODCZAS POBIERANIA GŁÓWNEJ PACZKI")
+                .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później. Do pobrania wymagane jest stabilne połączenie sieciowe. Jeżeli błąd się będzie się powtarzać skontaktuj się z nami pod adresem kontakt@tapo24.pl")
                 .setCancelable(false)
                 .setPositiveButton("Zamknij") { dialog, which ->
                     exitProcess(0)
@@ -73,6 +75,20 @@ class AssetUpdater(
         }
 
     }
+
+//    private fun dialogLowConnection() {
+//        if (!activity.isFinishing){
+//            val dialogClose = MaterialAlertDialogBuilder(context)
+//                .setTitle("UWAGA, BŁĄD PODCZAS POBIERANIA GŁÓWNEJ PACZKI")
+//                .setMessage("Niestety wystąpił błąd podczas pobierania głównej paczki. Spróbuj uruchomić aplikację później. Do pobrania wymagane jest stabilne połączenie sieciowe. Jeżeli błąd się będzie się powtarzać skontaktuj się z nami pod adresem kontakt@tapo24.pl")
+//                .setCancelable(false)
+//                .setPositiveButton("Zamknij") { dialog, which ->
+//                    exitProcess(0)
+//
+//                }
+//                .show()
+//        }
+//    }
     private fun dialogCloseApp() {
 
         val dialogClose = MaterialAlertDialogBuilder(context)
@@ -98,7 +114,6 @@ class AssetUpdater(
             // TODO: CHANGE IT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             val request = DownloadManager.Request(Uri.parse("https://develop.api3.tapo24.pl/api/data/resources/?type=$type&name=$name"))
             request.setDescription("Plik $name jest w trakcie pobierania")
-            request.allowScanningByMediaScanner()
             request.setTitle("Pobieranie pliku $name")
            // request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             //Set the local destination for the downloaded file to a path within the application's external files directory
@@ -116,13 +131,10 @@ class AssetUpdater(
             )
 
 
-
             val downloadManager = context.getSystemService(DownloadManager::class.java)!!
             // context.getSystemService(Context.DOWNLOAD_SERVICE)  as DownloadManager?
             val downloadId: Long = downloadManager.enqueue(request)
             val q = DownloadManager.Query().setFilterById(downloadId)
-
-
             while (!downloadFinished) {
                 val cursor = downloadManager.query(q)
                 if (cursor.moveToFirst()) {
@@ -176,16 +188,20 @@ class AssetUpdater(
 
                                 downloadFinished = true
                                 errorMessage = "OK"
+
                             }
                         }
                     }
-
+                    // file:///storage/emulated/0/Android/data/pl.tapo24.twa/files/Download/package/package_main.zip
                 }  else {
                     downloadFinished = true
                     errorMessage = "INTERNAL ERROR"
                     isError = true
-                    ACRA.errorReporter.putCustomData("Event at ${System.currentTimeMillis()}", State.downloadFinishId.toString())
-                    ACRA.errorReporter.handleSilentException(InternalException(InternalMessage.InternalImpossibleState.message));
+//                    withContext(Dispatchers.Main) {
+//                        dialogLowConnection()
+//                    }
+                    ACRA.errorReporter.putCustomData("Event at IMPOSSIBLE STATE DOWNLOADER${System.currentTimeMillis()}", State.downloadFinishId.toString())
+//                    ACRA.errorReporter.handleSilentException(InternalException(InternalMessage.InternalImpossibleState.message));
 
 
                 }
@@ -380,6 +396,21 @@ class AssetUpdater(
                         delay(500)
                         steps += 1
                     }
+
+                    val stat = StatFs(Environment.getExternalStorageDirectory().path)
+                    val bytesAvailable: Long
+                    bytesAvailable = if (Build.VERSION.SDK_INT >=
+                        Build.VERSION_CODES.JELLY_BEAN_MR2
+                    ) {
+                        stat.blockSizeLong * stat.availableBlocksLong
+                    } else {
+                        stat.blockSize.toLong() * stat.availableBlocks.toLong()
+                    }
+                    val megAvailable = bytesAvailable / (1024 * 1024)
+                    Log.e("", "Available MB : $megAvailable")
+
+
+                    ACRA.errorReporter.putCustomData("Free Space is: ", megAvailable.toString())
                     ACRA.errorReporter.putCustomData("Steps is ", steps.toString())
                     ACRA.errorReporter.putCustomData("download id is ", State.downloadFinishId.toString())
                     val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")

@@ -148,27 +148,30 @@ class MainActivity: AppCompatActivity() {
             if (settingNotificationInitialize == null) {
                 // show dialog
                 withContext(Dispatchers.Main) {
-                    dialogNotification.show(supportFragmentManager, "dialog_Permissions")
-                    dialogNotification.allowClick = {
-                        dialogNotification.dismiss()
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                            ActivityCompat.requestPermissions(
-                                activity, arrayOf(
-                                    android.Manifest.permission.POST_NOTIFICATIONS
-                                ), 1123
-                            )
-                        } else {
-                            createChannels()
+                    if (!supportFragmentManager.isDestroyed) {
+                        dialogNotification.show(supportFragmentManager, "dialog_Permissions")
+                        dialogNotification.allowClick = {
+                            dialogNotification.dismiss()
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                                ActivityCompat.requestPermissions(
+                                    activity, arrayOf(
+                                        android.Manifest.permission.POST_NOTIFICATIONS
+                                    ), 1123
+                                )
+                            } else {
+                                createChannels()
+                                saveInitNotification()
+                            }
+                        }
+                        dialogNotification.skipClick = {
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                                createChannels(true)
+                            }
                             saveInitNotification()
+                            dialogNotification.dismiss()
                         }
                     }
-                    dialogNotification.skipClick = {
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                            createChannels(true)
-                        }
-                        saveInitNotification()
-                        dialogNotification.dismiss()
-                    }
+
                 }
 
             }
@@ -244,7 +247,7 @@ class MainActivity: AppCompatActivity() {
 //            // Log and toast
 //            //Log.d(TAG, msg)
 //            println(token)
-//            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+//           // Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
 //        })
 //        firebaseAnalytics = Firebase.analytics
 //        val bundle = Bundle()
@@ -330,7 +333,7 @@ class MainActivity: AppCompatActivity() {
                     }.await()
                 }
                 State.networkType = "WiFi"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, this.supportFragmentManager, activity).getAllData()
 
 
             }
@@ -344,7 +347,7 @@ class MainActivity: AppCompatActivity() {
 
                 }
                 State.networkType = "All"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, this.supportFragmentManager, activity).getAllData()
             }
             // Add customization options here
 

@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentUtoComponentBinding
 import pl.tapo24.twa.utils.UlListBuilder
 import pl.tapo24.twa.ui.road.uto.utoComponent.UtoComponentFragmentArgs
+import kotlin.system.exitProcess
 
 @AndroidEntryPoint
 class UtoComponentFragment : Fragment() {
@@ -31,7 +33,23 @@ class UtoComponentFragment : Fragment() {
         _binding = FragmentUtoComponentBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val args = arguments?.let { UtoComponentFragmentArgs.fromBundle(it) }
+        viewModel.errorNullData.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                val dialogClose = MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("UWAGA BRAK DANYCH")
+                    .setMessage("Nie pobrano wcześniej wymaganych danych, w związku z tym korzystanie z tego modułu nie jest możliwe. Spróbuj uruchomić aplikację ponownie, wyczyścić pamięć aplikacji lub ją przeinstalować. Jeżeli błąd się będzie się powtarzać skontaktuj się z nami pod adresem kontakt@tapo24.pl")
+                    .setCancelable(false)
+                    .setPositiveButton("Zamknij") { dialog, which ->
+                        exitProcess(0)
+
+                    }
+                    .show()
+            }
+
+        })
+
         viewModel.getData(args!!.id)
+
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             if (it != null){

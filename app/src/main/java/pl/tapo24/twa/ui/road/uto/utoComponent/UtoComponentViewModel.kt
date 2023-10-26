@@ -25,16 +25,25 @@ class UtoComponentViewModel @Inject constructor(
     val expandProhibition = MutableLiveData(false)
     val expandBehavior = MutableLiveData(false)
     val expandStop = MutableLiveData(false)
-
+    val errorNullData = MutableLiveData(false)
 
     fun getData(id: Int) {
         //ACRA.errorReporter.putCustomData("myKey", "myValue")
         viewModelScope.launch(Dispatchers.IO){
             var dataFromDb: Uto? = null
             async { dataFromDb = dataTapoDb.uto().getById(id) }.await()
-            withContext(Dispatchers.Main) {
-                data.value = dataFromDb!!
+            if (dataFromDb == null) {
+                // error
+                withContext(Dispatchers.Main) {
+                    errorNullData.value = true
+                }
+
+            } else {
+                withContext(Dispatchers.Main) {
+                    data.value = dataFromDb!!
+                }
             }
+
         }
     }
 

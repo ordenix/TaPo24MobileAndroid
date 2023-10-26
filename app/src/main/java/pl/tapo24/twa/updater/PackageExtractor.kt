@@ -1,6 +1,8 @@
 package pl.tapo24.twa.updater
 
 import android.os.Environment
+import org.acra.ACRA
+import pl.tapo24.twa.data.State
 import java.io.BufferedOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -11,6 +13,7 @@ object PackageExtractor {
 
 
     fun unzip( path: String, file: File){
+        ACRA.errorReporter.putCustomData("Start extractor ${System.currentTimeMillis()}", "Started")
         File(path).run {
             if (!exists()) {
                 mkdirs()
