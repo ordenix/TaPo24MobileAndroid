@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import pl.tapo24.twa.BuildConfig
 
 object State {
+    var startDownloadMainPackage: Boolean = false
     var countChangeFragment = 0
 
     var environmentType: EnvironmentType = EnvironmentType.Master

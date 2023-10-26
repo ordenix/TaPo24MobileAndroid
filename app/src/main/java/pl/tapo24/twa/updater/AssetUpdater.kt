@@ -3,6 +3,7 @@ package pl.tapo24.twa.updater
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
@@ -370,6 +371,7 @@ class AssetUpdater(
                 }
 
             } else {
+                activity.requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
                 // downoload all because init
                 withContext(Dispatchers.Main) {
                     delay(10)
@@ -388,7 +390,7 @@ class AssetUpdater(
 
                 }
                 var response: Result<String>? = null
-                async { response = downloadAsset("package" ,"package_main.zip") }.await()
+                async { response = downloadAsset("package", "package_main.zip") }.await()
                 response?.onSuccess {
                     delay(500)
                     var steps = 0
@@ -413,11 +415,15 @@ class AssetUpdater(
                     ACRA.errorReporter.putCustomData("Free Space is: ", megAvailable.toString())
                     ACRA.errorReporter.putCustomData("Steps is ", steps.toString())
                     ACRA.errorReporter.putCustomData("download id is ", State.downloadFinishId.toString())
-                    val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
+                    val file = File(
+                        context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                        "package/package_main.zip"
+                    )
                     if (!activity.isFinishing) {
                         withContext(Dispatchers.Main) {
                             if (dialog.isVisible) {
-                                dialog.body.value = ("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                                dialog.body.value =
+                                    ("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
                                 dialog.setIndeterminate()
                             }
 
@@ -430,7 +436,8 @@ class AssetUpdater(
                         successExtract = true
                         countRetries += 1
                         try {
-                            context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
+                            context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+                                ?.toURI()?.path?.let { PackageExtractor.unzip(it, file) }
 
                             file.delete()
                             if (!activity.isFinishing) {
@@ -443,8 +450,8 @@ class AssetUpdater(
                                     if (dialog.isVisible) {
                                         try {
                                             dialog.dismiss()
-                                        } catch (_: IllegalStateException) {
-
+                                        } catch (ex: IllegalStateException) {
+                                            ACRA.errorReporter.handleSilentException(ex)
                                         }
 
 
@@ -493,15 +500,18 @@ class AssetUpdater(
 
                 }
 
-            }
-            // force clear other package file
-            val directory = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package")
-            if (directory.isDirectory){
-                for (listFile in directory.listFiles()) {
-                    listFile.delete()
+
+                // force clear other package file
+                val directory = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package")
+                if (directory.isDirectory){
+                    for (listFile in directory.listFiles()) {
+                        listFile.delete()
+                    }
                 }
+                directory.delete()
+                activity.requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR)
             }
-            directory.delete()
+
         }
 
 // val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "${element.type}/${element.fileName}")

@@ -1,5 +1,6 @@
 package pl.tapo24.twa.updater
 
+import android.app.Activity
 import android.content.Context
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
@@ -179,15 +180,19 @@ class DataUpdater(
                     }
                 }
             }
-            withContext(Dispatchers.Main) {
-                try {
-                    //////////////////////////////////////////////////////
-                    // MAT24-37 java.lang.IllegalArgumentException: View=DecorView@73477fe[MainActivity] not attached to window manager
-                    dialog.dismiss()
-                } catch (ex:Throwable) {
-                    ACRA.errorReporter.handleSilentException(ex)
+            val activity = context as Activity
+            if (!activity.isFinishing && !activity.isDestroyed) {
+                withContext(Dispatchers.Main) {
+                    try {
+                        //////////////////////////////////////////////////////
+                        // MAT24-37 java.lang.IllegalArgumentException: View=DecorView@73477fe[MainActivity] not attached to window manager
+                        dialog.dismiss()
+                    } catch (ex:Throwable) {
+                        ACRA.errorReporter.handleSilentException(ex)
+                    }
                 }
             }
+
 
         }
     }

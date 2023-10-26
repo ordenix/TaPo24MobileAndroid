@@ -333,7 +333,7 @@ class MainActivity: AppCompatActivity() {
                     }.await()
                 }
                 State.networkType = "WiFi"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, this.supportFragmentManager, activity).getAllData()
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
 
 
             }
@@ -347,7 +347,7 @@ class MainActivity: AppCompatActivity() {
 
                 }
                 State.networkType = "All"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, this.supportFragmentManager, activity).getAllData()
+                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
             }
             // Add customization options here
 

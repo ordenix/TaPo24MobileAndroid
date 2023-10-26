@@ -88,7 +88,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             }
 
         } else {
-            TODO("VERSION.SDK_INT < O AND ADD IN BACKEND FUNCTION THAT RETURN ROLE add to save it and check if internet is online")
+           // TODO("VERSION.SDK_INT < O AND ADD IN BACKEND FUNCTION THAT RETURN ROLE add to save it and check if internet is online")
         }
 
 
