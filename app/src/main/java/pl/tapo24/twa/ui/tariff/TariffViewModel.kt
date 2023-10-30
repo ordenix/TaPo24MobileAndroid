@@ -50,7 +50,7 @@ class TariffViewModel @Inject constructor(
     }
     val text: LiveData<String> = _text
     val querySuggestionList = MutableLiveData<DataQueryFromSuggestion?>()
-
+    var categoryValue: String = "%"
 
     fun saveShiftedItems() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -258,6 +258,13 @@ class TariffViewModel @Inject constructor(
         }
     }
 
+    fun getDataOnCategoryChanged() {
+        viewModelScope.launch(Dispatchers.IO) {
+            async { getAllTariffData() }.await()
+            searchTariffData(queryTextInSearchBar.value.orEmpty())
+        }
+    }
+
     private suspend fun getAllTariffData() {
         var dataFromDb: List<Tariff>? = null
         viewModelScope.async(Dispatchers.IO) {
@@ -265,14 +272,14 @@ class TariffViewModel @Inject constructor(
                 if (checkFavourite.value == true) {
                     async { dataFromDb = tapoDb.tariffDb().getFavByEngine("New") }.await()
                 } else {
-                    async { dataFromDb = tapoDb.tariffDb().getAllByEngine("New") }.await()
+                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("New", categoryValue) }.await()
                 }
 
             } else {
                 if (checkFavourite.value == true) {
                     async { dataFromDb = tapoDb.tariffDb().getFavByEngine("Old") }.await()
                 } else {
-                    async { dataFromDb = tapoDb.tariffDb().getAllByEngine("Old") }.await()
+                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("Old", categoryValue) }.await()
                 }
             }
 

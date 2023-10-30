@@ -222,6 +222,7 @@
     <string name="succesRegister">Poprawnie zarejestrowano użytkownika w systemie. Na podany email został wysłany link
         do aktywacji konta.
     </string>
+    <string name="all_offences">Wszystkie wykroczenia</string>
 
 
 </resources>

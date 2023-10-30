@@ -38,6 +38,7 @@ object PackageExtractor {
             }
         }
 
+        ACRA.errorReporter.putCustomData("STOP EXTRACTOR ${System.currentTimeMillis()}", "STOP")
 
 
 

@@ -29,7 +29,6 @@ class DialogTariffMore: DialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-// todo: Category show and parse
         _binding = DialogTariffMoreBinding.inflate(inflater, container, false)
         val root: View = binding.root
         dialog?.setCanceledOnTouchOutside(true)
@@ -44,6 +43,10 @@ class DialogTariffMore: DialogFragment() {
         }
         if (item !=null) {
             //binding  here
+            val textCategory = item!!.category?.let { parseCategory(it) }
+            binding.textView61.text = "Kategoria: ${textCategory}"
+
+
             if (item!!.code != null) {
                 binding.codeContainer.visibility = View.VISIBLE
                 binding.textView64.text = "${item!!.points} pkt"
@@ -101,6 +104,58 @@ class DialogTariffMore: DialogFragment() {
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             dialog.window!!.setLayout(width, height)
         }
+    }
+
+    private fun parseCategory(text: String): String {
+        var textToSet = ""
+        when (text) {
+            "prevention" -> {
+                textToSet= "Prewencja"
+            }
+            "accident" -> {
+                textToSet= "Kolizja"
+            }
+            "pedestrian" -> {
+                textToSet= "Wykroczenia pieszych"
+            }
+            "support" -> {
+                textToSet= "Wykroczenia pieszych z urz. wsp. ruch/ rowerzystów"
+            }
+            "to_pede" -> {
+                textToSet= "Wykroczenia wobec pieszych przez poj. mech."
+            }
+            "non_mech_to_pede" -> {
+                textToSet= "Wykroczenia wobec pieszych przez poj. inny niż mech."
+            }
+            "speed" -> {
+                textToSet= "Prędkość pojazdu/ wyprzedzanie"
+            }
+            "lights" -> {
+                textToSet= "Światła zewnętrzne"
+            }
+            "sign" -> {
+                textToSet= "Znaki i sygnały"
+            }
+            "belts" -> {
+                textToSet= "Przewóz osób/ pasy bezp."
+            }
+            "invalid" -> {
+                textToSet= "Karta Parkingowa"
+            }
+            "stop" -> {
+                textToSet= "Postój/Zatrzymanie/ Cofanie/ Zawracanie/ Holowanie"
+            }
+            "allow" -> {
+                textToSet= "Dopuszczenie/ Kierowanie"
+            }
+            "package" -> {
+                textToSet= "Przewóz ładunku/ Tablice/ Przejazd Kolejowy lub tramw."
+            }
+            "others" -> {
+                textToSet= "Pozostałe"
+            }
+        }
+        return textToSet
     }
 
 

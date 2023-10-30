@@ -10,10 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.google.android.material.snackbar.Snackbar
 import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentRoadBinding
-import pl.tapo24.twa.utils.SwipeListener
 
 class RoadFragment: Fragment() {
     private var _binding: FragmentRoadBinding? = null

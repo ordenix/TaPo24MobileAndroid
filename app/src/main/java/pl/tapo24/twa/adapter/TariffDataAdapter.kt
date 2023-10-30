@@ -1,5 +1,8 @@
 package pl.tapo24.twa.adapter
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +14,7 @@ import pl.tapo24.twa.BR
 import pl.tapo24.twa.R
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.ui.tariff.TariffViewModel
+import java.io.File
 
 
 class TariffDataAdapter(
@@ -41,6 +45,16 @@ class TariffDataAdapter(
             binding.setVariable(BR.data, item)
             binding.setVariable(BR.viewModel,viewModel)
             binding.setVariable(BR.position, position)
+            if (item.path != null) {
+                val file: File = File(binding.root.context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), item.path!!)
+                if (file.exists()) {
+                    val bitmap: Bitmap = BitmapFactory.decodeFile(file.absolutePath)
+                    binding.setVariable(BR.image, bitmap)
+                }
+            }else {
+                binding.setVariable(BR.image, null)
+            }
+
             binding.executePendingBindings()
 //            btn.setOnClickListener {
 //                onItemClick?.invoke(item)

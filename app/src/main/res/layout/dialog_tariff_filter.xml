@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   style="@style/smallContainer"
+                                                   android:background="@color/second_tapo"
+                                                   android:layout_height="match_parent">
+
+<!--    <Spinner-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content" android:id="@+id/spinner"-->
+<!--            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"-->
+<!--            android:layout_marginTop="8dp" android:layout_marginStart="8dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>-->
+    <TextView
+            android:text="@string/chose_category"
+            android:layout_width="wrap_content"
+            style="@style/textStyleWhiteInContainerCenter"
+            android:layout_height="wrap_content" android:id="@+id/textView93"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <Button
+            android:text="@string/all_offences"
+            android:layout_width="0dp"
+            style="@style/OrangeBtn"
+            android:backgroundTint="@color/orange_tapo"
+            android:layout_height="wrap_content" android:id="@+id/button8"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0" app:layout_constraintTop_toBottomOf="@+id/textView93"
+            android:layout_marginEnd="8dp" android:layout_marginStart="8dp"/>
+    <TextView
+            android:text="W tym miejscu wkrótce stworzysz własne kategorie wykroczeń."
+            style="@style/textStyleWhiteSmallInContainerCenter"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView95"
+            app:layout_constraintTop_toBottomOf="@+id/button8" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"/>
+    <TextView
+            android:text="Aby być na bieżąco z aktualizacjami włącz powiadomienia."
+            style="@style/textStyleWhiteSmallInContainerCenter"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView97"
+            app:layout_constraintTop_toBottomOf="@+id/textView95" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

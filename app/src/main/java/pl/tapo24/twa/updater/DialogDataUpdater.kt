@@ -21,9 +21,11 @@ class DialogDataUpdater: DialogFragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         _binding = DialogDataUpdaterBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
+        dialog?.setCancelable(false)
+        dialog?.setCanceledOnTouchOutside(false)
         body.observe(this, Observer {
             binding.description.text = it
         })
@@ -55,5 +57,10 @@ class DialogDataUpdater: DialogFragment() {
 
 
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        dialog?.setCanceledOnTouchOutside(false)
+//    }
 
 }

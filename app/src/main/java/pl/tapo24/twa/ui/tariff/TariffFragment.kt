@@ -35,6 +35,7 @@ class TariffFragment: Fragment() {
     private lateinit var viewModel: TariffViewModel
 
     private val dialogMore = DialogTariffMore()
+    private val dialogFilterOptions = DialogFilterOptions()
     //private lateinit var searchView: SearchView
 
     override fun onCreateView(
@@ -84,8 +85,14 @@ class TariffFragment: Fragment() {
             viewModel.changeFavState()
         }
         binding.moreFilter.setOnClickListener {
-            Snackbar.make(binding.root, getString(R.string.not_implemented), Snackbar.LENGTH_LONG)
-                .show()
+            dialogFilterOptions.selectedValue = viewModel.categoryValue
+            dialogFilterOptions.show(childFragmentManager, "DialogFilter")
+            dialogFilterOptions.onSelected = { it ->
+                viewModel.categoryValue = it
+                viewModel.getDataOnCategoryChanged()
+            }
+//            Snackbar.make(binding.root, getString(R.string.not_implemented), Snackbar.LENGTH_LONG)
+//                .show()
         }
 //        rv.getViewTreeObserver().addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
 //            override fun onGlobalLayout() {
@@ -123,7 +130,6 @@ class TariffFragment: Fragment() {
                 viewModel.sendQuerySuggestion(s.toString())
             }
         })
-        // TODO add icon network and filter suggestion history by query
         searchView.inflateMenu(R.menu.menu_search) //inner menu
 //        val menu = root.findViewById<TextView>(R.menu.menu_search)
         searchView.setOnMenuItemClickListener { menuItem: MenuItem? ->
@@ -226,6 +232,8 @@ class TariffFragment: Fragment() {
 //            }
 //        })
 
+
+
         return root
     }
 
@@ -236,6 +244,9 @@ class TariffFragment: Fragment() {
 
     override fun onPause() {
         super.onPause()
+        if (dialogFilterOptions.isVisible) {
+            dialogFilterOptions.dismiss()
+        }
         if (dialogMore.isVisible) {
             dialogMore.dismiss()
             viewModel.showDialogRenew = true

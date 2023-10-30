@@ -10,6 +10,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -102,8 +103,9 @@ class MainActivity: AppCompatActivity() {
             State.countChangeFragment  = 0
             //SessionProvider(tapoDb,networkClient).restoreSession()
             CheckVersion(tapoDb,networkClient,this).checkVersion()
-        // TODO: this comment is for test
-        // AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, supportFragmentManager).getAllData()
+        //
+        val activity: Activity = this
+        AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, supportFragmentManager, activity).getAllData()
 
         }
         State.countChangeFragment += 1
@@ -148,7 +150,7 @@ class MainActivity: AppCompatActivity() {
             if (settingNotificationInitialize == null) {
                 // show dialog
                 withContext(Dispatchers.Main) {
-                    if (!supportFragmentManager.isDestroyed) {
+                    if (!supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed && !supportFragmentManager.isStateSaved) {
                         dialogNotification.show(supportFragmentManager, "dialog_Permissions")
                         dialogNotification.allowClick = {
                             dialogNotification.dismiss()
@@ -221,6 +223,13 @@ class MainActivity: AppCompatActivity() {
 
         // init notification
 
+//        if (this.checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
+//            val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+//                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+////            putExtra(Settings.EXTRA_CHANNEL_ID, "fcm_fallback_notification_channel")
+//            }
+//            startActivity(intent)
+//        }
 
 
 
@@ -442,10 +451,11 @@ class MainActivity: AppCompatActivity() {
             override fun onDrawerSlide(view: View, v: Float) {}
             override fun onDrawerOpened(view: View) {}
             override fun onDrawerClosed(view: View) {
-                supportFragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .commit();
-
+                if (!supportFragmentManager.isDestroyed) {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .commit();
+                }
             }
             override fun onDrawerStateChanged(i: Int) {}
         })
@@ -556,7 +566,6 @@ class MainActivity: AppCompatActivity() {
             // or other notification behaviors after this.
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(mChannel)
-
 //            val ss = notificationManager.notificationChannels
 //            println(ss)
         }

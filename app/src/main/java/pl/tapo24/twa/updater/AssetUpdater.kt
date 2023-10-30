@@ -277,7 +277,7 @@ class AssetUpdater(
                     if(listLawFromServer?.find { el -> el.id == element.id } == null) {
                         if (!activity.isFinishing) {
                             if (!dialog.isVisible) {
-                                if (childFragmentManager != null && !childFragmentManager.isDestroyed) {
+                                if (childFragmentManager != null && !childFragmentManager.isDestroyed && !childFragmentManager.isStateSaved) {
                                     dialog.show(childFragmentManager, "Data")
                                 }
                             }
@@ -447,7 +447,8 @@ class AssetUpdater(
 
                                     }
                                     delay(1000)
-                                    if (dialog.isVisible) {
+                                    if (dialog.isVisible && !activity.isFinishing && !activity.isDestroyed
+                                        && childFragmentManager !=null && !childFragmentManager.isStateSaved) {
                                         try {
                                             dialog.dismiss()
                                         } catch (ex: IllegalStateException) {
@@ -503,8 +504,8 @@ class AssetUpdater(
 
                 // force clear other package file
                 val directory = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package")
-                if (directory.isDirectory){
-                    for (listFile in directory.listFiles()) {
+                if (directory.isDirectory && directory.listFiles() != null){
+                    for (listFile in directory.listFiles()!!) {
                         listFile.delete()
                     }
                 }
