@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentHelpersBinding
 
@@ -43,6 +47,26 @@ class HelpersFragment: Fragment() {
         }
         binding.linkLimits.setOnClickListener {
             openLink("https://www.gov.pl/web/infrastruktura/ograniczenia-w-ruchu")
+
+        }
+        binding.patronite.setOnClickListener {
+            openLink("https://patronite.pl/tapo24")
+            val firebaseAnalytics = Firebase.analytics
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
+                param(FirebaseAnalytics.Param.ITEM_NAME, "patron")
+
+            }
+
+        }
+        binding.caffe.setOnClickListener {
+            openLink("https://buycoffee.to/tapo24")
+            val firebaseAnalytics = Firebase.analytics
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
+                param(FirebaseAnalytics.Param.ITEM_NAME, "buy caffe")
+
+            }
+
+
 
         }
 
