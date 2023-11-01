@@ -365,7 +365,7 @@ class AssetUpdater(
                         async { tapoDb.assetListDb().deleteElement(element) }.await()
                     }
                 }
-                if (dialog.isVisible) {
+                if (dialog.isVisible && !activity.isFinishing &&!activity.isDestroyed && childFragmentManager != null && !childFragmentManager.isDestroyed && !childFragmentManager.isStateSaved) {
                     dialog.dismiss()
 
                 }
