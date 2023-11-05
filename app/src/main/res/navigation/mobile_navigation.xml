@@ -253,4 +253,9 @@
         <argument android:name="successDesc" app:argType="string"/>
         <action android:id="@+id/action_nav_success_to_nav_home" app:destination="@id/nav_home"/>
     </fragment>
+    <fragment android:id="@+id/nav_accountActivate"
+              android:name="pl.tapo24.twa.ui.login.register.accountActivate.AccountActivateFragment"
+              android:label="@string/account_activate" tools:layout="@layout/fragment_account_activate">
+        <argument android:name="url" app:argType="string"/>
+    </fragment>
 </navigation>

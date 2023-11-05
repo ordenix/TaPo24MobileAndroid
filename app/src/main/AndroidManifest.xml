@@ -38,8 +38,20 @@
                 android:name="pl.tapo24.twa.MainActivity"
                 android:exported="true"
                 android:hardwareAccelerated="true"
+                android:launchMode="singleInstance"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.TaPo24.NoActionBar">
+<!--            <nav-graph android:value="@navigation/mobile_navigation" />-->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data android:scheme="http"/>
+                <data android:host="tapo24.pl" />
+                <!--                      android:pathPattern="/PasswordForgot/.*"-->
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

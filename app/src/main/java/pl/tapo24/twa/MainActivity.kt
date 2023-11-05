@@ -18,6 +18,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
@@ -53,6 +54,7 @@ import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.utils.CheckConnection
+import pl.tapo24.twa.utils.IntentRouter
 import javax.inject.Inject
 
 
@@ -127,7 +129,6 @@ class MainActivity: AppCompatActivity() {
             }
         }
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -332,6 +333,7 @@ class MainActivity: AppCompatActivity() {
 
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
 
+        CheckVersion(tapoDb,networkClient,this).checkVersion()
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
             .setTitle("Wybór połączenia do aktualizacji danych")
             .setCancelable(false)
@@ -485,9 +487,12 @@ class MainActivity: AppCompatActivity() {
             }
             true
         }
+        IntentRouter().route(intent, navController)
+    }
 
-
-
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        IntentRouter().route(intent, navController)
     }
 
 
