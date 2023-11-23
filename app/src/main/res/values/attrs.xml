@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <attr name="buttonBackground" format="reference"/>
+        <attr name="separatorBackground" format="reference"/>
+        <attr name="textMainColor" format="reference"/>
+        <attr name="textSecondColor" format="reference"/>
+        <attr name="tapoMainColor" format="reference"/>
+        <attr name="tapoSecondColor" format="reference"/>
+        <attr name="tapoBackgroundColor" format="reference"/>
+</resources>

@@ -2,7 +2,7 @@
        android:shape="rectangle">
     <gradient
             android:angle="135"
-            android:endColor="@color/background_tapo"
+            android:endColor="?attr/tapoBackgroundColor"
             android:gradientRadius="50dp"
             android:startColor="@color/second_tapo"
             android:type="linear"/>

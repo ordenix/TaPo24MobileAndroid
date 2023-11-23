@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="itimTextViewStyle">
-        <item name="android:fontFamily">@font/itim</item>
+
     </style>
     <style name="textStyle">
         <item name="android:textColor">@color/white</item>
@@ -228,7 +228,7 @@
         <item name="colorError">@color/standard_red</item>
         <!-- Icon colors -->
         <item name="colorSurface">@color/orange_tapo</item>
-        <item name="colorOnPrimary">@color/background_tapo</item>
+        <item name="colorOnPrimary">?attr/tapoBackgroundColor</item>
         <item name="colorOnError">@color/standard_green</item>
     </style>
 
