@@ -5,19 +5,30 @@
 <!--        <item name="buttonBackground">@color/second_tapo</item>-->
 <!--        <item name="separatorBackground">@color/second_tapo</item>-->
 <!--        <item name="textMainColor">@color/second_tapo</item>-->
-<!--        <item name="textSecondColor">@color/second_tapo</item>-->
+
+<!--        <item name="textSecondColor">@color/tapoSecondColorColor</item>-->
         <item name="tapoMainColor">@color/tapoMainColorColor</item>
-        <item name="tapoSecondColor">@color/orange_tapo</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColor</item>
         <item name="tapoBackgroundColor">@color/tapoBackgroundColorColor</item>
+
+        <item name="buttonBackground">@color/buttonBackgroundColorColor</item>
+
+        <item name="smallIconColor">@color/smallIconColorColor</item>
+
+        <item name="separatorBackground">@color/separatorBackgroundColorColor</item>
+
+        <item name="textMainColor">@color/textMainColorColor</item>
+        <item name="textSecondColor">@color/textSecondColorColor</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2</item>
 
         <!-- Base tapo application scheme color. -->
 <!--        <item name="fontFamily">@font/itim</item>-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">?attr/tapoMainColor</item>
-        <item name="colorPrimaryVariant">@color/orange_tapo</item>
+        <item name="colorPrimaryVariant">@color/tapoSecondColorColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/orange_tapo</item>
+        <item name="colorSecondary">@color/tapoSecondColorColor</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -83,10 +94,10 @@
 
 
     <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="colorPrimary">@color/orange_tapo</item>
-        <item name="colorSecondary">@color/second_tapo</item>
-        <item name="colorSurface">@color/second_tapo</item>
-        <item name="colorOnSurface">@color/orange_tapo</item>
+        <item name="colorPrimary">?attr/tapoSecondColor</item>
+        <item name="colorSecondary">?attr/tapoMainColor</item>
+        <item name="colorSurface">?attr/tapoMainColor</item>
+        <item name="colorOnSurface">?attr/tapoSecondColor</item>
         <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
         <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
         <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body</item>

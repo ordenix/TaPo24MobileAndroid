@@ -76,7 +76,7 @@
 
                         <TextView
                                 style="@style/textStyleWhiteSmallInContainerCenter"
-                                android:textColor="@color/orange_tapo"
+                                android:textColor="?attr/textMainColor"
                                 android:textAlignment="textStart"
                                 android:text="@{data.id}"
                                 android:layout_width="wrap_content"
@@ -133,7 +133,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view17"
+                    android:background="@drawable/style_separator" android:id="@+id/view17"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
             <TextView

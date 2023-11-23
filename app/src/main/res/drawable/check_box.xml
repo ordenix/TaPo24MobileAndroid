@@ -3,8 +3,8 @@
           android:enterFadeDuration="@android:integer/config_shortAnimTime"
           android:exitFadeDuration="@android:integer/config_shortAnimTime">
     <item android:state_checked="true"
-          android:drawable="@color/orange_tapo"
-          android:color="@color/orange_tapo">
+          android:drawable="?attr/tapoSecondColor"
+          android:color="?attr/tapoSecondColor">
 
     </item>
     <item android:drawable="@color/white" android:color="@color/white">

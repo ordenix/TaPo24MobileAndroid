@@ -15,7 +15,7 @@
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:background="@color/second_tapo"
+            android:background="?attr/tapoMainColor"
             android:layout_height="wrap_content">
 
         <LinearLayout
@@ -45,7 +45,7 @@
                     android:visibility="@{data.chapter ? View.VISIBLE : View.GONE}"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"/>
+                    android:background="@drawable/style_separator"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

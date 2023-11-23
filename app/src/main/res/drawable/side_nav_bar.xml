@@ -4,6 +4,6 @@
             android:angle="135"
             android:endColor="?attr/tapoBackgroundColor"
             android:gradientRadius="50dp"
-            android:startColor="@color/second_tapo"
+            android:startColor="?attr/tapoMainColor"
             android:type="linear"/>
 </shape>

@@ -7,4 +7,6 @@
         <attr name="tapoMainColor" format="reference"/>
         <attr name="tapoSecondColor" format="reference"/>
         <attr name="tapoBackgroundColor" format="reference"/>
+        <attr name="smallIconColor" format="reference"/>
+        <attr name="textSecondColor2" format="reference"/>
 </resources>

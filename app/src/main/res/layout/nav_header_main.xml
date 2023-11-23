@@ -28,7 +28,7 @@
                 android:tintMode="src_in"
                 android:backgroundTintMode="add"
                 android:background="@drawable/style_social_media_button"
-                app:tint="@color/white"/>
+                app:tint="?attr/smallIconColor"/>
         <Space
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="0.5"/>
@@ -43,7 +43,7 @@
                 android:tintMode="src_in"
                 android:backgroundTintMode="add"
                 android:background="@drawable/style_social_media_button"
-                app:tint="@color/white"/>/>
+                app:tint="?attr/smallIconColor"/>/>
     </LinearLayout>
 
     <TextView

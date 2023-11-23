@@ -35,7 +35,7 @@
                 android:layout_height="150dp" android:id="@+id/imageView24"
                 app:layout_constraintTop_toBottomOf="@+id/description"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                app:tint="@color/orange_tapo"/>
+                app:tint="?attr/tapoSecondColor"/>
         <TextView
                 android:text="@string/if_again_writ_to_us"
                 android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
                 android:theme="@style/OrangeBtn"
                 app:icon="@drawable/house_solid"
                 app:iconSize="20dp"
-                android:backgroundTint="@color/orange_tapo"
+                android:backgroundTint="?attr/buttonBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/go_home"

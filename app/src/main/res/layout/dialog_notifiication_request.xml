@@ -3,7 +3,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                                    style="@style/smallContainer"
-                                                   android:background="@color/second_tapo"
+                                                   android:background="?attr/tapoMainColor"
                                                    android:layout_height="wrap_content">
 
     <ImageView
@@ -14,7 +14,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/orange_tapo"
+            app:tint="?attr/tapoSecondColor"
             android:layout_marginTop="16dp"/>
     <TextView
             android:text="Bądź na bieżąco!"
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView89"/>
     <Button
             android:text="Zezwól"
-            android:backgroundTint="@color/orange_tapo"
+            android:backgroundTint="?attr/buttonBackground"
             android:theme="@style/OrangeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/allow" app:layout_constraintEnd_toEndOf="parent"

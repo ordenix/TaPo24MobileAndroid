@@ -39,7 +39,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:id="@+id/view13"/>
@@ -69,7 +69,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:id="@+id/view14"/>
@@ -86,7 +86,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:id="@+id/view15"/>
@@ -206,7 +206,7 @@
             <Button
                     android:text="@string/more"
                     android:theme="@style/OrangeBtn"
-                    android:backgroundTint="@color/orange_tapo"
+                    android:backgroundTint="?attr/buttonBackground"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:id="@+id/button7"

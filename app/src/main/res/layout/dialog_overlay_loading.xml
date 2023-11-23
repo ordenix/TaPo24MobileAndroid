@@ -3,7 +3,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:background="@color/second_tapo"
+                                                   android:background="?attr/tapoMainColor"
                                                    android:layout_height="match_parent" android:paddingStart="20dp"
                                                    android:paddingEnd="20dp" android:paddingTop="0dp"
                                                    android:paddingBottom="20dp">
@@ -24,7 +24,7 @@
     <com.google.android.material.progressindicator.CircularProgressIndicator
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:indicatorColor="@color/orange_tapo"
+            app:indicatorColor="?attr/tapoSecondColor"
             android:indeterminate="true" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView58"/>

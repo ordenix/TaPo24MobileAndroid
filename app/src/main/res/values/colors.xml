@@ -8,9 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="second_tapo">#3d5a80</color>
-    <color name="orange_tapo">#ee6c4d</color>
-    <color name="text">#98C1D9</color>
+<!--    <color name="second_tapo">#3d5a80</color>-->
+    <color name="orange_tapo">#B64DEE</color>
+<!--    <color name="text">#98C1D9</color>-->
 
     <color name="standard_red">#F44336</color>
     <color name="standard_green">#4CAF50</color>
@@ -18,12 +18,18 @@
 
 
     <!-- Base tapo application color definition. -->
-    <color name="buttonBackgroundColor">#F44336</color>
-    <color name="separatorBackgroundColor">#F44336</color>
-    <color name="textMainColorColor">#F44336</color>
-    <color name="textSecondColorColor">#F44336</color>
+    <color name="buttonBackgroundColorColor">#ee6c4d</color>
+
+    <color name="separatorBackgroundColorColor">#ee6c4d</color>
+
+    <color name="textMainColorColor">#ee6c4d</color>
+    <color name="textSecondColorColor">#FFFFFFFF</color>
+    <color name="textSecondColorColor2">#FF000000</color>
+
+    <color name="smallIconColorColor">#FFFFFFFF</color>
+
     <color name="tapoMainColorColor">#3d5a80</color>
-    <color name="tapoSecondColorColor">#F44336</color>
+    <color name="tapoSecondColorColor">#ee6c4d</color>
     <color name="tapoBackgroundColorColor">#293241</color>
 
 </resources>
