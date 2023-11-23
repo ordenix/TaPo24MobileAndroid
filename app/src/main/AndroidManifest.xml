@@ -48,6 +48,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
                 <data android:scheme="http"/>
+                <data android:scheme="https"/>
                 <data android:host="tapo24.pl" />
                 <!--                      android:pathPattern="/PasswordForgot/.*"-->
                 <!-- note that the leading "/" is required for pathPrefix-->

@@ -94,7 +94,7 @@ class UlListBuilder {
 
 
 
-    fun getSpannableTextListWithoutBullet(text: String?): SpannableStringBuilder {
+    fun getSpannableTextListWithoutBullet(text: String?, extraSeparateLine: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
         val array: List<String> = text.split("/n").toList()
@@ -103,6 +103,9 @@ class UlListBuilder {
             if (!textTrim.contains("Null",true)) {
                 ssb.append(textTrim)
                 ssb.append("\n")
+                if (extraSeparateLine) {
+                    ssb.append("\n")
+                }
             }
         }
 

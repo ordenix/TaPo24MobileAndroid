@@ -68,6 +68,10 @@ class LoginFragment: Fragment() {
             }
         })
 
+        binding.forgotPassword.setOnClickListener {
+            findNavController().navigate(R.id.action_nav_login_to_nav_forgotPasswordStep1)
+        }
+
 
 //        val textView: TextView = binding.textViewLogin
 //        loginViewModel.text.observe(viewLifecycleOwner) {

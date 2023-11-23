@@ -30,6 +30,8 @@ enum class InternalMessage(val message: String) {
     InternalFavOffenseToken("Internal exception during process favourite offense"),
     InternalGetSpb("Internal exception during get data Spb"),
     InternalRegister("Internal exception during register"),
+    InternalCustomCategory("Internal exception during custom category"),
+    InternalCustomCategoryMap("Internal exception during custom category map"),
 
 
 

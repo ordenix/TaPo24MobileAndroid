@@ -3,14 +3,13 @@ package pl.tapo24.twa.infrastructure
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.FavouriteModule
+import pl.tapo24.twa.data.RCustomCategoryList
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.data.profile.BodyOffenses
-import pl.tapo24.twa.db.entity.AppVersion
-import pl.tapo24.twa.db.entity.AssetList
-import pl.tapo24.twa.db.entity.Tariff
+import pl.tapo24.twa.db.entity.*
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.exceptions.HttpException
 import pl.tapo24.twa.exceptions.HttpMessage
@@ -454,6 +453,39 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalFavOffenseToken.message))
+    }
+    // customCategory
+
+    fun getCustomCategoryList(token: String):Result<List<CustomCategory>> {
+        try {
+            val response = service.getCustomCategoryList(token).execute()
+            return  if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+
+        }catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalCustomCategory.message))
+
+    }
+
+    fun getCustomMapList(token: String):Result<List<MapCategory>> {
+        try {
+            val response = service.getCustomMapList(token).execute()
+            return  if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+
+        }catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalCustomCategoryMap.message))
+
     }
 
 }

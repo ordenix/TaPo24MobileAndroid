@@ -27,6 +27,8 @@ class ErrorFragment : Fragment() {
                 R.id.action_nav_error_to_nav_home
             )
         }
+        val args = arguments?.let { ErrorFragmentArgs.fromBundle(it) }
+        binding.description.text = args!!.errorDesc
         return root
     }
 

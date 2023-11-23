@@ -88,6 +88,8 @@
               android:label="@string/login"
               tools:layout="@layout/fragment_login">
         <action android:id="@+id/action_nav_login_to_nav_register" app:destination="@id/nav_register"/>
+        <action android:id="@+id/action_nav_login_to_nav_forgotPasswordStep1"
+                app:destination="@id/nav_forgotPasswordStep1"/>
     </fragment>
     <fragment android:id="@+id/nav_register"
               android:name="pl.tapo24.twa.ui.login.register.RegisterFragment"
@@ -244,12 +246,12 @@
               android:name="pl.tapo24.twa.ui.helpers.dictionary.DictionaryViewFragment"
               android:label="fragment_dictionary_view" tools:layout="@layout/fragment_dictionary_view"/>
     <fragment android:id="@+id/nav_error" android:name="pl.tapo24.twa.ui.statusForm.error.ErrorFragment"
-              android:label="fragment_error" tools:layout="@layout/fragment_error">
+              android:label="@string/error" tools:layout="@layout/fragment_error">
         <argument android:name="errorDesc" app:argType="string"/>
         <action android:id="@+id/action_nav_error_to_nav_home" app:destination="@id/nav_home"/>
     </fragment>
     <fragment android:id="@+id/nav_success" android:name="pl.tapo24.twa.ui.statusForm.success.SuccessFragment"
-              android:label="fragment_success" tools:layout="@layout/fragment_success">
+              android:label="@string/succes" tools:layout="@layout/fragment_success">
         <argument android:name="successDesc" app:argType="string"/>
         <action android:id="@+id/action_nav_success_to_nav_home" app:destination="@id/nav_home"/>
     </fragment>
@@ -257,5 +259,35 @@
               android:name="pl.tapo24.twa.ui.login.register.accountActivate.AccountActivateFragment"
               android:label="@string/account_activate" tools:layout="@layout/fragment_account_activate">
         <argument android:name="url" app:argType="string"/>
+        <action android:id="@+id/action_nav_accountActivate_to_nav_success" app:destination="@id/nav_success"/>
+        <action android:id="@+id/action_nav_accountActivate_to_nav_error" app:destination="@id/nav_error"/>
+    </fragment>
+    <fragment android:id="@+id/nav_unsubscribeAdv"
+              android:name="pl.tapo24.twa.ui.login.register.unsubscribeAdv.UnsubscribeAdvFragment"
+              android:label="@string/unSubAdv" tools:layout="@layout/fragment_unsubscribe_adv">
+        <argument android:name="url" app:argType="string"/>
+        <action android:id="@+id/action_nav_unsubscribeAdv_to_nav_success" app:destination="@id/nav_success"/>
+        <action android:id="@+id/action_nav_unsubscribeAdv_to_nav_error" app:destination="@id/nav_error"/>
+    </fragment>
+    <fragment android:id="@+id/nav_removeAccount"
+              android:name="pl.tapo24.twa.ui.login.register.removeAccount.RemoveAccountFragment"
+              android:label="@string/removeAccount" tools:layout="@layout/fragment_remove_account">
+        <argument android:name="url" app:argType="string"/>
+        <action android:id="@+id/action_nav_removeAccount_to_nav_success" app:destination="@id/nav_success"/>
+        <action android:id="@+id/action_nav_removeAccount_to_nav_error" app:destination="@id/nav_error"/>
+    </fragment>
+    <fragment android:id="@+id/nav_forgotPasswordStep1"
+              android:name="pl.tapo24.twa.ui.login.forgotPasswordStep1.ForgotPasswordStep1Fragment"
+              android:label="@string/forgotPassword" tools:layout="@layout/fragment_forgot_password_step1">
+        <action android:id="@+id/action_nav_forgotPasswordStep1_to_nav_success" app:destination="@id/nav_success"/>
+        <action android:id="@+id/action_nav_forgotPasswordStep1_to_nav_error" app:destination="@id/nav_error"/>
+    </fragment>
+
+    <fragment android:id="@+id/nav_forgotPasswordStep2"
+              android:name="pl.tapo24.twa.ui.login.forgotPasswordStep2.ForgotPasswordStep2Fragment"
+              android:label="@string/setNewPassword" tools:layout="@layout/fragment_forgot_password_step2">
+        <argument android:name="url" app:argType="string"/>
+        <action android:id="@+id/action_nav_forgotPasswordStep2_to_nav_success" app:destination="@id/nav_success"/>
+        <action android:id="@+id/action_nav_forgotPasswordStep2_to_nav_error" app:destination="@id/nav_error"/>
     </fragment>
 </navigation>

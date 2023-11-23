@@ -33,7 +33,7 @@ class UtoComponentFragment : Fragment() {
         _binding = FragmentUtoComponentBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val args = arguments?.let { UtoComponentFragmentArgs.fromBundle(it) }
-        viewModel.errorNullData.observe(viewLifecycleOwner, Observer {
+        viewModel.errorNullData.observe(viewLifecycleOwner) {
             if (it) {
                 val dialogClose = MaterialAlertDialogBuilder(requireContext())
                     .setTitle("UWAGA BRAK DANYCH")
@@ -46,7 +46,7 @@ class UtoComponentFragment : Fragment() {
                     .show()
             }
 
-        })
+        }
 
         viewModel.getData(args!!.id)
 

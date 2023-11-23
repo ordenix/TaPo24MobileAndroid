@@ -9,6 +9,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import pl.tapo24.twa.CustomCategoryModule
 import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.EnginesType
@@ -115,5 +116,11 @@ object AppModule {
     @Singleton
     fun bindFavouriteModule(tapoDb: TapoDb, networkClient: NetworkClient): FavouriteModule {
         return FavouriteModule(tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindCustomCategoryModule(tapoDb: TapoDb, networkClient: NetworkClient): CustomCategoryModule {
+        return CustomCategoryModule(tapoDb, networkClient)
     }
 }

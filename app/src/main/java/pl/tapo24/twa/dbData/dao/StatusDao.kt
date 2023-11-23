@@ -13,4 +13,7 @@ interface StatusDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Status>)
+
+    @Query("DELETE FROM status")
+    fun nukeTable()
 }

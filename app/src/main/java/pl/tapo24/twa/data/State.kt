@@ -24,6 +24,7 @@ object State {
     var isSessionConfirm: Boolean = false
     var isSessionRestored: Boolean = false
     var isFavouritesSynchronized: Boolean = false
+    var isCustomCategorySynchronized: Boolean = false
 
     var networkType = "WiFi"
 

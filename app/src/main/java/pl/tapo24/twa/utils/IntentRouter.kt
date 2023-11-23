@@ -12,5 +12,14 @@ class IntentRouter {
         if (data != null && data.toString().contains("ActivateAccount")) {
             navController?.navigate(R.id.nav_accountActivate, bundleOf("url" to data.toString()))
         }
+        if (data != null && data.toString().contains("UnsubscribeAdv")) {
+            navController?.navigate(R.id.nav_unsubscribeAdv, bundleOf("url" to data.toString()))
+        }
+        if (data != null && data.toString().contains("RemoveAccount")) {
+            navController?.navigate(R.id.nav_removeAccount, bundleOf("url" to data.toString()))
+        }
+        if (data != null && data.toString().contains("PasswordForgot")) {
+            navController?.navigate(R.id.nav_forgotPasswordStep2, bundleOf("url" to data.toString()))
+        }
     }
 }

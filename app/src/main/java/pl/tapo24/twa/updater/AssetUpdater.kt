@@ -51,7 +51,7 @@ class AssetUpdater(
                     getAssets()
                 } else if (!existAssetList) {
                     withContext(Dispatchers.Main) {
-                        dialogCloseApp()
+                        dialogCloseApp(true)
                     }
                 }
             } else if (!existAssetList) {
@@ -90,17 +90,35 @@ class AssetUpdater(
 //                .show()
 //        }
 //    }
-    private fun dialogCloseApp() {
+    private fun dialogCloseApp(networkAvailable: Boolean = false) {
+        if (networkAvailable) {
+            val dialogClose = MaterialAlertDialogBuilder(context)
+                .setTitle("UWAGA BRAK DANYCH")
+                .setMessage("Nie pobrano wcześniej wymaganych danych. Przy inicjalizacji wybrano pobieranie danych tylko za pomocą WiFi w związku z tym korzystanie z aplikacji nie jest możliwe. Wykryto jednak dostęp do sieci komórkowych, pobranie danych za pomocą tej metody może wiązać się z dodatkowymi kosztami naliczonymi przez operatora.")
+                .setCancelable(false)
+                .setPositiveButton("Zamknij") { dialog, which ->
+                    exitProcess(0)
 
-        val dialogClose = MaterialAlertDialogBuilder(context)
-            .setTitle("UWAGA BRAK DANYCH")
-            .setMessage("Nie pobrano wcześniej wymaganych danych, w związku z tym korzystanie z aplikacji nie jest możliwe")
-            .setCancelable(false)
-            .setPositiveButton("Zamknij") { dialog, which ->
-                exitProcess(0)
+                }
+                .setNegativeButton("Pobierz mimo to") {
+                    dialog, which ->
+                    getAssets()
+                    dialog.dismiss()
+                }
+                .show()
+        } else {
+            val dialogClose = MaterialAlertDialogBuilder(context)
+                .setTitle("UWAGA BRAK DANYCH")
+                .setMessage("Nie pobrano wcześniej wymaganych danych, w związku z tym korzystanie z aplikacji nie jest możliwe")
+                .setCancelable(false)
+                .setPositiveButton("Zamknij") { dialog, which ->
+                    exitProcess(0)
 
-            }
-            .show()
+                }
+                .show()
+        }
+
+
 
 
     }

@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
+import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.FragmentSettingBinding
 
 @AndroidEntryPoint
@@ -49,6 +50,29 @@ class SettingsFragment: Fragment() {
                 EnginesType.New -> binding.radioGroupEngine.check(binding.radioButtonAfter.id)
                 EnginesType.Old -> binding.radioGroupEngine.check(binding.radioButtonBefore.id)
             }
+        }
+        settingsViewModel.connectionType.observe(viewLifecycleOwner) {
+            if (it == "All") {
+                binding.radioGroupConnectionType.check(binding.radioButtonCell.id)
+            }
+            if (it == "WiFi") {
+                binding.radioGroupConnectionType.check(binding.radioButtonWifi.id)
+
+            }
+        }
+        binding.radioButtonCell.setOnClickListener {
+            //binding.radioButtonWifi.isChecked = true
+            settingsViewModel.connectionType.value = "All"
+            State.networkType = "All"
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono rodzaj połączenia, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonWifi.setOnClickListener {
+            //binding.radioButtonWifi.isChecked = true
+            settingsViewModel.connectionType.value = "WiFi"
+            State.networkType = "WiFi"
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono rodzaj połączenia, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
 
         binding.radioButtonBefore.setOnClickListener {

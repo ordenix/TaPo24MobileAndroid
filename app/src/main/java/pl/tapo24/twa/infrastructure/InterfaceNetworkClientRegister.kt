@@ -1,7 +1,11 @@
 package pl.tapo24.twa.infrastructure
 
+import pl.tapo24.twa.data.Dbid
 import pl.tapo24.twa.data.RString
+import pl.tapo24.twa.data.login.ToLoginData
+import pl.tapo24.twa.data.register.AccountTokenData
 import pl.tapo24.twa.data.register.RegisterForm
+import pl.tapo24.twa.data.register.TokenPasswordData
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -21,4 +25,32 @@ interface InterfaceNetworkClientRegister {
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("registerUser/")
     fun basicRegisterUser(@Header("INSTALLATION-UID")header: String, @Body login: RegisterForm): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("activate_account/")
+    fun basicActivateAccountUser(@Header("INSTALLATION-UID")header: String, @Body tokenData: AccountTokenData): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("check_email_confirm/")
+    fun basicCheckIsAccountActivated(@Header("INSTALLATION-UID")header: String, @Body dbid: Dbid): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("resend_activation_Token/")
+    fun resendActivationToken(@Header("INSTALLATION-UID")header: String, @Body dbid: Dbid): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("unsubscribe_Adv/")
+    fun unsubscribeAdv(@Header("INSTALLATION-UID")header: String, @Body tokenData: AccountTokenData): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("delete_account_from_first_email/")
+    fun deleteAccountFromFirstEmail(@Header("INSTALLATION-UID")header: String, @Body tokenData: AccountTokenData): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("request_Forgot_password/")
+    fun requestForgotPassword(@Header("INSTALLATION-UID")header: String, @Body data: ToLoginData): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("execute_forgot_password/")
+    fun executeForgotPassword(@Header("INSTALLATION-UID")header: String, @Body data: TokenPasswordData): Call<RString>
 }

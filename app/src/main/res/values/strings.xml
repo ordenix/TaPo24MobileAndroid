@@ -226,6 +226,19 @@
     <string name="chose_category">Wybierz kategorię:</string>
     <string name="buy_caffe">Postaw nam kawę</string>
     <string name="account_activate">Aktywacja Konta</string>
+    <string name="type_connection">Rodzaj połączenia:</string>
+    <string name="wifi_and_others">WiFi oraz sieci komórkowe</string>
+    <string name="only_wifi">Tylko WiFi</string>
+    <string name="remember_download">Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów, które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez
+        operatora w zależności od rodzaju taryfy połączenia
+    </string>
+    <string name="succes">Sukces</string>
+    <string name="unSubAdv">Desubskrypcja reklam</string>
+    <string name="removeAccount">Kasacja konta</string>
+    <string name="go_ahead">Przejdź dalej</string>
+    <string name="forgotPassowrd">Nie pamiętasz hasła?</string>
+    <string name="retypePassword">Powtórz hasło</string>
+    <string name="setNewPassword">Ustaw nowe hasło</string>
 
 
 </resources>

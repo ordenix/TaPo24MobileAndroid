@@ -46,7 +46,7 @@
                 android:id="@+id/constraintLayout5" android:layout_marginTop="8dp">
 
             <TextView
-                    android:text="@{data.expand == false ? `Rowiń` : `Zwiń`}"
+                    android:text="@{data.expand == false ? `Rozwiń` : `Zwiń`}"
                     android:onClick="@{()->(viewModel.expand(position))}"
                     style="@style/blackSmallText"
                     android:layout_width="wrap_content"

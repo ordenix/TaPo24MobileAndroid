@@ -27,16 +27,22 @@ class SettingsViewModel@Inject constructor(
 ) : ViewModel() {
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
-
+    val connectionType = MutableLiveData<String>("WiFi")
+//settingNetwork
+    // WiFi
+    // All
     init {
         viewModelScope.launch(Dispatchers.IO) {
             var settingEnvironment : Setting? = null
             var settingEngine : Setting? = null
+            var settingConnection : Setting? = null
             async { settingEnvironment = tapoDb.settingDb().getSettingByName("settingEnvironment") }.await()
             async { settingEngine = tapoDb.settingDb().getSettingByName("settingEngine") }.await()
+            async { settingConnection = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
             withContext(Dispatchers.Main ){
                 environment.value = EnvironmentType.values()[settingEnvironment!!.count]
                 engine.value = EnginesType.values()[settingEngine!!.count]
+                connectionType.value = settingConnection!!.value // If catch here null refactor it add to init on start application
             }
 
         }
@@ -51,6 +57,8 @@ class SettingsViewModel@Inject constructor(
     fun saveSettings () {
         var envSettingToDb: Setting? = Setting("settingEnvironment")
         var engSettingToDb: Setting? = Setting("settingEngine")
+        var connSettingToDb: Setting? = Setting("settingNetwork")
+        connSettingToDb = Setting("settingNetwork",connectionType.value!!,0)
         when (engine.value) {
             EnginesType.Old -> engSettingToDb = Setting("settingEngine","",0)
             EnginesType.New -> engSettingToDb = Setting("settingEngine","",1)
@@ -63,13 +71,14 @@ class SettingsViewModel@Inject constructor(
             else -> {}
         }
         viewModelScope.launch(Dispatchers.IO) {
+            if (engSettingToDb != null) {
+                tapoDb.settingDb().insert(engSettingToDb)
+            }
             if (envSettingToDb != null) {
                 tapoDb.settingDb().insert(envSettingToDb)
             }
-        }
-        viewModelScope.launch(Dispatchers.IO) {
-            if (engSettingToDb != null) {
-                tapoDb.settingDb().insert(engSettingToDb)
+            if (connSettingToDb != null) {
+                tapoDb.settingDb().insert(connSettingToDb)
             }
         }
     }

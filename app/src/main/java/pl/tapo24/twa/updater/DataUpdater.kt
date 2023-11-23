@@ -127,6 +127,7 @@ class DataUpdater(
 
                         }
                         if (it.id == "status"){
+                            deleteStatus()
                             getStatus()
                             Thread.sleep(delay)
 
@@ -264,12 +265,20 @@ class DataUpdater(
             }.await()
         }
     }
+    private fun deleteStatus() {
+        MainScope().launch(Dispatchers.IO) {
+            async {
+                dataTapoDb.status().nukeTable()
+            }.await()
+        }
+    }
     private fun getStatus() {
         MainScope().launch(Dispatchers.IO) {
             async {
                 withContext(Dispatchers.Main) {
                     dialog.setMessage("Pobieranie statusów KSIP")
                 }
+                //dataTapoDb.status().nukeTable()
                 val response = networkClient.getStatusData()
                 response.onSuccess {
                     dataTapoDb.status().insertList(it)

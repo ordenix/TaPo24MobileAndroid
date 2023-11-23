@@ -60,7 +60,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"/>
         <TextView
-                android:text="@{data.expand == false ? `Rowiń` : `Zwiń`}"
+                android:text="@{data.expand == false ? `Rozwiń` : `Zwiń`}"
                 android:onClick="@{()->(viewModel.expand(position))}"
                 android:background="@drawable/button_small_orange"
                 android:layout_marginTop="5dp"

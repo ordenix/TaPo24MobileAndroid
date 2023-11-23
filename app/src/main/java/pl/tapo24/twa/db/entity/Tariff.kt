@@ -71,6 +71,10 @@ data class Tariff(
     @ColumnInfo(defaultValue = "0")
     var sortOrderFav: Int = 0,
 
+    @ColumnInfo(defaultValue = "false")
+    var court: Boolean = false,
 
+    @ColumnInfo(defaultValue = "false")
+    var premiumIcon: Boolean = false,
 
 )

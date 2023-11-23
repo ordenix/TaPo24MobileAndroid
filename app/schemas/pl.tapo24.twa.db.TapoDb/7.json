@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "02fc394d4dc0bfcd157d59ddade276ba",
+    "version": 7,
+    "identityHash": "d16ffa74dd18887f3d115d362d1bc178",
     "entities": [
       {
         "tableName": "Setting",
@@ -130,7 +130,7 @@
       },
       {
         "tableName": "Tariff",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `category` TEXT DEFAULT '', `code` TEXT DEFAULT '', `law` TEXT DEFAULT '', `maxSpeed` INTEGER DEFAULT 0, `minSpeed` INTEGER DEFAULT 0, `name` TEXT DEFAULT '', `paragraph` TEXT DEFAULT '', `path` TEXT DEFAULT '', `points` TEXT DEFAULT '0', `subName` TEXT DEFAULT '', `tax` TEXT DEFAULT '', `taxRecidive` TEXT DEFAULT '', `recidive` INTEGER DEFAULT false, `text` TEXT DEFAULT '', `enginesType` TEXT NOT NULL DEFAULT '1', `favorites` INTEGER NOT NULL DEFAULT false, `color` TEXT NOT NULL DEFAULT '', `customCategory` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `category` TEXT DEFAULT '', `code` TEXT DEFAULT '', `law` TEXT DEFAULT '', `maxSpeed` INTEGER DEFAULT 0, `minSpeed` INTEGER DEFAULT 0, `name` TEXT DEFAULT '', `paragraph` TEXT DEFAULT '', `path` TEXT DEFAULT '', `points` TEXT DEFAULT '0', `subName` TEXT DEFAULT '', `tax` TEXT DEFAULT '', `taxRecidive` TEXT DEFAULT '', `recidive` INTEGER DEFAULT false, `text` TEXT DEFAULT '', `enginesType` TEXT NOT NULL DEFAULT 'New', `favorites` INTEGER NOT NULL DEFAULT false, `color` TEXT NOT NULL DEFAULT '', `customCategory` TEXT NOT NULL DEFAULT '', `sortOrder` INTEGER NOT NULL DEFAULT 0, `sortOrderFav` INTEGER NOT NULL DEFAULT 0, `court` INTEGER NOT NULL DEFAULT false, `premiumIcon` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -241,7 +241,7 @@
             "columnName": "enginesType",
             "affinity": "TEXT",
             "notNull": true,
-            "defaultValue": "'1'"
+            "defaultValue": "'New'"
           },
           {
             "fieldPath": "favorites",
@@ -263,6 +263,34 @@
             "affinity": "TEXT",
             "notNull": true,
             "defaultValue": "''"
+          },
+          {
+            "fieldPath": "sortOrder",
+            "columnName": "sortOrder",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "sortOrderFav",
+            "columnName": "sortOrderFav",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "court",
+            "columnName": "court",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "false"
+          },
+          {
+            "fieldPath": "premiumIcon",
+            "columnName": "premiumIcon",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "false"
           }
         ],
         "primaryKey": {
@@ -276,7 +304,7 @@
       },
       {
         "tableName": "LastSearch",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`query` TEXT NOT NULL, `lastTime` INTEGER NOT NULL DEFAULT 0, `isHistory` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`query`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`query` TEXT NOT NULL, `lastTime` INTEGER NOT NULL DEFAULT 0, `isHistory` INTEGER NOT NULL DEFAULT false, `count` INTEGER NOT NULL DEFAULT 0, `listDocId` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`query`))",
         "fields": [
           {
             "fieldPath": "query",
@@ -297,6 +325,20 @@
             "affinity": "INTEGER",
             "notNull": true,
             "defaultValue": "false"
+          },
+          {
+            "fieldPath": "count",
+            "columnName": "count",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "listDocId",
+            "columnName": "listDocId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
           }
         ],
         "primaryKey": {
@@ -307,12 +349,176 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "AssetList",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `path` TEXT NOT NULL DEFAULT '', `version` INTEGER NOT NULL DEFAULT 0, `name` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "path",
+            "columnName": "path",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "version",
+            "columnName": "version",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "AppVersion",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `versionCode` INTEGER NOT NULL DEFAULT 0, `versionName` TEXT NOT NULL DEFAULT '', `critical` INTEGER NOT NULL DEFAULT false, `whatChange` TEXT NOT NULL DEFAULT '', `dismissed` INTEGER NOT NULL DEFAULT false, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "versionCode",
+            "columnName": "versionCode",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "versionName",
+            "columnName": "versionName",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "critical",
+            "columnName": "critical",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "false"
+          },
+          {
+            "fieldPath": "whatChange",
+            "columnName": "whatChange",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "dismissed",
+            "columnName": "dismissed",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "false"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "CustomCategory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `categoryName` TEXT NOT NULL DEFAULT '', `sortOrder` INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "categoryName",
+            "columnName": "categoryName",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          },
+          {
+            "fieldPath": "sortOrder",
+            "columnName": "sortOrder",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "MapCategory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `customCategoryId` INTEGER NOT NULL DEFAULT 0, `tariffId` TEXT NOT NULL DEFAULT '', PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "customCategoryId",
+            "columnName": "customCategoryId",
+            "affinity": "INTEGER",
+            "notNull": true,
+            "defaultValue": "0"
+          },
+          {
+            "fieldPath": "tariffId",
+            "columnName": "tariffId",
+            "affinity": "TEXT",
+            "notNull": true,
+            "defaultValue": "''"
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "id"
+          ]
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '02fc394d4dc0bfcd157d59ddade276ba')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd16ffa74dd18887f3d115d362d1bc178')"
     ]
   }
 }
