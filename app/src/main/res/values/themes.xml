@@ -33,6 +33,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="masterFont">@font/itim</item>
         <!-- Customize your theme here. -->
         <!-- Original AppCompat attributes. -->
 <!--        <item name="colorPrimaryDark">@color/orange_tapo</item>-->
@@ -108,6 +110,7 @@
     </style>
     <style name="Font">
         <item name="fontFamily">sans-serif-light</item>
+        <item name="masterFont">sans-serif-light</item>
     </style>
 
     <style name="Fontc">

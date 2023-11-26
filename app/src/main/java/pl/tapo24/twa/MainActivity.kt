@@ -144,7 +144,7 @@ class MainActivity: AppCompatActivity() {
         //// START NOTIFICATION SECTION
         val activity: Activity = this
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//        theme.applyStyle(R.style.Font, true)
+        //theme.applyStyle(R.style.Font, true)
 //        theme.applyStyle(R.style.Fontc, true)
 
         MainScope().launch(Dispatchers.IO) {
