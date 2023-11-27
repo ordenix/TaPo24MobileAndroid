@@ -22,8 +22,9 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
                     TODO()
                 } else {
                     // send offline stack
-                    sendToServerCategoryMap()
-                    sendToServerCustomCategory()
+                    TODO()
+                    //sendToServerCategoryMap()
+                    //sendToServerCustomCategory()
                 }
             }
         }
@@ -59,7 +60,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
         return listCustomCategory
     }
-    private suspend fun sendToServerCustomCategory() {
+    private suspend fun addToServerCustomCategory() {
         if (State.internetStatus.value != 0) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
@@ -68,7 +69,43 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
             }.await()
         }
     }
-    private suspend fun sendToServerCategoryMap() {
+    private suspend fun updateToServerCustomCategory() {
+        if (State.internetStatus.value != 0) {
+            MainScope().async {
+                withContext(Dispatchers.IO) {
+                    TODO()
+                }
+            }.await()
+        }
+    }
+    private suspend fun deleteToServerCustomCategory() {
+        if (State.internetStatus.value != 0) {
+            MainScope().async {
+                withContext(Dispatchers.IO) {
+                    TODO()
+                }
+            }.await()
+        }
+    }
+    private suspend fun addToServerCustomMap() {
+        if (State.internetStatus.value != 0) {
+            MainScope().async {
+                withContext(Dispatchers.IO) {
+                    TODO()
+                }
+            }.await()
+        }
+    }
+    private suspend fun updateToServerCustomMap() {
+        if (State.internetStatus.value != 0) {
+            MainScope().async {
+                withContext(Dispatchers.IO) {
+                    TODO()
+                }
+            }.await()
+        }
+    }
+    private suspend fun deleteToServerCustomMap() {
         if (State.internetStatus.value != 0) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
@@ -78,7 +115,22 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
     }
 
-    fun preformSendToServer() {
+    fun preformAddToServerCustomCategory() {
+        TODO()
+    }
+    fun preformUpdateToServerCustomCategory() {
+        TODO()
+    }
+    fun preformDeleteToServerCustomCategory() {
+        TODO()
+    }
+    fun preformAddToServerCustomMap() {
+        TODO()
+    }
+    fun preformUpdateToServerCustomMap() {
+        TODO()
+    }
+    fun preformDeleteToServerCustomMap() {
         TODO()
     }
 }

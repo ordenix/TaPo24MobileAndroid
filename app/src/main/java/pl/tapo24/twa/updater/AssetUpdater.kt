@@ -364,7 +364,7 @@ class AssetUpdater(
                     if(listAssetFromServer?.find { el -> el.id == element.id } == null) {
                         if (!activity.isFinishing) {
                             if (!dialog.isVisible) {
-                                if (childFragmentManager != null && !childFragmentManager.isDestroyed) {
+                                if (childFragmentManager != null && !childFragmentManager.isDestroyed && !childFragmentManager.isStateSaved) {
                                     dialog.show(childFragmentManager, "Data")
                                 }
                             }

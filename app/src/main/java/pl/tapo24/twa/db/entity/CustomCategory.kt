@@ -15,5 +15,11 @@ data class CustomCategory(
     var categoryName: String = "",
 
     @ColumnInfo(defaultValue = "0")
-    var sortOrder: Int = 0
+    var sortOrder: Int = 0,
+
+    @ColumnInfo(defaultValue = "true")
+    var synchronized: Boolean = true,
+
+    @ColumnInfo(defaultValue = "false")
+    var toDelete: Boolean = false
 )
