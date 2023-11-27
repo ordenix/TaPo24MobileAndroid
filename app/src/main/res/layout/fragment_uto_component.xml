@@ -31,7 +31,7 @@
                     android:id="@+id/divider5"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     android:layout_marginBottom="2dp"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                     android:id="@+id/divider2"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     android:layout_marginBottom="2dp"/>
 
 
@@ -141,7 +141,7 @@
                     android:id="@+id/divider6"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     android:layout_marginBottom="2dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -196,7 +196,7 @@
                     android:id="@+id/divider3"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     android:layout_marginBottom="2dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -250,7 +250,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     android:layout_marginBottom="2dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -305,7 +305,7 @@
                     android:id="@+id/divider7"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     android:layout_marginBottom="2dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout

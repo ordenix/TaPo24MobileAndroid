@@ -28,7 +28,7 @@
                     android:id="@+id/divider5"
                     android:layout_width="0dp"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"
+                    android:background="@drawable/style_separator"
                     app:layout_constraintTop_toBottomOf="@+id/mainTitle" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
             <LinearLayout
@@ -52,7 +52,7 @@
                         android:id="@+id/divider10"
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
-                        android:background="@drawable/style_orange_container"
+                        android:background="@drawable/style_separator"
                         app:layout_constraintTop_toBottomOf="@+id/mainTitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
@@ -72,7 +72,7 @@
                         android:id="@+id/divider11"
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
-                        android:background="@drawable/style_orange_container"
+                        android:background="@drawable/style_separator"
                         app:layout_constraintTop_toBottomOf="@+id/mainTitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
@@ -92,7 +92,7 @@
                         android:id="@+id/divider12"
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
-                        android:background="@drawable/style_orange_container"
+                        android:background="@drawable/style_separator"
                         app:layout_constraintTop_toBottomOf="@+id/mainTitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
@@ -112,7 +112,7 @@
                         android:id="@+id/divider13"
                         android:layout_width="match_parent"
                         android:layout_height="3dp"
-                        android:background="@drawable/style_orange_container"
+                        android:background="@drawable/style_separator"
                         app:layout_constraintTop_toBottomOf="@+id/mainTitle"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>

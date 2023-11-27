@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="itimTextViewStyle">
-        <item name="android:fontFamily">@font/itim</item>
+
     </style>
     <style name="textStyle">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:textColor">?attr/textSecondColor</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
         <item name="android:layout_marginEnd">1dp</item>
         <item name="android:maxLines">1</item>
     </style>
     <style name="blackSmallText" parent="@style/textStyle">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?attr/textSecondColor2</item>
         <item name="android:textSize">15sp</item>
 
     </style>
     <style name="gridText">
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
         <item name="android:layout_marginEnd">1dp</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:layout_width">0dp</item>
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">?attr/textSecondColor2</item>
     </style>
     <style name="textStyleOrangeMediumWarp" parent="@style/textStyle">
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/orange_tapo</item>
+        <item name="android:textColor">?attr/textMainColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">50</item>
     </style>
     <style name="textStyleOrangeMediumWarpXl" parent="@style/textStyle">
         <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/orange_tapo</item>
+        <item name="android:textColor">?attr/textMainColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">50</item>
     </style>
     <style name="textStyleOrangeSmallWarp" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/orange_tapo</item>
+        <item name="android:textColor">?attr/textMainColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:maxLines">50</item>
     </style>
@@ -67,7 +67,7 @@
     </style>
     <style name="remarksKsipStatus" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/orange_tapo</item>
+        <item name="android:textColor">?attr/textMainColor</item>
         <item name="android:maxLines">10</item>
     </style>
     <style name="textStyleDrivingLicenceCountry" parent="@style/textStyle">
@@ -97,14 +97,14 @@
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">2dp</item>
-        <item name="android:background">@color/orange_tapo</item>
+        <item name="android:background">?attr/separatorBackground</item>
     </style>
     <style name="OrangeBtn">
-        <item name="background">@color/orange_tapo</item>
+        <item name="background">?attr/buttonBackground</item>
 
     </style>
     <style name="iconTariff">
-        <item name="tint">@color/white</item>
+        <item name="tint">?attr/smallIconColor</item>
         <item name="android:layout_width">20dp</item>
         <item name="android:layout_height">20dp</item>
 
@@ -130,17 +130,17 @@
     <style name="Widget.App.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
-        <item name="hintTextColor">@color/white</item>
+        <item name="hintTextColor">?attr/textSecondColor</item>
     </style>
 
     <style name="ThemeOverlay.App.TextInputLayout" parent="">
-        <item name="colorPrimary">@color/orange_tapo</item>
+        <item name="colorPrimary">?attr/tapoSecondColor</item>
         <item name="colorOutline">@color/white</item>
-        <item name="colorOnSurface">@color/orange_tapo</item>
+        <item name="colorOnSurface">?attr/tapoSecondColor</item>
         <item name="startIconTint">@color/white</item>
         <item name="colorError">@color/standard_red</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
         <item name="textAppearanceTitleMedium">@style/TextAppearance.Material3.TitleMedium</item>
         <item name="textAppearanceBodySmall">@style/TextAppearance.Material3.BodySmall</item>
         <item name="editTextStyle">@style/Widget.Material3.TextInputEditText.OutlinedBox</item>
@@ -152,22 +152,22 @@
 
     <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
     </style>
 
 
     <style name="MaterialAlertDialog.App.Body" parent="MaterialAlertDialog.Material3.Body.Text">
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
     </style>
 
     <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="android:textColor">@color/white</item>
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
 
     </style>
     <style name="Widget.App.ButtonOrange" parent="Widget.Material3.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/orange_tapo</item>
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:textColor">?attr/buttonBackground</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
 
     </style>
 
@@ -189,12 +189,12 @@
         <item name="shapeAppearance">@style/ShapeAppearance.Material3.SmallComponent</item>
     </style>
     <style name="ThemeOverlay.App.Button.TextButton" parent="ThemeOverlay.Material3.Button.TextButton">
-        <item name="colorOnContainer">@color/orange_tapo</item>
+        <item name="colorOnContainer">?attr/buttonBackground</item>
     </style>
     <style name="TextAppearance.App.Button" parent="TextAppearance.Material3.LabelLarge">
-        <item name="fontFamily">@font/itim</item>
+        <item name="fontFamily">?attr/masterFont</item>
 
-        <item name="android:fontFamily">@font/itim</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
     </style>
 
 
@@ -211,12 +211,13 @@
     </style>
 
     <style name="ThemeOverlay.App.Button.Orange" parent="ThemeOverlay.Material3.Button.TextButton">
-        <item name="colorContainer">@color/orange_tapo</item>
+        <item name="colorContainer">?attr/buttonBackground</item>
+        <item name="colorOutline">?attr/buttonBackground</item>
     </style>
 
     <style name="Widget.App.CheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
         <item name="android:textColor">@color/white</item>
-        <item name="fontFamily">@font/itim</item>
+        <item name="fontFamily">?attr/masterFont</item>
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.CheckBox</item>
     </style>
 
@@ -224,11 +225,11 @@
 
         <!-- Container colors -->
         <item name="colorOnSurface">@color/white</item>
-        <item name="colorPrimary">@color/orange_tapo</item>
+        <item name="colorPrimary">?attr/tapoSecondColor</item>
         <item name="colorError">@color/standard_red</item>
         <!-- Icon colors -->
-        <item name="colorSurface">@color/orange_tapo</item>
-        <item name="colorOnPrimary">@color/background_tapo</item>
+        <item name="colorSurface">?attr/tapoSecondColor</item>
+        <item name="colorOnPrimary">?attr/tapoBackgroundColor</item>
         <item name="colorOnError">@color/standard_green</item>
     </style>
 

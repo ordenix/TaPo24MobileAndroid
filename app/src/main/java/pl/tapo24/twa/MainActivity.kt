@@ -17,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
@@ -142,7 +143,9 @@ class MainActivity: AppCompatActivity() {
 
         //// START NOTIFICATION SECTION
         val activity: Activity = this
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        //theme.applyStyle(R.style.Font, true)
+//        theme.applyStyle(R.style.Fontc, true)
 
         MainScope().launch(Dispatchers.IO) {
             var settingNotificationInitialize: Setting? = null

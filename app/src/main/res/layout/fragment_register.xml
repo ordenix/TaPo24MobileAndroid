@@ -232,13 +232,13 @@
                         <Button
                                 android:text="@string/statute"
                                 android:theme="@style/OrangeBtn"
-                                android:backgroundTint="@color/orange_tapo"
+                                android:backgroundTint="?attr/buttonBackground"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/buttonStatute"/>
                         <Button
                                 android:text="@string/policyPrivate"
                                 android:theme="@style/OrangeBtn"
-                                android:backgroundTint="@color/orange_tapo"
+                                android:backgroundTint="?attr/buttonBackground"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" android:id="@+id/buttonPolicy"
                         />
@@ -255,7 +255,7 @@
                         android:theme="@style/OrangeBtn"
                         app:icon="@drawable/right_to_bracket_solid"
                         app:iconSize="20dp"
-                        android:backgroundTint="@color/orange_tapo"
+                        android:backgroundTint="?attr/buttonBackground"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/register" android:enabled="false"/>
             </LinearLayout>

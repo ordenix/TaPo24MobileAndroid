@@ -3,7 +3,7 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:background="@color/second_tapo"
+                                                   android:background="?attr/tapoMainColor"
                                                    android:layout_height="match_parent" android:paddingTop="2dp"
                                                    android:paddingEnd="2dp" android:paddingStart="2dp"
                                                    android:paddingBottom="2dp">
@@ -11,7 +11,7 @@
     <View
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:background="@drawable/style_orange_container"
+            android:background="@drawable/style_separator"
             android:id="@+id/view16"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout8" app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
     <View
             android:layout_width="0dp"
             android:layout_height="3dp"
-            android:background="@drawable/style_orange_container"
+            android:background="@drawable/style_separator"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:id="@+id/view12"/>
@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="3dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/style_orange_container"
+            android:background="@drawable/style_separator"
             android:id="@+id/view11"
             app:layout_constraintTop_toBottomOf="@+id/textVievText" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" android:visibility="visible"/>
@@ -236,7 +236,7 @@
     <Button
             android:text="Zamknij"
             android:theme="@style/OrangeBtn"
-            android:backgroundTint="@color/orange_tapo"
+            android:backgroundTint="?attr/buttonBackground"
             android:layout_height="35dp"
             app:iconSize="10dp"
             android:textSize="10dp"

@@ -15,7 +15,7 @@
     >
 
         <TextView
-                android:textColor="@color/white"
+                android:textColor="?attr/textSecondColor"
                 android:text="@string/success"
                 style="@style/textStyleOrangeMediumWarpXl"
                 android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
                 app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
         <TextView
                 android:text="TextView"
-                android:textColor="@color/white"
+                android:textColor="?attr/textSecondColor"
 
                 style="@style/textStyleOrangeMediumWarpXl"
                 android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                 android:theme="@style/OrangeBtn"
                 app:icon="@drawable/house_solid"
                 app:iconSize="20dp"
-                android:backgroundTint="@color/orange_tapo"
+                android:backgroundTint="?attr/buttonBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/go_home"

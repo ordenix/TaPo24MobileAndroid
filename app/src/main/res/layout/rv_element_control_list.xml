@@ -54,7 +54,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container"/>
+                    android:background="@drawable/style_separator"/>
             <TextView
                     android:text="@string/howToCheck"
                     style="@style/textStyleWhiteSmallInContainerCenter"
@@ -75,7 +75,7 @@
                         android:layout_height="wrap_content" app:srcCompat="@drawable/warning"
                         android:id="@+id/imageView15" app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                        app:tint="@color/orange_tapo"/>
+                        app:tint="?attr/textMainColor"/>
                 <TextView
                         android:text="@{`UWAGA: ` +data.methodsRemarks}"
                         android:layout_width="0dp"
@@ -88,7 +88,7 @@
             <View
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view2"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view2"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"
@@ -268,7 +268,7 @@
                     android:layout_width="match_parent"
                     android:visibility="@{(viewModel.isVisible(`B`,data) &amp;&amp; viewModel.isVisible(`A`,data)) ? View.VISIBLE : View.GONE}"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view5"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view5"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`B`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -408,7 +408,7 @@
                     android:layout_width="match_parent"
                     android:visibility="@{viewModel.isVisible(`C`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view3"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view3"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`C`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -545,7 +545,7 @@
                     android:layout_width="match_parent"
                     android:visibility="@{viewModel.isVisible(`D`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view4"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view4"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`D`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -685,7 +685,7 @@
                     android:layout_width="match_parent"
                     android:visibility="@{viewModel.isVisible(`E`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view6"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view6"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`E`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -823,7 +823,7 @@
                     android:visibility="@{viewModel.isVisible(`F`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view10"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view10"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`F`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -961,7 +961,7 @@
                     android:visibility="@{viewModel.isVisible(`G`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view7"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view7"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`G`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -1099,7 +1099,7 @@
                     android:layout_width="match_parent"
                     android:visibility="@{viewModel.isVisible(`H`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view8"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view8"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`H`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"
@@ -1237,7 +1237,7 @@
                     android:visibility="@{viewModel.isVisible(`I`,data) ? View.VISIBLE : View.GONE}"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@drawable/style_orange_container" android:id="@+id/view9"/>
+                    android:background="@drawable/style_separator" android:id="@+id/view9"/>
             <LinearLayout
                     android:visibility="@{viewModel.isVisible(`H`,data) ? View.VISIBLE : View.GONE}"
                     android:orientation="horizontal"

@@ -5,5 +5,5 @@
     <corners android:radius="10dp" />
     <stroke
             android:width="2dip"
-            android:color="@color/orange_tapo" />
+            android:color="?attr/tapoSecondColor" />
 </shape>
