@@ -35,6 +35,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
 
         <item name="masterFont">@font/itim</item>
+        <item name="weightFont">1</item>
+        <item name="weightFontMain">1</item>
+<!--        <item name="android:textStyle">bold</item>-->
         <!-- Customize your theme here. -->
         <!-- Original AppCompat attributes. -->
 <!--        <item name="colorPrimaryDark">@color/orange_tapo</item>-->
@@ -108,12 +111,57 @@
         <item name="buttonBarNeutralButtonStyle">@style/Widget.App.ButtonOrange</item>
         <item name="buttonBarNegativeButtonStyle">@style/Widget.App.ButtonOrange</item>
     </style>
-    <style name="Font">
-        <item name="fontFamily">sans-serif-light</item>
+    <style name="sansSerifLight">
         <item name="masterFont">sans-serif-light</item>
     </style>
 
-    <style name="Fontc">
+    <style name="arimo">
+        <item name="masterFont">@font/arimo</item>
+    </style>
+
+    <style name="itim">
+        <item name="masterFont">@font/itim</item>
+    </style>
+
+    <style name="armata">
+        <item name="masterFont">@font/armata</item>
+    </style>
+
+    <style name="alegreya">
+        <item name="masterFont">@font/alegreya</item>
+    </style>
+
+    <style name="boldFont">
+        <item name="weightFont">1</item>
+    </style>
+    <style name="nonBoldFont">
+        <item name="weightFont">0</item>
+    </style>
+
+    <style name="boldFontMain">
+        <item name="weightFontMain">1</item>
+    </style>
+    <style name="nonBoldFontMain">
+        <item name="weightFontMain">0</item>
+    </style>
+
+
+
+
+    <style name="defaultTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColor</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColor</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColor</item>
+
+        <item name="buttonBackground">@color/buttonBackgroundColorColor</item>
+
+        <item name="smallIconColor">@color/smallIconColorColor</item>
+
+        <item name="separatorBackground">@color/separatorBackgroundColorColor</item>
+
+        <item name="textMainColor">@color/textMainColorColor</item>
+        <item name="textSecondColor">@color/textSecondColorColor</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2</item>
     </style>
 
 </resources>

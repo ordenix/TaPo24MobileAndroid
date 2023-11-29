@@ -16,7 +16,7 @@ import pl.tapo24.twa.db.entity.*
         AppVersion::class,
         CustomCategory::class,
         MapCategory::class
-    ], version = 7,
+    ], version = 8,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),

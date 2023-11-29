@@ -239,6 +239,7 @@
     <string name="forgotPassowrd">Nie pamiętasz hasła?</string>
     <string name="retypePassword">Powtórz hasło</string>
     <string name="setNewPassword">Ustaw nowe hasło</string>
+    <string name="fontType">Rodzaj czcionki:</string>
 
 
 </resources>

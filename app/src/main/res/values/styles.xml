@@ -25,19 +25,19 @@
     <style name="textStyleOrangeMediumWarp" parent="@style/textStyle">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">?attr/textMainColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">?attr/weightFontMain</item>
         <item name="android:maxLines">50</item>
     </style>
     <style name="textStyleOrangeMediumWarpXl" parent="@style/textStyle">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">?attr/textMainColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">?attr/weightFontMain</item>
         <item name="android:maxLines">50</item>
     </style>
     <style name="textStyleOrangeSmallWarp" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">?attr/textMainColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">?attr/weightFontMain</item>
         <item name="android:maxLines">50</item>
     </style>
     <style name="textStyleCategoryDrivingLicence" parent="@style/textStyle">
@@ -82,7 +82,12 @@
     </style>
     <style name="textStyleWhiteCode" parent="@style/textStyle">
         <item name="android:textSize">15sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">?attr/weightFontMain</item>
+        <item name="android:maxLines">2</item>
+    </style>
+    <style name="textStyleWhiteTariffMore" parent="@style/textStyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">?attr/weightFont</item>
         <item name="android:maxLines">2</item>
     </style>
     <style name="textStyleLarge" parent="@style/textStyle">

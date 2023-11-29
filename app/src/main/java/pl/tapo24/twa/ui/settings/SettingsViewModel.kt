@@ -9,9 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pl.tapo24.twa.data.*
 import pl.tapo24.twa.updater.DataUpdater
-import pl.tapo24.twa.data.EnginesType
-import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
@@ -28,10 +27,20 @@ class SettingsViewModel@Inject constructor(
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
     val connectionType = MutableLiveData<String>("WiFi")
+
+    val fontType = MutableLiveData<FontTypes>(FontTypes.itim)
+    val themeType = MutableLiveData<ThemeTypes>(ThemeTypes.default)
+
+    val settingFontBoldMain = MutableLiveData<Boolean>(true)
+    val settingFontBoldTariff = MutableLiveData<Boolean>(true)
 //settingNetwork
     // WiFi
     // All
     init {
+        fontType.value = State.settingFont.value
+        themeType.value = State.settingTheme.value
+        settingFontBoldMain.value = State.settingFontBoldMain.value
+        settingFontBoldTariff.value = State.settingFontBoldTariff.value
         viewModelScope.launch(Dispatchers.IO) {
             var settingEnvironment : Setting? = null
             var settingEngine : Setting? = null
@@ -59,6 +68,14 @@ class SettingsViewModel@Inject constructor(
         var engSettingToDb: Setting? = Setting("settingEngine")
         var connSettingToDb: Setting? = Setting("settingNetwork")
         connSettingToDb = Setting("settingNetwork",connectionType.value!!,0)
+        val fontSettingToDb: Setting = Setting("settingFont","", fontType.value!!.ordinal)
+        val themeSettingToDb: Setting = Setting("settingTheme","", themeType.value!!.ordinal)
+        val boldMainSettingToDb: Setting = Setting("settingFontBoldMain","", state = settingFontBoldMain.value!!)
+        val boldTariffSettingToDb: Setting = Setting("settingFontBoldTariff","", state = settingFontBoldTariff.value!!)
+        State.settingFont.value = fontType.value
+        State.settingTheme.value = themeType.value
+        State.settingFontBoldTariff.value = settingFontBoldTariff.value
+        State.settingFontBoldMain.value = settingFontBoldMain.value
         when (engine.value) {
             EnginesType.Old -> engSettingToDb = Setting("settingEngine","",0)
             EnginesType.New -> engSettingToDb = Setting("settingEngine","",1)
@@ -80,6 +97,12 @@ class SettingsViewModel@Inject constructor(
             if (connSettingToDb != null) {
                 tapoDb.settingDb().insert(connSettingToDb)
             }
+            if (fontSettingToDb != null) {
+                tapoDb.settingDb().insert(fontSettingToDb)
+            }
+            tapoDb.settingDb().insert(themeSettingToDb)
+            tapoDb.settingDb().insert(boldMainSettingToDb)
+            tapoDb.settingDb().insert(boldTariffSettingToDb)
         }
     }
 

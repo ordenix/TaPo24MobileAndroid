@@ -43,9 +43,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import pl.tapo24.twa.data.EnginesType
-import pl.tapo24.twa.data.EnvironmentType
-import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.*
 import pl.tapo24.twa.databinding.ActivityMainBinding
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
@@ -132,8 +130,10 @@ class MainActivity: AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+ //       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
        // firebaseAnalytics = Firebase.analytics
 //        firebaseAnalytics.setUserProperty("favorite_food2", "food")
 //        firebaseAnalytics.setUserProperty("favorite_food", "food")
@@ -143,8 +143,8 @@ class MainActivity: AppCompatActivity() {
 
         //// START NOTIFICATION SECTION
         val activity: Activity = this
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        //theme.applyStyle(R.style.Font, true)
+
+        //theme.applyStyle(R.style.sansSerifLight, true)
 //        theme.applyStyle(R.style.Fontc, true)
 
         MainScope().launch(Dispatchers.IO) {
@@ -322,6 +322,91 @@ class MainActivity: AppCompatActivity() {
                 State.enginesType = EnginesType.values()[settingEngine!!.count]
             }
         }
+        // get theme
+        MainScope().launch(Dispatchers.IO) {
+            var settingFont : Setting? = null
+            var settingTheme : Setting? = null
+            var settingFontBoldTariff : Setting? = null
+            var settingFontBoldMain : Setting? = null
+            async { settingFont = tapoDb.settingDb().getSettingByName("settingFont") }.await()
+            async { settingTheme = tapoDb.settingDb().getSettingByName("settingTheme") }.await()
+            async { settingFontBoldTariff = tapoDb.settingDb().getSettingByName("settingFontBoldTariff") }.await()
+            async { settingFontBoldMain = tapoDb.settingDb().getSettingByName("settingFontBoldMain") }.await()
+            if (settingFont == null) {
+                async {
+                    val setting: Setting = Setting("settingFont","",FontTypes.itim.ordinal)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingFont.value = FontTypes.itim
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingFont.value = FontTypes.values()[settingFont!!.count]
+                }
+            }
+            if (settingTheme == null) {
+                async {
+                    val setting: Setting = Setting("settingTheme","",ThemeTypes.default.ordinal)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingTheme.value = ThemeTypes.default
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingTheme.value = ThemeTypes.values()[settingTheme!!.count]
+                }
+            }
+            if (settingFontBoldTariff == null) {
+                async {
+                    val setting: Setting = Setting("settingFontBoldTariff","", state = true)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldTariff.value = true
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldTariff.value = settingFontBoldTariff!!.state
+                }
+            }
+            if (settingFontBoldMain == null) {
+                async {
+                    val setting: Setting = Setting("settingFontBoldMain","", state = true)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldMain.value = true
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldMain.value = settingFontBoldMain!!.state
+                }
+            }
+        }
+        State.settingFontBoldTariff.observe(this, Observer {
+            if (it) {
+              theme.applyStyle(R.style.boldFont, true)
+            } else {
+                theme.applyStyle(R.style.nonBoldFont, true)
+            }
+        })
+        State.settingFontBoldMain.observe(this, Observer {
+            if (it) {
+                theme.applyStyle(R.style.boldFontMain, true)
+            } else {
+                theme.applyStyle(R.style.nonBoldFontMain, true)
+            }
+        })
+        State.settingFont.observe(this, Observer {
+            theme.applyStyle(it.themeName, true)
+        })
+        State.settingTheme.observe(this, Observer {
+            theme.applyStyle(it.themeName, true)
+        })
+
+      //  theme.applyStyle(R.style.sansSerifLight, true)
 
 //        val settingUid = tapoDb.settingDb().getSettingByName("uid")
 //        if (settingUid == null) {

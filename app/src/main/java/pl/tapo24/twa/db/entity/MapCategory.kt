@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class MapCategory(
     @PrimaryKey(autoGenerate = false)
-    val id: Int = 0,
+    var id: Int = 0,
 
     @ColumnInfo(defaultValue = "0")
     var customCategoryId: Int = 0,

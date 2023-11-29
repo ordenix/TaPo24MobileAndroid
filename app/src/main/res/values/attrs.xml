@@ -10,4 +10,6 @@
         <attr name="smallIconColor" format="reference"/>
         <attr name="textSecondColor2" format="reference"/>
         <attr name="masterFont" format="string"/>
+        <attr name="weightFont" format="string"/>
+        <attr name="weightFontMain" format="string"/>
 </resources>

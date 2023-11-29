@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class CustomCategory(
 
     @PrimaryKey(autoGenerate = false)
-    val id: Int = 0,
+    var id: Int = 0,
 
     @ColumnInfo(defaultValue = "")
     var categoryName: String = "",

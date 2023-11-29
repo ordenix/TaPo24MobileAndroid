@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
+import pl.tapo24.twa.data.FontTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.FragmentSettingBinding
 
@@ -125,6 +126,64 @@ class SettingsFragment: Fragment() {
                 Snackbar.make(it, "Gratulacje możesz dołączyć do zespołu Tapo24.pl ;)", Snackbar.LENGTH_LONG).show()
             }
         }
+
+        settingsViewModel.fontType.observe(viewLifecycleOwner) {
+            when (it) {
+                FontTypes.itim -> binding.radioGroupFontTypes.check(binding.radioButtonItim.id)
+                FontTypes.sansSerifLight -> binding.radioGroupFontTypes.check(binding.radioButtonSansSerifLight.id)
+                FontTypes.arimo -> binding.radioGroupFontTypes.check(binding.radioButtonArmino.id)
+                FontTypes.armata -> binding.radioGroupFontTypes.check(binding.radioButtonArmata.id)
+                FontTypes.alegreya -> binding.radioGroupFontTypes.check(binding.radioButtonAlegreya.id)
+            }
+        }
+        settingsViewModel.settingFontBoldMain.observe(viewLifecycleOwner) {
+            binding.boldMain.isChecked = it
+        }
+        settingsViewModel.settingFontBoldTariff.observe(viewLifecycleOwner) {
+            binding.boldTariff.isChecked = it
+        }
+        binding.boldTariff.setOnClickListener {
+            settingsViewModel.settingFontBoldTariff.value = !settingsViewModel.settingFontBoldTariff.value!!
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono pogrubienie tekstów taryfikatora, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+
+        binding.boldMain.setOnClickListener {
+            settingsViewModel.settingFontBoldMain.value = !settingsViewModel.settingFontBoldMain.value!!
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono pogrubienie tekstów głównych, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonItim.setOnClickListener {
+            binding.radioButtonItim.isChecked = true
+            settingsViewModel.fontType.value = FontTypes.itim
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonArmino.setOnClickListener {
+            binding.radioButtonArmino.isChecked = true
+            settingsViewModel.fontType.value = FontTypes.arimo
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonSansSerifLight.setOnClickListener {
+            binding.radioButtonSansSerifLight.isChecked = true
+            settingsViewModel.fontType.value = FontTypes.sansSerifLight
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonAlegreya.setOnClickListener {
+            binding.radioButtonAlegreya.isChecked = true
+            settingsViewModel.fontType.value = FontTypes.alegreya
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        binding.radioButtonArmata.setOnClickListener {
+            binding.radioButtonArmata.isChecked = true
+            settingsViewModel.fontType.value = FontTypes.armata
+            settingsViewModel.saveSettings()
+            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+
         return root
     }
 

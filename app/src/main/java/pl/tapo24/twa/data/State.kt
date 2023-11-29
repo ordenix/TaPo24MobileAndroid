@@ -2,6 +2,7 @@ package pl.tapo24.twa.data
 
 import androidx.lifecycle.MutableLiveData
 import pl.tapo24.twa.BuildConfig
+import pl.tapo24.twa.db.entity.Setting
 
 object State {
     var startDownloadMainPackage: Boolean = false
@@ -32,6 +33,12 @@ object State {
     var maxVisibleItem: Int = 50
 
     var downloadFinishId: Long = 0
+
+    // THEME
+    var settingFont: MutableLiveData<FontTypes> = MutableLiveData(FontTypes.itim)
+    var settingTheme : MutableLiveData<ThemeTypes> = MutableLiveData(ThemeTypes.default)
+    var settingFontBoldTariff : MutableLiveData<Boolean> = MutableLiveData(true)
+    var settingFontBoldMain : MutableLiveData<Boolean> = MutableLiveData(true)
 
 
 

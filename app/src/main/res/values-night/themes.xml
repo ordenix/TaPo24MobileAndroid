@@ -11,6 +11,20 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+
+        <item name="tapoMainColor">@color/tapoMainColorColor</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColor</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColor</item>
+
+        <item name="buttonBackground">@color/buttonBackgroundColorColor</item>
+
+        <item name="smallIconColor">@color/smallIconColorColor</item>
+
+        <item name="separatorBackground">@color/separatorBackgroundColorColor</item>
+
+        <item name="textMainColor">@color/textMainColorColor</item>
+        <item name="textSecondColor">@color/textSecondColorColor</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2</item>
         <!-- Customize your theme here. -->
         <!-- Original AppCompat attributes. -->
         <!--        <item name="colorPrimaryDark">@color/orange_tapo</item>-->
