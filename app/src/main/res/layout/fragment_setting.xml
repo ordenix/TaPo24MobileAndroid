@@ -82,19 +82,61 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView101"
                     app:layout_constraintTop_toBottomOf="@+id/boldTariff" app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" android:visibility="gone"/>
+                    app:layout_constraintStart_toStartOf="parent" android:visibility="visible"/>
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView101"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/radioGroup2">
+                    android:id="@+id/radioGroupTheme">
                 <RadioButton
-                        android:text="RadioButton"
+                        android:text="Domyślny"
                         android:buttonTint="@drawable/check_box"
                         style="@style/textStyle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioButton776"
-                        android:visibility="gone"/>
+                        android:layout_height="wrap_content" android:id="@+id/radioDefault"
+                        android:visibility="visible"/>
+                <RadioButton
+                        android:text="Szary"
+                        android:buttonTint="@drawable/check_box"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioGray"
+                        android:visibility="visible"/>
+                <RadioButton
+                        android:text="Morska bryza"
+                        android:buttonTint="@drawable/check_box"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioBlueMint"
+                        android:visibility="visible"/>
+                <RadioButton
+                        android:text="Pastelowy róż"
+                        android:buttonTint="@drawable/check_box"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioPink"
+                        android:visibility="visible"/>
+                <RadioButton
+                        android:text="Mroźny lód"
+                        android:buttonTint="@drawable/check_box"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioBlueIce"
+                        android:visibility="visible"/>
+                <RadioButton
+                        android:text="Mięta o poranku"
+                        android:buttonTint="@drawable/check_box"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioGreenMint"
+                        android:visibility="visible"/>
+                <RadioButton
+                        android:text="Pustynna burza"
+                        android:buttonTint="@drawable/check_box"
+                        style="@style/textStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioDesert"
+                        android:visibility="visible"/>
             </RadioGroup>
             <TextView
                     android:text="@string/type_connection"
@@ -104,7 +146,15 @@
                     android:id="@+id/textView3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup2"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textView102"/>
+            <TextView
+                    android:text="@string/warningTheme"
+                    android:background="@drawable/style_orange_container"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView102"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroupTheme"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

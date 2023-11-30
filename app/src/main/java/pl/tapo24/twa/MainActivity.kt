@@ -1,17 +1,16 @@
 package pl.tapo24.twa
 
-
+import android.content.Context
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -19,7 +18,6 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
@@ -33,14 +31,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.messaging.FirebaseMessaging
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.*
@@ -89,6 +85,9 @@ class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val dialogNotification = DialogNotificationRequest()
 
+    private lateinit var sharedPreferences: SharedPreferences
+    private val themeKey = "default"
+
     private var navController: NavController? = null
 
     private val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
@@ -128,10 +127,239 @@ class MainActivity: AppCompatActivity() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+        sharedPreferences = getSharedPreferences(
+            "ThemePref",
+            Context.MODE_PRIVATE
+        )
+
+        when (sharedPreferences.getString(themeKey, "default")) {
+            "default" ->  {
+                theme.applyStyle(R.style.defaultTheme, true)
+                State.settingTheme.value = ThemeTypes.Default
+            }
+            "grayTheme" ->  {
+                theme.applyStyle(R.style.grayTheme, true)
+                State.settingTheme.value = ThemeTypes.GrayTheme
+            }
+            "blueMintTheme" ->  {
+                theme.applyStyle(R.style.blueMintTheme, true)
+                State.settingTheme.value = ThemeTypes.BlueMintTheme
+            }
+            "pinkTheme" ->  {
+                theme.applyStyle(R.style.pinkTheme, true)
+                State.settingTheme.value = ThemeTypes.PinkTheme
+            }
+            "blueIceTheme" ->  {
+                theme.applyStyle(R.style.blueIceTheme, true)
+                State.settingTheme.value = ThemeTypes.BlueIceTheme
+            }
+            "greenMintTheme" ->  {
+                theme.applyStyle(R.style.greenMintTheme, true)
+                State.settingTheme.value = ThemeTypes.GreenMintTheme
+            }
+            "desertTheme" ->  {
+                theme.applyStyle(R.style.desertTheme, true)
+                State.settingTheme.value = ThemeTypes.DesertTheme
+            }
+
+
+        }
+
+
+        val activity: Activity = this
+        // get theme
+
+        MainScope().async(Dispatchers.IO) {
+            var settingFont : Setting? = null
+            var settingTheme : Setting? = null
+            var settingFontBoldTariff : Setting? = null
+            var settingFontBoldMain : Setting? = null
+            async { settingFont = tapoDb.settingDb().getSettingByName("settingFont") }.await()
+            async { settingTheme = tapoDb.settingDb().getSettingByName("settingTheme") }.await()
+            async { settingFontBoldTariff = tapoDb.settingDb().getSettingByName("settingFontBoldTariff") }.await()
+            async { settingFontBoldMain = tapoDb.settingDb().getSettingByName("settingFontBoldMain") }.await()
+            if (settingFont == null) {
+                async {
+                    val setting: Setting = Setting("settingFont","",FontTypes.itim.ordinal)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingFont.value = FontTypes.itim
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingFont.value = FontTypes.values()[settingFont!!.count]
+                }
+            }
+            if (settingTheme == null) {
+                async {
+                    val setting: Setting = Setting("settingTheme","",ThemeTypes.Default.ordinal)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                   // State.settingTheme.value = ThemeTypes.Default
+
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+
+                }
+            }
+            if (settingFontBoldTariff == null) {
+                async {
+                    val setting: Setting = Setting("settingFontBoldTariff","", state = true)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldTariff.value = true
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldTariff.value = settingFontBoldTariff!!.state
+                }
+            }
+            if (settingFontBoldMain == null) {
+                async {
+                    val setting: Setting = Setting("settingFontBoldMain","", state = true)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldMain.value = true
+                }
+            } else {
+                withContext(Dispatchers.Main) {
+                    State.settingFontBoldMain.value = settingFontBoldMain!!.state
+                }
+            }
+
+        }
+
+
+        State.settingFontBoldTariff.observe(this, Observer {
+            if (it) {
+                theme.applyStyle(R.style.boldFont, true)
+            } else {
+                theme.applyStyle(R.style.nonBoldFont, true)
+            }
+        })
+        State.settingFontBoldMain.observe(this, Observer {
+            if (it) {
+                theme.applyStyle(R.style.boldFontMain, true)
+            } else {
+                theme.applyStyle(R.style.nonBoldFontMain, true)
+            }
+        })
+        State.settingFont.observe(this, Observer {
+            theme.applyStyle(it.themeName, true)
+        })
+        State.settingTheme.observe(this, Observer {
+
+            sharedPreferences.edit().putString(themeKey, it.type).apply()
+
+        })
+
+
+
+
+
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setSupportActionBar(binding.appBarMain.toolbar)
+       // theme.applyStyle(ThemeTypes.PinkTheme.themeName, true)
+        setContentView(binding.root)
+        binding.appBarMain.fab.setOnClickListener { view ->
+            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
+        val drawerLayout: DrawerLayout = binding.drawerLayout
+        val navView: NavigationView = binding.navView
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewInstagram).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
+            intent.setPackage("com.instagram.android")
+
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
+                startActivity(intent2)
+
+            }
+        }
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewFacebook).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
+            intent.setPackage("com.facebook.katana")
+
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
+                startActivity(intent2)
+
+            }
+        }
+
+        navController = findNavController(R.id.nav_host_fragment_content_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers
+            ), drawerLayout
+        )
+        setupActionBarWithNavController(navController!!, appBarConfiguration)
+        navView.setupWithNavController(navController!!)
+
+        drawerLayout.addDrawerListener(object : DrawerListener {
+            override fun onDrawerSlide(view: View, v: Float) {}
+            override fun onDrawerOpened(view: View) {}
+            override fun onDrawerClosed(view: View) {
+                if (!supportFragmentManager.isDestroyed) {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .commit();
+                }
+            }
+            override fun onDrawerStateChanged(i: Int) {}
+        })
+
+
+
+        navView.setNavigationItemSelectedListener{
+            if (it.itemId == R.id.nav_tariff) {
+                drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
+                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
+                    override fun onDrawerOpened(drawerView: View) {}
+                    override fun onDrawerStateChanged(newState: Int) {}
+                    override fun onDrawerClosed(drawerView: View) {
+                        navController?.navigate(it.itemId)
+                        drawerLayout.removeDrawerListener(this)
+                    }
+                })
+                drawerLayout.closeDrawer(GravityCompat.START)
+
+            } else {
+                navController?.navigate(it.itemId)
+                drawerLayout.closeDrawer(GravityCompat.START)
+
+            }
+            true
+        }
+
+
+
+
+
+
  //       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
        // firebaseAnalytics = Firebase.analytics
@@ -142,10 +370,6 @@ class MainActivity: AppCompatActivity() {
 
 
         //// START NOTIFICATION SECTION
-        val activity: Activity = this
-
-        //theme.applyStyle(R.style.sansSerifLight, true)
-//        theme.applyStyle(R.style.Fontc, true)
 
         MainScope().launch(Dispatchers.IO) {
             var settingNotificationInitialize: Setting? = null
@@ -322,91 +546,6 @@ class MainActivity: AppCompatActivity() {
                 State.enginesType = EnginesType.values()[settingEngine!!.count]
             }
         }
-        // get theme
-        MainScope().launch(Dispatchers.IO) {
-            var settingFont : Setting? = null
-            var settingTheme : Setting? = null
-            var settingFontBoldTariff : Setting? = null
-            var settingFontBoldMain : Setting? = null
-            async { settingFont = tapoDb.settingDb().getSettingByName("settingFont") }.await()
-            async { settingTheme = tapoDb.settingDb().getSettingByName("settingTheme") }.await()
-            async { settingFontBoldTariff = tapoDb.settingDb().getSettingByName("settingFontBoldTariff") }.await()
-            async { settingFontBoldMain = tapoDb.settingDb().getSettingByName("settingFontBoldMain") }.await()
-            if (settingFont == null) {
-                async {
-                    val setting: Setting = Setting("settingFont","",FontTypes.itim.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFont.value = FontTypes.itim
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFont.value = FontTypes.values()[settingFont!!.count]
-                }
-            }
-            if (settingTheme == null) {
-                async {
-                    val setting: Setting = Setting("settingTheme","",ThemeTypes.default.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingTheme.value = ThemeTypes.default
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingTheme.value = ThemeTypes.values()[settingTheme!!.count]
-                }
-            }
-            if (settingFontBoldTariff == null) {
-                async {
-                    val setting: Setting = Setting("settingFontBoldTariff","", state = true)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldTariff.value = true
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldTariff.value = settingFontBoldTariff!!.state
-                }
-            }
-            if (settingFontBoldMain == null) {
-                async {
-                    val setting: Setting = Setting("settingFontBoldMain","", state = true)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldMain.value = true
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldMain.value = settingFontBoldMain!!.state
-                }
-            }
-        }
-        State.settingFontBoldTariff.observe(this, Observer {
-            if (it) {
-              theme.applyStyle(R.style.boldFont, true)
-            } else {
-                theme.applyStyle(R.style.nonBoldFont, true)
-            }
-        })
-        State.settingFontBoldMain.observe(this, Observer {
-            if (it) {
-                theme.applyStyle(R.style.boldFontMain, true)
-            } else {
-                theme.applyStyle(R.style.nonBoldFontMain, true)
-            }
-        })
-        State.settingFont.observe(this, Observer {
-            theme.applyStyle(it.themeName, true)
-        })
-        State.settingTheme.observe(this, Observer {
-            theme.applyStyle(it.themeName, true)
-        })
-
-      //  theme.applyStyle(R.style.sansSerifLight, true)
 
 //        val settingUid = tapoDb.settingDb().getSettingByName("uid")
 //        if (settingUid == null) {
@@ -454,8 +593,7 @@ class MainActivity: AppCompatActivity() {
             // Add customization options here
 
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
         if (State.isLogin.value == false && !State.isSessionRestored) {
@@ -496,85 +634,8 @@ class MainActivity: AppCompatActivity() {
            }
 
        }
-        setSupportActionBar(binding.appBarMain.toolbar)
-
-        binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        val drawerLayout: DrawerLayout = binding.drawerLayout
-        val navView: NavigationView = binding.navView
-        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewInstagram).setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
-            intent.setPackage("com.instagram.android")
-
-            try {
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
-                startActivity(intent2)
-
-            }
-        }
-        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewFacebook).setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
-            intent.setPackage("com.facebook.katana")
-
-            try {
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
-                startActivity(intent2)
-
-            }
-        }
-
-        navController = findNavController(R.id.nav_host_fragment_content_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController!!, appBarConfiguration)
-        navView.setupWithNavController(navController!!)
-
-        drawerLayout.addDrawerListener(object : DrawerListener {
-            override fun onDrawerSlide(view: View, v: Float) {}
-            override fun onDrawerOpened(view: View) {}
-            override fun onDrawerClosed(view: View) {
-                if (!supportFragmentManager.isDestroyed) {
-                    supportFragmentManager.beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .commit();
-                }
-            }
-            override fun onDrawerStateChanged(i: Int) {}
-        })
 
 
-
-        navView.setNavigationItemSelectedListener{
-            if (it.itemId == R.id.nav_tariff) {
-                drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
-                    override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
-                    override fun onDrawerOpened(drawerView: View) {}
-                    override fun onDrawerStateChanged(newState: Int) {}
-                    override fun onDrawerClosed(drawerView: View) {
-                        navController?.navigate(it.itemId)
-                        drawerLayout.removeDrawerListener(this)
-                    }
-                })
-                drawerLayout.closeDrawer(GravityCompat.START)
-
-            } else {
-                navController?.navigate(it.itemId)
-                drawerLayout.closeDrawer(GravityCompat.START)
-
-            }
-            true
-        }
         IntentRouter().route(intent, navController)
     }
 

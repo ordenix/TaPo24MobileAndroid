@@ -9,10 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import pl.tapo24.twa.data.EnginesType
-import pl.tapo24.twa.data.EnvironmentType
-import pl.tapo24.twa.data.FontTypes
-import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.*
 import pl.tapo24.twa.databinding.FragmentSettingBinding
 
 @AndroidEntryPoint
@@ -182,6 +179,56 @@ class SettingsFragment: Fragment() {
             settingsViewModel.fontType.value = FontTypes.armata
             settingsViewModel.saveSettings()
             Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
+        }
+        ///
+        binding.radioDefault.setOnClickListener {
+            binding.radioDefault.isChecked = true
+            State.settingTheme.value = ThemeTypes.Default
+
+        }
+        binding.radioGray.setOnClickListener {
+            binding.radioGray.isChecked = true
+            State.settingTheme.value = ThemeTypes.GrayTheme
+
+        }
+        binding.radioBlueMint.setOnClickListener {
+            binding.radioBlueMint.isChecked = true
+            State.settingTheme.value = ThemeTypes.BlueMintTheme
+
+        }
+        binding.radioPink.setOnClickListener {
+            binding.radioPink.isChecked = true
+            State.settingTheme.value = ThemeTypes.PinkTheme
+
+        }
+        binding.radioBlueIce.setOnClickListener {
+            binding.radioBlueIce.isChecked = true
+            State.settingTheme.value = ThemeTypes.BlueIceTheme
+
+        }
+        binding.radioGreenMint.setOnClickListener {
+            binding.radioGreenMint.isChecked = true
+            State.settingTheme.value = ThemeTypes.GreenMintTheme
+
+        }
+        binding.radioDesert.setOnClickListener {
+            binding.radioDesert.isChecked = true
+            State.settingTheme.value = ThemeTypes.DesertTheme
+
+        }
+
+
+        settingsViewModel.themeType.observe(viewLifecycleOwner) {
+            when (it) {
+                ThemeTypes.Default -> binding.radioGroupTheme.check(binding.radioDefault.id)
+                ThemeTypes.GrayTheme -> binding.radioGroupTheme.check(binding.radioGray.id)
+                ThemeTypes.BlueMintTheme -> binding.radioGroupTheme.check(binding.radioBlueMint.id)
+                ThemeTypes.PinkTheme -> binding.radioGroupTheme.check(binding.radioPink.id)
+                ThemeTypes.BlueIceTheme -> binding.radioGroupTheme.check(binding.radioBlueIce.id)
+                ThemeTypes.GreenMintTheme -> binding.radioGroupTheme.check(binding.radioGreenMint.id)
+                ThemeTypes.DesertTheme -> binding.radioGroupTheme.check(binding.radioDesert.id)
+
+            }
         }
 
         return root

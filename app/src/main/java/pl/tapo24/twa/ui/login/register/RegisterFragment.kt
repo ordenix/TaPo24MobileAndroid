@@ -270,13 +270,17 @@ class RegisterFragment: Fragment() {
         }
         viewModel.statusRegister.observe(viewLifecycleOwner, Observer {
             dialog.dismiss()
-            if (it.isSuccess) {
+            it.onSuccess {
                 findNavController().navigate(
                     R.id.action_nav_register_to_nav_success,
                     bundleOf("successDesc" to getString(R.string.succesRegister))
                 )
-            } else {
-
+            }
+            it.onFailure {e ->
+                findNavController().navigate(
+                    R.id.action_nav_register_to_nav_error,
+                    bundleOf("errorDesc" to e.message)
+                )
             }
         })
 

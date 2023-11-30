@@ -6,5 +6,11 @@ enum class ThemeTypes(
     val type: String,
     val themeName: Int
 ) {
-    default("default", R.style.defaultTheme)
+    Default("default", R.style.defaultTheme),
+    GrayTheme("grayTheme", R.style.grayTheme),
+    BlueMintTheme("blueMintTheme", R.style.blueMintTheme),
+    PinkTheme("pinkTheme", R.style.pinkTheme),
+    BlueIceTheme("blueIceTheme", R.style.blueIceTheme),
+    GreenMintTheme("greenMintTheme", R.style.greenMintTheme),
+    DesertTheme("desertTheme", R.style.desertTheme)
 }

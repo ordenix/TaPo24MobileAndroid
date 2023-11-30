@@ -14,13 +14,15 @@
         <item name="buttonBackground">@color/buttonBackgroundColorColor</item>
 
         <item name="smallIconColor">@color/smallIconColorColor</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColor</item>
 
         <item name="separatorBackground">@color/separatorBackgroundColorColor</item>
 
         <item name="textMainColor">@color/textMainColorColor</item>
         <item name="textSecondColor">@color/textSecondColorColor</item>
         <item name="textSecondColor2">@color/textSecondColorColor2</item>
-
+        <item name="inputFrameColor">@color/inputFrameColorColor</item>
+        <item name="inputTextColor">@color/inputTextColorColor</item>
         <!-- Base tapo application scheme color. -->
 <!--        <item name="fontFamily">@font/itim</item>-->
         <!-- Primary brand color. -->
@@ -152,16 +154,102 @@
         <item name="tapoMainColor">@color/tapoMainColorColor</item>
         <item name="tapoSecondColor">@color/tapoSecondColorColor</item>
         <item name="tapoBackgroundColor">@color/tapoBackgroundColorColor</item>
-
         <item name="buttonBackground">@color/buttonBackgroundColorColor</item>
-
         <item name="smallIconColor">@color/smallIconColorColor</item>
-
         <item name="separatorBackground">@color/separatorBackgroundColorColor</item>
-
         <item name="textMainColor">@color/textMainColorColor</item>
         <item name="textSecondColor">@color/textSecondColorColor</item>
         <item name="textSecondColor2">@color/textSecondColorColor2</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColor</item>
+        <item name="inputFrameColor">@color/inputFrameColorColor</item>
+        <item name="inputTextColor">@color/inputTextColorColor</item>
+    </style>
+    <style name="grayTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorGray</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorGray</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorGray</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorGray</item>
+        <item name="smallIconColor">@color/smallIconColorColorGray</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorGray</item>
+        <item name="textMainColor">@color/textMainColorColorGray</item>
+        <item name="textSecondColor">@color/textSecondColorColorGray</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2Gray</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorGray</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorGray</item>
+        <item name="inputTextColor">@color/inputTextColorColorGray</item>
+
+    </style>
+    <style name="blueMintTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorBlueMint</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorBlueMint</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorBlueMint</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorBlueMint</item>
+        <item name="smallIconColor">@color/smallIconColorColorBlueMint</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorBlueMint</item>
+        <item name="textMainColor">@color/textMainColorColorBlueMint</item>
+        <item name="textSecondColor">@color/textSecondColorColorBlueMint</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2BlueMint</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorBlueMint</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorBlueMint</item>
+        <item name="inputTextColor">@color/inputTextColorColorBlueMint</item>
+
+    </style>
+    <style name="pinkTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorPink</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorPink</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorPink</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorPink</item>
+        <item name="smallIconColor">@color/smallIconColorColorPink</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorPink</item>
+        <item name="textMainColor">@color/textMainColorColorPink</item>
+        <item name="textSecondColor">@color/textSecondColorColorPink</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2Pink</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorPink</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorPink</item>
+        <item name="inputTextColor">@color/inputTextColorColorPink</item>
+
+    </style>
+    <style name="blueIceTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorBlueIce</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorBlueIce</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorBlueIce</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorBlueIce</item>
+        <item name="smallIconColor">@color/smallIconColorColorBlueIce</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorBlueIce</item>
+        <item name="textMainColor">@color/textMainColorColorBlueIce</item>
+        <item name="textSecondColor">@color/textSecondColorColorBlueIce</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2BlueIce</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorBlueIce</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorBlueIce</item>
+        <item name="inputTextColor">@color/inputTextColorColorBlueIce</item>
+    </style>
+    <style name="greenMintTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorGreenMint</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorGreenMint</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorGreenMint</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorGreenMint</item>
+        <item name="smallIconColor">@color/smallIconColorColorGreenMint</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorGreenMint</item>
+        <item name="textMainColor">@color/textMainColorColorGreenMint</item>
+        <item name="textSecondColor">@color/textSecondColorColorGreenMint</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2GreenMint</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorGreenMint</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorGreenMint</item>
+        <item name="inputTextColor">@color/inputTextColorColorGreenMint</item>
+    </style>
+    <style name="desertTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorDesert</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorDesert</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorDesert</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorDesert</item>
+        <item name="smallIconColor">@color/smallIconColorColorDesert</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorDesert</item>
+        <item name="textMainColor">@color/textMainColorColorDesert</item>
+        <item name="textSecondColor">@color/textSecondColorColorDesert</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2Desert</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorDesert</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorDesert</item>
+        <item name="inputTextColor">@color/inputTextColorColorDesert</item>
     </style>
 
 </resources>

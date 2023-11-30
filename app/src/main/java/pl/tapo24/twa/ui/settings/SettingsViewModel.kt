@@ -1,6 +1,7 @@
 package pl.tapo24.twa.ui.settings
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,7 +30,7 @@ class SettingsViewModel@Inject constructor(
     val connectionType = MutableLiveData<String>("WiFi")
 
     val fontType = MutableLiveData<FontTypes>(FontTypes.itim)
-    val themeType = MutableLiveData<ThemeTypes>(ThemeTypes.default)
+    val themeType = MutableLiveData<ThemeTypes>(ThemeTypes.Default)
 
     val settingFontBoldMain = MutableLiveData<Boolean>(true)
     val settingFontBoldTariff = MutableLiveData<Boolean>(true)
@@ -73,7 +74,7 @@ class SettingsViewModel@Inject constructor(
         val boldMainSettingToDb: Setting = Setting("settingFontBoldMain","", state = settingFontBoldMain.value!!)
         val boldTariffSettingToDb: Setting = Setting("settingFontBoldTariff","", state = settingFontBoldTariff.value!!)
         State.settingFont.value = fontType.value
-        State.settingTheme.value = themeType.value
+        State.settingTheme.value = themeType.value!!
         State.settingFontBoldTariff.value = settingFontBoldTariff.value
         State.settingFontBoldMain.value = settingFontBoldMain.value
         when (engine.value) {

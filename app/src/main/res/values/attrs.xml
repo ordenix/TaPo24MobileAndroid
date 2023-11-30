@@ -4,11 +4,14 @@
         <attr name="separatorBackground" format="reference"/>
         <attr name="textMainColor" format="reference"/>
         <attr name="textSecondColor" format="reference"/>
+        <attr name="textSecondColor2" format="reference"/>
+        <attr name="inputFrameColor" format="reference"/>
+        <attr name="inputTextColor" format="reference"/>
         <attr name="tapoMainColor" format="reference"/>
         <attr name="tapoSecondColor" format="reference"/>
         <attr name="tapoBackgroundColor" format="reference"/>
         <attr name="smallIconColor" format="reference"/>
-        <attr name="textSecondColor2" format="reference"/>
+        <attr name="smallIconFavTariffColor" format="reference"/>
         <attr name="masterFont" format="string"/>
         <attr name="weightFont" format="string"/>
         <attr name="weightFontMain" format="string"/>

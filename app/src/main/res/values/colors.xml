@@ -25,11 +25,102 @@
     <color name="textMainColorColor">#ee6c4d</color>
     <color name="textSecondColorColor">#FFFFFFFF</color>
     <color name="textSecondColorColor2">#FF000000</color>
+    <color name="inputTextColorColor">#ee6c4d</color>
+    <color name="inputFrameColorColor">#ee6c4d</color>
+
 
     <color name="smallIconColorColor">#FFFFFFFF</color>
+    <color name="smallIconFavTariffColorColor">#FFFFFFFF</color>
 
     <color name="tapoMainColorColor">#3d5a80</color>
     <color name="tapoSecondColorColor">#ee6c4d</color>
     <color name="tapoBackgroundColorColor">#293241</color>
+
+    <!-- Base tapo application color definition. -->
+
+
+
+    <color name="buttonBackgroundColorColorGray">#B0B7C0</color>
+    <color name="separatorBackgroundColorColorGray">#B0B7C0</color>
+    <color name="textMainColorColorGray">#BC040404</color>
+    <color name="textSecondColorColorGray">#C1C1C1</color>
+    <color name="textSecondColorColor2Gray">#000000</color>
+    <color name="inputTextColorColorGray">#FF0303</color>
+    <color name="inputFrameColorColorGray">#FF0303</color>
+    <color name="smallIconFavTariffColorColorGray">#FF0303</color>
+    <color name="smallIconColorColorGray">#C1C1C1</color>
+    <color name="tapoMainColorColorGray">#474849</color>
+    <color name="tapoSecondColorColorGray">#DF2C2B2A</color>
+    <color name="tapoBackgroundColorColorGray">#7C7C7E</color>
+
+
+    <color name="buttonBackgroundColorColorBlueMint">#01949A</color>
+    <color name="separatorBackgroundColorColorBlueMint">#E2B0B7C0</color>
+    <color name="textMainColorColorBlueMint">#6FD8DCDC</color>
+    <color name="textSecondColorColorBlueMint">#01171C</color>
+    <color name="textSecondColorColor2BlueMint">#01171C</color>
+    <color name="inputTextColorColorBlueMint">#FF0303</color>
+    <color name="inputFrameColorColorBlueMint">#FF0303</color>
+    <color name="smallIconFavTariffColorColorBlueMint">#FF0303</color>
+    <color name="smallIconColorColorBlueMint">#01171C</color>
+    <color name="tapoMainColorColorBlueMint">#033F4E</color>
+    <color name="tapoSecondColorColorBlueMint">#033F4E</color>
+    <color name="tapoBackgroundColorColorBlueMint">#C4042F39</color>
+
+
+    <color name="buttonBackgroundColorColorPink">#D181B4</color>
+    <color name="separatorBackgroundColorColorPink">#EFEBE0</color>
+    <color name="textMainColorColorPink">#C6FFFFFF</color>
+    <color name="textSecondColorColorPink">#C31B1419</color>
+    <color name="textSecondColorColor2Pink">#C31B1419</color>
+    <color name="inputTextColorColorPink">#FF0303</color>
+    <color name="inputFrameColorColorPink">#FF0303</color>
+    <color name="smallIconFavTariffColorColorPink">#FF0303</color>
+    <color name="smallIconColorColorPink">#C6FFFFFF</color>
+    <color name="tapoMainColorColorPink">#784670</color>
+    <color name="tapoSecondColorColorPink">#C39A578F</color>
+    <color name="tapoBackgroundColorColorPink">#BF876685</color>
+
+
+    <color name="buttonBackgroundColorColorBlueIce">#60A3D9</color>
+    <color name="separatorBackgroundColorColorBlueIce">#60A3D9</color>
+    <color name="textMainColorColorBlueIce">#80B2DF</color>
+    <color name="textSecondColorColorBlueIce">#D4F1F4</color>
+    <color name="textSecondColorColor2BlueIce">#1E3D58</color>
+    <color name="inputTextColorColorBlueIce">#FF0303</color>
+    <color name="inputFrameColorColorBlueIce">#FF0303</color>
+    <color name="smallIconFavTariffColorColorBlueIce">#FF0303</color>
+    <color name="smallIconColorColorBlueIce">#C6FFFFFF</color>
+    <color name="tapoMainColorColorBlueIce">#08476C</color>
+    <color name="tapoSecondColorColorBlueIce">#5885AF</color>
+    <color name="tapoBackgroundColorColorBlueIce">#1E3D58</color>
+
+
+    <color name="buttonBackgroundColorColorGreenMint">#84A98C</color>
+    <color name="separatorBackgroundColorColorGreenMint">#CAD2C5</color>
+    <color name="textMainColorColorGreenMint">#CAD2C5</color>
+    <color name="textSecondColorColorGreenMint">#84A98C</color>
+    <color name="textSecondColorColor2GreenMint">#000000</color>
+    <color name="inputTextColorColorGreenMint">#FF0303</color>
+    <color name="inputFrameColorColorGreenMint">#FF0303</color>
+    <color name="smallIconFavTariffColorColorGreenMint">#FF0303</color>
+    <color name="smallIconColorColorGreenMint">#CAD2C5</color>
+    <color name="tapoMainColorColorGreenMint">#354F52</color>
+    <color name="tapoSecondColorColorGreenMint">#52796F</color>
+    <color name="tapoBackgroundColorColorGreenMint">#2F3E46</color>
+
+    <color name="buttonBackgroundColorColorDesert">#FFB5A7</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorDesert">#FFB5A7</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorDesert">#000000</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorDesert">#000000</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2Desert">#000000</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorDesert">#FF0303</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorDesert">#FF0303</color> <!--RAMKA W INPUTACH   -->
+    <color name="smallIconFavTariffColorColorDesert">#FF0303</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorDesert">#FFB5A7</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorDesert">#F9DCC4</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorDesert">#F8EDEB</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorDesert">#FEC89A</color> <!--TŁO TYLNE -->
+
 
 </resources>

@@ -139,9 +139,9 @@
     </style>
 
     <style name="ThemeOverlay.App.TextInputLayout" parent="">
-        <item name="colorPrimary">?attr/tapoSecondColor</item>
+        <item name="colorPrimary">?attr/inputFrameColor</item>
         <item name="colorOutline">@color/white</item>
-        <item name="colorOnSurface">?attr/tapoSecondColor</item>
+        <item name="colorOnSurface">?attr/inputTextColor</item>
         <item name="startIconTint">@color/white</item>
         <item name="colorError">@color/standard_red</item>
         <item name="android:textColor">@color/white</item>
