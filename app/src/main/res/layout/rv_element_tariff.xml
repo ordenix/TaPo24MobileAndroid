@@ -202,7 +202,7 @@
                 android:id="@+id/imageView3"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:tint="#FFFFFF"/>
+                app:tint="?attr/smallIconFavTariffColor"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

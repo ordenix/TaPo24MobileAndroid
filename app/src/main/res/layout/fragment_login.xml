@@ -20,7 +20,6 @@
                     android:id="@+id/outlinedTextField"
                     app:startIconDrawable="@drawable/user_solid"
                     style="@style/Widget.App.TextInputLayout"
-                    app:startIconTint="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hintLoginOrEmail"
@@ -41,7 +40,6 @@
                     android:textColor="?attr/textSecondColor"
 
                     app:startIconDrawable="@drawable/key_solid"
-                    app:startIconTint="@color/white"
                     style="@style/Widget.App.TextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

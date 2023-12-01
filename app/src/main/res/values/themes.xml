@@ -23,6 +23,9 @@
         <item name="textSecondColor2">@color/textSecondColorColor2</item>
         <item name="inputFrameColor">@color/inputFrameColorColor</item>
         <item name="inputTextColor">@color/inputTextColorColor</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColor</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColor</item>
+        <item name="inputIconColor">@color/inputIconColorColor</item>
         <!-- Base tapo application scheme color. -->
 <!--        <item name="fontFamily">@font/itim</item>-->
         <!-- Primary brand color. -->
@@ -163,6 +166,10 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColor</item>
         <item name="inputFrameColor">@color/inputFrameColorColor</item>
         <item name="inputTextColor">@color/inputTextColorColor</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColor</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColor</item>
+        <item name="inputIconColor">@color/inputIconColorColor</item>
+
     </style>
     <style name="grayTheme">
         <item name="tapoMainColor">@color/tapoMainColorColorGray</item>
@@ -177,6 +184,9 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorGray</item>
         <item name="inputFrameColor">@color/inputFrameColorColorGray</item>
         <item name="inputTextColor">@color/inputTextColorColorGray</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorGray</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorGray</item>
+        <item name="inputIconColor">@color/inputIconColorColorGray</item>
 
     </style>
     <style name="blueMintTheme">
@@ -192,6 +202,9 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorBlueMint</item>
         <item name="inputFrameColor">@color/inputFrameColorColorBlueMint</item>
         <item name="inputTextColor">@color/inputTextColorColorBlueMint</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorBlueMint</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorBlueMint</item>
+        <item name="inputIconColor">@color/inputIconColorColorBlueMint</item>
 
     </style>
     <style name="pinkTheme">
@@ -207,6 +220,9 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorPink</item>
         <item name="inputFrameColor">@color/inputFrameColorColorPink</item>
         <item name="inputTextColor">@color/inputTextColorColorPink</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorPink</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorPink</item>
+        <item name="inputIconColor">@color/inputIconColorColorPink</item>
 
     </style>
     <style name="blueIceTheme">
@@ -222,6 +238,9 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorBlueIce</item>
         <item name="inputFrameColor">@color/inputFrameColorColorBlueIce</item>
         <item name="inputTextColor">@color/inputTextColorColorBlueIce</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorBlueIce</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorBlueIce</item>
+        <item name="inputIconColor">@color/inputIconColorColorBlueIce</item>
     </style>
     <style name="greenMintTheme">
         <item name="tapoMainColor">@color/tapoMainColorColorGreenMint</item>
@@ -236,6 +255,9 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorGreenMint</item>
         <item name="inputFrameColor">@color/inputFrameColorColorGreenMint</item>
         <item name="inputTextColor">@color/inputTextColorColorGreenMint</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorGreenMint</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorGreenMint</item>
+        <item name="inputIconColor">@color/inputIconColorColorGreenMint</item>
     </style>
     <style name="desertTheme">
         <item name="tapoMainColor">@color/tapoMainColorColorDesert</item>
@@ -250,6 +272,9 @@
         <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorDesert</item>
         <item name="inputFrameColor">@color/inputFrameColorColorDesert</item>
         <item name="inputTextColor">@color/inputTextColorColorDesert</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorDesert</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorDesert</item>
+        <item name="inputIconColor">@color/inputIconColorColorDesert</item>
     </style>
 
 </resources>

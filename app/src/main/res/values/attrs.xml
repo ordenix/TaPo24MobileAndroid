@@ -7,6 +7,9 @@
         <attr name="textSecondColor2" format="reference"/>
         <attr name="inputFrameColor" format="reference"/>
         <attr name="inputTextColor" format="reference"/>
+        <attr name="inputFrameBeforeColor" format="reference"/>
+        <attr name="inputTextBeforeColor" format="reference"/>
+        <attr name="inputIconColor" format="reference"/>
         <attr name="tapoMainColor" format="reference"/>
         <attr name="tapoSecondColor" format="reference"/>
         <attr name="tapoBackgroundColor" format="reference"/>
