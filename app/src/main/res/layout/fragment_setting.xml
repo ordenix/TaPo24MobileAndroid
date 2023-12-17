@@ -28,50 +28,40 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView100" android:id="@+id/radioGroupFontTypes">
                 <RadioButton
                         android:text="itim"
-                        android:buttonTint="@drawable/check_box"
                         android:fontFamily="@font/itim"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonItim"/>
                 <RadioButton
                         android:text="sans-serif-light"
-                        android:buttonTint="@drawable/check_box"
                         android:fontFamily="sans-serif-light"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonSansSerifLight"/>
                 <RadioButton
                         android:text="armino"
-                        android:buttonTint="@drawable/check_box"
                         android:fontFamily="@font/arimo"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonArmino"/>
                 <RadioButton
                         android:text="alegreya"
-                        android:buttonTint="@drawable/check_box"
                         android:fontFamily="@font/alegreya"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonAlegreya"/>
                 <RadioButton
                         android:text="armata"
-                        android:buttonTint="@drawable/check_box"
                         android:fontFamily="@font/armata"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonArmata"/>
             </RadioGroup>
             <com.google.android.material.switchmaterial.SwitchMaterial
                     android:text="Pogrubienie tekstów głównych"
-                    style="@style/textStyle"
                     android:layout_width="0dp"
+                    style="@style/Widget.App.Switch"
                     android:layout_height="wrap_content" android:id="@+id/boldMain"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroupFontTypes" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
             <com.google.android.material.switchmaterial.SwitchMaterial
                     android:text="Pogrubienie tekstów taryfikatora"
-                    style="@style/textStyle"
+                    style="@style/Widget.App.Switch"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" android:id="@+id/boldTariff"
                     app:layout_constraintTop_toBottomOf="@+id/boldMain" app:layout_constraintStart_toStartOf="parent"
@@ -90,50 +80,36 @@
                     android:id="@+id/radioGroupTheme">
                 <RadioButton
                         android:text="Domyślny"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioDefault"
                         android:visibility="visible"/>
                 <RadioButton
                         android:text="Szary"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioGray"
                         android:visibility="visible"/>
                 <RadioButton
                         android:text="Morska bryza"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioBlueMint"
                         android:visibility="visible"/>
                 <RadioButton
                         android:text="Pastelowy róż"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioPink"
                         android:visibility="visible"/>
                 <RadioButton
                         android:text="Mroźny lód"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioBlueIce"
                         android:visibility="visible"/>
                 <RadioButton
                         android:text="Mięta o poranku"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioGreenMint"
                         android:visibility="visible"/>
                 <RadioButton
                         android:text="Pustynna burza"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioDesert"
                         android:visibility="visible"/>
@@ -146,15 +122,34 @@
                     android:id="@+id/textView3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView102"/>
+                    app:layout_constraintTop_toBottomOf="@+id/textView1044" android:layout_marginTop="2dp"/>
             <TextView
-                    android:text="@string/warningTheme"
+                    android:text="@string/premiumNotify"
                     android:background="@drawable/style_orange_container"
                     style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView102"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroupTheme"
-                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp" android:maxLines="10" android:textAlignment="center"/>
+            <TextView
+                    android:text="Styl aplikacji został narzucony przez dewelopera z uwagi na okoliczności data zmiany nastąpi: 2020-01-01"
+                    android:background="@drawable/style_orange_container"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textInfoForceStyle"
+                    app:layout_constraintTop_toBottomOf="@+id/textView102"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp" android:maxLines="10" android:textAlignment="center"/>
+            <TextView
+                    android:text="@string/warningTheme"
+                    android:background="@drawable/style_orange_container"
+                    style="@style/textStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView1044"
+                    app:layout_constraintTop_toBottomOf="@+id/textInfoForceStyle"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"/>
             <RadioGroup
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -164,8 +159,6 @@
                     android:visibility="gone">
                 <RadioButton
                         android:text="@string/after09"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonAfter"/>
                 <RadioButton
@@ -180,18 +173,16 @@
                     android:id="@+id/radioGroupConnectionType"
                     app:layout_constraintTop_toBottomOf="@+id/textView3"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            >
+                    android:layout_marginTop="8dp">
                 <RadioButton
                         android:text="@string/wifi_and_others"
-                        android:buttonTint="@drawable/check_box"
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonCell"/>
                 <RadioButton
                         android:text="@string/only_wifi"
                         android:layout_width="match_parent"
-                        style="@style/textStyle"
-                        android:buttonTint="@drawable/check_box"
+
+
                         android:layout_height="wrap_content" android:id="@+id/radioButtonWifi"/>
             </RadioGroup>
             <TextView
@@ -223,9 +214,6 @@
                     app:layout_constraintEnd_toEndOf="parent">
                 <RadioButton
                         android:text="@string/EnvProd"
-                        android:buttonTint="@drawable/check_box"
-
-                        style="@style/textStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/radioButtonProduction"/>
                 <RadioButton

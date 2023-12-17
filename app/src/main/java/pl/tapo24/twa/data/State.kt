@@ -39,7 +39,7 @@ object State {
     var settingTheme : MutableLiveData<ThemeTypes> = MutableLiveData()
     var settingFontBoldTariff : MutableLiveData<Boolean> = MutableLiveData(true)
     var settingFontBoldMain : MutableLiveData<Boolean> = MutableLiveData(true)
-
+    var funeralTheme : MutableLiveData<Boolean> = MutableLiveData(false)
 
     var test = false
 

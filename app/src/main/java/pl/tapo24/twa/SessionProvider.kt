@@ -10,6 +10,7 @@ import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.TokenDecodeData
 import java.util.Base64
 import kotlinx.serialization.decodeFromString
+import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
@@ -72,26 +73,38 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
         MainScope().launch(Dispatchers.IO) {
             async { tapoDb.settingDb().insert(settingToDb) }.await()
         }
-        val arrayToken = jwtToken.split(".")
-        var decodedJwt = ""
-        var decodedData = TokenDecodeData()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            decodedJwt = Base64.getUrlDecoder().decode(arrayToken[1]).decodeToString()
-            decodedData = Json.decodeFromString(decodedJwt)
-            State.userName = decodedData.sub.toString()
-            if (decodedData.role == "Admin" || decodedData.role ==  "Vip") {
-                // TODO: MAT24-36 Wyszukiwarka listy kontrolnej
-                // State.premiumVersion = true
-            } else {
-                // TODO: UNCOMENT ABOVE
-                //State.premiumVersion = false
+        if (State.internetStatus.value !=0) {
+            // get data from backend
+            MainScope().launch(Dispatchers.IO) {
+            val userDataFromBackend: Result<DataUser> = networkClient.getDataUser()
+            userDataFromBackend.onSuccess {
+                val settingToDbUserName = Setting("UserName", it.login!!)
+                val settingToDbRole = Setting("Role", it.role!!)
+
+                    async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
+                    async { tapoDb.settingDb().insert(settingToDbRole) }.await()
+
+                State.userName = it.login!!
+                State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
             }
-
-        } else {
-           // TODO("VERSION.SDK_INT < O AND ADD IN BACKEND FUNCTION THAT RETURN ROLE add to save it and check if internet is online")
         }
-
-
+        } else {
+            // offline
+            var userNameFromDb: Setting? = null
+            var roleFromDb: Setting? = null
+            MainScope().launch(Dispatchers.IO) {
+                async { userNameFromDb = tapoDb.settingDb().getSettingByName("UserName") }.await()
+                async { roleFromDb = tapoDb.settingDb().getSettingByName("Role") }.await()
+                withContext(Dispatchers.Main) {
+                    if (userNameFromDb != null) {
+                        State.userName = userNameFromDb!!.value
+                    }
+                    if (roleFromDb != null) {
+                        State.premiumVersion = roleFromDb!!.value == "Admin" || roleFromDb!!.value == "Vip"
+                    }
+                }
+            }
+        }
     }
 
     suspend fun loginToService(dataToLogin: ToLoginData):Result<String> {

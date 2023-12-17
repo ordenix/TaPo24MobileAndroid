@@ -142,4 +142,22 @@
     <color name="tapoBackgroundColorColorDesert">#FEC89A</color> <!--TŁO TYLNE -->
 
 
+
+    <color name="buttonBackgroundColorColorFuneral">#66666E</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorFuneral">#66666E</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorFuneral">#D0D0D3</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorFuneral">#9999A1</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2Funeral">#D0D0D3</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorFuneral">#9999A1</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorFuneral">#D0D0D3</color> <!--RAMKA W INPUTACH PO KLIKNIĘCIU   -->
+    <color name="inputTextBeforeColorColorFuneral">#9999A1</color> <!--INPUT TEXT PRZED WPISANIEM   -->
+    <color name="inputFrameBeforeColorColorFuneral">#000000</color><!--RAMKA W INPUTACH PRZED KLIKNIĘCIEM   -->
+    <color name="inputIconColorColorFuneral">#000000</color><!--IKONA W INPUCIE   -->
+    <color name="smallIconFavTariffColorColorFuneral">#66666E</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorFuneral">#D0D0D3</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorFuneral">#282829</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorFuneral">#333335</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorFuneral">#000000</color> <!--TŁO TYLNE -->
+
+
 </resources>

@@ -441,7 +441,7 @@ class AssetUpdater(
                         withContext(Dispatchers.Main) {
                             if (dialog.isVisible) {
                                 dialog.body.value =
-                                    ("Dekompresja głównej paczki w tym czasie możesz iśc na kawę ;)")
+                                    ("Dekompresja głównej paczki, w tym czasie możesz iśc na kawę ;)")
                                 dialog.setIndeterminate()
                             }
 

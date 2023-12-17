@@ -1,10 +1,13 @@
 package pl.tapo24.twa.infrastructure
 
+import android.service.autofill.UserData
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.data.RCustomCategoryList
+import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
@@ -338,6 +341,18 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetSpb.message))
     }
 
+    fun getMourningData(): Result<List<Mourning>>{
+        try {
+            val response = service.getMourningData().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetMourning.message))
+    }
+
 
     fun getPostalCodeSequenceByCity(city: String): Result<ResponseCodeSequence>{
         try {
@@ -369,6 +384,17 @@ class NetworkClient(var url: String) {
 
     // login
 
+    fun getDataUser(): Result<DataUser> {
+        try {
+            val response = service.getDataUser(State.jwtToken).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetUserData.message))
+    }
     fun login(loginData: ToLoginData): Result<String> {
         try {
             val response = service.basicLogin(loginData).execute()

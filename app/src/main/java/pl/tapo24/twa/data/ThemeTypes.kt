@@ -12,5 +12,6 @@ enum class ThemeTypes(
     PinkTheme("pinkTheme", R.style.pinkTheme),
     BlueIceTheme("blueIceTheme", R.style.blueIceTheme),
     GreenMintTheme("greenMintTheme", R.style.greenMintTheme),
-    DesertTheme("desertTheme", R.style.desertTheme)
+    DesertTheme("desertTheme", R.style.desertTheme),
+    FuneralTheme("FuneralTheme", R.style.funeralTheme)
 }

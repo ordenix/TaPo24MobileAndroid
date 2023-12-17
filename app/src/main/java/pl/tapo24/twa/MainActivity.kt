@@ -1,10 +1,8 @@
 package pl.tapo24.twa
 
-import android.content.Context
-import android.app.Activity
-import android.app.NotificationChannel
-import android.app.NotificationManager
+import android.app.*
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -31,6 +29,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -50,6 +49,9 @@ import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
+import pl.tapo24.twa.worker.UpdateWorker
+import java.security.AccessController.getContext
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -87,6 +89,8 @@ class MainActivity: AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
     private val themeKey = "default"
+
+    private val funeralTheme = "false"
 
     private var navController: NavController? = null
 
@@ -137,43 +141,61 @@ class MainActivity: AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val workRequest = PeriodicWorkRequestBuilder<UpdateWorker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .build()
+        WorkManager.getInstance(this).enqueue(workRequest)
+
+
         sharedPreferences = getSharedPreferences(
             "ThemePref",
             Context.MODE_PRIVATE
         )
+        when (sharedPreferences.getString(funeralTheme,"false")) {
+            "false" -> {
+                when (sharedPreferences.getString(themeKey, "default")) {
+                    "default" ->  {
+                        theme.applyStyle(R.style.defaultTheme, true)
+                        State.settingTheme.value = ThemeTypes.Default
+                    }
+                    "grayTheme" ->  {
+                        theme.applyStyle(R.style.grayTheme, true)
+                        State.settingTheme.value = ThemeTypes.GrayTheme
+                    }
+                    "blueMintTheme" ->  {
+                        theme.applyStyle(R.style.blueMintTheme, true)
+                        State.settingTheme.value = ThemeTypes.BlueMintTheme
+                    }
+                    "pinkTheme" ->  {
+                        theme.applyStyle(R.style.pinkTheme, true)
+                        State.settingTheme.value = ThemeTypes.PinkTheme
+                    }
+                    "blueIceTheme" ->  {
+                        theme.applyStyle(R.style.blueIceTheme, true)
+                        State.settingTheme.value = ThemeTypes.BlueIceTheme
+                    }
+                    "greenMintTheme" ->  {
+                        theme.applyStyle(R.style.greenMintTheme, true)
+                        State.settingTheme.value = ThemeTypes.GreenMintTheme
+                    }
+                    "desertTheme" ->  {
+                        theme.applyStyle(R.style.desertTheme, true)
+                        State.settingTheme.value = ThemeTypes.DesertTheme
+                    }
 
-        when (sharedPreferences.getString(themeKey, "default")) {
-            "default" ->  {
-                theme.applyStyle(R.style.defaultTheme, true)
-                State.settingTheme.value = ThemeTypes.Default
-            }
-            "grayTheme" ->  {
-                theme.applyStyle(R.style.grayTheme, true)
-                State.settingTheme.value = ThemeTypes.GrayTheme
-            }
-            "blueMintTheme" ->  {
-                theme.applyStyle(R.style.blueMintTheme, true)
-                State.settingTheme.value = ThemeTypes.BlueMintTheme
-            }
-            "pinkTheme" ->  {
-                theme.applyStyle(R.style.pinkTheme, true)
-                State.settingTheme.value = ThemeTypes.PinkTheme
-            }
-            "blueIceTheme" ->  {
-                theme.applyStyle(R.style.blueIceTheme, true)
-                State.settingTheme.value = ThemeTypes.BlueIceTheme
-            }
-            "greenMintTheme" ->  {
-                theme.applyStyle(R.style.greenMintTheme, true)
-                State.settingTheme.value = ThemeTypes.GreenMintTheme
-            }
-            "desertTheme" ->  {
-                theme.applyStyle(R.style.desertTheme, true)
-                State.settingTheme.value = ThemeTypes.DesertTheme
-            }
 
-
+                }
+            }
+            "true" -> {
+                theme.applyStyle(R.style.funeralTheme, true)
+            }
         }
+
+
 
 
         val activity: Activity = this
@@ -264,7 +286,27 @@ class MainActivity: AppCompatActivity() {
         })
         State.settingTheme.observe(this, Observer {
 
-            sharedPreferences.edit().putString(themeKey, it.type).apply()
+            val shared = sharedPreferences.getString(themeKey, "default")
+            if (shared != it.type) {
+                sharedPreferences.edit().putString(themeKey, it.type).apply()
+                activity.finish()
+                activity.startActivity(Intent(activity, MainActivity::class.java))
+                activity.finishAffinity()
+            }
+
+
+        })
+
+        State.funeralTheme.observe(this, Observer {
+
+            val shared = sharedPreferences.getString(funeralTheme, "default")
+            if (shared != it.toString()) {
+                sharedPreferences.edit().putString(funeralTheme, it.toString()).apply()
+                activity.finish()
+                activity.startActivity(Intent(activity, MainActivity::class.java))
+                activity.finishAffinity()
+            }
+
 
         })
 

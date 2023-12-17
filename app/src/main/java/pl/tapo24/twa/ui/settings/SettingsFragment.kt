@@ -139,6 +139,30 @@ class SettingsFragment: Fragment() {
         settingsViewModel.settingFontBoldTariff.observe(viewLifecycleOwner) {
             binding.boldTariff.isChecked = it
         }
+        if (State.premiumVersion) {
+            binding.radioButtonArmino.isEnabled = true
+            binding.radioButtonAlegreya.isEnabled = true
+            binding.radioButtonArmata.isEnabled = true
+
+            binding.radioBlueIce.isEnabled = true
+            binding.radioBlueMint.isEnabled = true
+            binding.radioPink.isEnabled = true
+            binding.radioGreenMint.isEnabled = true
+            binding.radioDesert.isEnabled = true
+            binding.textView102.visibility = View.GONE
+        } else {
+            binding.radioButtonArmino.isEnabled = false
+            binding.radioButtonAlegreya.isEnabled = false
+            binding.radioButtonArmata.isEnabled = false
+
+            binding.radioBlueIce.isEnabled = false
+            binding.radioBlueMint.isEnabled = false
+            binding.radioPink.isEnabled = false
+            binding.radioGreenMint.isEnabled = false
+            binding.radioDesert.isEnabled = false
+            binding.textView102.visibility = View.VISIBLE
+        }
+
         binding.boldTariff.setOnClickListener {
             settingsViewModel.settingFontBoldTariff.value = !settingsViewModel.settingFontBoldTariff.value!!
             settingsViewModel.saveSettings()
@@ -227,6 +251,7 @@ class SettingsFragment: Fragment() {
                 ThemeTypes.BlueIceTheme -> binding.radioGroupTheme.check(binding.radioBlueIce.id)
                 ThemeTypes.GreenMintTheme -> binding.radioGroupTheme.check(binding.radioGreenMint.id)
                 ThemeTypes.DesertTheme -> binding.radioGroupTheme.check(binding.radioDesert.id)
+                ThemeTypes.FuneralTheme -> binding.radioGroupTheme.check(binding.radioDefault.id)
 
             }
         }

@@ -54,6 +54,7 @@ dependencies {
     def room_version = "2.5.2"
     def retrofit_version = "2.9.0"
     def acraVersion = "5.11.1"
+    def work_version ="2.9.0"
 
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
@@ -105,6 +106,9 @@ dependencies {
 //    implementation 'com.google.firebase:firebase-messaging:23.2.1'
 //    implementation 'com.google.firebase:firebase-inappmessaging-display:20.3.5'
     //implementation 'com.google.firebase:firebase-inappmessaging-display-ktx'
+
+    // work
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
 
 }

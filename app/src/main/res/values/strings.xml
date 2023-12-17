@@ -241,6 +241,7 @@
     <string name="setNewPassword">Ustaw nowe hasło</string>
     <string name="fontType">Rodzaj czcionki:</string>
     <string name="warningTheme">Uwaga! Zmiana motywu wymaga restartu aplikacji!!</string>
+    <string name="premiumNotify">Aby aktywować pozostałe funkcjonalności zostań użytkownikiem PREMIUM.</string>
 
 
 </resources>

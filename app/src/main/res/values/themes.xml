@@ -91,6 +91,7 @@
 
 
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+        <item name="radioButtonStyle">@style/Widget.App.RadioButton</item>
 
     </style>
     <style name="Theme.TaPo24.NoActionBar">
@@ -116,6 +117,33 @@
         <item name="buttonBarNeutralButtonStyle">@style/Widget.App.ButtonOrange</item>
         <item name="buttonBarNegativeButtonStyle">@style/Widget.App.ButtonOrange</item>
     </style>
+
+    <style name="Widget.App.RadioButton" parent="Widget.Material3.CompoundButton.RadioButton">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.RadioButton</item>
+        <item name="buttonTint">@color/radio_tint</item>
+        <item name="android:textColor">@color/radio_text</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
+    </style>
+
+
+    <style name="ThemeOverlay.App.RadioButton" parent="">
+
+<!--        <item name="colorOnSurface">@color/buttonBackgroundColorColorDesert</item>-->
+<!--        <item name="colorPrimary">@color/inputTextColorColorDesert</item>-->
+    </style>
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+        <item name="android:fontFamily">?attr/masterFont</item>
+        <item name="android:textColor">?attr/textSecondColor</item>
+        <item name="thumbTint">@color/switch_thumb</item>
+        <item name="trackTint">@color/switch_track</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="">
+        <item name="android:fontFamily">?attr/masterFont</item>
+        <item name="colorPrimary">?attr/buttonBackground</item>
+    </style>
+
     <style name="sansSerifLight">
         <item name="masterFont">sans-serif-light</item>
     </style>
@@ -276,5 +304,22 @@
         <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorDesert</item>
         <item name="inputIconColor">@color/inputIconColorColorDesert</item>
     </style>
+    <style name="funeralTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorFuneral</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorFuneral</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorFuneral</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorFuneral</item>
+        <item name="smallIconColor">@color/smallIconColorColorFuneral</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorFuneral</item>
+        <item name="textMainColor">@color/textMainColorColorFuneral</item>
+        <item name="textSecondColor">@color/textSecondColorColorFuneral</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2Funeral</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorFuneral</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorFuneral</item>
+        <item name="inputTextColor">@color/inputTextColorColorFuneral</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorFuneral</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorFuneral</item>
+        <item name="inputIconColor">@color/inputIconColorColorFuneral</item>
 
+    </style>
 </resources>

@@ -4,14 +4,12 @@ import pl.tapo24.twa.data.RCustomCategoryList
 import pl.tapo24.twa.data.RCustomMapList
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.data.profile.BodyOffenses
-import pl.tapo24.twa.db.entity.AppVersion
-import pl.tapo24.twa.db.entity.AssetList
-import pl.tapo24.twa.db.entity.CustomCategory
-import pl.tapo24.twa.db.entity.Tariff
+import pl.tapo24.twa.db.entity.*
 import pl.tapo24.twa.dbData.entity.*
 import retrofit2.Call
 import retrofit2.http.Body
@@ -110,6 +108,11 @@ interface InterfaceNetworkClient {
     @GET("data/data_spb")
     fun getSpbData(): Call<List<Spb>>
 
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_mourning")
+    fun getMourningData(): Call<List<Mourning>>
+
+
     // endpoints for module
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("postal/get_city_code_sequence_by_city_name/")
@@ -135,6 +138,11 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=UTF-8")
     @PUT("profile/favorites_offenses/")
     fun putFavoritesOffenses(@Header("Authorization")header: String, @Body data: BodyOffenses): Call<String>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("login/get_data_user/")
+    fun getDataUser(@Header("Authorization")header: String): Call<DataUser>
+
 // customCategory
 
     @Headers("Content-Type: application/json; charset=UTF-8")
