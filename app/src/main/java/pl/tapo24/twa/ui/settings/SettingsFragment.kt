@@ -242,6 +242,8 @@ class SettingsFragment: Fragment() {
         }
 
 
+
+
         settingsViewModel.themeType.observe(viewLifecycleOwner) {
             when (it) {
                 ThemeTypes.Default -> binding.radioGroupTheme.check(binding.radioDefault.id)

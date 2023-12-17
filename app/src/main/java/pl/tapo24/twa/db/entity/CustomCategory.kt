@@ -18,7 +18,7 @@ data class CustomCategory(
     var sortOrder: Int = 0,
 
     @ColumnInfo(defaultValue = "true")
-    var synchronized: Boolean = true,
+    var dataSynchronized: Boolean = true,
 
     @ColumnInfo(defaultValue = "false")
     var toDelete: Boolean = false

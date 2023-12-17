@@ -16,7 +16,7 @@ data class MapCategory(
     var tariffId: String = "",
 
     @ColumnInfo(defaultValue = "true")
-    var synchronized: Boolean = true,
+    var dataSynchronized: Boolean = true,
 
     @ColumnInfo(defaultValue = "false")
     var toDelete: Boolean = false

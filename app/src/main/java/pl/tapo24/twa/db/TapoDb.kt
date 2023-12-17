@@ -2,7 +2,9 @@ package pl.tapo24.twa.db
 
 import androidx.room.AutoMigration
 import androidx.room.Database
+import androidx.room.RenameColumn
 import androidx.room.RoomDatabase
+import androidx.room.migration.AutoMigrationSpec
 import pl.tapo24.twa.db.dao.*
 import pl.tapo24.twa.db.entity.*
 
@@ -17,7 +19,7 @@ import pl.tapo24.twa.db.entity.*
         CustomCategory::class,
         MapCategory::class,
         Mourning::class
-    ], version = 10,
+    ], version = 11,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -28,13 +30,17 @@ import pl.tapo24.twa.db.entity.*
         AutoMigration (from = 6, to = 7),
         AutoMigration (from = 7, to = 8),
         AutoMigration (from = 8, to = 9),
-        AutoMigration (from = 9, to = 10)
+        AutoMigration (from = 9, to = 10),
+        AutoMigration (from = 10, to = 11, spec = TapoDb.Migration11::class)
 
 
     ]
 
 )
 abstract class TapoDb: RoomDatabase() {
+    @RenameColumn(tableName = "CustomCategory", fromColumnName ="synchronized", toColumnName = "dataSynchronized")
+    @RenameColumn(tableName = "MapCategory", fromColumnName ="synchronized", toColumnName = "dataSynchronized")
+    class Migration11: AutoMigrationSpec
     abstract fun settingDb(): SettingDao
     abstract fun whatsNewsDb(): WhatsNewsDao
     abstract fun tariffDb(): TariffDao
