@@ -14,6 +14,9 @@ interface MourningDao {
     @Query("SELECT * FROM mourning")
     fun getAll(): List<Mourning>
 
+
+    @Query("SELECT * FROM mourning order by id ASC limit 1")
+    fun getLast(): Mourning
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(item: List<Mourning>)
 

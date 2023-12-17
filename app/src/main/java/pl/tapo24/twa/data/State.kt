@@ -11,7 +11,7 @@ object State {
     var environmentType: EnvironmentType = EnvironmentType.Master
     var enginesType: EnginesType = EnginesType.New
 
-    var internetStatus:  MutableLiveData<Int> = MutableLiveData(0)
+    var internetStatus:  MutableLiveData<NetworkTypes> = MutableLiveData(NetworkTypes.None)
 
     var jwtToken:String = ""
     var userName: String = ""

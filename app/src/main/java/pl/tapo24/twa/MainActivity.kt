@@ -49,6 +49,7 @@ import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
+import pl.tapo24.twa.worker.MourningWorker
 import pl.tapo24.twa.worker.UpdateWorker
 import java.security.AccessController.getContext
 import java.util.concurrent.TimeUnit
@@ -106,7 +107,7 @@ class MainActivity: AppCompatActivity() {
         //fireBase.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, bundle)
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
-        if (State.countChangeFragment > 10 && State.internetStatus.value != 0) {
+        if (State.countChangeFragment > 10 && State.internetStatus.value != NetworkTypes.None) {
             State.countChangeFragment  = 0
             //SessionProvider(tapoDb,networkClient).restoreSession()
             CheckVersion(tapoDb,networkClient,this).checkVersion()
@@ -142,13 +143,7 @@ class MainActivity: AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
 
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val workRequest = PeriodicWorkRequestBuilder<UpdateWorker>(15, TimeUnit.MINUTES)
-            .setConstraints(constraints)
-            .build()
-        WorkManager.getInstance(this).enqueue(workRequest)
+
 
 
         sharedPreferences = getSharedPreferences(
@@ -192,8 +187,28 @@ class MainActivity: AppCompatActivity() {
             }
             "true" -> {
                 theme.applyStyle(R.style.funeralTheme, true)
+                State.funeralTheme.value = true
             }
         }
+
+
+        val workManager =  WorkManager.getInstance(this)
+        val tags = workManager.getWorkInfosByTag("Mourning")
+        MainScope().launch {
+            tags.await()
+            if (tags.get().size < 1) {
+                val constraints = Constraints.Builder()
+                    //.setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+                val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(15, TimeUnit.MINUTES)
+                    .setConstraints(constraints)
+                    .addTag("Mourning")
+                    .build()
+                workManager.enqueue(workRequest)
+            }
+
+        }
+
 
 
 
@@ -203,11 +218,9 @@ class MainActivity: AppCompatActivity() {
 
         MainScope().async(Dispatchers.IO) {
             var settingFont : Setting? = null
-            var settingTheme : Setting? = null
             var settingFontBoldTariff : Setting? = null
             var settingFontBoldMain : Setting? = null
             async { settingFont = tapoDb.settingDb().getSettingByName("settingFont") }.await()
-            async { settingTheme = tapoDb.settingDb().getSettingByName("settingTheme") }.await()
             async { settingFontBoldTariff = tapoDb.settingDb().getSettingByName("settingFontBoldTariff") }.await()
             async { settingFontBoldMain = tapoDb.settingDb().getSettingByName("settingFontBoldMain") }.await()
             if (settingFont == null) {
@@ -221,20 +234,6 @@ class MainActivity: AppCompatActivity() {
             } else {
                 withContext(Dispatchers.Main) {
                     State.settingFont.value = FontTypes.values()[settingFont!!.count]
-                }
-            }
-            if (settingTheme == null) {
-                async {
-                    val setting: Setting = Setting("settingTheme","",ThemeTypes.Default.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                   // State.settingTheme.value = ThemeTypes.Default
-
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-
                 }
             }
             if (settingFontBoldTariff == null) {
@@ -317,7 +316,6 @@ class MainActivity: AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setSupportActionBar(binding.appBarMain.toolbar)
-       // theme.applyStyle(ThemeTypes.PinkTheme.themeName, true)
         setContentView(binding.root)
         binding.appBarMain.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -328,7 +326,6 @@ class MainActivity: AppCompatActivity() {
         navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewInstagram).setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
             intent.setPackage("com.instagram.android")
-
             try {
                 startActivity(intent)
             } catch (e: ActivityNotFoundException) {
@@ -642,7 +639,7 @@ class MainActivity: AppCompatActivity() {
             sessionProvider.restoreSession()
         }
         State.internetStatus.observe(this, Observer {
-            if (it != 0 ) {
+            if (it != NetworkTypes.None ) {
                 // to do execute offline stacks
                 if (!State.isSessionConfirm && State.isLogin.value == true) {
                     sessionProvider.restoreSession()
@@ -654,7 +651,7 @@ class MainActivity: AppCompatActivity() {
             }
         })
         State.isLogin.observe(this, Observer {
-            if (it && State.internetStatus.value != 0) {
+            if (it && State.internetStatus.value != NetworkTypes.None) {
                 favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
             }
         })
@@ -774,6 +771,7 @@ class MainActivity: AppCompatActivity() {
         super.onDestroy()
         navController?.removeOnDestinationChangedListener(listener)
     }
+
 
 }
 

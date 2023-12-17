@@ -133,7 +133,7 @@
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="8dp" android:maxLines="10" android:textAlignment="center"/>
             <TextView
-                    android:text="Styl aplikacji został narzucony przez dewelopera z uwagi na okoliczności data zmiany nastąpi: 2020-01-01"
+                    android:text="@string/style_mourning_warning"
                     android:background="@drawable/style_orange_container"
                     style="@style/textStyle"
                     android:layout_width="wrap_content"

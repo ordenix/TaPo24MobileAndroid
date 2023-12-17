@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
+import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.FragmentTariffBinding
 import java.util.*
@@ -197,7 +198,7 @@ class TariffFragment: Fragment() {
             }
 
         })
-        if (State.internetStatus.value == 0) {
+        if (State.internetStatus.value == NetworkTypes.None) {
             Snackbar.make(binding.root, getString(R.string.offline_work), Snackbar.LENGTH_LONG)
                 .show()
             binding.network.visibility = View.VISIBLE

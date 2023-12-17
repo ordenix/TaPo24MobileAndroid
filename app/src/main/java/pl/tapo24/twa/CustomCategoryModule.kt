@@ -1,6 +1,7 @@
 package pl.tapo24.twa
 
 import kotlinx.coroutines.*
+import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.CustomCategory
@@ -13,7 +14,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
 
     fun synchronizeOnSessionCreated() {
         MainScope().launch(Dispatchers.IO) {
-            if (State.internetStatus.value != 0 && State.isLogin.value == true && !State.isCustomCategorySynchronized) {
+            if (State.internetStatus.value != NetworkTypes.None && State.isLogin.value == true && !State.isCustomCategorySynchronized) {
                 var offline: Setting? = null
                 async { offline  =  tapoDb.settingDb().getSettingByName("offlineToSendCustomCategory")}.await()
                 if (offline == null) {
@@ -32,7 +33,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
 
     private suspend fun receiveFromServerCustomCategory(): List<CustomCategory> {
         var listCustomCategory: List<CustomCategory> = listOf()
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     val response = networkClient.getCustomCategoryList(State.jwtToken)
@@ -47,7 +48,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
     }
     private suspend fun receiveFromServerCustomMap(): List<MapCategory> {
         var listCustomCategory: List<MapCategory> = listOf()
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     val response = networkClient.getCustomMapList(State.jwtToken)
@@ -61,7 +62,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         return listCustomCategory
     }
     private suspend fun addToServerCustomCategory() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                 TODO()
@@ -70,7 +71,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
     }
     private suspend fun updateToServerCustomCategory() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     TODO()
@@ -79,7 +80,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
     }
     private suspend fun deleteToServerCustomCategory() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     TODO()
@@ -88,7 +89,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
     }
     private suspend fun addToServerCustomMap() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     TODO()
@@ -97,7 +98,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
     }
     private suspend fun updateToServerCustomMap() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     TODO()
@@ -106,7 +107,7 @@ class CustomCategoryModule  @Inject constructor(private var tapoDb: TapoDb, priv
         }
     }
     private suspend fun deleteToServerCustomMap() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO) {
                     TODO()

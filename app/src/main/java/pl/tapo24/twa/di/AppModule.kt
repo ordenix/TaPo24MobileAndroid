@@ -20,6 +20,7 @@ import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
+import pl.tapo24.twa.updater.MourningCheck
 import javax.inject.Singleton
 
 @Module
@@ -109,6 +110,12 @@ object AppModule {
     @Singleton
     fun bindSessionProvider(tapoDb: TapoDb, networkClient: NetworkClient): SessionProvider {
         return SessionProvider(tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindMourningCheck(tapoDb: TapoDb, networkClient: NetworkClient): MourningCheck {
+        return MourningCheck(tapoDb, networkClient)
     }
 
 

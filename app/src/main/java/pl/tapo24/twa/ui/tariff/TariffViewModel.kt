@@ -7,6 +7,7 @@ import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.EnginesType
+import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
@@ -70,7 +71,7 @@ class TariffViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             var responseBody: DataQueryFromSuggestion? =null
             val listLastSearch: MutableList<LastSearch> = mutableListOf()
-            if (State.internetStatus.value != 0) {
+            if (State.internetStatus.value != NetworkTypes.None) {
                 async {
                     val body = DataQueryToSuggestion(suggestion)
                     val response = networkClientElastic.getSuggestionList(body)
@@ -179,7 +180,7 @@ class TariffViewModel @Inject constructor(
                     // other result
                     var docIdArray = listOf<String>()
                     var listTariffToPost = mutableListOf<Tariff>()
-                    if (State.internetStatus.value != 0) {
+                    if (State.internetStatus.value != NetworkTypes.None) {
                         // filter online
 
                         async { docIdArray = sendQueryToElasticAndSave(queryText) }.await()

@@ -10,6 +10,7 @@ import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.TokenDecodeData
 import java.util.Base64
 import kotlinx.serialization.decodeFromString
+import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.db.TapoDb
@@ -32,7 +33,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             var jwtFromDb: Setting? = null
             async { jwtFromDb = tapoDb.settingDb().getSettingByName("jwtToken") }.await()
             if (jwtFromDb != null) {
-                if(State.internetStatus.value !=0) {
+                if(State.internetStatus.value != NetworkTypes.None) {
                     var response: Result<String>? = null
                     response = networkClient.checkValidToken(jwtFromDb!!.value)
                     response.onSuccess {
@@ -73,7 +74,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
         MainScope().launch(Dispatchers.IO) {
             async { tapoDb.settingDb().insert(settingToDb) }.await()
         }
-        if (State.internetStatus.value !=0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             // get data from backend
             MainScope().launch(Dispatchers.IO) {
             val userDataFromBackend: Result<DataUser> = networkClient.getDataUser()

@@ -1,6 +1,7 @@
 package pl.tapo24.twa
 
 import kotlinx.coroutines.*
+import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.TapoDb
@@ -15,7 +16,7 @@ class FavouriteModule @Inject constructor(private var tapoDb: TapoDb, private va
         /// check stack offline
 
         MainScope().launch(Dispatchers.IO) {
-            if (State.internetStatus.value != 0 && State.isLogin.value == true && !State.isFavouritesSynchronized) {
+            if (State.internetStatus.value != NetworkTypes.None && State.isLogin.value == true && !State.isFavouritesSynchronized) {
                 var offline: Setting? = null
                 async { offline  =  tapoDb.settingDb().getSettingByName("offlineToSendFavourite")}.await()
                 if (offline == null) {
@@ -62,7 +63,7 @@ class FavouriteModule @Inject constructor(private var tapoDb: TapoDb, private va
     }
 
     private suspend fun sendFavListToServer() {
-        if (State.internetStatus.value != 0) {
+        if (State.internetStatus.value != NetworkTypes.None) {
             MainScope().async {
                 withContext(Dispatchers.IO){
                     var tariffFav: List<Tariff>? = null
@@ -135,7 +136,7 @@ class FavouriteModule @Inject constructor(private var tapoDb: TapoDb, private va
         // if offline then State.isFavouritesSynchronized = false
         if (State.isLogin.value == true) {
             MainScope().launch(Dispatchers.IO) {
-                if (State.internetStatus.value != 0) {
+                if (State.internetStatus.value != NetworkTypes.None) {
                     // interet avaliable
                     sendFavListToServer()
                 } else {

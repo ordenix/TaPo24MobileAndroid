@@ -1,6 +1,7 @@
 package pl.tapo24.twa.ui.settings
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -139,29 +140,36 @@ class SettingsFragment: Fragment() {
         settingsViewModel.settingFontBoldTariff.observe(viewLifecycleOwner) {
             binding.boldTariff.isChecked = it
         }
+        var premiumVisible = State.premiumVersion
         if (State.premiumVersion) {
-            binding.radioButtonArmino.isEnabled = true
-            binding.radioButtonAlegreya.isEnabled = true
-            binding.radioButtonArmata.isEnabled = true
-
-            binding.radioBlueIce.isEnabled = true
-            binding.radioBlueMint.isEnabled = true
-            binding.radioPink.isEnabled = true
-            binding.radioGreenMint.isEnabled = true
-            binding.radioDesert.isEnabled = true
             binding.textView102.visibility = View.GONE
         } else {
-            binding.radioButtonArmino.isEnabled = false
-            binding.radioButtonAlegreya.isEnabled = false
-            binding.radioButtonArmata.isEnabled = false
-
-            binding.radioBlueIce.isEnabled = false
-            binding.radioBlueMint.isEnabled = false
-            binding.radioPink.isEnabled = false
-            binding.radioGreenMint.isEnabled = false
-            binding.radioDesert.isEnabled = false
             binding.textView102.visibility = View.VISIBLE
         }
+        if (State.funeralTheme.value == true) {
+            premiumVisible = false
+            binding.radioDefault.isEnabled = false
+            binding.radioGray.isEnabled = false
+            binding.textInfoForceStyle.visibility = View.VISIBLE
+        } else {
+            binding.textInfoForceStyle.visibility = View.GONE
+            binding.radioDefault.isEnabled = true
+            binding.radioGray.isEnabled = true
+        }
+        binding.boldTariff.isEnabled = premiumVisible
+        binding.boldMain.isEnabled = premiumVisible
+        binding.radioButtonArmino.isEnabled = premiumVisible
+        binding.radioButtonAlegreya.isEnabled = premiumVisible
+        binding.radioButtonArmata.isEnabled = premiumVisible
+
+        binding.radioBlueIce.isEnabled = premiumVisible
+        binding.radioBlueMint.isEnabled = premiumVisible
+        binding.radioPink.isEnabled = premiumVisible
+        binding.radioGreenMint.isEnabled = premiumVisible
+        binding.radioDesert.isEnabled = premiumVisible
+
+
+
 
         binding.boldTariff.setOnClickListener {
             settingsViewModel.settingFontBoldTariff.value = !settingsViewModel.settingFontBoldTariff.value!!

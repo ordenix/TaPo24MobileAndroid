@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import org.acra.ACRA
+import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.AssetList
@@ -40,13 +41,13 @@ class AssetUpdater(
         MainScope().launch(Dispatchers.IO) {
             var existAssetList = false
             async { existAssetList = tapoDb.assetListDb().exist() }.await()
-            if (State.internetStatus.value != 0) {
+            if (State.internetStatus.value != NetworkTypes.None) {
                 // Network available
                 if (State.networkType == "All") {
                     // download because all
                     getAssets()
 
-                } else if (State.networkType == "WiFi" && State.internetStatus.value == 2) {
+                } else if (State.networkType == "WiFi" && State.internetStatus.value == NetworkTypes.WiFi) {
                     // download because condition valid uesr have network WiFi
                     getAssets()
                 } else if (!existAssetList) {
