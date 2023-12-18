@@ -50,8 +50,6 @@ import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
 import pl.tapo24.twa.worker.MourningWorker
-import pl.tapo24.twa.worker.UpdateWorker
-import java.security.AccessController.getContext
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -70,6 +68,9 @@ class MainActivity: AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     @Inject
+    lateinit var initializationModule: InitializationModule
+
+    @Inject
     lateinit var favouriteModule: FavouriteModule
 
     @Inject
@@ -86,7 +87,7 @@ class MainActivity: AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    val dialogNotification = DialogNotificationRequest()
+    private val dialogNotification = DialogNotificationRequest()
 
     private lateinit var sharedPreferences: SharedPreferences
     private val themeKey = "default"
@@ -125,147 +126,41 @@ class MainActivity: AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // granted
                 createChannels()
-                saveInitNotification()
+                initializationModule.saveInitNotification()
             } else {
                 // not granted
-                saveInitNotification()
+                initializationModule.saveInitNotification()
             }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-
+   override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
-
-
-
-
         sharedPreferences = getSharedPreferences(
             "ThemePref",
             Context.MODE_PRIVATE
         )
-        when (sharedPreferences.getString(funeralTheme,"false")) {
-            "false" -> {
-                when (sharedPreferences.getString(themeKey, "default")) {
-                    "default" ->  {
-                        theme.applyStyle(R.style.defaultTheme, true)
-                        State.settingTheme.value = ThemeTypes.Default
-                    }
-                    "grayTheme" ->  {
-                        theme.applyStyle(R.style.grayTheme, true)
-                        State.settingTheme.value = ThemeTypes.GrayTheme
-                    }
-                    "blueMintTheme" ->  {
-                        theme.applyStyle(R.style.blueMintTheme, true)
-                        State.settingTheme.value = ThemeTypes.BlueMintTheme
-                    }
-                    "pinkTheme" ->  {
-                        theme.applyStyle(R.style.pinkTheme, true)
-                        State.settingTheme.value = ThemeTypes.PinkTheme
-                    }
-                    "blueIceTheme" ->  {
-                        theme.applyStyle(R.style.blueIceTheme, true)
-                        State.settingTheme.value = ThemeTypes.BlueIceTheme
-                    }
-                    "greenMintTheme" ->  {
-                        theme.applyStyle(R.style.greenMintTheme, true)
-                        State.settingTheme.value = ThemeTypes.GreenMintTheme
-                    }
-                    "desertTheme" ->  {
-                        theme.applyStyle(R.style.desertTheme, true)
-                        State.settingTheme.value = ThemeTypes.DesertTheme
-                    }
-
-
-                }
-            }
-            "true" -> {
-                theme.applyStyle(R.style.funeralTheme, true)
-                State.funeralTheme.value = true
-            }
-        }
-
+        val funeral: String = sharedPreferences.getString(funeralTheme,"false") ?: "false"
+        val themeName: String = sharedPreferences.getString(themeKey, "default") ?: "default"
+        val themeType = initializationModule.returnStyleTheme(funeral, themeName)
+        State.settingTheme.value = themeType
+        theme.applyStyle(themeType.themeName, true)
 
         val workManager =  WorkManager.getInstance(this)
-        val tags = workManager.getWorkInfosByTag("Mourning")
-        MainScope().launch {
-            tags.await()
-            if (tags.get().size < 1) {
-                val constraints = Constraints.Builder()
-                    //.setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
-                val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(15, TimeUnit.MINUTES)
-                    .setConstraints(constraints)
-                    .addTag("Mourning")
-                    .build()
-                workManager.enqueue(workRequest)
-            }
-
-        }
-
-
-
-
+        val constraints = Constraints.Builder()
+            //.setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(15, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .addTag("Mourning")
+            .build()
+        workManager.enqueueUniquePeriodicWork("Mourning",ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
 
         val activity: Activity = this
         // get theme
 
-        MainScope().async(Dispatchers.IO) {
-            var settingFont : Setting? = null
-            var settingFontBoldTariff : Setting? = null
-            var settingFontBoldMain : Setting? = null
-            async { settingFont = tapoDb.settingDb().getSettingByName("settingFont") }.await()
-            async { settingFontBoldTariff = tapoDb.settingDb().getSettingByName("settingFontBoldTariff") }.await()
-            async { settingFontBoldMain = tapoDb.settingDb().getSettingByName("settingFontBoldMain") }.await()
-            if (settingFont == null) {
-                async {
-                    val setting: Setting = Setting("settingFont","",FontTypes.itim.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFont.value = FontTypes.itim
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFont.value = FontTypes.values()[settingFont!!.count]
-                }
-            }
-            if (settingFontBoldTariff == null) {
-                async {
-                    val setting: Setting = Setting("settingFontBoldTariff","", state = true)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldTariff.value = true
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldTariff.value = settingFontBoldTariff!!.state
-                }
-            }
-            if (settingFontBoldMain == null) {
-                async {
-                    val setting: Setting = Setting("settingFontBoldMain","", state = true)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldMain.value = true
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFontBoldMain.value = settingFontBoldMain!!.state
-                }
-            }
-
-        }
-
-
+        initializationModule.getThemeParameters()
         State.settingFontBoldTariff.observe(this, Observer {
             if (it) {
                 theme.applyStyle(R.style.boldFont, true)
@@ -284,7 +179,6 @@ class MainActivity: AppCompatActivity() {
             theme.applyStyle(it.themeName, true)
         })
         State.settingTheme.observe(this, Observer {
-
             val shared = sharedPreferences.getString(themeKey, "default")
             if (shared != it.type) {
                 sharedPreferences.edit().putString(themeKey, it.type).apply()
@@ -292,12 +186,8 @@ class MainActivity: AppCompatActivity() {
                 activity.startActivity(Intent(activity, MainActivity::class.java))
                 activity.finishAffinity()
             }
-
-
         })
-
         State.funeralTheme.observe(this, Observer {
-
             val shared = sharedPreferences.getString(funeralTheme, "default")
             if (shared != it.toString()) {
                 sharedPreferences.edit().putString(funeralTheme, it.toString()).apply()
@@ -305,14 +195,7 @@ class MainActivity: AppCompatActivity() {
                 activity.startActivity(Intent(activity, MainActivity::class.java))
                 activity.finishAffinity()
             }
-
-
         })
-
-
-
-
-
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setSupportActionBar(binding.appBarMain.toolbar)
@@ -323,31 +206,9 @@ class MainActivity: AppCompatActivity() {
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewInstagram).setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
-            intent.setPackage("com.instagram.android")
-            try {
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
-                startActivity(intent2)
-
-            }
-        }
-        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewFacebook).setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
-            intent.setPackage("com.facebook.katana")
-
-            try {
-                startActivity(intent)
-            } catch (e: ActivityNotFoundException) {
-                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
-                startActivity(intent2)
-
-            }
-        }
-
         navController = findNavController(R.id.nav_host_fragment_content_main)
+        initializeNaveMenu(navView)
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
@@ -357,7 +218,6 @@ class MainActivity: AppCompatActivity() {
         )
         setupActionBarWithNavController(navController!!, appBarConfiguration)
         navView.setupWithNavController(navController!!)
-
         drawerLayout.addDrawerListener(object : DrawerListener {
             override fun onDrawerSlide(view: View, v: Float) {}
             override fun onDrawerOpened(view: View) {}
@@ -370,12 +230,9 @@ class MainActivity: AppCompatActivity() {
             }
             override fun onDrawerStateChanged(i: Int) {}
         })
-
-
-
         navView.setNavigationItemSelectedListener{
             if (it.itemId == R.id.nav_tariff) {
-                drawerLayout?.addDrawerListener(object : DrawerLayout.DrawerListener {
+                drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
                     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
                     override fun onDrawerOpened(drawerView: View) {}
                     override fun onDrawerStateChanged(newState: Int) {}
@@ -389,23 +246,9 @@ class MainActivity: AppCompatActivity() {
             } else {
                 navController?.navigate(it.itemId)
                 drawerLayout.closeDrawer(GravityCompat.START)
-
             }
             true
         }
-
-
-
-
-
-
- //       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
-       // firebaseAnalytics = Firebase.analytics
-//        firebaseAnalytics.setUserProperty("favorite_food2", "food")
-//        firebaseAnalytics.setUserProperty("favorite_food", "food")
-       // FirebaseDatabase.getInstance().setPersistenceEnabled(false);
-
 
 
         //// START NOTIFICATION SECTION
@@ -432,171 +275,24 @@ class MainActivity: AppCompatActivity() {
                                 )
                             } else {
                                 createChannels()
-                                saveInitNotification()
+                                initializationModule.saveInitNotification()
                             }
                         }
                         dialogNotification.skipClick = {
                             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                                 createChannels(true)
                             }
-                            saveInitNotification()
+                            initializationModule.saveInitNotification()
                             dialogNotification.dismiss()
                         }
                     }
-
                 }
-
             }
         }
         // END NOTIFICATION SECTION
 
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            // Create the NotificationChannel.
-//            val name = "TEST"
-//            val descriptionText =" getString(R.string.channel_description)"
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val mChannel = NotificationChannel("CHANNEL_ID", name, importance)
-//            mChannel.description = descriptionText
-//            // Register the channel with the system. You can't change the importance
-//            // or other notification behaviors after this.
-//            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(mChannel)
-//        }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            // Create the NotificationChannel.
-//            val name = "TEST2"
-//            val descriptionText =" getString(R.string.channel_description)"
-//            val importance = NotificationManager.IMPORTANCE_DEFAULT
-//            val mChannel = NotificationChannel("CHANNEL_ID2", name, importance)
-//            mChannel.description = descriptionText
-//            // Register the channel with the system. You can't change the importance
-//            // or other notification behaviors after this.
-//            val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-//            notificationManager.createNotificationChannel(mChannel)
-//            val ss = notificationManager.notificationChannels
-//            println(ss)
-//        }
-
-        //        ActivityCompat.requestPermissions(
-//            this, arrayOf(
-//                android.Manifest.permission.POST_NOTIFICATIONS
-//            ), 112
-//        )
-
-//        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
-//            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-//            putExtra(Settings.EXTRA_CHANNEL_ID, "fcm_fallback_notification_channel")
-//        }
-//        startActivity(intent)
-
-
-        // init notification
-
-//        if (this.checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
-//            val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
-//                putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-////            putExtra(Settings.EXTRA_CHANNEL_ID, "fcm_fallback_notification_channel")
-//            }
-//            startActivity(intent)
-//        }
-
-
-
-
-
-
-//        val intent = Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS).apply {
-//            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
-//            putExtra(Settings.EXTRA_CHANNEL_ID, "CHANNEL_ID2")
-//        }
-//        startActivity(intent)
-
-/// TOKEEN
-
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-//            if (!task.isSuccessful) {
-//               // Log.w(TAG, "Fetching FCM registration token failed", task.exception)
-//                return@OnCompleteListener
-//            }
-//
-//            // Get new FCM registration token
-//            val token = task.result
-//
-//            // Log and toast
-//            Log.d("SSSSSSSSSSSSSSSSSSSSSS", token)
-//            println(token)
-//           // Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
-//        })
-//        firebaseAnalytics = Firebase.analytics
-//        val bundle = Bundle()
-//        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "id")
-//        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name")
-//        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image")
-//        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
-        //FirebaseInAppMessaging.getInstance().setAutomaticDataCollectionEnabled(true);
-//        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getPDF()
-//        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getGraphics()
-
-        //FirebaseInAppMessaging.getInstance().on
-        MainScope().launch(Dispatchers.IO) {
-            var settingUid: Setting? = null
-            async { settingUid = tapoDb.settingDb().getSettingByName("uid") }.await()
-
-            if (settingUid == null) {
-                async {
-                    val response = networkClient.getUid()
-                    response.onSuccess {
-                        val setting = Setting("uid",it.uid!!)
-                        tapoDb.settingDb().insert(setting)
-                    }
-
-                }.await()
-            } else {
-                State.uid = settingUid!!.value
-            }
-        }
-
-        MainScope().launch(Dispatchers.IO) {
-            var settingEnvironment : Setting? = null
-            var settingEngine : Setting? = null
-            async { settingEnvironment = tapoDb.settingDb().getSettingByName("settingEnvironment") }.await()
-            async { settingEngine = tapoDb.settingDb().getSettingByName("settingEngine") }.await()
-
-            if (settingEnvironment == null) {
-                State.environmentType = EnvironmentType.Master
-                async {
-                    val setting: Setting = Setting("settingEnvironment","", EnvironmentType.Master.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                State.environmentType = EnvironmentType.Master
-
-            } else {
-                State.environmentType = EnvironmentType.values()[settingEnvironment!!.count]
-            }
-            if (settingEngine == null) {
-                State.enginesType = EnginesType.New
-                async {
-                    val setting: Setting = Setting("settingEngine","",EnginesType.New.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                State.enginesType = EnginesType.New
-            } else {
-                State.enginesType = EnginesType.values()[settingEngine!!.count]
-            }
-        }
-
-//        val settingUid = tapoDb.settingDb().getSettingByName("uid")
-//        if (settingUid == null) {
-//            MainScope().launch(Dispatchers.IO) {
-//                networkClient.getUid()
-//            }
-//        }
-//        val uid: Uid = Uid()
-
-
-
-
+        initializationModule.getUid()
+        initializationModule.getSetting()
         DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
 
         CheckVersion(tapoDb,networkClient,this).checkVersion()
@@ -632,8 +328,6 @@ class MainActivity: AppCompatActivity() {
             // Add customization options here
 
 
-
-
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
         if (State.isLogin.value == false && !State.isSessionRestored) {
             sessionProvider.restoreSession()
@@ -663,17 +357,13 @@ class MainActivity: AppCompatActivity() {
            if (settingNetwork == null) {
                withContext(Dispatchers.Main) {
                    dialogTypeDownloadData.show()
-
                }
            } else {
                State.networkType = settingNetwork!!.value
                // DOWNOLOAD DATA
                AssetUpdater(tapoDb,dataTapoDb,networkClient,context, context.supportFragmentManager, activity).getAllData()
-
            }
-
        }
-
 
         IntentRouter().route(intent, navController)
     }
@@ -682,8 +372,6 @@ class MainActivity: AppCompatActivity() {
         super.onNewIntent(intent)
         IntentRouter().route(intent, navController)
     }
-
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -705,7 +393,6 @@ class MainActivity: AppCompatActivity() {
         if (item.itemId == R.id.action_settings) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_settings)
-
         }
         if (item.itemId == R.id.action_info) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -740,13 +427,6 @@ class MainActivity: AppCompatActivity() {
 
     }
 
-    private fun saveInitNotification() {
-        MainScope().launch(Dispatchers.IO){
-            val settingToInsert = Setting("NotificationInit","",0,state = true)
-            async { tapoDb.settingDb().insert(settingToInsert) }.await()
-        }
-    }
-
     private fun createChannels(block: Boolean = false) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create the NotificationChannel.
@@ -762,8 +442,6 @@ class MainActivity: AppCompatActivity() {
             // or other notification behaviors after this.
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(mChannel)
-//            val ss = notificationManager.notificationChannels
-//            println(ss)
         }
     }
 
@@ -772,7 +450,28 @@ class MainActivity: AppCompatActivity() {
         navController?.removeOnDestinationChangedListener(listener)
     }
 
+    private fun initializeNaveMenu(navView: NavigationView) {
 
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewInstagram).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
+            intent.setPackage("com.instagram.android")
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/tapo24.pl/"))
+                startActivity(intent2)
+            }
+        }
+        navView.getHeaderView(0).findViewById<ImageView>(R.id.imageViewFacebook).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
+            intent.setPackage("com.facebook.katana")
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                val intent2 = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/TaPo24/"))
+                startActivity(intent2)
+            }
+        }
+    }
 }
-
-
+// 781

@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import pl.tapo24.twa.CustomCategoryModule
 import pl.tapo24.twa.FavouriteModule
+import pl.tapo24.twa.InitializationModule
 import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
@@ -129,5 +130,11 @@ object AppModule {
     @Singleton
     fun bindCustomCategoryModule(tapoDb: TapoDb, networkClient: NetworkClient): CustomCategoryModule {
         return CustomCategoryModule(tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindInitializationModule(tapoDb: TapoDb, networkClient: NetworkClient): InitializationModule {
+        return InitializationModule(tapoDb, networkClient)
     }
 }
