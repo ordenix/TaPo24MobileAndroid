@@ -9,7 +9,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import pl.tapo24.twa.CustomCategoryModule
 import pl.tapo24.twa.FavouriteModule
 import pl.tapo24.twa.InitializationModule
 import pl.tapo24.twa.SessionProvider
@@ -21,7 +20,11 @@ import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
+import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.updater.MourningCheck
+import pl.tapo24.twa.useCase.customCategory.AddCustomCategoryUseCase
+import pl.tapo24.twa.useCase.customCategory.ChangeNameCustomCategoryUseCase
+import pl.tapo24.twa.useCase.customCategory.SynchronizeCustomCategoryUseCase
 import javax.inject.Singleton
 
 @Module
@@ -128,13 +131,32 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindCustomCategoryModule(tapoDb: TapoDb, networkClient: NetworkClient): CustomCategoryModule {
-        return CustomCategoryModule(tapoDb, networkClient)
+    fun bindInitializationModule(tapoDb: TapoDb, networkClient: NetworkClient): InitializationModule {
+        return InitializationModule(tapoDb, networkClient)
     }
 
     @Provides
     @Singleton
-    fun bindInitializationModule(tapoDb: TapoDb, networkClient: NetworkClient): InitializationModule {
-        return InitializationModule(tapoDb, networkClient)
+    fun bindAddCustomCategory(tapoDb: TapoDb, @ApplicationContext app: Context): AddCustomCategoryUseCase {
+        return AddCustomCategoryUseCase(tapoDb, app)
+    }
+
+
+    @Provides
+    @Singleton
+    fun bindCustomCategoryModule(@ApplicationContext app: Context, tapoDb: TapoDb, networkClient: NetworkClient): CustomCategoryModule {
+        return CustomCategoryModule(app, tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindChangeNameCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): ChangeNameCustomCategoryUseCase {
+        return ChangeNameCustomCategoryUseCase(app, tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindSynchronizeCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb, networkClient: NetworkClient): SynchronizeCustomCategoryUseCase {
+        return SynchronizeCustomCategoryUseCase(app, tapoDb, networkClient)
     }
 }

@@ -1,4 +1,4 @@
-package pl.tapo24.twa.data
+package pl.tapo24.twa.data.customCategory
 
 
 import pl.tapo24.twa.db.entity.MapCategory

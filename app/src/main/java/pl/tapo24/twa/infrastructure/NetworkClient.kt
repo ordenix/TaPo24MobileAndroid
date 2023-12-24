@@ -1,10 +1,6 @@
 package pl.tapo24.twa.infrastructure
 
-import android.service.autofill.UserData
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
-import pl.tapo24.twa.FavouriteModule
-import pl.tapo24.twa.data.RCustomCategoryList
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.login.DataUser
@@ -484,9 +480,9 @@ class NetworkClient(var url: String) {
 
     fun getCustomCategoryList(token: String):Result<List<CustomCategory>> {
         try {
-            val response = service.getCustomCategoryList(token).execute()
+            val response = service.getCustomCategoryList("Bearer $token").execute()
             return  if (response.isSuccessful) {
-                Result.success(response.body()!!.r)
+                Result.success(response.body()!!)
             } else {
                 Result.failure(HttpException(response.errorBody().toString()))
             }
@@ -500,7 +496,7 @@ class NetworkClient(var url: String) {
 
     fun getCustomMapList(token: String):Result<List<MapCategory>> {
         try {
-            val response = service.getCustomMapList(token).execute()
+            val response = service.getCustomMapList("Bearer $token").execute()
             return  if (response.isSuccessful) {
                 Result.success(response.body()!!.r)
             } else {
@@ -511,6 +507,51 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalCustomCategoryMap.message))
+
+    }
+
+    fun putCustomCategory(token: String, data: CustomCategory):Result<CustomCategory> {
+        try {
+            val response = service.putCustomCategory("Bearer $token", data).execute()
+            return  if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                 if (response.code() == 409 && errorMessage == "User have already that custom category name") {
+                    return Result.failure(HttpException(HttpMessage.UserHaveAlreadyThatCustomCategory.message))
+                }
+                else {
+                    return Result.failure(HttpException(errorMessage))
+                }
+
+            }
+
+        }catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalCustomCategory.message))
+
+    }
+
+    fun deleteCustomCategory(token: String, customCategory: CustomCategory):Result<String> {
+        try {
+            val response = service.deleteCustomCategory("Bearer $token", customCategory).execute()
+            return  if (response.isSuccessful) {
+                Result.success(response.body()!!.r ?: "OK")
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                if (response.code() == 409 && errorMessage == "This custom category not exist") {
+                    return Result.failure(HttpException(HttpMessage.ThisCustomCategoryNotExist.message))
+                }
+                else {
+                    return Result.failure(HttpException(errorMessage))
+                }
+            }
+
+        }catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalCustomCategory.message))
 
     }
 

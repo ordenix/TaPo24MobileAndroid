@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.tariff.customCategory.CustomCategoryFragment">
-
-    <TextView
+>
+    <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello"/>
+            android:layout_height="wrap_content" android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp" android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/style_social_media_button"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/rvCustomCategory" android:maxHeight="250dp"/>
+            <Button
+                    style="@style/Widget.App.Button.Orange"
+                    app:icon="@drawable/add_box"
+                    android:text="@string/addCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/addCategory"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/rvCustomCategory"/>
+            <TextView
+                    style="@style/textStyleLarge"
+                    android:text="@string/showOwnCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView103"
+                    app:layout_constraintTop_toBottomOf="@+id/addCategory" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginTop="8dp" android:maxLines="5"
+                    android:textAlignment="center"/>
+            <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView103"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp">
+                <RadioButton
+                        android:text="Na początku listy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton4"/>
+                <RadioButton
+                        android:text="Na końcu listy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton5"/>
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

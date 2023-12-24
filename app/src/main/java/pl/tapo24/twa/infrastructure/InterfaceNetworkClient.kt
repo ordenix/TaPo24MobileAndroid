@@ -1,24 +1,19 @@
 package pl.tapo24.twa.infrastructure
 
-import pl.tapo24.twa.data.RCustomCategoryList
-import pl.tapo24.twa.data.RCustomMapList
+import pl.tapo24.twa.data.RString
+import pl.tapo24.twa.data.customCategory.RCustomCategoryList
+import pl.tapo24.twa.data.customCategory.RCustomMapList
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.customCategory.RCustomCategory
 import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.entity.*
-import pl.tapo24.twa.dbData.entity.*
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.PUT
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
@@ -146,11 +141,18 @@ interface InterfaceNetworkClient {
 // customCategory
 
     @Headers("Content-Type: application/json; charset=UTF-8")
-    @PUT("custom_category/custom_category_list/")
-    fun getCustomCategoryList(@Header("Authorization")header: String): Call<RCustomCategoryList>
+    @GET("custom_category/custom_category_list/")
+    fun getCustomCategoryList(@Header("Authorization")header: String): Call<List<CustomCategory>>
     @Headers("Content-Type: application/json; charset=UTF-8")
     @PUT("custom_category/custom_category_map_list/")
     fun getCustomMapList(@Header("Authorization")header: String): Call<RCustomMapList>
 
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @PUT("custom_category/custom_category/")
+    fun putCustomCategory(@Header("Authorization")header: String, @Body customCategory: CustomCategory): Call<RCustomCategory>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @HTTP(method = "DELETE", path = "custom_category/custom_category/", hasBody = true)
+    fun deleteCustomCategory(@Header("Authorization")header: String, @Body customCategory: CustomCategory): Call<RString>
 
 }

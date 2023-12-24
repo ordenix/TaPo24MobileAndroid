@@ -23,5 +23,7 @@ enum class HttpMessage(val message: String) {
     UserWasBanned("Użytkownik został zbanowany"),
     MaxExecuteForgotPassword("Osiągnięto maksymalną ilość prób żądania nadania nowego hasła ciągu 30 minut"),
     DifferentIp("Obecny adres IP jest inny niż ten podczas żądania zmiany hasła. Najprawdopodobniej doszło do zmiany sieci - spróbuj jeszcze raz wysłać żądanie zmiany hasła w tej samej sieci"),
+    UserHaveAlreadyThatCustomCategory("Użytkownik posiada już taką kategorię"),
+    ThisCustomCategoryNotExist("Taka kategoria nie istnieje"),
 
 }

@@ -243,6 +243,12 @@
     <string name="warningTheme">Uwaga! Zmiana motywu wymaga restartu aplikacji!!</string>
     <string name="premiumNotify">Aby aktywować pozostałe funkcjonalności zostań użytkownikiem PREMIUM.</string>
     <string name="style_mourning_warning">Motyw aplikacji został automatycznie zmieniony z uwagi na obowiązującą żałobę. Indywidualna zmiana wersji kolorystycznej nie jest na razie możliwa. Prosimy o chwilę zadumy.</string>
+    <string name="networkRequiedToAddCustomCategory">Aby dodać kategorię musisz być połączony z internetem</string>
+    <string name="succesAddCustomCategory">Dodano kategorię</string>
+    <string name="ownCategory">Własne kategorie</string>
+    <string name="addCategory">Dodaj kategorię</string>
+    <string name="showOwnCategory">Wyświetlanie własnych kategorii</string>
+    <string name="updateCustomCategory">Zaktualizowano nazwę kategorii</string>
 
 
 </resources>

@@ -71,6 +71,7 @@
         <action android:id="@+id/action_nav_tariff_to_nav_law" app:destination="@id/nav_law"/>
         <action android:id="@+id/action_nav_tariff_to_nav_law2" app:destination="@id/nav_law"/>
         <action android:id="@+id/action_nav_tariff_to_nav_road" app:destination="@id/nav_road"/>
+        <action android:id="@+id/action_nav_tariff_to_nav_customCategory" app:destination="@id/nav_customCategory"/>
     </fragment>
     <fragment
             android:id="@+id/nav_settings"
@@ -290,4 +291,7 @@
         <action android:id="@+id/action_nav_forgotPasswordStep2_to_nav_success" app:destination="@id/nav_success"/>
         <action android:id="@+id/action_nav_forgotPasswordStep2_to_nav_error" app:destination="@id/nav_error"/>
     </fragment>
+    <fragment android:id="@+id/nav_customCategory"
+              android:name="pl.tapo24.twa.ui.tariff.customCategory.CustomCategoryFragment"
+              android:label="@string/ownCategory" tools:layout="@layout/fragment_custom_category"/>
 </navigation>
