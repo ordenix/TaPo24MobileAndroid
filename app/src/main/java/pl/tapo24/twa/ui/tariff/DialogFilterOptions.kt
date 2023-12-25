@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ListPopupWindow
 import androidx.fragment.app.DialogFragment
+import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.customCategory.CategoryDictionary
+import pl.tapo24.twa.data.customCategory.DataCategory
 import pl.tapo24.twa.databinding.DialogTariffFilterBinding
 
 
@@ -19,102 +22,41 @@ class DialogFilterOptions: DialogFragment() {
     private var _binding: DialogTariffFilterBinding? = null
     private val binding get() = _binding!!
 
-    var onSelected: (value: String) -> Unit = {
+    var onSelected: (value: DataCategory) -> Unit = {
         it
     }
-    var selectedValue: String = "%"
+
+    var onClickOnManage: () -> Unit = {
+
+    }
+var selectedCategory: DataCategory = CategoryDictionary.All.element
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = DialogTariffFilterBinding.inflate(inflater,container,false)
         val root = binding.root
 
-        val options = ArrayList<String>()
 
-        options.add("option 1")
-        options.add("option 2")
-        options.add("option 3")
+        if (State.premiumVersion) {
+            binding.notifyAddCustomCategoryPremium.visibility = View.GONE
+            binding.editCustomCategory.isEnabled = true
 
-        var courses = arrayOf<String?>("C", "Data structures",
-            "Interview prep", "Algorithms",
-            "DSA with java", "OS")
+        } else {
+            binding.notifyAddCustomCategoryPremium.visibility = View.VISIBLE
+            binding.editCustomCategory.isEnabled = false
 
-// use default spinner item to show options in spinner
-
-// use default spinner item to show options in spinner
-//        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(requireContext(), r2.layout.simple_spinner_item, courses)
-//        adapter.setDropDownViewResource(android.R.layout
-//            .simple_spinner_dropdown_item)
-//        binding.spinner.adapter = adapter
-        var textToSet = ""
-        when (selectedValue) {
-            "%" -> {
-                textToSet= "Wszystkie wykroczenia"
-            }
-            "prevention" -> {
-                textToSet= "Prewencja"
-            }
-            "accident" -> {
-                textToSet= "Kolizja"
-            }
-            "pedestrian" -> {
-                textToSet= "Wykroczenia pieszych"
-            }
-            "support" -> {
-                textToSet= "Wykroczenia pieszych z urz. wsp. ruch/ rowerzystów"
-            }
-            "to_pede" -> {
-                textToSet= "Wykroczenia wobec pieszych przez poj. mech."
-            }
-            "non_mech_to_pede" -> {
-                textToSet= "Wykroczenia wobec pieszych przez poj. inny niż mech."
-            }
-            "speed" -> {
-                textToSet= "Prędkość pojazdu/ wyprzedzanie"
-            }
-            "lights" -> {
-                textToSet= "Światła zewnętrzne"
-            }
-            "sign" -> {
-                textToSet= "Znaki i sygnały"
-            }
-            "belts" -> {
-                textToSet= "Przewóz osób/ pasy bezp."
-            }
-            "invalid" -> {
-                textToSet= "Karta Parkingowa"
-            }
-            "stop" -> {
-                textToSet= "Postój/Zatrzymanie/ Cofanie/ Zawracanie/ Holowanie"
-            }
-            "allow" -> {
-                textToSet= "Dopuszczenie/ Kierowanie"
-            }
-            "package" -> {
-                textToSet= "Przewóz ładunku/ Tablice/ Przejazd Kolejowy lub tramw."
-            }
-            "others" -> {
-                textToSet= "Pozostałe"
-            }
         }
-        binding.button8.text = textToSet
+        binding.editCustomCategory.setOnClickListener {
+            onClickOnManage()
+        }
 
 
-        val items = listOf("Wszystkie wykroczenia",
-            "Prewencja",
-            "Kolizja",
-            "Wykroczenia pieszych",
-            "Wykroczenia pieszych z urz. wsp. ruch/ rowerzystów",
-            "Wykroczenia wobec pieszych przez poj. mech.",
-            "Wykroczenia wobec pieszych przez poj. inny niż mech.",
-            "Prędkość pojazdu/ wyprzedzanie",
-            "Światła zewnętrzne",
-            "Znaki i sygnały",
-            "Przewóz osób/ pasy bezp.",
-            "Karta Parkingowa",
-            "Postój/Zatrzymanie/ Cofanie/ Zawracanie/ Holowanie",
-            "Dopuszczenie/ Kierowanie",
-            "Przewóz ładunku/ Tablice/ Przejazd Kolejowy lub tramw.",
-            "Pozostałe")
+        val listDataCategory = prepareListDataCategory()
+
+        //val textToSet = listDataCategory.find { it.query == selectedValue }?.name ?: "Wszystkie wykroczenia"
+        binding.button8.text = selectedCategory.name
+
+        val items = prepareListToShow(listDataCategory)
+
         val listPopupWindow = ListPopupWindow(requireContext(), null, r2.attr.listPopupWindowStyle)
         listPopupWindow.anchorView = binding.button8
         val adapter2 = ArrayAdapter(requireContext(), R.layout.list_popup_window_item, items)
@@ -122,78 +64,10 @@ class DialogFilterOptions: DialogFragment() {
 
         listPopupWindow.setOnItemClickListener { parent: AdapterView<*>?, view: View?, position: Int, id: Long ->
             // Respond to list popup window item click.
-            var value: String = ""
-            var text: String = ""
-            when (id.toInt()) {
-                0 -> {
-                    value = "%"
-                    text= "Wszystkie wykroczenia"
-                }
-                1 -> {
-                    value = "prevention"
-                    text= "Prewencja"
-                }
-                2 -> {
-                    value = "accident"
-                    text= "Kolizja"
-                }
-                3 -> {
-                    value = "pedestrian"
-                    text= "Wykroczenia pieszych"
-                }
-                4 -> {
-                    value = "support"
-                    text= "Wykroczenia pieszych z urz. wsp. ruch/ rowerzystów"
-                }
-                5 -> {
-                    value = "to_pede"
-                    text= "Wykroczenia wobec pieszych przez poj. mech."
-                }
-                6 -> {
-                    value = "non_mech_to_pede"
-                    text= "Wykroczenia wobec pieszych przez poj. inny niż mech."
-                }
-                7 -> {
-                    value = "speed"
-                    text= "Prędkość pojazdu/ wyprzedzanie"
-                }
-                8 -> {
-                    value = "lights"
-                    text= "Światła zewnętrzne"
-                }
-                9 -> {
-                    value = "sign"
-                    text= "Znaki i sygnały"
-                }
-                10 -> {
-                    value = "belts"
-                    text= "Przewóz osób/ pasy bezp."
-                }
-                11 -> {
-                    value = "invalid"
-                    text= "Karta Parkingowa"
-                }
-                12 -> {
-                    value = "stop"
-                    text= "Postój/Zatrzymanie/ Cofanie/ Zawracanie/ Holowanie"
-                }
-                13 -> {
-                    value = "allow"
-                    text= "Dopuszczenie/ Kierowanie"
-                }
-                14 -> {
-                    value = "package"
-                    text= "Przewóz ładunku/ Tablice/ Przejazd Kolejowy lub tramw."
-                }
-                15 -> {
-                    value = "others"
-                    text= "Pozostałe"
-                }
-            }
-            binding.button8.text = text
-            // Dismiss popup.
+            binding.button8.text = listDataCategory[id.toInt()].name
+
             listPopupWindow.dismiss()
-            onSelected(value)
+            onSelected(listDataCategory[id.toInt()])
             dialog?.dismiss()
 
         }
@@ -210,6 +84,22 @@ class DialogFilterOptions: DialogFragment() {
             val height = ViewGroup.LayoutParams.WRAP_CONTENT
             dialog.window!!.setLayout(width, height)
         }
+    }
+    //236
+    private fun prepareListDataCategory(): List<DataCategory> {
+        val list: MutableList<DataCategory> = mutableListOf()
+        for (category in CategoryDictionary.values()) {
+            list.add(category.element)
+        }
+        return list
+    }
+
+    private fun prepareListToShow(list: List<DataCategory>): List<String> {
+        val listToShow: MutableList<String> = mutableListOf()
+        for (category in list) {
+            listToShow.add(category.name)
+        }
+        return listToShow
     }
 
 }

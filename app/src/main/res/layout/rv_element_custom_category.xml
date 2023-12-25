@@ -39,6 +39,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"/>
             <ImageView
                     app:tint="?attr/smallIconColor"
+                    android:onClick="@{() -> viewModel.performChangeNameCustomCategory(data)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/edit"
                     android:id="@+id/imageView" app:layout_constraintEnd_toStartOf="@+id/imageView2"
@@ -46,6 +47,7 @@
                     android:layout_marginEnd="16dp"/>
             <ImageView
                     app:tint="?attr/smallIconColor"
+                    android:onClick="@{() -> viewModel.performDeleteCustomCategory(data)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/delete"
                     android:id="@+id/imageView2" app:layout_constraintEnd_toEndOf="parent"

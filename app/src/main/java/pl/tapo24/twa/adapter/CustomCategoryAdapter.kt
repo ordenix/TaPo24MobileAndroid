@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.twa.R
 import pl.tapo24.twa.BR
 import pl.tapo24.twa.db.entity.CustomCategory
+import pl.tapo24.twa.ui.tariff.customCategory.CustomCategoryViewModel
 import java.util.*
 
 class CustomCategoryAdapter(
-    var items: List<CustomCategory>
+    var items: List<CustomCategory>,
+    var viewModel: CustomCategoryViewModel?
 ): RecyclerView.Adapter<CustomCategoryAdapter.CustomCategoryAdapterHolder>() {
 
 
@@ -37,6 +39,7 @@ class CustomCategoryAdapter(
 
         fun bind(item: CustomCategory) {
             binding.setVariable(BR.data, item)
+            binding.setVariable(BR.viewModel, viewModel)
 
 
         }

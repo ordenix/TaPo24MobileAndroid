@@ -24,7 +24,7 @@ class AddCustomCategoryUseCase @Inject constructor(private val tapoDb: TapoDb, p
     }
 
 
-    suspend fun addCustomCategory(name: String, sortOrder: Int): Result<String> {
+    suspend fun run(name: String, sortOrder: Int): Result<String> {
          if (CheckConnection().getConnectionType(context) != NetworkTypes.None) {
             val hiltEntryPoint = EntryPointAccessors.fromApplication(context, CustomCategoryProviderEntryPoint::class.java)
             val customCategoryModule = hiltEntryPoint.customCategoryModule()
@@ -33,9 +33,9 @@ class AddCustomCategoryUseCase @Inject constructor(private val tapoDb: TapoDb, p
                 response = customCategoryModule.putCustomCategory(name, sortOrder)
             }.await()
             response!!.onSuccess {
-                MainScope().launch(Dispatchers.IO) {
+                MainScope().async(Dispatchers.IO) {
                     async { tapoDb.customCategory().insert(it) }.await()
-                }
+                }.await()
                 return Result.success(context.getString(R.string.succesAddCustomCategory))
             }
              response!!.onFailure {

@@ -22,9 +22,7 @@ import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.updater.MourningCheck
-import pl.tapo24.twa.useCase.customCategory.AddCustomCategoryUseCase
-import pl.tapo24.twa.useCase.customCategory.ChangeNameCustomCategoryUseCase
-import pl.tapo24.twa.useCase.customCategory.SynchronizeCustomCategoryUseCase
+import pl.tapo24.twa.useCase.customCategory.*
 import javax.inject.Singleton
 
 @Module
@@ -158,5 +156,17 @@ object AppModule {
     @Singleton
     fun bindSynchronizeCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb, networkClient: NetworkClient): SynchronizeCustomCategoryUseCase {
         return SynchronizeCustomCategoryUseCase(app, tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindChangeOrderCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): ChangeOrderCustomCategoryUseCase {
+        return ChangeOrderCustomCategoryUseCase(app, tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindDeleteCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): DeleteCustomCategoryUseCase {
+        return DeleteCustomCategoryUseCase(app, tapoDb)
     }
 }

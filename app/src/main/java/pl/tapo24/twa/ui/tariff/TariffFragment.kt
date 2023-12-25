@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -86,7 +87,7 @@ class TariffFragment: Fragment() {
             viewModel.changeFavState()
         }
         binding.moreFilter.setOnClickListener {
-            dialogFilterOptions.selectedValue = viewModel.categoryValue
+            dialogFilterOptions.selectedCategory = viewModel.categoryValue
             dialogFilterOptions.show(childFragmentManager, "DialogFilter")
             dialogFilterOptions.onSelected = { it ->
                 viewModel.categoryValue = it
@@ -94,6 +95,9 @@ class TariffFragment: Fragment() {
             }
 //            Snackbar.make(binding.root, getString(R.string.not_implemented), Snackbar.LENGTH_LONG)
 //                .show()
+        }
+        dialogFilterOptions.onClickOnManage = {
+            findNavController().navigate(R.id.action_nav_tariff_to_nav_customCategory)
         }
 //        rv.getViewTreeObserver().addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
 //            override fun onGlobalLayout() {

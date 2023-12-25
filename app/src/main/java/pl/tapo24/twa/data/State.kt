@@ -45,4 +45,6 @@ object State {
 
     var loadStyle = false
     //. var themeName: Int = R.style.defaultTheme
+    // CUSTOM CATEGORY
+    var showCustomOnTop: MutableLiveData<Boolean> = MutableLiveData(true)
 }

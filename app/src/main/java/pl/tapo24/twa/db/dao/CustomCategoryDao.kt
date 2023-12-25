@@ -10,6 +10,9 @@ interface CustomCategoryDao {
     @Query("SELECT * from customCategory")
     fun getAll(): List<CustomCategory>
 
+    @Query("SELECT * from customCategory WHERE toDelete = '0' order by sortOrder ASC")
+    fun getAllWithoutDeleted(): List<CustomCategory>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(customCategory: CustomCategory)
 
@@ -27,5 +30,8 @@ interface CustomCategoryDao {
 
     @Query("SELECT * FROM customCategory WHERE dataSynchronized = '0'")
     fun getAllNotSynchronized(): List<CustomCategory>
+
+    @Query("SELECT COUNT(customCategory.id) from customCategory where toDelete = '0'")
+    fun getCountOfElements(): Int
 
 }

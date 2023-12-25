@@ -249,6 +249,15 @@
     <string name="addCategory">Dodaj kategorię</string>
     <string name="showOwnCategory">Wyświetlanie własnych kategorii</string>
     <string name="updateCustomCategory">Zaktualizowano nazwę kategorii</string>
+    <string name="deleteCustomCategory">Usunięto kategorię</string>
+    <string name="areYouSureToDelete">Czy na pewno chcesz usunąć kategorię?</string>
+    <string name="editCategoryName">Edytuj nazwę kategorii</string>
+    <string name="notify_add_custom_category_premium">Aby dodawać własne kategie wykroczeń zostań użytkownikiem
+        PREMIUM
+    </string>
+    <string name="manageCustomCategory">Zarządzaj kategoriami</string>
+    <string name="showOnEndList">Na końcu listy</string>
+    <string name="showOnTopList">Na początku listy</string>
 
 
 </resources>

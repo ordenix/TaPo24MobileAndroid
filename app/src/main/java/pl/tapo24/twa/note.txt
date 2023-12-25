@@ -106,3 +106,20 @@
        // FirebaseDatabase.getInstance().setPersistenceEnabled(false);
 
 
+
+       // use default spinner item to show options in spinner
+
+       // use default spinner item to show options in spinner
+       //        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(requireContext(), r2.layout.simple_spinner_item, courses)
+       //        adapter.setDropDownViewResource(android.R.layout
+       //            .simple_spinner_dropdown_item)
+       //        binding.spinner.adapter = adapter
+options.add("option 1")
+        options.add("option 2")
+        options.add("option 3")
+
+        var courses = arrayOf<String?>("C", "Data structures",
+            "Interview prep", "Algorithms",
+            "DSA with java", "OS")
+
+val options = ArrayList<String>()

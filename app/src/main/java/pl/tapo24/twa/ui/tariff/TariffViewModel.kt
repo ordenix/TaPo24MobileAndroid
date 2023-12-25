@@ -9,6 +9,8 @@ import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.customCategory.CategoryDictionary
+import pl.tapo24.twa.data.customCategory.DataCategory
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
 import pl.tapo24.twa.data.elastic.queryToElasticForTariffList.DataToElasticForTariffList
@@ -51,7 +53,7 @@ class TariffViewModel @Inject constructor(
     }
     val text: LiveData<String> = _text
     val querySuggestionList = MutableLiveData<DataQueryFromSuggestion?>()
-    var categoryValue: String = "%"
+    var categoryValue: DataCategory = CategoryDictionary.All.element
 
     fun saveShiftedItems() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -273,14 +275,14 @@ class TariffViewModel @Inject constructor(
                 if (checkFavourite.value == true) {
                     async { dataFromDb = tapoDb.tariffDb().getFavByEngine("New") }.await()
                 } else {
-                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("New", categoryValue) }.await()
+                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("New", categoryValue.query) }.await()
                 }
 
             } else {
                 if (checkFavourite.value == true) {
                     async { dataFromDb = tapoDb.tariffDb().getFavByEngine("Old") }.await()
                 } else {
-                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("Old", categoryValue) }.await()
+                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("Old", categoryValue.query) }.await()
                 }
             }
 
