@@ -494,7 +494,7 @@ class NetworkClient(var url: String) {
 
     }
 
-    fun getCustomMapList(token: String):Result<List<MapCategory>> {
+    fun getCustomCategoryMapList(token: String):Result<List<MapCategory>> {
         try {
             val response = service.getCustomMapList("Bearer $token").execute()
             return  if (response.isSuccessful) {
@@ -553,6 +553,45 @@ class NetworkClient(var url: String) {
         }
         return Result.failure(InternalException(InternalMessage.InternalCustomCategory.message))
 
+    }
+
+    fun putCustomCategoryMap(token: String, mapCategory: MapCategory): Result<String> {
+        try {
+            val response = service.putCustomCategoryMap("Bearer $token", mapCategory).execute()
+            return  if (response.isSuccessful) {
+                Result.success(response.body()!!.r ?: "OK")
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                return Result.failure(HttpException(errorMessage))
+
+            }
+
+        }catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalCustomCategoryMap.message))
+    }
+
+    fun deleteCustomCategoryMap(token: String, mapCategory: MapCategory): Result<String> {
+        try {
+            val response = service.deleteCustomCategoryMap("Bearer $token", mapCategory).execute()
+            return  if (response.isSuccessful) {
+                Result.success(response.body()!!.r ?: "OK")
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                if (response.code() == 409 && errorMessage == "This custom map not exist") {
+                    return Result.failure(HttpException(HttpMessage.ThisCustomCategoryMapNotExist.message))
+                }
+                else {
+                    return Result.failure(HttpException(errorMessage))
+                }
+
+            }
+
+        }catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalCustomCategoryMap.message))
     }
 
 }

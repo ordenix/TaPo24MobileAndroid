@@ -10,6 +10,7 @@ import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.CustomCategory
+import pl.tapo24.twa.db.entity.MapCategory
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.utils.CheckConnection
@@ -113,6 +114,50 @@ class CustomCategoryModule @Inject constructor(private val context: Context, pri
             val setting = Setting(name = "showOnTop", state = showOnTop)
             async { tapoDb.settingDb().insert(setting) }.await()
         }
+    }
+
+    //map list
+
+    suspend fun getCustomCategoryMapList(): Result<List<MapCategory>> {
+        val mapCategoryList: MutableList<MapCategory> = mutableListOf()
+        MainScope().async(Dispatchers.IO) {
+            if (CheckConnection().getConnectionType(context) != NetworkTypes.None) {
+                val response = networkClient.getCustomCategoryMapList(State.jwtToken)
+                response.onSuccess { responseMapCategory ->
+                    var listFromDb: List<MapCategory>? = null
+                    async { listFromDb = tapoDb.mapCategory().getAll() }.await()
+                    mapCategoryList.addAll(responseMapCategory)
+                    mapCategoryList.forEach { mapCategory ->
+                        val elementFind = listFromDb!!.find {
+                                it.customCategoryId == mapCategory.customCategoryId
+                                && it.tariffId == mapCategory.tariffId }
+                        if (elementFind != null) {
+                            mapCategory.apply {
+                                dataSynchronized = elementFind.dataSynchronized
+                                toDelete = elementFind.toDelete
+                            }
+                        }
+                    }
+                    async { tapoDb.mapCategory().nukeTable() }.await()
+                    async { tapoDb.mapCategory().insertAll(mapCategoryList) }.await()
+                }
+
+            } else {
+                val mapCategoryListFromDb = async { tapoDb.mapCategory().getAllWithoutDeleted() }.await()
+                mapCategoryList.addAll(mapCategoryListFromDb)
+            }
+        }.await()
+        return Result.success(mapCategoryList)
+    }
+
+    fun putMapCategory(mapCategory: MapCategory): Result<String> {
+        val response = networkClient.putCustomCategoryMap(State.jwtToken, mapCategory)
+        return response
+    }
+
+    fun deleteMapCategory(mapCategory: MapCategory): Result<String> {
+        val response = networkClient.deleteCustomCategoryMap(State.jwtToken, mapCategory)
+        return response
     }
 
 

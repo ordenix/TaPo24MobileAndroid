@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
+import pl.tapo24.twa.adapter.CustomCategoryMapAdapter
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.customCategory.CategoryToMap
 import pl.tapo24.twa.databinding.FragmentTariffBinding
 import java.util.*
 
@@ -37,6 +39,7 @@ class TariffFragment: Fragment() {
     private lateinit var viewModel: TariffViewModel
 
     private val dialogMore = DialogTariffMore()
+    private val dialogTariffMapCustomCategory = DialogTariffMapCustomCategory()
     private val dialogFilterOptions = DialogFilterOptions()
     //private lateinit var searchView: SearchView
 
@@ -207,6 +210,15 @@ class TariffFragment: Fragment() {
                 .show()
             binding.network.visibility = View.VISIBLE
         }
+        // viewModel.mapListCustomCategory.value = listOf(CategoryToMap(true,1,"tesfdssdfsdfsdt1"),CategoryToMap(false,1,"test2"),CategoryToMap(false,1,"test3"))
+        viewModel.adapterCustomCategoryMap = CustomCategoryMapAdapter(viewModel.mapListCustomCategory.value.orEmpty(),viewModel)
+        viewModel.showEditMapDialog.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.showEditMapDialog.value = false
+                dialogTariffMapCustomCategory.tariffViewModel = viewModel
+                dialogTariffMapCustomCategory.show(childFragmentManager, "CustomCategoryMap")
+            }
+        })
 
 
 //        val ssss = binding.spinner
@@ -273,6 +285,10 @@ class TariffFragment: Fragment() {
         dialogMore.show(childFragmentManager, "More")
         dialogMore.onAddFavClick = {
             viewModel.itemToDialog?.let { it1 -> viewModel.clickOnFavorites(it1, viewModel.positionToDialog) }
+        }
+        dialogMore.editMapClick = {
+            viewModel.getListForDialogMap(viewModel.itemToDialog?.id ?: "")
+            viewModel.showEditMapDialog.value = true
         }
         dialogMore.closeClick = {
             viewModel.showDialog.value = false

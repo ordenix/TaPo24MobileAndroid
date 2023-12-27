@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import pl.tapo24.twa.R
+import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.DialogTariffMoreBinding
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.utils.UlListBuilder
@@ -25,6 +26,10 @@ class DialogTariffMore: DialogFragment() {
     }
 
     var closeClick: () -> Unit = {
+
+    }
+
+    var editMapClick: () -> Unit = {
 
     }
 
@@ -73,6 +78,14 @@ class DialogTariffMore: DialogFragment() {
         }
         binding.button6.setOnClickListener {
             this.dismiss()
+        }
+        if (State.premiumVersion) {
+            binding.editCategory.visibility = View.VISIBLE
+            binding.editCategory.setOnClickListener {
+                editMapClick()
+            }
+        } else {
+            binding.editCategory.visibility = View.GONE
         }
 
         return root

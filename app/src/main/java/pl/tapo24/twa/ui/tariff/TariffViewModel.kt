@@ -4,12 +4,14 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import pl.tapo24.twa.FavouriteModule
+import pl.tapo24.twa.adapter.CustomCategoryMapAdapter
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.customCategory.CategoryDictionary
+import pl.tapo24.twa.data.customCategory.CategoryToMap
 import pl.tapo24.twa.data.customCategory.DataCategory
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
@@ -22,6 +24,9 @@ import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.infrastructure.NetworkClientElastic
+import pl.tapo24.twa.module.CustomCategoryModule
+import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
+import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
 import pl.tapo24.twa.utils.RegexTariff
 import javax.inject.Inject
 
@@ -30,7 +35,10 @@ class TariffViewModel @Inject constructor(
     private val tapoDb: TapoDb,
     private val networkClient: NetworkClient,
     private val networkClientElastic: NetworkClientElastic,
-    private val favouriteModule: FavouriteModule
+    private val favouriteModule: FavouriteModule,
+    private val customCategoryModule: CustomCategoryModule,
+    private val prepareMapListToTariffUseCase: PrepareMapListToTariffUseCase,
+    private val setMapCustomCategoryUseCase: SetMapCustomCategoryUseCase
 ) : ViewModel() {
 
     //val sss = tapoDb.tariffDb().getAll()
@@ -48,12 +56,46 @@ class TariffViewModel @Inject constructor(
     val queryTextInSearchBar = MutableLiveData("")
     val checkFavourite: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    lateinit var adapterCustomCategoryMap: CustomCategoryMapAdapter
+    val showEditMapDialog: MutableLiveData<Boolean> = MutableLiveData(false)
+    val mapListCustomCategory: MutableLiveData<List<CategoryToMap>> = MutableLiveData()
+
     private val _text = MutableLiveData<String>().apply {
         value = "This is Tarrif"
     }
     val text: LiveData<String> = _text
     val querySuggestionList = MutableLiveData<DataQueryFromSuggestion?>()
     var categoryValue: DataCategory = CategoryDictionary.All.element
+
+    init {
+        if (State.premiumVersion) {
+            viewModelScope.launch(Dispatchers.IO) {
+                setMapCustomCategoryUseCase.runMap("1", 1)
+                val listCustomCategory = async {customCategoryModule.getCustomCategories()}.await()
+                val listCustomCategoryMap = async { customCategoryModule.getCustomCategoryMapList() }.await()
+                listCustomCategory.onSuccess {elements ->
+                    withContext(Dispatchers.Main) {
+                        State.customCategoryList = elements
+                    }
+                }
+                listCustomCategoryMap.onSuccess {elements ->
+                    withContext(Dispatchers.Main) {
+                        State.customCategoryMapList = elements
+                    }
+                }
+
+            }
+        }
+    }
+
+    fun getListForDialogMap(tariffId: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val list = async { prepareMapListToTariffUseCase.run(tariffId) }.await()
+            withContext(Dispatchers.Main) {
+                mapListCustomCategory.value = list
+            }
+        }
+    }
 
     fun saveShiftedItems() {
         viewModelScope.launch(Dispatchers.IO) {

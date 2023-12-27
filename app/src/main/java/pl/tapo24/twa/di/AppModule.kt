@@ -23,6 +23,8 @@ import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.updater.MourningCheck
 import pl.tapo24.twa.useCase.customCategory.*
+import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
+import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
 import javax.inject.Singleton
 
 @Module
@@ -168,5 +170,17 @@ object AppModule {
     @Singleton
     fun bindDeleteCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): DeleteCustomCategoryUseCase {
         return DeleteCustomCategoryUseCase(app, tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindPrepareMapListToTariffUseCase(tapoDb: TapoDb): PrepareMapListToTariffUseCase {
+        return PrepareMapListToTariffUseCase(tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindSetMapCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): SetMapCustomCategoryUseCase {
+        return SetMapCustomCategoryUseCase(app, tapoDb)
     }
 }

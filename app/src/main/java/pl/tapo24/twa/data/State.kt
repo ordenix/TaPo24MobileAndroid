@@ -3,6 +3,8 @@ package pl.tapo24.twa.data
 import androidx.lifecycle.MutableLiveData
 import pl.tapo24.twa.BuildConfig
 import pl.tapo24.twa.R
+import pl.tapo24.twa.db.entity.CustomCategory
+import pl.tapo24.twa.db.entity.MapCategory
 
 object State {
     var startDownloadMainPackage: Boolean = false
@@ -47,4 +49,6 @@ object State {
     //. var themeName: Int = R.style.defaultTheme
     // CUSTOM CATEGORY
     var showCustomOnTop: MutableLiveData<Boolean> = MutableLiveData(true)
+    var customCategoryMapList = listOf<MapCategory>()
+    var customCategoryList = listOf<CustomCategory>()
 }

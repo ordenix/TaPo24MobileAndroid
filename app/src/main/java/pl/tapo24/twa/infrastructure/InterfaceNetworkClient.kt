@@ -144,7 +144,7 @@ interface InterfaceNetworkClient {
     @GET("custom_category/custom_category_list/")
     fun getCustomCategoryList(@Header("Authorization")header: String): Call<List<CustomCategory>>
     @Headers("Content-Type: application/json; charset=UTF-8")
-    @PUT("custom_category/custom_category_map_list/")
+    @GET("custom_category/custom_category_map_list/")
     fun getCustomMapList(@Header("Authorization")header: String): Call<RCustomMapList>
 
     @Headers("Content-Type: application/json; charset=UTF-8")
@@ -155,4 +155,12 @@ interface InterfaceNetworkClient {
     @HTTP(method = "DELETE", path = "custom_category/custom_category/", hasBody = true)
     fun deleteCustomCategory(@Header("Authorization")header: String, @Body customCategory: CustomCategory): Call<RString>
 
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @PUT("custom_category/custom_category_to_tariff/")
+    fun putCustomCategoryMap(@Header("Authorization")header: String, @Body customMap: MapCategory): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @HTTP(method = "DELETE", path = "custom_category/custom_category_to_tariff/", hasBody = true)
+    fun deleteCustomCategoryMap(@Header("Authorization")header: String, @Body customMap: MapCategory): Call<RString>
 }

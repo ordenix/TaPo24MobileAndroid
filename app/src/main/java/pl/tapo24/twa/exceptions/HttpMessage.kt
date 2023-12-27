@@ -25,5 +25,6 @@ enum class HttpMessage(val message: String) {
     DifferentIp("Obecny adres IP jest inny niż ten podczas żądania zmiany hasła. Najprawdopodobniej doszło do zmiany sieci - spróbuj jeszcze raz wysłać żądanie zmiany hasła w tej samej sieci"),
     UserHaveAlreadyThatCustomCategory("Użytkownik posiada już taką kategorię"),
     ThisCustomCategoryNotExist("Taka kategoria nie istnieje"),
+    ThisCustomCategoryMapNotExist("Taka mapa kategorii nie istnieje"),
 
 }

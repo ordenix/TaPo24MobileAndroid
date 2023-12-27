@@ -15,15 +15,15 @@ import org.acra.sender.HttpSender
 class MainApplication: Application() {
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
-
-        initAcra {
-            reportFormat = StringFormat.JSON
-            httpSender {
-                uri = "https://acra.tapo24.pl/report" /*best guess, you may need to adjust this*/
-                basicAuthLogin = "LEEPculNAAaeiJgr"
-                basicAuthPassword = "7kaqOKxTeEuWP5tm"
-                httpMethod = HttpSender.Method.POST
-            }
+        if   (!BuildConfig.DEBUG) {
+            initAcra {
+                reportFormat = StringFormat.JSON
+                httpSender {
+                    uri = "https://acra.tapo24.pl/report" /*best guess, you may need to adjust this*/
+                    basicAuthLogin = "LEEPculNAAaeiJgr"
+                    basicAuthPassword = "7kaqOKxTeEuWP5tm"
+                    httpMethod = HttpSender.Method.POST
+                }
 //            dialog {
 //                //required
 //                text = "Przykro nam, że spotkało to właśnie Ciebie"
@@ -45,12 +45,14 @@ class MainApplication: Application() {
 //                //reportDialogClass = MyCustomDialog::class.java
 //            }
 
-            toast {
-                //required
-                text = "Oj awaria :( Przykro nam, że cb to spotkało. Juz został ogłoszony alarm u programisty i pracuje aby usunąć ten błąd"
-                //defaults to Toast.LENGTH_LONG
-                length = Toast.LENGTH_LONG
+                toast {
+                    //required
+                    text = "Oj awaria :( Przykro nam, że cb to spotkało. Juz został ogłoszony alarm u programisty i pracuje aby usunąć ten błąd"
+                    //defaults to Toast.LENGTH_LONG
+                    length = Toast.LENGTH_LONG
+                }
             }
         }
+
     }
 }
