@@ -30,10 +30,10 @@
 <!--        <item name="fontFamily">@font/itim</item>-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">?attr/tapoMainColor</item>
-        <item name="colorPrimaryVariant">@color/tapoSecondColorColor</item>
+        <item name="colorPrimaryVariant">?attr/tapoMainColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/tapoSecondColorColor</item>
+        <item name="colorSecondary">?attr/buttonBackground</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -320,6 +320,96 @@
         <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorFuneral</item>
         <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorFuneral</item>
         <item name="inputIconColor">@color/inputIconColorColorFuneral</item>
+
+    </style>
+    <style name="nTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorN</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorN</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorN</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorN</item>
+        <item name="smallIconColor">@color/smallIconColorColorN</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorN</item>
+        <item name="textMainColor">@color/textMainColorColorN</item>
+        <item name="textSecondColor">@color/textSecondColorColorN</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2N</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorN</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorN</item>
+        <item name="inputTextColor">@color/inputTextColorColorN</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorN</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorN</item>
+        <item name="inputIconColor">@color/inputIconColorColorN</item>
+
+    </style>
+    <style name="damianTheme">
+        <item name="tapoMainColor">@color/tapoMainColorColorDamian</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorDamian</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorDamian</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorDamian</item>
+        <item name="smallIconColor">@color/smallIconColorColorDamian</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorDamian</item>
+        <item name="textMainColor">@color/textMainColorColorDamian</item>
+        <item name="textSecondColor">@color/textSecondColorColorDamian</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2Damian</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorDamian</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorDamian</item>
+        <item name="inputTextColor">@color/inputTextColorColorDamian</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorDamian</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorDamian</item>
+        <item name="inputIconColor">@color/inputIconColorColorDamian</item>
+
+    </style>
+    <style name="d2Theme">
+        <item name="tapoMainColor">@color/tapoMainColorColorD2</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorD2</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorD2</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorD2</item>
+        <item name="smallIconColor">@color/smallIconColorColorD2</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorD2</item>
+        <item name="textMainColor">@color/textMainColorColorD2</item>
+        <item name="textSecondColor">@color/textSecondColorColorD2</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2D2</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorD2</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorD2</item>
+        <item name="inputTextColor">@color/inputTextColorColorD2</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorD2</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorD2</item>
+        <item name="inputIconColor">@color/inputIconColorColorD2</item>
+
+    </style>
+    <style name="g1Theme">
+        <item name="tapoMainColor">@color/tapoMainColorColorG1</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorG1</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorG1</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorG1</item>
+        <item name="smallIconColor">@color/smallIconColorColorG1</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorG1</item>
+        <item name="textMainColor">@color/textMainColorColorG1</item>
+        <item name="textSecondColor">@color/textSecondColorColorG1</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2G1</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorG1</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorG1</item>
+        <item name="inputTextColor">@color/inputTextColorColorG1</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorG1</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorG1</item>
+        <item name="inputIconColor">@color/inputIconColorColorG1</item>
+
+    </style>
+    <style name="g2Theme">
+        <item name="tapoMainColor">@color/tapoMainColorColorG2</item>
+        <item name="tapoSecondColor">@color/tapoSecondColorColorG2</item>
+        <item name="tapoBackgroundColor">@color/tapoBackgroundColorColorG2</item>
+        <item name="buttonBackground">@color/buttonBackgroundColorColorG2</item>
+        <item name="smallIconColor">@color/smallIconColorColorG2</item>
+        <item name="separatorBackground">@color/separatorBackgroundColorColorG2</item>
+        <item name="textMainColor">@color/textMainColorColorG2</item>
+        <item name="textSecondColor">@color/textSecondColorColorG2</item>
+        <item name="textSecondColor2">@color/textSecondColorColor2G2</item>
+        <item name="smallIconFavTariffColor">@color/smallIconFavTariffColorColorG2</item>
+        <item name="inputFrameColor">@color/inputFrameColorColorG2</item>
+        <item name="inputTextColor">@color/inputTextColorColorG2</item>
+        <item name="inputFrameBeforeColor">@color/inputFrameBeforeColorColorG2</item>
+        <item name="inputTextBeforeColor">@color/inputTextBeforeColorColorG2</item>
+        <item name="inputIconColor">@color/inputIconColorColorG2</item>
 
     </style>
 </resources>

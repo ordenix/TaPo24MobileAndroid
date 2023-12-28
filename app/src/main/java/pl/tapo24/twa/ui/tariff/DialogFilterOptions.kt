@@ -91,6 +91,27 @@ var selectedCategory: DataCategory = CategoryDictionary.All.element
         for (category in CategoryDictionary.values()) {
             list.add(category.element)
         }
+        if (State.premiumVersion) {
+            val listCustomDataCategory: MutableList<DataCategory> = mutableListOf()
+            State.customCategoryList.forEach {element ->
+                listCustomDataCategory.add(
+                    DataCategory(
+                        name = element.categoryName,
+                        query = "",
+                        customId = element.id,
+                        isCustom = true
+                    )
+                )
+            }
+            if (State.showCustomOnTop.value!!) {
+                //top
+                list.addAll(1, listCustomDataCategory)
+            } else {
+                //bottom
+                list.addAll(listCustomDataCategory)
+
+            }
+        }
         return list
     }
 

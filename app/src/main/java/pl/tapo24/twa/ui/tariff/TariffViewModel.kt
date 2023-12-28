@@ -20,6 +20,7 @@ import pl.tapo24.twa.data.elastic.queryToElasticForTariffList.Page
 import pl.tapo24.twa.data.elastic.resultClasFromElastic.DataTariffListFromElastic
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.LastSearch
+import pl.tapo24.twa.db.entity.MapCategory
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.infrastructure.NetworkClient
@@ -70,24 +71,35 @@ class TariffViewModel @Inject constructor(
     init {
         if (State.premiumVersion) {
             viewModelScope.launch(Dispatchers.IO) {
-                setMapCustomCategoryUseCase.runMap("1", 1)
+                getListCustomCategoryMap()
                 val listCustomCategory = async {customCategoryModule.getCustomCategories()}.await()
-                val listCustomCategoryMap = async { customCategoryModule.getCustomCategoryMapList() }.await()
                 listCustomCategory.onSuccess {elements ->
                     withContext(Dispatchers.Main) {
                         State.customCategoryList = elements
                     }
                 }
-                listCustomCategoryMap.onSuccess {elements ->
-                    withContext(Dispatchers.Main) {
-                        State.customCategoryMapList = elements
-                    }
+                val showOnTop = async { customCategoryModule.getShowOnTopParameter() }.await()
+                withContext(Dispatchers.Main) {
+                    State.showCustomOnTop.value = showOnTop
                 }
 
             }
+
         }
     }
 
+    private suspend fun getListCustomCategoryMap() {
+        viewModelScope.async(Dispatchers.IO) {
+            val listCustomCategoryMap = async { customCategoryModule.getCustomCategoryMapList() }.await()
+
+            listCustomCategoryMap.onSuccess {elements ->
+                withContext(Dispatchers.Main) {
+                    State.customCategoryMapList = elements
+                }
+            }
+
+        }.await()
+    }
     fun getListForDialogMap(tariffId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             val list = async { prepareMapListToTariffUseCase.run(tariffId) }.await()
@@ -95,6 +107,20 @@ class TariffViewModel @Inject constructor(
                 mapListCustomCategory.value = list
             }
         }
+    }
+
+    fun setMapCustomCategory(categoryId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            async { setMapCustomCategoryUseCase.runMap(itemToDialog?.id ?: "", categoryId) }.await()
+            async { getListCustomCategoryMap() }.await()
+            if (categoryValue.isCustom) {
+                withContext(Dispatchers.Main) {
+                    tariffData.value = emptyList()
+                }
+                getAllTariffData()
+            }
+        }
+
     }
 
     fun saveShiftedItems() {
@@ -317,7 +343,21 @@ class TariffViewModel @Inject constructor(
                 if (checkFavourite.value == true) {
                     async { dataFromDb = tapoDb.tariffDb().getFavByEngine("New") }.await()
                 } else {
-                    async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("New", categoryValue.query) }.await()
+                    if (categoryValue.isCustom) {
+                        val tarifIds:List<MapCategory>  = State.customCategoryMapList.filter {
+                            mapCategory -> mapCategory.customCategoryId == categoryValue.customId
+                        }
+                        val listToAdd: MutableList<Tariff> = mutableListOf()
+                        async {
+                            tarifIds.forEach { element ->
+                                listToAdd.add(tapoDb.tariffDb().getByTariffId(element.tariffId))
+                            }
+                        }.await()
+                        dataFromDb = listToAdd
+                    } else {
+                        async { dataFromDb = tapoDb.tariffDb().getAllByEngineAndCategory("New", categoryValue.query) }.await()
+
+                    }
                 }
 
             } else {

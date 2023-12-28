@@ -22,6 +22,7 @@
         <CheckBox
                 android:text="@{data.categoryName}"
                 android:checked="@{data.selected}"
+                android:onClick="@{() -> viewModel.setMapCustomCategory(data.categoryId)}"
                 style="@style/textStyleWhiteCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/checkBox"

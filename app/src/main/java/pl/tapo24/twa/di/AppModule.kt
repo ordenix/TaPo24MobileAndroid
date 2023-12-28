@@ -25,6 +25,7 @@ import pl.tapo24.twa.updater.MourningCheck
 import pl.tapo24.twa.useCase.customCategory.*
 import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
 import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
+import pl.tapo24.twa.useCase.customCategoryMap.SynchronizeCustomCategoryMapUseCase
 import javax.inject.Singleton
 
 @Module
@@ -182,5 +183,11 @@ object AppModule {
     @Singleton
     fun bindSetMapCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): SetMapCustomCategoryUseCase {
         return SetMapCustomCategoryUseCase(app, tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindSynchronizeCustomCategoryMapUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): SynchronizeCustomCategoryMapUseCase {
+        return SynchronizeCustomCategoryMapUseCase(app, tapoDb)
     }
 }

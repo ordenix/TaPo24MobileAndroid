@@ -10,6 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pl.tapo24.twa.adapter.SettingThemeAdapter
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.db.TapoDb
@@ -34,6 +35,8 @@ class SettingsViewModel@Inject constructor(
 
     val settingFontBoldMain = MutableLiveData<Boolean>(true)
     val settingFontBoldTariff = MutableLiveData<Boolean>(true)
+    lateinit var adapter: SettingThemeAdapter
+    val themeTypesDataList: MutableLiveData<List<ThemeTypesData>> = MutableLiveData()
 //settingNetwork
     // WiFi
     // All
@@ -56,6 +59,24 @@ class SettingsViewModel@Inject constructor(
             }
 
         }
+        prepareThemeList()
+    }
+
+    private fun prepareThemeList() {
+        val list = mutableListOf<ThemeTypesData>()
+        ThemeTypes.values().forEach {element->
+            if (!element.isHiddenInList) {
+                var selected = false
+                if (element == State.settingTheme.value) {
+                    selected = true
+                }
+                list.add(ThemeTypesData(element, selected))
+            }
+        }
+        themeTypesDataList.value = list
+    }
+    fun selectTheme(theme: ThemeTypes) {
+        State.settingTheme.value = theme
     }
     fun getData(context: Context){
         environment.value?.let { networkClient.rebuild(it.url) }

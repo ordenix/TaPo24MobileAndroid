@@ -30,7 +30,9 @@ class DialogTariffMapCustomCategory: DialogFragment() {
                 tariffViewModel!!.adapterCustomCategoryMap.notifyDataSetChanged()
         })
         }
-
+        binding.buttonClose.setOnClickListener {
+            dismiss()
+        }
 
 
 

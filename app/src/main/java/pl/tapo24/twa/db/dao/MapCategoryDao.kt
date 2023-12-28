@@ -1,9 +1,6 @@
 package pl.tapo24.twa.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import pl.tapo24.twa.db.entity.MapCategory
 
 
@@ -30,4 +27,16 @@ interface MapCategoryDao {
 
     @Query("select * from mapCategory where tariffId = :tariffId and customCategoryId = :categoryId")
     fun getByTariffIdAndCategoryId(tariffId: String, categoryId: Int): MapCategory
+
+    @Delete
+    fun delete(mapCategory: MapCategory)
+
+    @Query("SELECT COUNT(mapCategory.id) from mapCategory")
+    fun getCountOfElements(): Int
+
+    @Query("SELECT * FROM mapCategory WHERE toDelete = '1'")
+    fun getAllToDelete(): List<MapCategory>
+
+    @Query("SELECT * FROM mapCategory WHERE dataSynchronized = '0'")
+    fun getAllNotSynchronized(): List<MapCategory>
 }

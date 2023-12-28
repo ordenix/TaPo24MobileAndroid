@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.twa.adapter.SettingThemeAdapter
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.databinding.FragmentSettingBinding
 
@@ -148,26 +151,17 @@ class SettingsFragment: Fragment() {
         }
         if (State.funeralTheme.value == true) {
             premiumVisible = false
-            binding.radioDefault.isEnabled = false
-            binding.radioGray.isEnabled = false
+            binding.recyclerView.visibility = View.GONE
             binding.textInfoForceStyle.visibility = View.VISIBLE
         } else {
             binding.textInfoForceStyle.visibility = View.GONE
-            binding.radioDefault.isEnabled = true
-            binding.radioGray.isEnabled = true
+            binding.recyclerView.visibility = View.VISIBLE
         }
         binding.boldTariff.isEnabled = premiumVisible
         binding.boldMain.isEnabled = premiumVisible
         binding.radioButtonArmino.isEnabled = premiumVisible
         binding.radioButtonAlegreya.isEnabled = premiumVisible
         binding.radioButtonArmata.isEnabled = premiumVisible
-
-        binding.radioBlueIce.isEnabled = premiumVisible
-        binding.radioBlueMint.isEnabled = premiumVisible
-        binding.radioPink.isEnabled = premiumVisible
-        binding.radioGreenMint.isEnabled = premiumVisible
-        binding.radioDesert.isEnabled = premiumVisible
-
 
 
 
@@ -213,58 +207,18 @@ class SettingsFragment: Fragment() {
             Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
         ///
-        binding.radioDefault.setOnClickListener {
-            binding.radioDefault.isChecked = true
-            State.settingTheme.value = ThemeTypes.Default
-
-        }
-        binding.radioGray.setOnClickListener {
-            binding.radioGray.isChecked = true
-            State.settingTheme.value = ThemeTypes.GrayTheme
-
-        }
-        binding.radioBlueMint.setOnClickListener {
-            binding.radioBlueMint.isChecked = true
-            State.settingTheme.value = ThemeTypes.BlueMintTheme
-
-        }
-        binding.radioPink.setOnClickListener {
-            binding.radioPink.isChecked = true
-            State.settingTheme.value = ThemeTypes.PinkTheme
-
-        }
-        binding.radioBlueIce.setOnClickListener {
-            binding.radioBlueIce.isChecked = true
-            State.settingTheme.value = ThemeTypes.BlueIceTheme
-
-        }
-        binding.radioGreenMint.setOnClickListener {
-            binding.radioGreenMint.isChecked = true
-            State.settingTheme.value = ThemeTypes.GreenMintTheme
-
-        }
-        binding.radioDesert.setOnClickListener {
-            binding.radioDesert.isChecked = true
-            State.settingTheme.value = ThemeTypes.DesertTheme
-
-        }
 
 
-
-
-        settingsViewModel.themeType.observe(viewLifecycleOwner) {
-            when (it) {
-                ThemeTypes.Default -> binding.radioGroupTheme.check(binding.radioDefault.id)
-                ThemeTypes.GrayTheme -> binding.radioGroupTheme.check(binding.radioGray.id)
-                ThemeTypes.BlueMintTheme -> binding.radioGroupTheme.check(binding.radioBlueMint.id)
-                ThemeTypes.PinkTheme -> binding.radioGroupTheme.check(binding.radioPink.id)
-                ThemeTypes.BlueIceTheme -> binding.radioGroupTheme.check(binding.radioBlueIce.id)
-                ThemeTypes.GreenMintTheme -> binding.radioGroupTheme.check(binding.radioGreenMint.id)
-                ThemeTypes.DesertTheme -> binding.radioGroupTheme.check(binding.radioDesert.id)
-                ThemeTypes.FuneralTheme -> binding.radioGroupTheme.check(binding.radioDefault.id)
-
-            }
-        }
+        // 270
+        val rv = binding.recyclerView
+        rv.layoutManager = LinearLayoutManager(activity)
+        settingsViewModel.adapter = SettingThemeAdapter(settingsViewModel.themeTypesDataList.value.orEmpty(),settingsViewModel)
+        rv.adapter = settingsViewModel.adapter
+//
+        settingsViewModel.themeTypesDataList.observe(viewLifecycleOwner, Observer {
+            settingsViewModel.adapter.items = it
+            settingsViewModel.adapter.notifyDataSetChanged()
+        })
 
         return root
     }

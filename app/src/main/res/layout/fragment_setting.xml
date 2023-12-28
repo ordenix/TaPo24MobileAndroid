@@ -73,47 +73,10 @@
                     android:layout_height="wrap_content" android:id="@+id/textView101"
                     app:layout_constraintTop_toBottomOf="@+id/boldTariff" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" android:visibility="visible"/>
-            <RadioGroup
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView101"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:id="@+id/radioGroupTheme">
-                <RadioButton
-                        android:text="Domyślny"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioDefault"
-                        android:visibility="visible"/>
-                <RadioButton
-                        android:text="Szary"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioGray"
-                        android:visibility="visible"/>
-                <RadioButton
-                        android:text="Morska bryza"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioBlueMint"
-                        android:visibility="visible"/>
-                <RadioButton
-                        android:text="Pastelowy róż"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioPink"
-                        android:visibility="visible"/>
-                <RadioButton
-                        android:text="Mroźny lód"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioBlueIce"
-                        android:visibility="visible"/>
-                <RadioButton
-                        android:text="Mięta o poranku"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioGreenMint"
-                        android:visibility="visible"/>
-                <RadioButton
-                        android:text="Pustynna burza"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioDesert"
-                        android:visibility="visible"/>
-            </RadioGroup>
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" app:layout_constraintTop_toBottomOf="@+id/textView101"
+                    tools:layout_editor_absoluteX="10dp" android:id="@+id/recyclerView"/>
             <TextView
                     android:text="@string/type_connection"
                     android:layout_width="wrap_content"
@@ -129,9 +92,9 @@
                     style="@style/textStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" android:id="@+id/textView102"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroupTheme"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerView"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="8dp" android:maxLines="10" android:textAlignment="center"/>
+                    android:maxLines="10" android:textAlignment="center"/>
             <TextView
                     android:text="@string/style_mourning_warning"
                     android:background="@drawable/style_orange_container"

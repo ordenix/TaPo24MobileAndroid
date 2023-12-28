@@ -166,4 +166,86 @@
     <color name="tapoBackgroundColorColorFuneral">#000000</color> <!--TŁO TYLNE -->
 
 
+    <color name="buttonBackgroundColorColorN">#B00710</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorN">#161A1D</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorN">#0B090A</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorN">#0B090A</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2N">#0B090A</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorN">#0B090A</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorN">#B1A7A6</color> <!--RAMKA W INPUTACH   -->
+    <color name="inputTextBeforeColorColorN">#0B090A</color> <!--INPUT TEXT PRZED WPISANIEM   -->
+    <color name="inputFrameBeforeColorColorN">#0B090A</color><!--RAMKA W INPUTACH PRZED KLIKNIĘCIEM   -->
+    <color name="inputIconColorColorN">#0B090A</color><!--IKONA W INPUCIE   -->
+    <color name="smallIconFavTariffColorColorN">#161A1D</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorN">#161A1D</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorN">#660708</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorN">#6E090A</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorN">#161A1D</color> <!--TŁO TYLNE -->
+
+    <color name="buttonBackgroundColorColorDamian">#D5BDAF</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorDamian">#D5BDAF</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorDamian">#0B090A</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorDamian">#0B090A</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2Damian">#0B090A</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorDamian">#0B090A</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorDamian">#E3D5CA</color> <!--RAMKA W INPUTACH   -->
+    <color name="inputTextBeforeColorColorDamian">#0B090A</color> <!--INPUT TEXT PRZED WPISANIEM   -->
+    <color name="inputFrameBeforeColorColorDamian">#0B090A</color><!--RAMKA W INPUTACH PRZED KLIKNIĘCIEM   -->
+    <color name="inputIconColorColorDamian">#0B090A</color><!--IKONA W INPUCIE   -->
+    <color name="smallIconFavTariffColorColorDamian">#161A1D</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorDamian">#161A1D</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorDamian">#D6CCC2</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorDamian">#E3D5CA</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorDamian">#D5BDAF</color> <!--TŁO TYLNE -->
+
+    <color name="buttonBackgroundColorColorD2">#FFB4A2</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorD2">#FFB4A2</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorD2">#0B090A</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorD2">#0B090A</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2D2">#0B090A</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorD2">#0B090A</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorD2">#E5989B</color> <!--RAMKA W INPUTACH   -->
+    <color name="inputTextBeforeColorColorD2">#0B090A</color> <!--INPUT TEXT PRZED WPISANIEM   -->
+    <color name="inputFrameBeforeColorColorD2">#0B090A</color><!--RAMKA W INPUTACH PRZED KLIKNIĘCIEM   -->
+    <color name="inputIconColorColorD2">#0B090A</color><!--IKONA W INPUCIE   -->
+    <color name="smallIconFavTariffColorColorD2">#161A1D</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorD2">#161A1D</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorD2">#FFCDB2</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorD2">#E5989B</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorD2">#FFB4A2</color> <!--TŁO TYLNE -->
+    <!--G -->
+    <color name="buttonBackgroundColorColorG1">#AC8484</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorG1">#8F84AC</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorG1">#403458</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorG1">#403458</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2G1">#403458</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorG1">#403458</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorG1">#FFFFFF</color> <!--RAMKA W INPUTACH   -->
+    <color name="inputTextBeforeColorColorG1">#403458</color> <!--INPUT TEXT PRZED WPISANIEM   -->
+    <color name="inputFrameBeforeColorColorG1">#403458</color><!--RAMKA W INPUTACH PRZED KLIKNIĘCIEM   -->
+    <color name="inputIconColorColorG1">#403458</color><!--IKONA W INPUCIE   -->
+    <color name="smallIconFavTariffColorColorG1">#FFFFFF</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorG1">#FFFFFF</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorG1">#987BA4</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorG1">#8387B3</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorG1">#8F84AC</color> <!--TŁO TYLNE -->
+
+    <color name="buttonBackgroundColorColorG2">#F7BDB7</color> <!--TŁO PRZYCISKU -->
+    <color name="separatorBackgroundColorColorG2">#F7BDB7</color> <!--TŁO SEPERATORA -->
+    <color name="textMainColorColorG2">#363040</color> <!--TEXT GŁÓWNY NP OPIS WYKROCZENNIA  -->
+    <color name="textSecondColorColorG2">#363040</color> <!--TEXT UZUPEŁNIAJĄCY POD WYKROCZENIEM   -->
+    <color name="textSecondColorColor2G2">#363040</color> <!--TEXT W KONETNERCH W DRODZE I POMOCACH   -->
+    <color name="inputTextColorColorG2">#363040</color> <!--TEXT W INPUTACH   -->
+    <color name="inputFrameColorColorG2">#F7BDB7</color> <!--RAMKA W INPUTACH   -->
+    <color name="inputTextBeforeColorColorG2">#363040</color> <!--INPUT TEXT PRZED WPISANIEM   -->
+    <color name="inputFrameBeforeColorColorG2">#363040</color><!--RAMKA W INPUTACH PRZED KLIKNIĘCIEM   -->
+    <color name="inputIconColorColorG2">#363040</color><!--IKONA W INPUCIE   -->
+    <color name="smallIconFavTariffColorColorG2">#363040</color> <!--KOLOR IKONY ULUBIONEJ W WYKROCZENIACH   -->
+    <color name="smallIconColorColorG2">#363040</color> <!--KOLOR MAŁYCH IKON W TARYFIKATORZE -->
+    <color name="tapoMainColorColorG2">#FDB58F</color> <!--TŁO PASKA U GÓRY, TŁO EKRANU POWITALNEGO, TŁO WYKROCZENIA -->
+    <color name="tapoSecondColorColorG2">#F7BDB7</color> <!--TŁO KONTENERÓW W SEKCJI DROGA ORAZ MENU itp itd -->
+    <color name="tapoBackgroundColorColorG2">#FFD6AB</color> <!--TŁO TYLNE -->
+
+
+
 </resources>
