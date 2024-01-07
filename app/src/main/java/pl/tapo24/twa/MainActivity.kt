@@ -90,9 +90,6 @@ class MainActivity: AppCompatActivity() {
     private val dialogNotification = DialogNotificationRequest()
 
     private lateinit var sharedPreferences: SharedPreferences
-    private val themeKey = "default"
-
-    private val funeralTheme = "false"
 
     private var navController: NavController? = null
 
@@ -141,10 +138,10 @@ class MainActivity: AppCompatActivity() {
             "ThemePref",
             Context.MODE_PRIVATE
         )
-        val funeral: String = sharedPreferences.getString(funeralTheme,"false") ?: "false"
-        val themeName: String = sharedPreferences.getString(themeKey, "default") ?: "default"
-        val themeType = initializationModule.returnStyleTheme(funeral, themeName)
-        State.settingTheme.value = themeType
+        val funeralFromShared: Boolean = sharedPreferences.getBoolean("funeralTheme", false)
+        val themeName: String = sharedPreferences.getString("mainTheme", "default") ?: "default"
+        val themeType = initializationModule.returnStyleTheme(funeralFromShared, themeName)
+
         theme.applyStyle(themeType.themeName, true)
 
         val workManager =  WorkManager.getInstance(this)
@@ -156,45 +153,17 @@ class MainActivity: AppCompatActivity() {
             .addTag("Mourning")
             .build()
         workManager.enqueueUniquePeriodicWork("Mourning",ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
-
-        val activity: Activity = this
         // get theme
-
+        val activity: Activity = this
         initializationModule.getThemeParameters()
-        State.settingFontBoldTariff.observe(this, Observer {
-            if (it) {
-                theme.applyStyle(R.style.boldFont, true)
-            } else {
-                theme.applyStyle(R.style.nonBoldFont, true)
-            }
-        })
-        State.settingFontBoldMain.observe(this, Observer {
-            if (it) {
-                theme.applyStyle(R.style.boldFontMain, true)
-            } else {
-                theme.applyStyle(R.style.nonBoldFontMain, true)
-            }
-        })
-        State.settingFont.observe(this, Observer {
-            theme.applyStyle(it.themeName, true)
-        })
-        State.settingTheme.observe(this, Observer {
-            val shared = sharedPreferences.getString(themeKey, "default")
-            if (shared != it.type) {
-                sharedPreferences.edit().putString(themeKey, it.type).apply()
-                activity.finish()
-                activity.startActivity(Intent(activity, MainActivity::class.java))
-                activity.finishAffinity()
-            }
-        })
-        State.funeralTheme.observe(this, Observer {
-            val shared = sharedPreferences.getString(funeralTheme, "default")
-            if (shared != it.toString()) {
-                sharedPreferences.edit().putString(funeralTheme, it.toString()).apply()
-                activity.finish()
-                activity.startActivity(Intent(activity, MainActivity::class.java))
-                activity.finishAffinity()
-            }
+        initializationModule.setThemeObserver(this)
+        State.requireRestart.observe(this, Observer {
+           if (it) {
+               State.requireRestart.value = false
+               activity.finish()
+               activity.startActivity(Intent(activity, MainActivity::class.java))
+               activity.finishAffinity()
+           }
         })
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -360,11 +329,10 @@ class MainActivity: AppCompatActivity() {
                }
            } else {
                State.networkType = settingNetwork!!.value
-               // DOWNOLOAD DATA
+               // DOWNLOAD DATA
                AssetUpdater(tapoDb,dataTapoDb,networkClient,context, context.supportFragmentManager, activity).getAllData()
            }
        }
-
         IntentRouter().route(intent, navController)
     }
 

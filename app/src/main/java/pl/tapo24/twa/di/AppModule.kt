@@ -1,10 +1,12 @@
 package pl.tapo24.twa.di
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
@@ -132,8 +134,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindInitializationModule(tapoDb: TapoDb, networkClient: NetworkClient): InitializationModule {
-        return InitializationModule(tapoDb, networkClient)
+    fun bindInitializationModule(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): InitializationModule {
+        return InitializationModule(tapoDb, networkClient, app )
     }
 
     @Provides

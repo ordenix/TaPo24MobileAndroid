@@ -1,5 +1,11 @@
 package pl.tapo24.twa
 
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.db.TapoDb
@@ -7,12 +13,37 @@ import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.infrastructure.NetworkClient
 import javax.inject.Inject
 
-class InitializationModule @Inject constructor(private val tapoDb: TapoDb, private val networkClient: NetworkClient) {
+class InitializationModule @Inject constructor(private val tapoDb: TapoDb, private val networkClient: NetworkClient, private val context: Context){
     fun setNetworkType() {
 
     }
 
+    fun setThemeObserver(activity: AppCompatActivity
+    ) {
+        State.settingFontBoldTariff.observe(activity, Observer {
+            if (it) {
+                activity.theme.applyStyle(R.style.boldFont, true)
+            } else {
+                activity.theme.applyStyle(R.style.nonBoldFont, true)
+            }
+        })
+        State.settingFontBoldMain.observe(activity, Observer {
+            if (it) {
+                activity.theme.applyStyle(R.style.boldFontMain, true)
+            } else {
+                activity.theme.applyStyle(R.style.nonBoldFontMain, true)
+            }
+        })
+        State.settingFont.observe(activity, Observer {
+            activity.theme.applyStyle(it.themeName, true)
+        })
+    }
+
     fun getThemeParameters() {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+            "ThemePref",
+            Context.MODE_PRIVATE
+        )
         MainScope().async(Dispatchers.IO) {
             var settingFont : Setting? = null
             var settingFontBoldTariff : Setting? = null
@@ -59,6 +90,8 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
                     State.settingFontBoldMain.value = settingFontBoldMain!!.state
                 }
             }
+            val funeralFromShared: Boolean = sharedPreferences.getBoolean("funeralTheme", false)
+            State.funeralTheme = funeralFromShared
 
         }
     }
@@ -123,8 +156,8 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
         }
     }
 
-    fun returnStyleTheme(funeral: String = "false", themeKey: String = "default"): ThemeTypes {
-        return if (funeral == "false") {
+    fun returnStyleTheme(funeral: Boolean = false, themeKey: String = "default"): ThemeTypes {
+        return if (!funeral) {
             val themeType: ThemeTypes? = ThemeTypes.values().find { element -> element.type == themeKey }
             themeType ?: ThemeTypes.Default
         } else {

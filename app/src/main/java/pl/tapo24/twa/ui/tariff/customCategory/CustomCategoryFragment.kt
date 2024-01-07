@@ -43,30 +43,20 @@ class CustomCategoryFragment : Fragment() {
                 // Respond to negative button press
                 viewModel.deleteCustomCategory()
             }
-        val viewDialogWithEditNameCustomCategory = layoutInflater.inflate(R.layout.dialog_custom_category_name, null)
-        val dialogAddCustomCategory = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.addCategory))
-            .setView(viewDialogWithEditNameCustomCategory)
-            .setPositiveButton("Dodaj") { dialog, which ->
-                // Respond to positive button press
-                val categoryName = viewDialogWithEditNameCustomCategory.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.customCategoryName).text.toString()
-                viewModel.addCustomCategory(categoryName)
-            }
-            .create()
-        val dialogEditCustomCategory = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(getString(R.string.editCategoryName))
-            .setView(viewDialogWithEditNameCustomCategory)
-            .setPositiveButton("Zapisz") { dialog, which ->
-                // Respond to positive button press
-                val categoryName = viewDialogWithEditNameCustomCategory.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.customCategoryName).text.toString()
-                viewModel.changeNameCustomCategoryName(categoryName)
-            }
-            .setNegativeButton("Anuluj") { dialog, which ->
-                // Respond to negative button press
-            }
-            .create()
+
+
         binding.addCategory.setOnClickListener {
+            val viewDialogWithEditNameCustomCategory = layoutInflater.inflate(R.layout.dialog_custom_category_name, null)
             viewDialogWithEditNameCustomCategory.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.customCategoryName).setText("")
+            val dialogAddCustomCategory = MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.addCategory))
+                .setView(viewDialogWithEditNameCustomCategory)
+                .setPositiveButton("Dodaj") { dialog, which ->
+                    // Respond to positive button press
+                    val categoryName = viewDialogWithEditNameCustomCategory.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.customCategoryName).text.toString()
+                    viewModel.addCustomCategory(categoryName)
+                }
+                .create()
             dialogAddCustomCategory.show()
         }
         val dialogInfo = MaterialAlertDialogBuilder(requireContext())
@@ -97,9 +87,22 @@ class CustomCategoryFragment : Fragment() {
         })
         viewModel.showEditNameDialog.observe(viewLifecycleOwner, Observer {
             if (it) {
+                val viewDialogWithEditNameCustomCategory = layoutInflater.inflate(R.layout.dialog_custom_category_name, null)
                 viewModel.showEditNameDialog.value = false
 
                 viewDialogWithEditNameCustomCategory.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.customCategoryName).setText(viewModel.customCategoryToEditName?.categoryName)
+                val dialogEditCustomCategory = MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.editCategoryName))
+                    .setView(viewDialogWithEditNameCustomCategory)
+                    .setPositiveButton("Zapisz") { dialog, which ->
+                        // Respond to positive button press
+                        val categoryName = viewDialogWithEditNameCustomCategory.findViewById<com.google.android.material.textfield.TextInputEditText>(R.id.customCategoryName).text.toString()
+                        viewModel.changeNameCustomCategoryName(categoryName)
+                    }
+                    .setNegativeButton("Anuluj") { dialog, which ->
+                        // Respond to negative button press
+                    }
+                    .create()
                 dialogEditCustomCategory.show()
             }
         })

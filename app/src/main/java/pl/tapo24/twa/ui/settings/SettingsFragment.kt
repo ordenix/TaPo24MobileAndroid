@@ -149,7 +149,7 @@ class SettingsFragment: Fragment() {
         } else {
             binding.textView102.visibility = View.VISIBLE
         }
-        if (State.funeralTheme.value == true) {
+        if (State.funeralTheme) {
             premiumVisible = false
             binding.recyclerView.visibility = View.GONE
             binding.textInfoForceStyle.visibility = View.VISIBLE

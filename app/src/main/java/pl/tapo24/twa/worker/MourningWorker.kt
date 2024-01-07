@@ -1,6 +1,7 @@
 package pl.tapo24.twa.worker
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.work.CoroutineWorker
 import androidx.work.Data
 import androidx.work.WorkerParameters
@@ -31,33 +32,36 @@ class MourningWorker (val context: Context, val parameters: WorkerParameters): C
         fun mourningCheck(): MourningCheck
     }
 
-
-//    @Inject
-//    lateinit var mourningCheck: MourningCheck
     override suspend fun doWork(): Result {
         val networkType = CheckConnection().getConnectionType(context)
         val hiltEntryPoint = EntryPointAccessors.fromApplication(context, MourningProviderEntryPoint::class.java)
         val mourningCheck = hiltEntryPoint.mourningCheck()
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+            "ThemePref",
+            Context.MODE_PRIVATE
+        )
+
         if (networkType != NetworkTypes.None) {
             mourningCheck.getMourningFromService()
-            val statusMourning = mourningCheck.checkIsMourningActive()
-            statusMourning.onSuccess {
-                withContext(Dispatchers.Main ) {
-                    State.funeralTheme.value = it
-                }
-            }
+            checkMourning(mourningCheck, sharedPreferences)
             return Result.success()
         } else {
-            val statusMourning = mourningCheck.checkIsMourningActive()
-            statusMourning.onSuccess {
-                withContext(Dispatchers.Main ) {
-                    State.funeralTheme.value = it
-                }
-            }
-
+            checkMourning(mourningCheck, sharedPreferences)
             return Result.success()
         }
 
 
+    }
+    private suspend fun checkMourning(mourningCheck: MourningCheck, sharedPreferences: SharedPreferences) {
+        val funeralFromShared: Boolean = sharedPreferences.getBoolean("funeralTheme", false)
+        val statusMourning = mourningCheck.checkIsMourningActive()
+        statusMourning.onSuccess {
+            if (it != funeralFromShared) {
+                sharedPreferences.edit().putBoolean("funeralTheme", it).apply()
+                withContext(Dispatchers.Main) {
+                    State.requireRestart.value = true
+                }
+            }
+        }
     }
 }

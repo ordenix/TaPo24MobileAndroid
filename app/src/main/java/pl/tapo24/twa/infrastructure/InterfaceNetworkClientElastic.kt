@@ -20,6 +20,10 @@ interface InterfaceNetworkClientElastic {
     @POST("search.json")
     fun getTariffList(@Body body: DataToElasticForTariffList, @Header("Authorization") authorization:String): Call<DataTariffListFromElastic>
 
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("click")
+    fun clickOnSuggestion(@Body body: DataToElasticForTariffList, @Header("Authorization") authorization:String): Call<Any>
+
    // Bearer search-gwuqjnb5u2je9vnc6e7i5gnd -before
     //Bearer search-gwuqjnb5u2je9vnc6e7i5gnd new
     //https://elastic-enterprise-search.server.tapo24.pl/api/as/v1/engines/tapo24new/click

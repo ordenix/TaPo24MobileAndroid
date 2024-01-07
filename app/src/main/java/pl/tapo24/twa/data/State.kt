@@ -38,10 +38,10 @@ object State {
 
     // THEME
     var settingFont: MutableLiveData<FontTypes> = MutableLiveData(FontTypes.itim)
-    var settingTheme : MutableLiveData<ThemeTypes> = MutableLiveData()
-    var settingFontBoldTariff : MutableLiveData<Boolean> = MutableLiveData(true)
-    var settingFontBoldMain : MutableLiveData<Boolean> = MutableLiveData(true)
-    var funeralTheme : MutableLiveData<Boolean> = MutableLiveData(false)
+    var settingFontBoldTariff: MutableLiveData<Boolean> = MutableLiveData(true)
+    var settingFontBoldMain: MutableLiveData<Boolean> = MutableLiveData(true)
+    var funeralTheme: Boolean = false
+    var requireRestart: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var test = false
 
