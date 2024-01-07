@@ -371,8 +371,20 @@ class MainActivity: AppCompatActivity() {
             navController.navigate(R.id.nav_login)
         }
         if (item.itemId == R.id.action_logout) {
-            sessionProvider.clearSession()
-            Snackbar.make(window.decorView.rootView, "Wylogowano z serwisu", Snackbar.LENGTH_LONG).show()
+            val dialogMaterialAlertDialogBuilder = MaterialAlertDialogBuilder(this)
+                .setTitle("Wylogowanie")
+                .setMessage("Czy na pewno chcesz się wylogować z serwisu?")
+                .setNegativeButton("Nie") { dialog, which ->
+                    // Respond to negative button press
+                }
+                .setPositiveButton("Tak") { dialog, which ->
+                    // Respond to positive button press
+                    sessionProvider.clearSession()
+                    Snackbar.make(window.decorView.rootView, "Wylogowano z serwisu", Snackbar.LENGTH_LONG).show()
+                }
+                .show()
+//            sessionProvider.clearSession()
+//            Snackbar.make(window.decorView.rootView, "Wylogowano z serwisu", Snackbar.LENGTH_LONG).show()
         }
         return super.onOptionsItemSelected(item)
     }

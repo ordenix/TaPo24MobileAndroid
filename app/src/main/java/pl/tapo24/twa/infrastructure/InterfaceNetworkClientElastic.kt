@@ -1,5 +1,6 @@
 package pl.tapo24.twa.infrastructure
 
+import pl.tapo24.twa.data.elastic.DataClickToElastic
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
 import pl.tapo24.twa.data.elastic.queryToElasticForTariffList.DataToElasticForTariffList
@@ -22,7 +23,7 @@ interface InterfaceNetworkClientElastic {
 
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("click")
-    fun clickOnSuggestion(@Body body: DataToElasticForTariffList, @Header("Authorization") authorization:String): Call<Any>
+    fun clickOnSuggestion(@Body body: DataClickToElastic, @Header("Authorization") authorization:String): Call<Any>
 
    // Bearer search-gwuqjnb5u2je9vnc6e7i5gnd -before
     //Bearer search-gwuqjnb5u2je9vnc6e7i5gnd new

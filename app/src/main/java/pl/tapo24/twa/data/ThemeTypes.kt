@@ -19,7 +19,7 @@ enum class ThemeTypes(
     FuneralTheme("FuneralTheme", R.style.funeralTheme, false, true,"Pogrzebowa czerń"),
     NTheme("nTheme", R.style.nTheme, false, false,"Krwista czerń"),
     DamianTheme("damianTheme", R.style.damianTheme, false, false,"Mistrzowska szarość"),
-    D2Theme("d2Theme", R.style.d2Theme, false, true,"Wiatr na pustyni"),
-    G1Theme("g1Theme", R.style.g1Theme, false, true,"Neonowy rozbójnik"),
-    G2Theme("g2Theme", R.style.g2Theme, false,  true,"Słoneczny pirat")
+    D2Theme("d2Theme", R.style.d2Theme, false, false,"Wiatr na pustyni"),
+    G1Theme("g1Theme", R.style.g1Theme, false, false,"Neonowy rozbójnik"),
+    G2Theme("g2Theme", R.style.g2Theme, false,  false,"Słoneczny pirat")
 }

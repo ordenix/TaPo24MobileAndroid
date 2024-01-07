@@ -2,6 +2,7 @@ package pl.tapo24.twa.infrastructure
 
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.elastic.DataClickToElastic
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
 import pl.tapo24.twa.data.elastic.queryToElasticForTariffList.DataToElasticForTariffList
@@ -38,9 +39,7 @@ class NetworkClientElastic(var url: String) {
 
     fun getTariffDataList(suggestions: DataToElasticForTariffList): Result<DataTariffListFromElastic> {
         try {
-            // TODO: BEARER
             val response = service.getTariffList(suggestions, State.enginesType.bearer).execute()
-            println(response)
             if (response.isSuccessful) {
                 return Result.success(response.body()!!)
             }
@@ -53,9 +52,19 @@ class NetworkClientElastic(var url: String) {
 
     fun getSuggestionList(suggestions: DataQueryToSuggestion): Result<DataQueryFromSuggestion> {
         try {
-            // TODO: BEARER
             val response = service.getQuerySuggestion(suggestions, State.enginesType.bearer).execute()
-            println(response)
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetElastic.message))
+    }
+
+    fun clickData(dataToClick: DataClickToElastic): Result<Any> {
+        try {
+            val response = service.clickOnSuggestion(dataToClick, State.enginesType.bearer).execute()
             if (response.isSuccessful) {
                 return Result.success(response.body()!!)
             }

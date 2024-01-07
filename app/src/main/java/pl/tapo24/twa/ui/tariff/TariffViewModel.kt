@@ -13,6 +13,7 @@ import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.customCategory.CategoryDictionary
 import pl.tapo24.twa.data.customCategory.CategoryToMap
 import pl.tapo24.twa.data.customCategory.DataCategory
+import pl.tapo24.twa.data.elastic.DataClickToElastic
 import pl.tapo24.twa.data.elastic.DataQueryFromSuggestion
 import pl.tapo24.twa.data.elastic.DataQueryToSuggestion
 import pl.tapo24.twa.data.elastic.queryToElasticForTariffList.DataToElasticForTariffList
@@ -309,6 +310,15 @@ class TariffViewModel @Inject constructor(
         itemToDialog = item
         positionToDialog = position
         showDialog.value = true
+        if (State.internetStatus.value != NetworkTypes.None && queryTextInSearchBar.value?.isNotEmpty() == true) {
+            val dataToClick = DataClickToElastic(item.id,queryTextInSearchBar.value.orEmpty())
+            viewModelScope.launch(Dispatchers.IO) {
+                val r = networkClientElastic.clickData(dataToClick)
+                println(r)
+            }
+
+        }
+
 
     }
     fun clickOnFavorites(item: Tariff, position: Int) {
