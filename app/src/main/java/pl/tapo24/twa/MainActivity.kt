@@ -50,6 +50,7 @@ import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
 import pl.tapo24.twa.worker.MourningWorker
+import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -148,11 +149,19 @@ class MainActivity: AppCompatActivity() {
         val constraints = Constraints.Builder()
             //.setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-        val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(15, TimeUnit.MINUTES)
+        val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(5, TimeUnit.HOURS)
             .setConstraints(constraints)
             .addTag("Mourning")
             .build()
         workManager.enqueueUniquePeriodicWork("Mourning",ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
+       val constraints2 = Constraints.Builder()
+           .build()
+       val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(30, TimeUnit.DAYS)
+           .setConstraints(constraints2)
+           .setInitialDelay(30, TimeUnit.DAYS)
+           .addTag("ShowNotifyForTariffIcon")
+           .build()
+       workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
         // get theme
         val activity: Activity = this
         initializationModule.getThemeParameters()

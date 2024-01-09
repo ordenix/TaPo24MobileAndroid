@@ -55,13 +55,12 @@ class TariffFragment: Fragment() {
 
         viewModel =
             ViewModelProvider(this).get(TariffViewModel::class.java)
-
         _binding = FragmentTariffBinding.inflate(inflater, container, false)
         val root: View = binding.root
         viewModel.startApp()
         val rv = binding.RvTariffData
         rv.layoutManager = LinearLayoutManager(activity)
-        viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty(),viewModel)
+        viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty(),viewModel,requireContext())
         rv. adapter = viewModel.adapter
         viewModel.tariffData.observe(viewLifecycleOwner, Observer {
             viewModel.adapter.items = it

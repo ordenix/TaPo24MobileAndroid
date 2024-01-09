@@ -1,6 +1,11 @@
 package pl.tapo24.twa.ui.tariff
 
+import android.content.Context
 import androidx.lifecycle.*
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import pl.tapo24.twa.FavouriteModule
@@ -30,6 +35,9 @@ import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
 import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
 import pl.tapo24.twa.utils.RegexTariff
+import pl.tapo24.twa.worker.MourningWorker
+import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,9 +48,8 @@ class TariffViewModel @Inject constructor(
     private val favouriteModule: FavouriteModule,
     private val customCategoryModule: CustomCategoryModule,
     private val prepareMapListToTariffUseCase: PrepareMapListToTariffUseCase,
-    private val setMapCustomCategoryUseCase: SetMapCustomCategoryUseCase
+    private val setMapCustomCategoryUseCase: SetMapCustomCategoryUseCase,
 ) : ViewModel() {
-
     //val sss = tapoDb.tariffDb().getAll()
     var tariffData: MutableLiveData<List<Tariff>> = MutableLiveData()
     val tariffDataAll: MutableLiveData<List<Tariff>> = MutableLiveData()
@@ -100,6 +107,15 @@ class TariffViewModel @Inject constructor(
             }
 
         }.await()
+    }
+    fun clickOnNotifyForTariffIcon() {
+        State.showNotifyForTariffIcon = false
+        viewModelScope.launch(Dispatchers.IO) {
+            val setting: Setting = Setting("showNotifyForTariffIcon","",0,false)
+            tapoDb.settingDb().insert(setting)
+        }
+        adapter.notifyDataSetChanged()
+
     }
     fun getListForDialogMap(tariffId: String) {
         viewModelScope.launch(Dispatchers.IO) {

@@ -430,6 +430,20 @@ class NetworkClient(var url: String) {
         }
         return Result.failure(InternalException(InternalMessage.InternalLogin.message))
     }
+    fun generateNewToken(token: String): Result<String> {
+        try {
+            val response = service.generateNewToken("Bearer $token").execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r!!)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                return Result.failure(HttpException(errorMessage))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalLogin.message))
+    }
 
     fun checkValidToken(token: String): Result<String> {
         try {

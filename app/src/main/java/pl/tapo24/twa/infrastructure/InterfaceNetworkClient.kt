@@ -125,6 +125,11 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=UTF-8")
     @GET("login/test_token_valid_and_account_baned_status/")
     fun checkValidToken(@Header("Authorization")header: String): Call<String>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @POST("login/generate_new_JWT/")
+    fun generateNewToken(@Header("Authorization")header: String): Call<RString>
+
     // response profile
     @Headers("Content-Type: application/json; charset=UTF-8")
     @GET("profile/favorites_offenses/")

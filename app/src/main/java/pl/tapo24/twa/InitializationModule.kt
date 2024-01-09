@@ -145,6 +145,16 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
             } else {
                 State.enginesType = EnginesType.values()[settingEngine!!.count]
             }
+            val showNotifyForTariffIcon = async { tapoDb.settingDb().getSettingByName("showNotifyForTariffIcon") }.await()
+            if (showNotifyForTariffIcon == null){
+                async {
+                    val setting: Setting = Setting("showNotifyForTariffIcon","", state = true)
+                    tapoDb.settingDb().insert(setting)
+                }.await()
+                State.showNotifyForTariffIcon = true
+            } else {
+                State.showNotifyForTariffIcon = showNotifyForTariffIcon!!.state
+            }
         }
 
 

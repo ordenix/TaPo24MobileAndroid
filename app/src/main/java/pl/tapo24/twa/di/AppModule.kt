@@ -24,6 +24,8 @@ import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.updater.MourningCheck
+import pl.tapo24.twa.useCase.RegenerateJwtTokenUseCase
+import pl.tapo24.twa.useCase.ShowNotifyForTariffIconUseCase
 import pl.tapo24.twa.useCase.customCategory.*
 import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
 import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
@@ -115,8 +117,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindSessionProvider(tapoDb: TapoDb, networkClient: NetworkClient): SessionProvider {
-        return SessionProvider(tapoDb, networkClient)
+    fun bindSessionProvider(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): SessionProvider {
+        return SessionProvider(tapoDb, networkClient, app)
     }
 
     @Provides
@@ -191,5 +193,17 @@ object AppModule {
     @Singleton
     fun bindSynchronizeCustomCategoryMapUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): SynchronizeCustomCategoryMapUseCase {
         return SynchronizeCustomCategoryMapUseCase(app, tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindRegenerateJwtTokenUseCase(networkClient: NetworkClient, tapoDb: TapoDb): RegenerateJwtTokenUseCase {
+        return RegenerateJwtTokenUseCase(networkClient, tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindShowNotifyForTariffIconUseCase(tapoDb: TapoDb): ShowNotifyForTariffIconUseCase {
+        return ShowNotifyForTariffIconUseCase(tapoDb)
     }
 }

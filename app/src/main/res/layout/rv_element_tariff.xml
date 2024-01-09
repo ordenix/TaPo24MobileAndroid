@@ -7,10 +7,10 @@
 
     <data>
         <import type="android.view.View"/>
-        <variable name="image"
-                  type="android.graphics.Bitmap"/>
         <variable name="position"
                   type="java.lang.Integer"/>
+        <variable name="visibleNotifyForTariffIcon"
+                  type="java.lang.Boolean"/>
         <variable name="data"
                   type="pl.tapo24.twa.db.entity.Tariff"/>
         <variable name="viewModel" type="pl.tapo24.twa.ui.tariff.TariffViewModel"/>
@@ -81,13 +81,22 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" app:layout_constraintStart_toEndOf="@+id/button4"
                 app:layout_constraintEnd_toStartOf="@+id/divider4"
-                android:layout_marginEnd="8dp" app:layout_constraintTop_toBottomOf="@+id/divider5"
-                android:layout_marginTop="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider5"
+                app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/imageContainer">
 
+            <TextView
+                    android:visibility="@{visibleNotifyForTariffIcon == true ? View.VISIBLE : View.GONE}"
+                    android:onClick="@{()->(viewModel.clickOnNotifyForTariffIcon())}"
+                    android:text="Ikony dostępne dla użytkowników PREMIUM \nKliknij aby zamknąć"
+                    android:layout_width="wrap_content"
+                    style="@style/textStyleNotifyForTariffIcon"
+                    android:layout_height="wrap_content" android:id="@+id/notifyForTariffIcon"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
             <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" app:imageBitmap="@{image}" android:id="@+id/imageDetails"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp" android:id="@+id/imageDetails"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>

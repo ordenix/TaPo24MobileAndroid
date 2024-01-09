@@ -24,6 +24,7 @@ object State {
 
     var premiumVersion: Boolean = false
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
+    var showNotifyForTariffIcon: Boolean = true
     var isSessionConfirm: Boolean = false
     var isSessionRestored: Boolean = false
     var isFavouritesSynchronized: Boolean = false

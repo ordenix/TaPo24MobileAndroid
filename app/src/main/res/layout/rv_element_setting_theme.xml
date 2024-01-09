@@ -32,7 +32,7 @@
                     android:text="@{data.themeType.namePl}"
                     android:layout_width="match_parent"
                     android:checked="@{data.selected}"
-                    android:onCheckedChanged="@{() -> viewModel.selectTheme(data.themeType)}"
+                    android:onClick="@{() -> viewModel.selectTheme(data.themeType)}"
                     android:enabled="@{isEnabled}"
                     android:layout_height="wrap_content"
                     android:visibility="visible" app:layout_constraintStart_toStartOf="parent"

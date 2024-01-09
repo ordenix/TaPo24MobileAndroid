@@ -28,6 +28,13 @@
         <item name="android:textStyle">?attr/weightFontMain</item>
         <item name="android:maxLines">50</item>
     </style>
+    <style name="textStyleNotifyForTariffIcon" parent="@style/textStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">?attr/textMainColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:maxLines">50</item>
+    </style>
     <style name="textStyleOrangeMediumWarpXl" parent="@style/textStyle">
         <item name="android:textSize">22sp</item>
         <item name="android:textColor">?attr/textMainColor</item>

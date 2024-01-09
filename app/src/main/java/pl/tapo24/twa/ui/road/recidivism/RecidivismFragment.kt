@@ -30,7 +30,7 @@ class RecidivismFragment : Fragment() {
 
         val rv = binding.rv
         rv.layoutManager = LinearLayoutManager(activity)
-        viewModel.adapter = TariffDataAdapter(viewModel.data.value.orEmpty(), null)
+        viewModel.adapter = TariffDataAdapter(viewModel.data.value.orEmpty(), null, requireContext())
         rv.adapter = viewModel.adapter
 //
         viewModel.data.observe(viewLifecycleOwner, Observer {

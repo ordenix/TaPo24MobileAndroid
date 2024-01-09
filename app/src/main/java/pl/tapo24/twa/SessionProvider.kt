@@ -2,6 +2,7 @@ package pl.tapo24.twa
 
 import android.content.Context
 import android.os.Build
+import androidx.work.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
@@ -20,11 +21,20 @@ import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.succes.HttpSuccessMessage
+import pl.tapo24.twa.worker.RegenerateJwtTokenWorker
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private var networkClient: NetworkClient)
+class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private var networkClient: NetworkClient, private var context: Context)
 
  {
+
+     val workManager: WorkManager = WorkManager.getInstance(context)
+     val constraints = Constraints.Builder()
+         .setRequiredNetworkType(NetworkType.CONNECTED)
+
+         .build()
+
 
 
     fun restoreSession() {
@@ -81,9 +91,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             userDataFromBackend.onSuccess {
                 val settingToDbUserName = Setting("UserName", it.login!!)
                 val settingToDbRole = Setting("Role", it.role!!)
-
-                    async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
-                    async { tapoDb.settingDb().insert(settingToDbRole) }.await()
+                async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
+                async { tapoDb.settingDb().insert(settingToDbRole) }.await()
 
                 State.userName = it.login!!
                 State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
@@ -114,6 +123,13 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
         response.onSuccess {
             withContext(Dispatchers.Main) {
                 createSession(it)
+               // here add worker to regenrate
+            val workRequest = PeriodicWorkRequestBuilder<RegenerateJwtTokenWorker>(15, TimeUnit.DAYS)
+                    .setConstraints(constraints)
+                    .setInitialDelay(15, TimeUnit.DAYS)
+                    .build()
+            workManager.enqueueUniquePeriodicWork("RegenerateJwt", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
+
             }
 
             return  Result.success(HttpSuccessMessage.SuccessLogin.message)
@@ -125,6 +141,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
     }
 
     fun clearSession() {
+//        remove worker if exist
+        workManager.cancelUniqueWork("RegenerateJwt")
         State.isLogin.value = false
         State.premiumVersion = false
         // State.uid = "" // TODO: SET TATE UID AND DB BY LOGIN UID
