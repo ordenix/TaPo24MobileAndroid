@@ -1,14 +1,9 @@
 package pl.tapo24.twa.ui.tariff
 
-import android.content.Context
 import androidx.lifecycle.*
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import pl.tapo24.twa.FavouriteModule
+import pl.tapo24.twa.module.FavouriteModule
 import pl.tapo24.twa.adapter.CustomCategoryMapAdapter
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
@@ -35,9 +30,6 @@ import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
 import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
 import pl.tapo24.twa.utils.RegexTariff
-import pl.tapo24.twa.worker.MourningWorker
-import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel

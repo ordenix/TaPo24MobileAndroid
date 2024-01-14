@@ -107,6 +107,10 @@ interface InterfaceNetworkClient {
     @GET("data/data_mourning")
     fun getMourningData(): Call<List<Mourning>>
 
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/shop_status")
+    fun getShopStatus(): Call<Setting>
+
 
     // endpoints for module
     @Headers("Content-Type: application/json; charset=utf-8")
@@ -143,6 +147,10 @@ interface InterfaceNetworkClient {
     @GET("login/get_data_user/")
     fun getDataUser(@Header("Authorization")header: String): Call<DataUser>
 
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @POST("login/promote_to_paid_account/")
+    fun promoteToPaidAccount(@Header("Authorization")header: String): Call<RString>
+
 // customCategory
 
     @Headers("Content-Type: application/json; charset=UTF-8")
@@ -168,4 +176,5 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=UTF-8")
     @HTTP(method = "DELETE", path = "custom_category/custom_category_to_tariff/", hasBody = true)
     fun deleteCustomCategoryMap(@Header("Authorization")header: String, @Body customMap: MapCategory): Call<RString>
+    // check list
 }

@@ -1,4 +1,4 @@
-package pl.tapo24.twa
+package pl.tapo24.twa.module
 
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.NetworkTypes

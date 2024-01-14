@@ -54,7 +54,7 @@ class ShopListAdapter(
                     println(item)
                     val option = item.subscriptionOption
                     val price = option.pricingPhases.joinToString(separator = " następnie ") { phase ->
-                        "${phase.price.formatted} za ${phase.billingPeriod.toDescription} ${if (phase.billingCycleCount != 0) "(przez ${phase.billingCycleCount} miesiące)" else ""}"
+                        "${phase.price.formatted} ${if (phase.price.formatted == "Bezpłatne") "na" else "za" } ${phase.billingPeriod.toDescription} ${if (phase.billingCycleCount!! > 1) "(przez ${phase.billingCycleCount} miesiące)" else ""}"
                     }
 
                     binding.setVariable(BR.paywallItem, item)
@@ -102,8 +102,8 @@ val Period.toTitle: String?
 val Period.toDescription: String?
     get() = when (unit) {
         Period.Unit.DAY -> if (value == 1) "$value day" else "$value days"
-        Period.Unit.WEEK -> if (value == 1) "$value week" else "$value weeks"
+        Period.Unit.WEEK -> if (value == 1) "$value tydzień" else "$value weeks"
         Period.Unit.MONTH -> if (value == 1) "$value miesiąc" else "$value months"
-        Period.Unit.YEAR -> if (value == 1) "$value year" else "$value years"
+        Period.Unit.YEAR -> if (value == 1) "$value rok" else "$value years"
         Period.Unit.UNKNOWN -> null
     }

@@ -5,5 +5,6 @@ data class DataUser(
     var uid: String? = null,
     var dbid: Int? = null,
     var role: String? = null,
+    var isBetaTester: Boolean? = null,
     var providers: Providers? = null
 )

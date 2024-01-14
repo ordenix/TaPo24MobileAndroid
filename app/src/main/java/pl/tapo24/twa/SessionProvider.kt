@@ -91,13 +91,16 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             userDataFromBackend.onSuccess {
                 val settingToDbUserName = Setting("UserName", it.login!!)
                 val settingToDbRole = Setting("Role", it.role!!)
+                val settingToDbBetaStatus = Setting("Beta", state = it.isBetaTester ?: false)
+                State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
+                State.userName = it.login!!
+                State.beta = it.isBetaTester?: false
                 async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
                 async { tapoDb.settingDb().insert(settingToDbRole) }.await()
+                async { tapoDb.settingDb().insert(settingToDbBetaStatus) }.await()
                 withContext(Dispatchers.Main) {
                     State.paymentId.value = it.login!!
                 }
-                State.userName = it.login!!
-                State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
             }
         }
         } else {
@@ -107,12 +110,16 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             MainScope().launch(Dispatchers.IO) {
                 async { userNameFromDb = tapoDb.settingDb().getSettingByName("UserName") }.await()
                 async { roleFromDb = tapoDb.settingDb().getSettingByName("Role") }.await()
+                val betaFromDb = async {tapoDb.settingDb().getSettingByName("Role") }.await()
                 withContext(Dispatchers.Main) {
                     if (userNameFromDb != null) {
                         State.userName = userNameFromDb!!.value
                     }
                     if (roleFromDb != null) {
                         State.premiumVersion = roleFromDb!!.value == "Admin" || roleFromDb!!.value == "Vip"
+                    }
+                    if (betaFromDb != null) {
+                        State.beta = betaFromDb.state
                     }
                 }
             }
@@ -147,6 +154,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
         workManager.cancelUniqueWork("RegenerateJwt")
         State.isLogin.value = false
         State.premiumVersion = false
+        State.paymentId.value = ""
         // State.uid = "" // TODO: SET TATE UID AND DB BY LOGIN UID
         State.userName = ""
         val settingToDb = Setting("jwtToken",)

@@ -380,6 +380,20 @@ class NetworkClient(var url: String) {
 
     // login
 
+    fun promoteToPaidAccount(): Result<String> {
+        return try {
+            val response = service.promoteToPaidAccount("Bearer ${State.jwtToken}").execute()
+            if (response.isSuccessful) {
+                Result.success(response.body()!!.r!!)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                Result.failure(HttpException(errorMessage))
+            }
+        } catch (ex: Throwable) {
+            Result.failure(ex)
+        }
+    }
+
     fun getDataUser(): Result<DataUser> {
         try {
             val response = service.getDataUser(State.jwtToken).execute()
@@ -606,6 +620,19 @@ class NetworkClient(var url: String) {
             return Result.failure(ex)
         }
         return Result.failure(InternalException(InternalMessage.InternalCustomCategoryMap.message))
+    }
+
+    fun getShopStatus(): Result<Setting> {
+        try {
+            val response = service.getShopStatus().execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
     }
 
 }

@@ -47,6 +47,9 @@ import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.module.FavouriteModule
+import pl.tapo24.twa.module.InitializationModule
+import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
@@ -88,6 +91,10 @@ class MainActivity: AppCompatActivity() {
 
     @Inject
     lateinit var networkClient: NetworkClient
+
+
+    @Inject
+    lateinit var premiumShopModule: PremiumShopModule
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -339,6 +346,7 @@ class MainActivity: AppCompatActivity() {
                )
                Purchases.logLevel = LogLevel.DEBUG
                State.revenuecatInitialize = true
+               premiumShopModule.checkPermissionOnInit()
            }
        })
 
@@ -395,7 +403,23 @@ class MainActivity: AppCompatActivity() {
         }
         if (item.itemId == R.id.action_shop) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
-            navController.navigate(R.id.nav_shop)
+            var shopAvailable = false
+            MainScope().launch(Dispatchers.IO) {
+                val checkShopStatus = async {networkClient.getShopStatus()}.await()
+                checkShopStatus.onSuccess {
+                    if (it.state) {
+                        shopAvailable = true
+                    }
+                }
+                withContext(Dispatchers.Main) {
+                    if (shopAvailable && State.revenuecatInitialize && !State.beta) {
+                        navController.navigate(R.id.nav_shop)
+                    } else {
+                        Snackbar.make(window.decorView.rootView, "Sklep jest niedostępny", Snackbar.LENGTH_LONG).show()
+                    }
+                }
+            }
+
         }
         if (item.itemId == R.id.action_login) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)

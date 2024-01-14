@@ -25,6 +25,7 @@ object State {
     const val versionCode = BuildConfig.VERSION_CODE
 
     var premiumVersion: Boolean = false
+    var beta: Boolean = false
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
     var showNotifyForTariffIcon: Boolean = true
     var isSessionConfirm: Boolean = false

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.color.MaterialColors
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.ControlListAdapter
@@ -39,6 +40,8 @@ class ControlListFragment : Fragment() {
         val root: View = binding.root
 
         viewModel = ViewModelProvider(this).get(ControlListViewModel::class.java)
+        viewModel.colorSpan1 = MaterialColors.getColor(root, R.attr.tapoSecondColor)
+        viewModel.colorSpan2 = MaterialColors.getColor(root, R.attr.tapoBackgroundColor)
         if (viewModel.data.value.isNullOrEmpty()) {
             viewModel.getData()
         }

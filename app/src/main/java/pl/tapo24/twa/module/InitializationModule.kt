@@ -1,12 +1,11 @@
-package pl.tapo24.twa
+package pl.tapo24.twa.module
 
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.*
+import pl.tapo24.twa.R
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting

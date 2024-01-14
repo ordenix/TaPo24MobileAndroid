@@ -13,10 +13,11 @@ import com.revenuecat.purchases.Purchases
 import com.revenuecat.purchases.getCustomerInfoWith
 import com.revenuecat.purchases.models.SubscriptionOption
 import com.revenuecat.purchases.purchaseWith
+import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.ShopListAdapter
 import pl.tapo24.twa.databinding.FragmentShopBinding
-
+@AndroidEntryPoint
 class ShopFragment : Fragment() {
     private var _binding: FragmentShopBinding? = null
     private val binding get() = _binding!!
@@ -47,9 +48,6 @@ class ShopFragment : Fragment() {
 
 
 
-        Purchases.sharedInstance.getCustomerInfoWith({ error -> println(error) }, { customerInfo ->
-            println(customerInfo)
-        })
         viewModel.itemClicked.observe(viewLifecycleOwner){
             if (it != null) {
                 viewModel.itemClicked.value = null
@@ -61,7 +59,7 @@ class ShopFragment : Fragment() {
                         }
                     },
                     onSuccess = { _, _ ->
-                        activity?.finish()
+                        viewModel.successPurchase()
                     },
                 )
             }

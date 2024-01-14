@@ -9,9 +9,15 @@ import com.revenuecat.purchases.getOfferingsWith
 import com.revenuecat.purchases.models.Period
 import com.revenuecat.purchases.models.StoreProduct
 import com.revenuecat.purchases.models.SubscriptionOption
+import dagger.hilt.android.lifecycle.HiltViewModel
 import pl.tapo24.twa.adapter.ShopListAdapter
+import pl.tapo24.twa.module.PremiumShopModule
+import javax.inject.Inject
 
-class ShopViewModel : ViewModel() {
+@HiltViewModel
+class ShopViewModel @Inject constructor(
+    private val premiumShopModule: PremiumShopModule
+) : ViewModel() {
     lateinit var adapter: ShopListAdapter
     val testItem: MutableLiveData<PaywallItem> = MutableLiveData()
     val offeringsData: MutableLiveData<Offering?> = MutableLiveData()
@@ -34,6 +40,10 @@ class ShopViewModel : ViewModel() {
                 // Do nothing
             }
         }
+
+    }
+    fun successPurchase() {
+        premiumShopModule.requestUpdatePermissionInBackendAndSetNewJWT()
 
     }
 

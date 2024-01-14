@@ -1,18 +1,16 @@
 package pl.tapo24.twa.di
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import pl.tapo24.twa.FavouriteModule
-import pl.tapo24.twa.InitializationModule
+import pl.tapo24.twa.module.FavouriteModule
+import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
@@ -23,6 +21,7 @@ import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
+import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.MourningCheck
 import pl.tapo24.twa.useCase.RegenerateJwtTokenUseCase
 import pl.tapo24.twa.useCase.ShowNotifyForTariffIconUseCase
@@ -205,5 +204,11 @@ object AppModule {
     @Singleton
     fun bindShowNotifyForTariffIconUseCase(tapoDb: TapoDb): ShowNotifyForTariffIconUseCase {
         return ShowNotifyForTariffIconUseCase(tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindPremiumShopModule(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): PremiumShopModule {
+        return PremiumShopModule(tapoDb, networkClient, app)
     }
 }
