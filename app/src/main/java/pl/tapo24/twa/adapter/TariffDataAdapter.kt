@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import pl.tapo24.twa.BR
 import pl.tapo24.twa.R
+import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.ui.tariff.TariffViewModel
@@ -51,6 +52,9 @@ class TariffDataAdapter(
             binding.setVariable(BR.data, item)
             binding.setVariable(BR.viewModel,viewModel)
             binding.setVariable(BR.position, position)
+            if (State.environmentType !=  EnvironmentType.Master) {
+                binding.setVariable(BR.visibleDocId, true)
+            }
 
             if (item.path != null) {
                 val file: File = File(binding.root.context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), item.path!!)
