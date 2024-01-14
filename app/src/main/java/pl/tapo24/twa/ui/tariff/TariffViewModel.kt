@@ -8,6 +8,7 @@ import pl.tapo24.twa.adapter.CustomCategoryMapAdapter
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
 import pl.tapo24.twa.data.EnginesType
+import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.customCategory.CategoryDictionary
@@ -389,7 +390,13 @@ class TariffViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 if (dataFromDb != null) {
                     if ((tariffData.value?.size ?: 0) < 1) {
-                        tariffData.value = dataFromDb!!.take(State.maxVisibleItem)
+                        tariffData.value = dataFromDb!!.take(
+                            if (State.environmentType == EnvironmentType.Master) {
+                                State.maxVisibleItem
+                            } else {
+                                dataFromDb!!.size
+                            }
+                        )
                     }
                     tariffDataAll.value = dataFromDb!!
 

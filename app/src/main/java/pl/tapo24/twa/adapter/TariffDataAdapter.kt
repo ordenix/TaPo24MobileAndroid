@@ -56,7 +56,9 @@ class TariffDataAdapter(
                 binding.setVariable(BR.visibleDocId, true)
             }
 
-            if (item.path != null) {
+            if (item.path != null && (item.path!!.contains("sign",true)
+                        || item.path!!.contains("speed",true)
+                        || item.path!!.contains("invalid-",true))) {
                 val file: File = File(binding.root.context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), item.path!!)
                 if (file.exists()) {
                     val bitmap: Bitmap = BitmapFactory.decodeFile(file.absolutePath)
