@@ -17,6 +17,8 @@ object State {
 
     var jwtToken:String = ""
     var userName: String = ""
+    var paymentId: MutableLiveData<String> = MutableLiveData("")
+    var revenuecatInitialize = false
     var uid: String = ""
 
     const val versionName = BuildConfig.VERSION_NAME

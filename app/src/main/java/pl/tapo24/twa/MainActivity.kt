@@ -36,6 +36,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
+import com.revenuecat.purchases.LogLevel
+import com.revenuecat.purchases.Purchases
+import com.revenuecat.purchases.PurchasesConfiguration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.*
@@ -156,9 +159,9 @@ class MainActivity: AppCompatActivity() {
         workManager.enqueueUniquePeriodicWork("Mourning",ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
        val constraints2 = Constraints.Builder()
            .build()
-       val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(30, TimeUnit.DAYS)
+       val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
            .setConstraints(constraints2)
-           .setInitialDelay(30, TimeUnit.DAYS)
+           .setInitialDelay(10, TimeUnit.DAYS)
            .addTag("ShowNotifyForTariffIcon")
            .build()
        workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
@@ -327,6 +330,18 @@ class MainActivity: AppCompatActivity() {
                 favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
             }
         })
+       State.paymentId.observe(this, Observer {
+           if (it.isNotEmpty()) {
+               Purchases.configure(
+                   PurchasesConfiguration.Builder(this, "goog_myXkyrkSAFApGeVWzHSEfmvDiiK")
+                       .appUserID(it)
+                       .build()
+               )
+               Purchases.logLevel = LogLevel.DEBUG
+               State.revenuecatInitialize = true
+           }
+       })
+
 
         val context = this
         MainScope().launch(Dispatchers.IO) {
@@ -354,13 +369,16 @@ class MainActivity: AppCompatActivity() {
         menuInflater.inflate(R.menu.main, menu)
         val menuLogin = menu.findItem(R.id.action_login)
         val menuLogOut = menu.findItem(R.id.action_logout)
+        val menuShop = menu.findItem(R.id.action_shop)
         State.isLogin.observe(this, Observer {
             if (it == true) {
                 menuLogOut.isVisible = true
                 menuLogin.isVisible = false
+                menuShop.isVisible = true
             } else {
                 menuLogOut.isVisible = false
                 menuLogin.isVisible = true
+                menuShop.isVisible = false
             }
         })
         return true
@@ -374,6 +392,10 @@ class MainActivity: AppCompatActivity() {
         if (item.itemId == R.id.action_info) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_about_application)
+        }
+        if (item.itemId == R.id.action_shop) {
+            val navController = findNavController(R.id.nav_host_fragment_content_main)
+            navController.navigate(R.id.nav_shop)
         }
         if (item.itemId == R.id.action_login) {
             val navController = findNavController(R.id.nav_host_fragment_content_main)

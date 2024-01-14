@@ -11,6 +11,11 @@
           android:icon="@drawable/gears_solid"
           android:orderInCategory="150"
           app:showAsAction="never"/>
+    <item android:id="@+id/action_shop"
+          android:title="@string/shop_Premium"
+          android:icon="@drawable/gears_solid"
+          android:orderInCategory="155"
+          app:showAsAction="never"/>
 <!--    <item android:id="@+id/action_about"-->
 <!--          android:title="@string/menu_about"-->
 <!--          android:orderInCategory="200"-->

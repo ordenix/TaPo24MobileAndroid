@@ -93,7 +93,9 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                 val settingToDbRole = Setting("Role", it.role!!)
                 async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
                 async { tapoDb.settingDb().insert(settingToDbRole) }.await()
-
+                withContext(Dispatchers.Main) {
+                    State.paymentId.value = it.login!!
+                }
                 State.userName = it.login!!
                 State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
             }

@@ -17,8 +17,8 @@ android {
         applicationId "pl.tapo24.twa"
         minSdk 24
         targetSdk 34
-        versionCode 43
-        versionName "2.43"
+        versionCode 44
+        versionName "2.44"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -55,9 +55,12 @@ dependencies {
     def retrofit_version = "2.9.0"
     def acraVersion = "5.11.1"
     def work_version ="2.9.0"
+    def billing_version = "6.1.0"
 
-    implementation 'io.qonversion.android.sdk:sdk:6.+'
-    implementation 'com.android.billingclient:billing:6.1.0'
+    implementation 'com.revenuecat.purchases:purchases:7.0.0'
+
+
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2"
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
