@@ -53,6 +53,9 @@ import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.CheckVersion
 import pl.tapo24.twa.updater.DataUpdater
+import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
+import pl.tapo24.twa.useCase.checkList.GetCheckListDictionaryUseCase
+import pl.tapo24.twa.useCase.checkList.GetCheckListMapUseCase
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
 import pl.tapo24.twa.worker.MourningWorker
@@ -95,6 +98,16 @@ class MainActivity: AppCompatActivity() {
 
     @Inject
     lateinit var premiumShopModule: PremiumShopModule
+
+    @Inject
+    lateinit var getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase
+
+    @Inject
+    lateinit var getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase
+
+    @Inject
+
+    lateinit var getCheckListMapUseCase: GetCheckListMapUseCase
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -281,7 +294,7 @@ class MainActivity: AppCompatActivity() {
 
         initializationModule.getUid()
         initializationModule.getSetting()
-        DataUpdater(tapoDb,dataTapoDb,networkClient,this).getData()
+        DataUpdater(tapoDb,dataTapoDb,networkClient,this, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase).getData()
 
         CheckVersion(tapoDb,networkClient,this).checkVersion()
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
@@ -394,6 +407,7 @@ class MainActivity: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_settings) {
+           // DataUpdater(tapoDb,dataTapoDb,networkClient,this, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase).getData()
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_settings)
         }

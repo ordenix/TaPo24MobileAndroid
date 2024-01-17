@@ -3,6 +3,7 @@ package pl.tapo24.twa.infrastructure
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
@@ -627,6 +628,58 @@ class NetworkClient(var url: String) {
             val response = service.getShopStatus().execute()
             return if (response.isSuccessful) {
                 Result.success(response.body()!!)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+    }
+
+    fun getCheckListDictionary(): Result<List<CheckListDictionary>> {
+        try {
+            val response = service.getCheckListDictionary("Bearer ${State.jwtToken}").execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+    }
+
+    fun getCheckListAllMap(): Result<List<CheckListMapComplex>> {
+        try {
+            val response = service.getCheckListAllMap("Bearer ${State.jwtToken}").execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+    }
+
+    fun getCheckListMapByTypeId(id: Int): Result<List<CheckListMapComplex>> {
+        try {
+            val response = service.getCheckListMapByTypeId("Bearer ${State.jwtToken}", id).execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+    }
+
+    fun getAllTypeList(): Result<List<CheckListType>> {
+        try {
+            val response = service.getAllTypeList("Bearer ${State.jwtToken}").execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!.r)
             } else {
                 Result.failure(HttpException(response.errorBody().toString()))
             }

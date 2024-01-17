@@ -1,10 +1,11 @@
 package pl.tapo24.twa.infrastructure
 
 import pl.tapo24.twa.data.RString
-import pl.tapo24.twa.data.customCategory.RCustomCategoryList
+import pl.tapo24.twa.data.RType
 import pl.tapo24.twa.data.customCategory.RCustomMapList
 import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.customCategory.RCustomCategory
 import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.ToLoginData
@@ -177,4 +178,23 @@ interface InterfaceNetworkClient {
     @HTTP(method = "DELETE", path = "custom_category/custom_category_to_tariff/", hasBody = true)
     fun deleteCustomCategoryMap(@Header("Authorization")header: String, @Body customMap: MapCategory): Call<RString>
     // check list
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("check_list/get_dictionary/")
+    fun getCheckListDictionary(@Header("Authorization")header: String,): Call<RType<List<CheckListDictionary>>>
+
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("check_list/get_all_map/")
+    fun getCheckListAllMap(@Header("Authorization")header: String,): Call<RType<List<CheckListMapComplex>>>
+
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("check_list/get_map_by_type_id/")
+    fun getCheckListMapByTypeId(@Header("Authorization")header: String,@Query("code") id: Int): Call<RType<List<CheckListMapComplex>>>
+
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @GET("check_list/get_all_type_list/")
+    fun getAllTypeList(@Header("Authorization")header: String,): Call<RType<List<CheckListType>>>
 }

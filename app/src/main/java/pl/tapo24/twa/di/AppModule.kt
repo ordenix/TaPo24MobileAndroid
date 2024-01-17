@@ -25,6 +25,10 @@ import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.MourningCheck
 import pl.tapo24.twa.useCase.RegenerateJwtTokenUseCase
 import pl.tapo24.twa.useCase.ShowNotifyForTariffIconUseCase
+import pl.tapo24.twa.useCase.checkList.ChangeMapState
+import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
+import pl.tapo24.twa.useCase.checkList.GetCheckListDictionaryUseCase
+import pl.tapo24.twa.useCase.checkList.GetCheckListMapUseCase
 import pl.tapo24.twa.useCase.customCategory.*
 import pl.tapo24.twa.useCase.customCategoryMap.PrepareMapListToTariffUseCase
 import pl.tapo24.twa.useCase.customCategoryMap.SetMapCustomCategoryUseCase
@@ -210,5 +214,29 @@ object AppModule {
     @Singleton
     fun bindPremiumShopModule(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): PremiumShopModule {
         return PremiumShopModule(tapoDb, networkClient, app)
+    }
+
+    @Provides
+    @Singleton
+    fun bindGetCheckListAllTypeUseCase(tapoDb: TapoDb, networkClient: NetworkClient): GetCheckListAllTypeUseCase {
+        return GetCheckListAllTypeUseCase(tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindGetCheckListMapUseCase(tapoDb: TapoDb, networkClient: NetworkClient): GetCheckListMapUseCase {
+        return GetCheckListMapUseCase(tapoDb, networkClient)
+    }
+
+    @Provides
+    @Singleton
+    fun bindChangeMapState(tapoDb: TapoDb): ChangeMapState {
+        return ChangeMapState(tapoDb)
+    }
+
+    @Provides
+    @Singleton
+    fun bindGetCheckListDictionaryUseCase(tapoDb: TapoDb, networkClient: NetworkClient): GetCheckListDictionaryUseCase {
+        return GetCheckListDictionaryUseCase(tapoDb, networkClient)
     }
 }

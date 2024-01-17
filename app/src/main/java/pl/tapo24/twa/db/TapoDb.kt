@@ -18,8 +18,11 @@ import pl.tapo24.twa.db.entity.*
         AppVersion::class,
         CustomCategory::class,
         MapCategory::class,
-        Mourning::class
-    ], version = 11,
+        Mourning::class,
+        CheckListDictionary::class,
+        CheckListMap::class,
+        CheckListType::class,
+    ], version = 12,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -31,7 +34,8 @@ import pl.tapo24.twa.db.entity.*
         AutoMigration (from = 7, to = 8),
         AutoMigration (from = 8, to = 9),
         AutoMigration (from = 9, to = 10),
-        AutoMigration (from = 10, to = 11, spec = TapoDb.Migration11::class)
+        AutoMigration (from = 10, to = 11, spec = TapoDb.Migration11::class),
+        AutoMigration (from = 11, to = 12),
 
 
     ]
@@ -53,4 +57,10 @@ abstract class TapoDb: RoomDatabase() {
     abstract fun customCategory(): CustomCategoryDao
 
     abstract fun mourning(): MourningDao
+
+    abstract fun checkListDictionary(): CheckListDictionaryDao
+
+    abstract fun checkListMap(): CheckListMapDao
+
+    abstract fun checkListType(): CheckListTypeDao
 }

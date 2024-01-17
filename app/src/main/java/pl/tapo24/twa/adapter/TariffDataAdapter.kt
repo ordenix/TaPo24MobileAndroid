@@ -3,6 +3,9 @@ package pl.tapo24.twa.adapter
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+
 
 import pl.tapo24.twa.BR
 import pl.tapo24.twa.R

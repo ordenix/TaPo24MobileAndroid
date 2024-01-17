@@ -10,13 +10,19 @@ import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.DataBaseVersion
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
+import pl.tapo24.twa.useCase.checkList.GetCheckListDictionaryUseCase
+import pl.tapo24.twa.useCase.checkList.GetCheckListMapUseCase
 
 
 class DataUpdater(
     val tapoDb: TapoDb,
     val dataTapoDb: DataTapoDb,
     val networkClient: NetworkClient,
-    val context: Context
+    val context: Context,
+    val getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase,
+    val getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase,
+    val getCheckListMapUseCase: GetCheckListMapUseCase
 
 ) {
     private val delay: Long = 200
@@ -95,6 +101,11 @@ class DataUpdater(
                 getTaiff()
                 Thread.sleep(delay)
                 getSpb()
+                Thread.sleep(delay)
+                setInfo("check list")
+                async { getCheckListDictionaryUseCase.getCheckListDictionaryFromServer() }.await()
+                async { getCheckListAllTypeUseCase.getCheckListAllTypeFromServer() }.await()
+                async { getCheckListMapUseCase.getCheckListMapFromServer() }.await()
 
             } else {
                 //getCodeDrivingLicence()
@@ -177,6 +188,14 @@ class DataUpdater(
                             getSpb()
                             Thread.sleep(delay)
                         }
+                        if (it.id == "check_list"){
+                            setInfo("check list")
+                            Thread.sleep(delay)
+                            async { getCheckListDictionaryUseCase.getCheckListDictionaryFromServer() }.await()
+                            async { getCheckListAllTypeUseCase.getCheckListAllTypeFromServer() }.await()
+                            async { getCheckListMapUseCase.getCheckListMapFromServer() }.await()
+
+                        }
                         async { dataTapoDb.dataBaseVersion().insert(it) }.await()
                     }
                 }
@@ -196,6 +215,15 @@ class DataUpdater(
 
 
         }
+    }
+
+    private fun setInfo(info: String) {
+        MainScope().launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                dialog.setMessage("Pobieranie $info")
+            }
+        }
+
     }
 
     private fun getCodeDrivingLicence() {
