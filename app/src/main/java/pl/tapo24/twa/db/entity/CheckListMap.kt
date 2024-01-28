@@ -10,7 +10,7 @@ data class CheckListMap(
     val id: Int,
 
     @ColumnInfo(defaultValue = "0")
-    val sortOrder: Int,
+    var sortOrder: Int,
 
     @ColumnInfo(defaultValue = "0")
     val checkListType: Int,
@@ -20,10 +20,10 @@ data class CheckListMap(
 
 
     @ColumnInfo(defaultValue = "false")
-    val isSelected: Boolean = false,
+    var isSelected: Boolean = false,
 
     @ColumnInfo(defaultValue = "false")
-    val isDeleted: Boolean = false
+    var isDeleted: Boolean = false
 
 
 ) {

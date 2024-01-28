@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.road.checkList.checkList.CheckListFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="?attr/tapoBackgroundColor"
+            android:layout_height="wrap_content"
+            android:id="@+id/constraintLayout152"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                app:indicatorColor="?attr/tapoSecondColor"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearProgressIndicator22"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp" android:fillViewport="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout15" android:layout_marginBottom="8dp"
+            android:id="@+id/nestedScrollView" app:layout_constraintTop_toBottomOf="@+id/constraintLayout152">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/rv"/>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <Button
+                        android:text="@string/unSelesctAll"
+                        android:layout_width="match_parent"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_height="match_parent" android:id="@+id/unselectAll" android:layout_weight="1"
+                        android:layout_marginStart="5dp" android:layout_marginEnd="5dp"/>
+                <Button
+                        android:text="Edytuj listę"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/edit" android:layout_weight="1"
+                        android:layout_marginStart="5dp" android:layout_marginEnd="5dp"/>
+
+            </LinearLayout>
+            <Button
+                    android:text="@string/restore_list"
+                    android:layout_width="match_parent"
+                    android:theme="@style/OrangeBtn"
+                    android:backgroundTint="?attr/buttonBackground"
+                    android:layout_height="wrap_content" android:id="@+id/restore" android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:background="?attr/tapoBackgroundColor"
+            android:layout_height="wrap_content" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/constraintLayout15">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:layout_width="match_parent"
+                app:indicatorColor="?attr/tapoSecondColor"
+                android:layout_height="wrap_content"
+                android:id="@+id/linearProgressIndicator2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

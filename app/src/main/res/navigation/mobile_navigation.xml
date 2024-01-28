@@ -61,6 +61,7 @@
         <action android:id="@+id/action_nav_road_to_nav_recidivism" app:destination="@+id/nav_recidivism"/>
         <action android:id="@+id/action_nav_road_to_nav_holdingDocumentsChose"
                 app:destination="@id/nav_holdingDocumentsChose"/>
+        <action android:id="@+id/action_nav_road_to_nav_checkListList" app:destination="@id/nav_checkListList"/>
     </fragment>
 
     <fragment
@@ -296,4 +297,15 @@
               android:label="@string/ownCategory" tools:layout="@layout/fragment_custom_category"/>
     <fragment android:id="@+id/nav_shop" android:name="pl.tapo24.twa.ui.shop.ShopFragment"
               android:label="@string/shop_Premium" tools:layout="@layout/fragment_shop"/>
+    <fragment android:id="@+id/nav_checkListList"
+              android:name="pl.tapo24.twa.ui.road.checkList.CheckListListFragment"
+              android:label="fragment_check_list_list" tools:layout="@layout/fragment_check_list_list">
+        <action android:id="@+id/action_nav_checkListList_to_nav_checkList"
+                app:destination="@id/nav_checkList"/>
+    </fragment>
+    <fragment android:id="@+id/nav_checkList"
+              android:name="pl.tapo24.twa.ui.road.checkList.checkList.CheckListFragment"
+              android:label="fragment_check_list" tools:layout="@layout/fragment_check_list">
+        <argument android:name="idList" app:argType="integer"/>
+    </fragment>
 </navigation>

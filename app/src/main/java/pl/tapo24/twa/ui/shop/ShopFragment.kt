@@ -32,7 +32,7 @@ class ShopFragment : Fragment() {
         _binding = FragmentShopBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ShopViewModel::class.java)
         val root: View = binding.root
-        viewModel.fetchProducts2()
+
 
 
         val rv = binding.rvShop

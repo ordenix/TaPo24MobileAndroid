@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -74,7 +75,7 @@ import javax.inject.Inject
     ]
 )
 @AndroidEntryPoint
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     @Inject
@@ -88,7 +89,7 @@ class MainActivity: AppCompatActivity() {
 
     @Inject
     lateinit var tapoDb: TapoDb
-    
+
     @Inject
     lateinit var dataTapoDb: DataTapoDb
 
@@ -130,12 +131,19 @@ class MainActivity: AppCompatActivity() {
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
         if (State.countChangeFragment > 10 && State.internetStatus.value != NetworkTypes.None) {
-            State.countChangeFragment  = 0
+            State.countChangeFragment = 0
             //SessionProvider(tapoDb,networkClient).restoreSession()
-            CheckVersion(tapoDb,networkClient,this).checkVersion()
-        //
-        val activity: Activity = this
-        AssetUpdater(tapoDb,dataTapoDb,networkClient,applicationContext, supportFragmentManager, activity).getAllData()
+            CheckVersion(tapoDb, networkClient, this).checkVersion()
+            //
+            val activity: Activity = this
+            AssetUpdater(
+                tapoDb,
+                dataTapoDb,
+                networkClient,
+                applicationContext,
+                supportFragmentManager,
+                activity
+            ).getAllData()
 
         }
         State.countChangeFragment += 1
@@ -155,7 +163,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-   override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
         sharedPreferences = getSharedPreferences(
@@ -165,10 +173,13 @@ class MainActivity: AppCompatActivity() {
         val funeralFromShared: Boolean = sharedPreferences.getBoolean("funeralTheme", false)
         val themeName: String = sharedPreferences.getString("mainTheme", "default") ?: "default"
         val themeType = initializationModule.returnStyleTheme(funeralFromShared, themeName)
-
+//        window.setFlags(
+//            WindowManager.LayoutParams.FLAG_SECURE,
+//            WindowManager.LayoutParams.FLAG_SECURE
+//        )
         theme.applyStyle(themeType.themeName, true)
 
-        val workManager =  WorkManager.getInstance(this)
+        val workManager = WorkManager.getInstance(this)
         val constraints = Constraints.Builder()
             //.setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
@@ -176,26 +187,26 @@ class MainActivity: AppCompatActivity() {
             .setConstraints(constraints)
             .addTag("Mourning")
             .build()
-        workManager.enqueueUniquePeriodicWork("Mourning",ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
-       val constraints2 = Constraints.Builder()
-           .build()
-       val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
-           .setConstraints(constraints2)
-           .setInitialDelay(10, TimeUnit.DAYS)
-           .addTag("ShowNotifyForTariffIcon")
-           .build()
-       workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
+        workManager.enqueueUniquePeriodicWork("Mourning", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
+        val constraints2 = Constraints.Builder()
+            .build()
+        val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
+            .setConstraints(constraints2)
+            .setInitialDelay(10, TimeUnit.DAYS)
+            .addTag("ShowNotifyForTariffIcon")
+            .build()
+        workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
         // get theme
         val activity: Activity = this
         initializationModule.getThemeParameters()
         initializationModule.setThemeObserver(this)
         State.requireRestart.observe(this, Observer {
-           if (it) {
-               State.requireRestart.value = false
-               activity.finish()
-               activity.startActivity(Intent(activity, MainActivity::class.java))
-               activity.finishAffinity()
-           }
+            if (it) {
+                State.requireRestart.value = false
+                activity.finish()
+                activity.startActivity(Intent(activity, MainActivity::class.java))
+                activity.finishAffinity()
+            }
         })
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -229,9 +240,10 @@ class MainActivity: AppCompatActivity() {
                         .commit();
                 }
             }
+
             override fun onDrawerStateChanged(i: Int) {}
         })
-        navView.setNavigationItemSelectedListener{
+        navView.setNavigationItemSelectedListener {
             if (it.itemId == R.id.nav_tariff) {
                 drawerLayout.addDrawerListener(object : DrawerLayout.DrawerListener {
                     override fun onDrawerSlide(drawerView: View, slideOffset: Float) {}
@@ -259,7 +271,8 @@ class MainActivity: AppCompatActivity() {
             val settingAllowForNotification: Setting? = null
             val settingAllowForChannelAdv: Setting? = null
             async {
-                settingNotificationInitialize = tapoDb.settingDb().getSettingByName("NotificationInit")  }.await()
+                settingNotificationInitialize = tapoDb.settingDb().getSettingByName("NotificationInit")
+            }.await()
 
             if (settingNotificationInitialize == null) {
                 // show dialog
@@ -294,9 +307,17 @@ class MainActivity: AppCompatActivity() {
 
         initializationModule.getUid()
         initializationModule.getSetting()
-        DataUpdater(tapoDb,dataTapoDb,networkClient,this, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase).getData()
+        DataUpdater(
+            tapoDb,
+            dataTapoDb,
+            networkClient,
+            this,
+            getCheckListDictionaryUseCase,
+            getCheckListAllTypeUseCase,
+            getCheckListMapUseCase
+        ).getData()
 
-        CheckVersion(tapoDb,networkClient,this).checkVersion()
+        CheckVersion(tapoDb, networkClient, this).checkVersion()
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
             .setTitle("Wybór połączenia do aktualizacji danych")
             .setCancelable(false)
@@ -305,12 +326,19 @@ class MainActivity: AppCompatActivity() {
                 // Respond to negative button press
                 MainScope().launch(Dispatchers.IO) {
                     async {
-                        val setting: Setting = Setting("settingNetwork","WiFi")
+                        val setting: Setting = Setting("settingNetwork", "WiFi")
                         tapoDb.settingDb().insert(setting)
                     }.await()
                 }
                 State.networkType = "WiFi"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
+                AssetUpdater(
+                    tapoDb,
+                    dataTapoDb,
+                    networkClient,
+                    this,
+                    this.supportFragmentManager,
+                    activity
+                ).getAllData()
 
 
             }
@@ -318,15 +346,22 @@ class MainActivity: AppCompatActivity() {
                 // Respond to positive button press
                 MainScope().launch(Dispatchers.IO) {
                     async {
-                        val setting: Setting = Setting("settingNetwork","All")
+                        val setting: Setting = Setting("settingNetwork", "All")
                         tapoDb.settingDb().insert(setting)
                     }.await()
 
                 }
                 State.networkType = "All"
-                AssetUpdater(tapoDb,dataTapoDb,networkClient,this, this.supportFragmentManager, activity).getAllData()
+                AssetUpdater(
+                    tapoDb,
+                    dataTapoDb,
+                    networkClient,
+                    this,
+                    this.supportFragmentManager,
+                    activity
+                ).getAllData()
             }
-            // Add customization options here
+        // Add customization options here
 
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
@@ -334,7 +369,7 @@ class MainActivity: AppCompatActivity() {
             sessionProvider.restoreSession()
         }
         State.internetStatus.observe(this, Observer {
-            if (it != NetworkTypes.None ) {
+            if (it != NetworkTypes.None) {
                 // to do execute offline stacks
                 if (!State.isSessionConfirm && State.isLogin.value == true) {
                     sessionProvider.restoreSession()
@@ -350,34 +385,41 @@ class MainActivity: AppCompatActivity() {
                 favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
             }
         })
-       State.paymentId.observe(this, Observer {
-           if (it.isNotEmpty()) {
-               Purchases.configure(
-                   PurchasesConfiguration.Builder(this, "goog_myXkyrkSAFApGeVWzHSEfmvDiiK")
-                       .appUserID(it)
-                       .build()
-               )
-               Purchases.logLevel = LogLevel.DEBUG
-               State.revenuecatInitialize = true
-               premiumShopModule.checkPermissionOnInit()
-           }
-       })
+        State.paymentId.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                Purchases.configure(
+                    PurchasesConfiguration.Builder(this, "goog_myXkyrkSAFApGeVWzHSEfmvDiiK")
+                        .appUserID(it)
+                        .build()
+                )
+                Purchases.logLevel = LogLevel.DEBUG
+                State.revenuecatInitialize = true
+                premiumShopModule.checkPermissionOnInit()
+            }
+        })
 
 
         val context = this
         MainScope().launch(Dispatchers.IO) {
-           var settingNetwork: Setting? = null
-           async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
-           if (settingNetwork == null) {
-               withContext(Dispatchers.Main) {
-                   dialogTypeDownloadData.show()
-               }
-           } else {
-               State.networkType = settingNetwork!!.value
-               // DOWNLOAD DATA
-               AssetUpdater(tapoDb,dataTapoDb,networkClient,context, context.supportFragmentManager, activity).getAllData()
-           }
-       }
+            var settingNetwork: Setting? = null
+            async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
+            if (settingNetwork == null) {
+                withContext(Dispatchers.Main) {
+                    dialogTypeDownloadData.show()
+                }
+            } else {
+                State.networkType = settingNetwork!!.value
+                // DOWNLOAD DATA
+                AssetUpdater(
+                    tapoDb,
+                    dataTapoDb,
+                    networkClient,
+                    context,
+                    context.supportFragmentManager,
+                    activity
+                ).getAllData()
+            }
+        }
         IntentRouter().route(intent, navController)
     }
 
@@ -385,6 +427,7 @@ class MainActivity: AppCompatActivity() {
         super.onNewIntent(intent)
         IntentRouter().route(intent, navController)
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main, menu)
@@ -407,7 +450,7 @@ class MainActivity: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_settings) {
-           // DataUpdater(tapoDb,dataTapoDb,networkClient,this, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase).getData()
+            // DataUpdater(tapoDb,dataTapoDb,networkClient,this, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase).getData()
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_settings)
         }
@@ -419,7 +462,7 @@ class MainActivity: AppCompatActivity() {
             val navController = findNavController(R.id.nav_host_fragment_content_main)
             var shopAvailable = false
             MainScope().launch(Dispatchers.IO) {
-                val checkShopStatus = async {networkClient.getShopStatus()}.await()
+                val checkShopStatus = async { networkClient.getShopStatus() }.await()
                 checkShopStatus.onSuccess {
                     if (it.state) {
                         shopAvailable = true
@@ -480,7 +523,8 @@ class MainActivity: AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create the NotificationChannel.
             val name = "Powiadomienia ogólne"
-            val descriptionText ="W tym kanale są przesyłane powiadomienia dotyczące aplikacji i jej nowości w funkcjonowaniu"
+            val descriptionText =
+                "W tym kanale są przesyłane powiadomienia dotyczące aplikacji i jej nowości w funkcjonowaniu"
             var importance = NotificationManager.IMPORTANCE_DEFAULT
             if (block) {
                 importance = NotificationManager.IMPORTANCE_NONE

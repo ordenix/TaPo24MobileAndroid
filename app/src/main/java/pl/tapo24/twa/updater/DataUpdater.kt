@@ -306,7 +306,7 @@ class DataUpdater(
                 withContext(Dispatchers.Main) {
                     dialog.setMessage("Pobieranie statusów KSIP")
                 }
-                //dataTapoDb.status().nukeTable()
+                dataTapoDb.status().nukeTable()
                 val response = networkClient.getStatusData()
                 response.onSuccess {
                     dataTapoDb.status().insertList(it)

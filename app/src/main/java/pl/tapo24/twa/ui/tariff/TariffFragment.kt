@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -114,6 +115,18 @@ class TariffFragment: Fragment() {
 //            viewModel.adapter.notifyDataSetChanged()
 //
 //        })
+
+//        binding.nView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+//            if (v.getChildAt(v.childCount - 1) != null) {
+//                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight &&
+//                    scrollY > oldScrollY
+//                ) {
+//                    //code to fetch more data for endless scrolling
+//                    Snackbar.make(binding.root, getString(R.string.not_implemented), Snackbar.LENGTH_LONG)
+//                        .show()
+//                }
+//            }
+//        } as NestedScrollView.OnScrollChangeListener)
         ///// search sugestion section
         val searchBar = binding.searchBar
         val searchView = binding.searchView

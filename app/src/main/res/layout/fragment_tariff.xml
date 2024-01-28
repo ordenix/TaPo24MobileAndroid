@@ -14,7 +14,7 @@
             android:layout_gravity="fill_vertical"
 
             android:layout_height="match_parent"
-            app:layout_behavior="@string/searchbar_scrolling_view_behavior">
+            app:layout_behavior="@string/searchbar_scrolling_view_behavior" android:id="@+id/nView">
         <!-- Screen content goes here. -->
 
         <androidx.recyclerview.widget.RecyclerView

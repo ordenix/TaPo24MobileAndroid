@@ -67,6 +67,7 @@ class TariffDataAdapter(
                 if (file.exists()) {
                     val bitmap: Bitmap = BitmapFactory.decodeFile(file.absolutePath)
                     imgDetails.setImageBitmap(bitmap)
+                    binding.setVariable(BR.visibleNotifyForTariffIcon, false)
                 }
 
             }else {

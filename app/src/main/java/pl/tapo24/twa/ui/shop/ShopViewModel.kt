@@ -53,29 +53,29 @@ class ShopViewModel @Inject constructor(
         }
     }
 
-    fun fetchProducts2() {
-        Purchases.sharedInstance.getOfferingsWith { offerings: Offerings ->
-            val listOf: Offering = offerings.current!!
-//            val sss: SubscriptionOption = SubscriptionOption
-            val s: List<PaywallItem> = listOf?.availablePackages?.flatMap {
-                val product = it.product
-
-                it.product.subscriptionOptions?.let { options ->
-                    val title = product.period?.toTitle ?: product.title
-
-                    mutableListOf(PaywallItem.Title(title)) + options.map { option ->
-                        PaywallItem.Option(option, option == it.product.defaultOption)
-                    }.sortedBy { option -> !option.defaultOffer }
-                } ?: run {
-                    listOf(
-                        PaywallItem.Title(product.title),
-                        PaywallItem.Product(product),
-                    )
-                }
-            } ?: emptyList()
-            testItem.value = s[1]
-        }
-    }
+//    fun fetchProducts2() {
+//        Purchases.sharedInstance.getOfferingsWith { offerings: Offerings ->
+//            val listOf: Offering = offerings.current!!
+////            val sss: SubscriptionOption = SubscriptionOption
+//            val s: List<PaywallItem> = listOf?.availablePackages?.flatMap {
+//                val product = it.product
+//
+//                it.product.subscriptionOptions?.let { options ->
+//                    val title = product.period?.toTitle ?: product.title
+//
+//                    mutableListOf(PaywallItem.Title(title)) + options.map { option ->
+//                        PaywallItem.Option(option, option == it.product.defaultOption)
+//                    }.sortedBy { option -> !option.defaultOffer }
+//                } ?: run {
+//                    listOf(
+//                        PaywallItem.Title(product.title),
+//                        PaywallItem.Product(product),
+//                    )
+//                }
+//            } ?: emptyList()
+//            testItem.value = s[1]
+//        }
+//    }
 
 //    sealed class PaywallItem {
 //        data class Title(
