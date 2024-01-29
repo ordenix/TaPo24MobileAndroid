@@ -74,6 +74,28 @@ class CheckListFragment : Fragment() {
                 .setNegativeButton(getString(R.string.no)) { _, _ -> }
                 .show()
         }
+        binding.restore.setOnClickListener {
+            val dialogConfirmRestoreAll = MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.are_you_sure))
+                .setMessage(getString(R.string.are_you_sure_to_restore_list))
+                .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                    viewModel.restoreList()
+                }
+                .setNegativeButton(getString(R.string.no)) { _, _ -> }
+                .show()
+        }
+        viewModel.invokeDeletedItem.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                val dialogConfirmDelete = MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(getString(R.string.are_you_sure))
+                    .setMessage(getString(R.string.are_you_sure_to_delete_item))
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
+                        viewModel.deleteItem(it, viewModel.invokeDeletedPosition)
+                    }
+                    .setNegativeButton(getString(R.string.no)) { _, _ -> }
+                    .show()
+            }
+         })
         return root
     }
 

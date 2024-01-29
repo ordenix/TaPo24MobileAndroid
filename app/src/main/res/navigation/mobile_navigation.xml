@@ -299,13 +299,13 @@
               android:label="@string/shop_Premium" tools:layout="@layout/fragment_shop"/>
     <fragment android:id="@+id/nav_checkListList"
               android:name="pl.tapo24.twa.ui.road.checkList.CheckListListFragment"
-              android:label="fragment_check_list_list" tools:layout="@layout/fragment_check_list_list">
+              android:label="@string/list_check_list" tools:layout="@layout/fragment_check_list_list">
         <action android:id="@+id/action_nav_checkListList_to_nav_checkList"
                 app:destination="@id/nav_checkList"/>
     </fragment>
     <fragment android:id="@+id/nav_checkList"
               android:name="pl.tapo24.twa.ui.road.checkList.checkList.CheckListFragment"
-              android:label="fragment_check_list" tools:layout="@layout/fragment_check_list">
+              android:label="@string/check_list" tools:layout="@layout/fragment_check_list">
         <argument android:name="idList" app:argType="integer"/>
     </fragment>
 </navigation>

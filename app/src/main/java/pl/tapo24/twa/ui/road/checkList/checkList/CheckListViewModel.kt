@@ -21,7 +21,7 @@ class CheckListViewModel @Inject constructor(
 ): ViewModel() {
     var idList: Int? = null
     lateinit var adapter: CheckListAdapter
-    val items = MutableLiveData<List<CheckListComplex>>()
+    val items = MutableLiveData<MutableList<CheckListComplex>>()
     val progress = MutableLiveData<Int>(0)
     val isEditMode = MutableLiveData<Boolean>(false)
 
@@ -33,9 +33,12 @@ class CheckListViewModel @Inject constructor(
             var  itemsFromDb: List<CheckListComplex>? = null
            async { itemsFromDb = (getComplexCheckListByType.getCheckListByTypeNonDeleted(type)) }.await()
             if (itemsFromDb != null) {
-                items.postValue(itemsFromDb!!)
-                val percent = itemsFromDb?.filter { it.isSelected }?.size?.times(100)?.div(itemsFromDb?.size ?: 1)
-                progress.postValue(percent?: 0)
+                items.postValue(itemsFromDb!!.toMutableList())
+                if (itemsFromDb?.size != 0) {
+                    val percent = itemsFromDb?.filter { it.isSelected }?.size?.times(100)?.div(itemsFromDb?.size ?: 1)
+                    progress.postValue(percent?: 0)
+                }
+
             }
 
         }
@@ -70,9 +73,12 @@ class CheckListViewModel @Inject constructor(
     }
 
     fun deleteItem(item: CheckListComplex, position: Int) {
+        items.value?.remove(item)
         item.isDeleted = true
         changeMapStateUseCase.updateItem(item)
         adapter.notifyItemRemoved(position)
+        val percent = items.value?.filter { it.isSelected }?.size?.times(100)?.div(items.value?.size ?: 1)
+        progress.postValue(percent?: 0)
     }
 
     fun restoreList() {
@@ -81,6 +87,7 @@ class CheckListViewModel @Inject constructor(
             getCheckListByType(idList ?: 0)
         }
     }
+
 
 
 

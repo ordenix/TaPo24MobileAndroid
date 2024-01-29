@@ -17,4 +17,7 @@ interface CheckListTypeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(checkListType: CheckListType)
+
+    @Query("DELETE FROM checkListType")
+    fun nukeTable()
 }

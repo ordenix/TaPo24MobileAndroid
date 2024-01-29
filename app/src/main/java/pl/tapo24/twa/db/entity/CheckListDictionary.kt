@@ -10,6 +10,9 @@ data class CheckListDictionary(
     val id: Int,
 
     @ColumnInfo(defaultValue = "")
-    val description: String
+    val description: String,
+
+    @ColumnInfo(defaultValue = "")
+    val pathToPdf: String
 
 )

@@ -271,5 +271,9 @@
     <string name="are_you_sure">Czy aby na pewno?</string>
     <string name="are_you_sure_to_restore_list">Czy chcesz przywrócić listę do domyślnych</string>
     <string name="are_you_sure_to_un_select_all">Czy chcesz odznaczyć wszystko w liście ?</string>
+    <string name="are_you_sure_to_delete_item">Czy chcesz skasować czynność ?</string>
+
+    <string name="check_list">Check lista</string>
+    <string name="list_check_list">Check listy</string>
 
 </resources>

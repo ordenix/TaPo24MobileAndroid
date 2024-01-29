@@ -18,4 +18,7 @@ interface CheckListDictionaryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(checkListDictionary: CheckListDictionary)
+
+    @Query("DELETE FROM checkListDictionary")
+    fun nukeTable()
 }

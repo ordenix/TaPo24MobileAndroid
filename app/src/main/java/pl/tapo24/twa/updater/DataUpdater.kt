@@ -38,7 +38,9 @@ class DataUpdater(
             async {
                 dataTapoDb.clearAllTables()
                 tapoDb.tariffDb().nukeTable()
-
+                tapoDb.checkListMap().nukeTable()
+                tapoDb.checkListDictionary().nukeTable()
+                tapoDb.checkListType().nukeTable()
             }.await()
         }
     }

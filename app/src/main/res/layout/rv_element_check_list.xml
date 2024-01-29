@@ -45,6 +45,7 @@
 
             <ImageView
                     app:tint="?attr/smallIconColor"
+                    android:onClick="@{() -> (viewModel.invokeDeleteItem(data, position))}"
                     android:visibility="@{viewModel.isEditMode ? View.VISIBLE : View.GONE}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" app:srcCompat="@drawable/delete"

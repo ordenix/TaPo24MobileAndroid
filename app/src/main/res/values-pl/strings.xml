@@ -12,6 +12,8 @@
     <string name="logout">Wyloguj</string>
     <string name="settings">Ustawienia</string>
     <string name="about_me">Profil</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_tariff">Taryfikator</string>
@@ -151,6 +153,7 @@
     <string name="removeFav">Usuń z ulubionych</string>
     <string name="addFav">Dodaj do ulubionych</string>
     <string name="done">Gotowe</string>
+    <string name="edit_list">Edytuj listę</string>
     <string name="sign_desc">Opis znaku:</string>
     <string name="more">Więcej</string>
     <string name="roadSignDetails">Szczegóły znaku</string>
@@ -226,7 +229,48 @@
     <string name="chose_category">Wybierz kategorię:</string>
     <string name="buy_caffe">Postaw nam kawę</string>
     <string name="account_activate">Aktywacja Konta</string>
+    <string name="type_connection">Rodzaj połączenia:</string>
+    <string name="wifi_and_others">WiFi oraz sieci komórkowe</string>
+    <string name="only_wifi">Tylko WiFi</string>
+    <string name="remember_download">Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów, które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez
+        operatora w zależności od rodzaju taryfy połączenia
+    </string>
+    <string name="succes">Sukces</string>
+    <string name="unSubAdv">Desubskrypcja reklam</string>
+    <string name="removeAccount">Kasacja konta</string>
+    <string name="go_ahead">Przejdź dalej</string>
+    <string name="forgotPassowrd">Nie pamiętasz hasła?</string>
+    <string name="retypePassword">Powtórz hasło</string>
+    <string name="setNewPassword">Ustaw nowe hasło</string>
     <string name="fontType">Rodzaj czcionki:</string>
-
+    <string name="warningTheme">Uwaga! Zmiana motywu wymaga restartu aplikacji!!</string>
+    <string name="premiumNotify">Aby aktywować pozostałe funkcjonalności zostań użytkownikiem PREMIUM.</string>
+    <string name="style_mourning_warning">Motyw aplikacji został automatycznie zmieniony z uwagi na obowiązującą żałobę. Indywidualna zmiana wersji kolorystycznej nie jest na razie możliwa. Prosimy o chwilę zadumy.</string>
+    <string name="networkRequiedToAddCustomCategory">Aby dodać kategorię musisz być połączony z internetem</string>
+    <string name="succesAddCustomCategory">Dodano kategorię</string>
+    <string name="ownCategory">Własne kategorie</string>
+    <string name="addCategory">Dodaj kategorię</string>
+    <string name="showOwnCategory">Wyświetlanie własnych kategorii</string>
+    <string name="updateCustomCategory">Zaktualizowano nazwę kategorii</string>
+    <string name="deleteCustomCategory">Usunięto kategorię</string>
+    <string name="areYouSureToDelete">Czy na pewno chcesz usunąć kategorię?</string>
+    <string name="editCategoryName">Edytuj nazwę kategorii</string>
+    <string name="notify_add_custom_category_premium">Aby dodawać własne kategie wykroczeń zostań użytkownikiem
+        PREMIUM
+    </string>
+    <string name="manageCustomCategory">Zarządzaj kategoriami</string>
+    <string name="showOnEndList">Na końcu listy</string>
+    <string name="showOnTopList">Na początku listy</string>
+    <string name="add_to_fav">Dodaj do ulubionych</string>
+    <string name="editCategory">Edytuj kategorię</string>
+    <string name="shop_Premium">Sklep</string>
+    <string name="check_listy">Check Listy</string>
+    <string name="test">test</string>
+    <string name="unSelesctAll">Odznacz wszystkie</string>
+    <string name="restore_list">Przywróć domyślną listę</string>
+    <string name="are_you_sure">Czy aby na pewno?</string>
+    <string name="are_you_sure_to_restore_list">Czy chcesz przywrócić listę do domyślnych</string>
+    <string name="are_you_sure_to_un_select_all">Czy chcesz odznaczyć wszystko w liście ?</string>
+    <string name="are_you_sure_to_delete_item">Czy chcesz skasować czynność ?</string>
 
 </resources>
