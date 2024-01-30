@@ -10,5 +10,8 @@ data class DataBaseVersion(
     var id: String,
 
     @ColumnInfo(defaultValue = "0")
-    var version: Int = 0
+    var version: Int = 0,
+
+    @ColumnInfo(defaultValue = "")
+    var dateLastUpdate: String? = ""
 )

@@ -13,4 +13,9 @@ interface CountryDrivingLicenceDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<CountryDrivingLicence>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: CountryDrivingLicence)
+    @Query("DELETE FROM countryDrivingLicence")
+    fun deleteAll()
 }

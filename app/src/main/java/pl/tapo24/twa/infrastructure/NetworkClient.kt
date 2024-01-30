@@ -1,5 +1,6 @@
 package pl.tapo24.twa.infrastructure
 
+import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
@@ -17,6 +18,8 @@ import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.reflect.KClass
+import kotlin.reflect.cast
 
 
 class NetworkClient(var url: String) {
@@ -35,9 +38,6 @@ class NetworkClient(var url: String) {
 //    val gson = GsonBuilder()
 //        .setLenient()
 //        .create()
-
-
-
 
 
     private var retro = Retrofit.Builder()
@@ -72,31 +72,6 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetUid.message))
     }
 
-
-    fun getDataBaseVersionByName(name: String): Result<DataBaseVersion> {
-        try {
-            val response = service.getDataBaseVersionByName(name).execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetBaseVersion.message))
-    }
-
-    fun getCodeDrivingLicence(): Result<List<CodeDrivingLicence>> {
-        try {
-            val response = service.getDrivingLicenceCodeData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetCodeDrivingLicence.message))
-    }
-
     fun getAllDataBaseVersion(): Result<List<DataBaseVersion>> {
         try {
             val response = service.getAllDataBaseVersion().execute()
@@ -109,174 +84,23 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetBaseVersion.message))
     }
 
-    fun getCountryDrivingLicenceData(): Result<List<CountryDrivingLicence>> {
+
+
+    fun getDynamicData(path: String): Result<List<Any>> {
         try {
-            val response = service.getCountryDrivingLicenceData().execute()
+            val response = service.getDynamicData("data/$path").execute()
             if (response.isSuccessful) {
                 return Result.success(response.body()!!)
             }
         } catch (ex: Throwable) {
             return Result.failure(ex)
         }
-        return Result.failure(InternalException(InternalMessage.InternalGetCountry.message))
+        return Result.failure(InternalException(InternalMessage.InternalGetData.message))
     }
 
-    fun getLightsCodeData(): Result<List<LightsCodeCountry>> {
-        try {
-            val response = service.getLightsCodeData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetLightsCode.message))
-    }
 
-    fun getLightsFrontData(): Result<List<LightsFront>> {
-        try {
-            val response = service.getLightsFrontData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetFrontLights.message))
-    }
 
-    fun getLightsOthersData(): Result<List<LightsOthers>>{
-        try {
-            val response = service.getLightsOthersData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetLightsOther.message))
-    }
 
-    fun getStatusData(): Result<List<Status>>{
-        try {
-            val response = service.getStatusData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetStatus.message))
-    }
-
-    fun getTowingData(): Result<List<Towing>>{
-        try {
-            val response = service.getTowingData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetTowing.message))
-    }
-    //
-
-    fun getStoryData(): Result<List<Story>>{
-        try {
-            val response = service.getStory().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetStory.message))
-    }
-
-    fun getControlListData(): Result<List<ControlList>>{
-        try {
-            val response = service.getControlList().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetControlList.message))
-    }
-
-    fun getCodePointsOldData(): Result<List<CodePointsOld>>{
-        try {
-            val response = service.getCodePointsOld().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetPointsOld.message))
-    }
-
-    fun getCodePointsNewData(): Result<List<CodePointsNew>>{
-        try {
-            val response = service.getCodePointsNew().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetPointsNew.message))
-    }
-
-    fun getCodeLimitsDrivingLicenceData(): Result<List<CodeLimitsDrivingLicence>>{
-        try {
-            val response = service.getCodeLimitsDrivingLicence().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetCodeLimits.message))
-    }
-
-    fun getHoldingDocumentsData(): Result<List<HoldingDocuments>>{
-        try {
-            val response = service.getHoldingDocuments().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetHoldingDocuments.message))
-    }
-
-    fun getUtoData(): Result<List<Uto>>{
-        try {
-            val response = service.getUto().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetUtoDocuments.message))
-    }
-
-    fun getSignData(): Result<List<Sign>>{
-        try {
-            val response = service.getSign().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetSignDocuments.message))
-    }
 
     fun getLawData(): Result<List<Law>>{
         try {
@@ -326,17 +150,6 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetAppVersion.message))
     }
 
-    fun getSpbData(): Result<List<Spb>>{
-        try {
-            val response = service.getSpbData().execute()
-            if (response.isSuccessful) {
-                return Result.success(response.body()!!)
-            }
-        } catch (ex: Throwable) {
-            return Result.failure(ex)
-        }
-        return Result.failure(InternalException(InternalMessage.InternalGetSpb.message))
-    }
 
     fun getMourningData(): Result<List<Mourning>>{
         try {

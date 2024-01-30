@@ -19,4 +19,10 @@ interface HoldingDocumentsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<HoldingDocuments>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: HoldingDocuments)
+
+    @Query("DELETE FROM holdingDocuments")
+    fun deleteAll()
 }

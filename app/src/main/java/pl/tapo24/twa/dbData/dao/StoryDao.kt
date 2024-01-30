@@ -14,4 +14,10 @@ interface StoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Story>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: Story)
+
+    @Query("DELETE FROM story")
+    fun deleteAll()
 }

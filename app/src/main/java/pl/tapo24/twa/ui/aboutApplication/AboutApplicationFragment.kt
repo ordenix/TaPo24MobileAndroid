@@ -5,10 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.twa.adapter.AboutApplicationAdapter
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.FragmentAboutApplicationBinding
 
+@AndroidEntryPoint
 class AboutApplicationFragment: Fragment() {
     private var _binding: FragmentAboutApplicationBinding? = null
 
@@ -22,7 +27,7 @@ class AboutApplicationFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val viewModelAboutApplication =
+        val viewModel =
             ViewModelProvider(this).get(AboutApplicationViewModel::class.java)
         // TODO: uncoment in xml check update etc
 
@@ -33,10 +38,24 @@ class AboutApplicationFragment: Fragment() {
         binding.versionCode.text = State.versionCode.toString()
         binding.versionName.text = State.versionName
 
-//        val textView: TextView = binding.textViewAboutApp
-//        viewModelAboutApplication.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
+        viewModel.getData()
+        val rv = binding.recyclerView2
+        rv.layoutManager = LinearLayoutManager(activity)
+        viewModel.adapter = AboutApplicationAdapter(viewModel.data.value.orEmpty())
+        rv.adapter = viewModel.adapter
+//
+        viewModel.data.observe(viewLifecycleOwner, Observer {
+            viewModel.adapter.items = it
+            viewModel.adapter.notifyDataSetChanged()
+        })
+        binding.checkUpdate.setOnClickListener {
+            viewModel.update()
+        }
+        binding.force.setOnClickListener {
+            viewModel.forceUpdate()
+        }
+
+
         return root
     }
 

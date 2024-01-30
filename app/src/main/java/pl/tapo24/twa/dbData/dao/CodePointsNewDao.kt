@@ -14,4 +14,10 @@ interface CodePointsNewDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<CodePointsNew>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: CodePointsNew)
+
+    @Query("DELETE FROM codePointsNew")
+    fun deleteAll()
 }

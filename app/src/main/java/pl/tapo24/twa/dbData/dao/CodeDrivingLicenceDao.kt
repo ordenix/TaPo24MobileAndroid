@@ -14,4 +14,10 @@ interface CodeDrivingLicenceDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<CodeDrivingLicence>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: CodeDrivingLicence)
+
+    @Query("DELETE FROM codeDrivingLicence")
+    fun deleteAll()
 }

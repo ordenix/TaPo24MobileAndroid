@@ -21,6 +21,12 @@ interface SpbDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Spb>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: Spb)
+
     @Query("DELETE FROM spb")
     fun nukeTable()
+
+    @Query("DELETE FROM spb")
+    fun deleteAll()
 }

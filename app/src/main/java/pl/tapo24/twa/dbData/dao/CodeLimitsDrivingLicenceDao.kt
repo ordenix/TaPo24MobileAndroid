@@ -14,4 +14,9 @@ interface CodeLimitsDrivingLicenceDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<CodeLimitsDrivingLicence>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: CodeLimitsDrivingLicence)
+    @Query("DELETE FROM codeLimitsDrivingLicence")
+    fun deleteAll()
 }

@@ -14,4 +14,10 @@ interface TowingDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Towing>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: Towing)
+
+    @Query("DELETE FROM towing")
+    fun deleteAll()
 }

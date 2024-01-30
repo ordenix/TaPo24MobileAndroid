@@ -13,12 +13,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.SettingThemeAdapter
 import pl.tapo24.twa.data.*
-import pl.tapo24.twa.updater.DataUpdater
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
+import pl.tapo24.twa.updater.DataBaseUpdater
 import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
 import pl.tapo24.twa.useCase.checkList.GetCheckListDictionaryUseCase
 import pl.tapo24.twa.useCase.checkList.GetCheckListMapUseCase
@@ -32,7 +32,8 @@ class SettingsViewModel@Inject constructor(
     private val context: Application,
     private val getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase,
     private val getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase,
-    private val getCheckListMapUseCase: GetCheckListMapUseCase
+    private val getCheckListMapUseCase: GetCheckListMapUseCase,
+    private val dataBaseUpdater: DataBaseUpdater
 ) : ViewModel() {
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
@@ -99,12 +100,10 @@ class SettingsViewModel@Inject constructor(
         }
 
     }
-    fun getData(context: Context){
+    fun getData(){
         environment.value?.let { networkClient.rebuild(it.url) }
         environment.value?.let { networkClientRegister.rebuild(it.url) }
-        val dataupdate = DataUpdater(tapoDb,dataTapoDb,networkClient,context, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase)
-        dataupdate.deleteData()
-        dataupdate.getData()
+        dataBaseUpdater.update(true)
     }
     fun saveSettings () {
         var envSettingToDb: Setting? = Setting("settingEnvironment")

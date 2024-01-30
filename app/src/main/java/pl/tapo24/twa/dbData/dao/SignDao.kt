@@ -14,4 +14,10 @@ interface SignDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Sign>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: Sign)
+
+    @Query("DELETE FROM sign")
+    fun deleteAll()
 }

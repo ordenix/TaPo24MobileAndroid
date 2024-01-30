@@ -21,4 +21,7 @@ interface CheckListDictionaryDao {
 
     @Query("DELETE FROM checkListDictionary")
     fun nukeTable()
+
+    @Query("DELETE FROM checkListDictionary")
+    fun deleteAll()
 }

@@ -53,7 +53,7 @@ import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.CheckVersion
-import pl.tapo24.twa.updater.DataUpdater
+import pl.tapo24.twa.updater.DataBaseUpdater
 import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
 import pl.tapo24.twa.useCase.checkList.GetCheckListDictionaryUseCase
 import pl.tapo24.twa.useCase.checkList.GetCheckListMapUseCase
@@ -61,6 +61,7 @@ import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
 import pl.tapo24.twa.worker.MourningWorker
 import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
+import pl.tapo24.twa.worker.UpdateWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -101,14 +102,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var premiumShopModule: PremiumShopModule
 
     @Inject
-    lateinit var getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase
-
-    @Inject
-    lateinit var getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase
-
-    @Inject
-
-    lateinit var getCheckListMapUseCase: GetCheckListMapUseCase
+    lateinit var dataBaseUpdater: DataBaseUpdater
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -196,6 +190,15 @@ class MainActivity : AppCompatActivity() {
             .addTag("ShowNotifyForTariffIcon")
             .build()
         workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
+        val constraints3 = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val workRequest3 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
+            .setConstraints(constraints3)
+            .addTag("Mourning")
+            .build()
+
+        workManager.enqueueUniquePeriodicWork("DataUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest3)
         // get theme
         val activity: Activity = this
         initializationModule.getThemeParameters()
@@ -307,15 +310,30 @@ class MainActivity : AppCompatActivity() {
 
         initializationModule.getUid()
         initializationModule.getSetting()
-        DataUpdater(
-            tapoDb,
-            dataTapoDb,
-            networkClient,
-            this,
-            getCheckListDictionaryUseCase,
-            getCheckListAllTypeUseCase,
-            getCheckListMapUseCase
-        ).getData()
+
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("Pobieranie danych")
+            .setMessage("Proszę czekać")
+            // .setCancelable(false)
+            .create()
+
+        State.dialogDownloadMessage.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                if (!supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                    if (dialog.isShowing) {
+                        dialog.setMessage(it)
+                    } else {
+                        dialog.setMessage(it)
+                        dialog.show()
+                    }
+                }
+            } else {
+                if (dialog.isShowing && !supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                    dialog.dismiss()
+                }
+            }
+        })
+        dataBaseUpdater.update()
 
         CheckVersion(tapoDb, networkClient, this).checkVersion()
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)

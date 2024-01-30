@@ -13,4 +13,10 @@ interface LightsFrontDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<LightsFront>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: LightsFront)
+
+    @Query("DELETE FROM lightsFront")
+    fun deleteAll()
 }

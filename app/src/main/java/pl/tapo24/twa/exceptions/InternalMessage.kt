@@ -34,6 +34,7 @@ enum class InternalMessage(val message: String) {
     InternalCustomCategoryMap("Internal exception during custom category map"),
     InternalGetUserData("Internal exception during get user data"),
     InternalGetMourning("Internal exception during get data Mourning"),
+    InternalGetData("Internal exception during get data"),
 
 
 

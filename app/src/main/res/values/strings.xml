@@ -28,6 +28,7 @@
     <string name="vBase">Baza wykroczeń:</string>
     <string name="vServer">Wersje na serwerze</string>
     <string name="checkUpdate">Sprawdź aktualizacje</string>
+    <string name="forceUpdate">Wymuś aktualizacje</string>
 
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>

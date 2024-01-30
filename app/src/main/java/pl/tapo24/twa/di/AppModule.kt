@@ -1,6 +1,7 @@
 package pl.tapo24.twa.di
 
 import android.content.Context
+import androidx.fragment.app.FragmentManager
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -9,6 +10,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import org.checkerframework.checker.fenum.qual.PolyFenum
+import pl.tapo24.twa.MainActivity
 import pl.tapo24.twa.module.FavouriteModule
 import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.SessionProvider
@@ -22,6 +25,7 @@ import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.module.PremiumShopModule
+import pl.tapo24.twa.updater.DataBaseUpdater
 import pl.tapo24.twa.updater.MourningCheck
 import pl.tapo24.twa.useCase.RegenerateJwtTokenUseCase
 import pl.tapo24.twa.useCase.ShowNotifyForTariffIconUseCase
@@ -241,5 +245,23 @@ object AppModule {
     @Singleton
     fun bindGetComplexCheckListByType(tapoDb: TapoDb): GetComplexCheckListByType {
         return GetComplexCheckListByType(tapoDb)
+    }
+
+
+    @Provides
+    @Singleton
+    fun bindDataBaseUpdater(tapoDb: TapoDb, dataTapoDb: DataTapoDb,
+                            networkClient: NetworkClient,
+                            @ApplicationContext app: Context,
+                            getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase,
+                            getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase,
+                            getCheckListMapUseCase: GetCheckListMapUseCase,
+                            ): DataBaseUpdater {
+        return DataBaseUpdater(app,
+            networkClient,
+            tapoDb,
+            dataTapoDb, getCheckListDictionaryUseCase,
+            getCheckListAllTypeUseCase,
+            getCheckListMapUseCase)
     }
 }

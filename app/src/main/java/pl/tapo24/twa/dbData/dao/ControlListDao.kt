@@ -14,4 +14,10 @@ interface ControlListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<ControlList>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: ControlList)
+
+    @Query("DELETE FROM controlList")
+    fun deleteAll()
 }

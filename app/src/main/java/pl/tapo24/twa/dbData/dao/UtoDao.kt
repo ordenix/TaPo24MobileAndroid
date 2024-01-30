@@ -15,4 +15,10 @@ interface UtoDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<Uto>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(items: Uto)
+
+    @Query("DELETE FROM uto")
+    fun deleteAll()
 }

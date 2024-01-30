@@ -55,4 +55,6 @@ object State {
     var showCustomOnTop: MutableLiveData<Boolean> = MutableLiveData(true)
     var customCategoryMapList = listOf<MapCategory>()
     var customCategoryList = listOf<CustomCategory>()
+
+    val dialogDownloadMessage: MutableLiveData<String> = MutableLiveData("")
 }

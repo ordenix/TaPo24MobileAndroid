@@ -23,7 +23,6 @@ class SettingsFragment: Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private var context2: Context? = null
     private var clickedOnInfo = false
     private var clickedOnDevInfo = false
 
@@ -35,7 +34,6 @@ class SettingsFragment: Fragment() {
     ): View {
         val settingsViewModel =
             ViewModelProvider(this).get(SettingsViewModel::class.java)
-        context2 = container?.context
 
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -94,21 +92,21 @@ class SettingsFragment: Fragment() {
             binding.radioButtonProduction.isChecked = true
             settingsViewModel.environment.value = EnvironmentType.Master
             settingsViewModel.saveSettings()
-            context2?.let { it1 -> settingsViewModel.getData(it1) }
+            settingsViewModel.getData()
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
         binding.radioButtonFeature.setOnClickListener {
             binding.radioButtonFeature.isChecked = true
             settingsViewModel.environment.value = EnvironmentType.Feature
             settingsViewModel.saveSettings()
-            context2?.let { it1 -> settingsViewModel.getData(it1) }
+            settingsViewModel.getData()
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
         binding.radioButtonTest.setOnClickListener {
             binding.radioButtonTest.isChecked = true
             settingsViewModel.environment.value = EnvironmentType.Beta
             settingsViewModel.saveSettings()
-            context2?.let { it1 -> settingsViewModel.getData(it1) }
+            settingsViewModel.getData()
             Snackbar.make(it, "Zmieniono środowisko, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
         binding.tvDevelop.setOnClickListener {
