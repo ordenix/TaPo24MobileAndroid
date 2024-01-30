@@ -292,7 +292,7 @@ class TariffViewModel @Inject constructor(
 
 
                     withContext(Dispatchers.Main) {
-                        tariffData.value = listTariffToPost.take(State.maxVisibleItem)
+                        tariffData.value = listTariffToPost
                     }
 
 
@@ -304,7 +304,7 @@ class TariffViewModel @Inject constructor(
                 // clear filter
                 withContext(Dispatchers.Main ) {
                     if (tariffDataAll.value?.isNotEmpty() == true) {
-                        tariffData.value = tariffDataAll.value?.take(State.maxVisibleItem)
+                        tariffData.value = tariffDataAll.value
 
                     } else {
                         // MAT24-34 java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
@@ -390,13 +390,7 @@ class TariffViewModel @Inject constructor(
             withContext(Dispatchers.Main) {
                 if (dataFromDb != null) {
                     if ((tariffData.value?.size ?: 0) < 1) {
-                        tariffData.value = dataFromDb!!.take(
-                            if (State.environmentType == EnvironmentType.Master) {
-                                State.maxVisibleItem
-                            } else {
-                                dataFromDb!!.size
-                            }
-                        )
+                        tariffData.value = dataFromDb!!
                     }
                     tariffDataAll.value = dataFromDb!!
 

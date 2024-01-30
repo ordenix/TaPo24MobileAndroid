@@ -21,6 +21,7 @@ import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.CustomCategoryMapAdapter
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
 import pl.tapo24.twa.adapter.TariffDataAdapter
+import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.customCategory.CategoryToMap
@@ -53,7 +54,8 @@ class TariffFragment: Fragment() {
 //            .show()
 
        // dialog.setContentView(R.layout.dialog_overlay_loading,)
-
+        var dataSize = 0
+        var showItem = 4
         viewModel =
             ViewModelProvider(this).get(TariffViewModel::class.java)
         _binding = FragmentTariffBinding.inflate(inflater, container, false)
@@ -64,7 +66,13 @@ class TariffFragment: Fragment() {
         viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty(),viewModel,requireContext())
         rv. adapter = viewModel.adapter
         viewModel.tariffData.observe(viewLifecycleOwner, Observer {
-            viewModel.adapter.items = it
+            showItem = if (it.size > 4) {
+                4
+            } else {
+                it.size
+            }
+            dataSize = it.size
+            viewModel.adapter.items = it.take(showItem)
             viewModel.adapter.notifyDataSetChanged()
         })
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
@@ -116,17 +124,29 @@ class TariffFragment: Fragment() {
 //
 //        })
 
-//        binding.nView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
-//            if (v.getChildAt(v.childCount - 1) != null) {
-//                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight &&
-//                    scrollY > oldScrollY
-//                ) {
-//                    //code to fetch more data for endless scrolling
+        binding.nView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener { v: NestedScrollView, scrollX: Int, scrollY: Int, oldScrollX: Int, oldScrollY: Int ->
+            if (v.getChildAt(v.childCount - 1) != null) {
+                if (scrollY >= v.getChildAt(v.childCount - 1).measuredHeight - v.measuredHeight &&
+                    scrollY > oldScrollY
+                ) {
+                    var maxItem = 0
+                    if (State.environmentType == EnvironmentType.Master) {
+                        maxItem = State.maxVisibleItem
+                    } else {
+                        maxItem = viewModel.tariffData.value?.size ?: 0
+                    }
+                    if (viewModel.adapter.items.size < dataSize && viewModel.adapter.items.size < maxItem) {
+                        showItem += 1
+                        viewModel.adapter.items =
+                            viewModel.tariffData.value!!.take(showItem)
+                        viewModel.adapter.notifyItemInserted(viewModel.adapter.items.size)
+                    }
+                    //code to fetch more data for endless scrolling
 //                    Snackbar.make(binding.root, getString(R.string.not_implemented), Snackbar.LENGTH_LONG)
 //                        .show()
-//                }
-//            }
-//        } as NestedScrollView.OnScrollChangeListener)
+                }
+            }
+        } as NestedScrollView.OnScrollChangeListener)
         ///// search sugestion section
         val searchBar = binding.searchBar
         val searchView = binding.searchView
