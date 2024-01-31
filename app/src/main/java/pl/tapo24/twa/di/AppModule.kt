@@ -6,6 +6,8 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.qualifiers.ActivityContext
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
@@ -25,10 +27,7 @@ import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.module.PremiumShopModule
-import pl.tapo24.twa.updater.DataBaseUpdater
-import pl.tapo24.twa.updater.InitPackageDownloader
-import pl.tapo24.twa.updater.LawUpdater
-import pl.tapo24.twa.updater.MourningCheck
+import pl.tapo24.twa.updater.*
 import pl.tapo24.twa.useCase.RegenerateJwtTokenUseCase
 import pl.tapo24.twa.useCase.ShowNotifyForTariffIconUseCase
 import pl.tapo24.twa.useCase.checkList.*
@@ -315,15 +314,33 @@ object AppModule {
         )
     }
 
+//    @Provides
+//    @Singleton
+//    fun bindInitPackageDownloader(
+//        tapoDb: TapoDb, dataTapoDb: DataTapoDb,
+//        networkClient: NetworkClient,
+//        @ApplicationContext app: Context,
+//
+//        ): InitPackageDownloader {
+//        return InitPackageDownloader(
+//            app,
+//            networkClient,
+//            tapoDb,
+//            dataTapoDb
+//        )
+//
+//    }
+
+
     @Provides
     @Singleton
-    fun bindInitPackageDownloader(
+    fun bindAssetUpdater(
         tapoDb: TapoDb, dataTapoDb: DataTapoDb,
         networkClient: NetworkClient,
         @ApplicationContext app: Context,
 
-        ): InitPackageDownloader {
-        return InitPackageDownloader(
+        ): AssetUpdater {
+        return AssetUpdater(
             app,
             networkClient,
             tapoDb,
@@ -331,4 +348,6 @@ object AppModule {
         )
 
     }
+
+
 }

@@ -16,6 +16,7 @@ import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.module.InitializationModule
+import pl.tapo24.twa.updater.InitPackageDownloader
 import pl.tapo24.twa.worker.DataBaseUpdateWorker
 import pl.tapo24.twa.worker.MourningWorker
 import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
@@ -29,6 +30,8 @@ class MainApplication: Application() {
     lateinit var tapoDb: TapoDb
     @Inject
     lateinit var initializationModule: InitializationModule
+    @Inject
+    lateinit var initPackageDownloader: InitPackageDownloader
 
 
     override fun onCreate() {
@@ -63,19 +66,25 @@ class MainApplication: Application() {
         MainScope().launch(Dispatchers.IO) {
             var settingNetwork: Setting? = null
             async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
-            if (settingNetwork == null) {
-
-            } else {
+            val settingInitializePackage = async { tapoDb.settingDb().getSettingByName("settingInitializePackage") }.await()
+            if (settingNetwork != null) {
                 State.networkType = settingNetwork!!.value
-                val constraints4 = Constraints.Builder()
-                    .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
-                val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
-                    .setConstraints(constraints4)
-                    .addTag("DataLawAndAssetUpdate")
-                    .build()
+                if (settingInitializePackage == null) {
+                    // init main package
+                    initPackageDownloader.downloadInitPackage()
 
-                workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
+                } else {
+                    val constraints4 = Constraints.Builder()
+                        .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .build()
+                    val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
+                        .setConstraints(constraints4)
+                        .addTag("DataLawAndAssetUpdate")
+                        .build()
+
+                    workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
+                }
+
             }
         }
 

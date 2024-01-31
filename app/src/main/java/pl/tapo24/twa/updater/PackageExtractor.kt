@@ -12,38 +12,36 @@ import java.util.zip.ZipFile
 object PackageExtractor {
 
 
-    fun unzip( path: String, file: File){
+    fun unzip( path: String, file: File): Result<String>{
         ACRA.errorReporter.putCustomData("Start extractor ${System.currentTimeMillis()}", "Started")
         File(path).run {
             if (!exists()) {
                 mkdirs()
             }
         }
+        try {
+            ZipFile(file).use { zip ->
 
-        ZipFile(file).use { zip ->
+                zip.entries().asSequence().forEach { zipEntry ->
+                    zip.getInputStream(zipEntry).use { input ->
 
-            zip.entries().asSequence().forEach { zipEntry ->
-                zip.getInputStream(zipEntry).use { input ->
+                        val filePath = path+ File.separator+zipEntry.name
 
-                    val filePath = path+ File.separator+zipEntry.name
+                        if(!zipEntry.isDirectory) {
+                            extract(input, filePath)
+                        } else {
+                            val dir = File(filePath)
+                            dir.mkdir()
+                        }
 
-                    if(!zipEntry.isDirectory) {
-                       extract(input, filePath)
-                    } else {
-                        val dir = File(filePath)
-                        dir.mkdir()
                     }
-
                 }
             }
+            ACRA.errorReporter.putCustomData("STOP EXTRACTOR ${System.currentTimeMillis()}", "STOP")
+            return Result.success("OK")
+        } catch (e: Exception) {
+            return Result.failure(e)
         }
-
-        ACRA.errorReporter.putCustomData("STOP EXTRACTOR ${System.currentTimeMillis()}", "STOP")
-
-
-
-
-
     }
 
     private fun extract(inputStream: InputStream, path: String) {

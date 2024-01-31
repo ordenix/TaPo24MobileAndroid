@@ -96,8 +96,7 @@ class LawUpdater @Inject constructor(
         MainScope().async(Dispatchers.IO) {
             isPublicStorage = tapoDb.settingDb().getSettingByName("publicStorage")?.state ?: false
         }.await()
-        //return isPublicStorage
-        return true
+        return isPublicStorage
     }
 
 }
