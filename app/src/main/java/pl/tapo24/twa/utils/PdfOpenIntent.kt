@@ -17,9 +17,14 @@ class PdfOpenIntent(
 //            // Handle the Intent
 //        }
 //    }
-    fun openPDF(fileName: String) {
-        val file: File = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${fileName}")
-        //  val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24/pdf/${it.type}/${it.fileName}")
+    fun openPDF(fileName: String, isPublicStorage: Boolean) {
+        val file: File = if (isPublicStorage) {
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24Don'tDelete/pdf/${fileName}")
+
+        } else {
+            File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "pdf/${fileName}")
+
+        }
         val target = Intent(Intent.ACTION_VIEW)
 
         val fURI = FileProvider.getUriForFile(

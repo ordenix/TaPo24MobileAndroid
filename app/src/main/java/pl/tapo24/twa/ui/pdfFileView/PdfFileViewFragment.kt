@@ -66,7 +66,7 @@ class PdfFileViewFragment: Fragment() {
             viewModel.adapter.notifyDataSetChanged()
         })
         viewModel.adapter.onItemClick = {
-            it.fileName?.let { it1 -> PdfOpenIntent(requireContext()).openPDF(it1) }
+            it.fileName?.let { it1 -> PdfOpenIntent(requireContext()).openPDF(it1, viewModel.isPublicStorage) }
         }
 
         // TODO: refactor abofe becaus dup?

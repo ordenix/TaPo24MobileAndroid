@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.WindowManager
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -51,14 +50,10 @@ import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.module.FavouriteModule
 import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.module.PremiumShopModule
-import pl.tapo24.twa.updater.AssetUpdater
-import pl.tapo24.twa.updater.CheckVersion
-import pl.tapo24.twa.updater.DataBaseUpdater
-import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
-import pl.tapo24.twa.useCase.checkList.GetCheckListDictionaryUseCase
-import pl.tapo24.twa.useCase.checkList.GetCheckListMapUseCase
+import pl.tapo24.twa.updater.*
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
+import pl.tapo24.twa.worker.DataBaseUpdateWorker
 import pl.tapo24.twa.worker.MourningWorker
 import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
 import pl.tapo24.twa.worker.UpdateWorker
@@ -104,6 +99,9 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var dataBaseUpdater: DataBaseUpdater
 
+    @Inject
+    lateinit var initPackageDownloader: InitPackageDownloader
+
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private val dialogNotification = DialogNotificationRequest()
@@ -130,14 +128,14 @@ class MainActivity : AppCompatActivity() {
             CheckVersion(tapoDb, networkClient, this).checkVersion()
             //
             val activity: Activity = this
-            AssetUpdater(
-                tapoDb,
-                dataTapoDb,
-                networkClient,
-                applicationContext,
-                supportFragmentManager,
-                activity
-            ).getAllData()
+//            AssetUpdaterOLD(
+//                tapoDb,
+//                dataTapoDb,
+//                networkClient,
+//                applicationContext,
+//                supportFragmentManager,
+//                activity
+//            ).getAllData()
 
         }
         State.countChangeFragment += 1
@@ -174,31 +172,7 @@ class MainActivity : AppCompatActivity() {
         theme.applyStyle(themeType.themeName, true)
 
         val workManager = WorkManager.getInstance(this)
-        val constraints = Constraints.Builder()
-            //.setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(5, TimeUnit.HOURS)
-            .setConstraints(constraints)
-            .addTag("Mourning")
-            .build()
-        workManager.enqueueUniquePeriodicWork("Mourning", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
-        val constraints2 = Constraints.Builder()
-            .build()
-        val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
-            .setConstraints(constraints2)
-            .setInitialDelay(10, TimeUnit.DAYS)
-            .addTag("ShowNotifyForTariffIcon")
-            .build()
-        workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
-        val constraints3 = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val workRequest3 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
-            .setConstraints(constraints3)
-            .addTag("Mourning")
-            .build()
 
-        workManager.enqueueUniquePeriodicWork("DataUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest3)
         // get theme
         val activity: Activity = this
         initializationModule.getThemeParameters()
@@ -308,32 +282,8 @@ class MainActivity : AppCompatActivity() {
         }
         // END NOTIFICATION SECTION
 
-        initializationModule.getUid()
-        initializationModule.getSetting()
 
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setTitle("Pobieranie danych")
-            .setMessage("Proszę czekać")
-            // .setCancelable(false)
-            .create()
-
-        State.dialogDownloadMessage.observe(this, Observer {
-            if (it.isNotEmpty()) {
-                if (!supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
-                    if (dialog.isShowing) {
-                        dialog.setMessage(it)
-                    } else {
-                        dialog.setMessage(it)
-                        dialog.show()
-                    }
-                }
-            } else {
-                if (dialog.isShowing && !supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
-                    dialog.dismiss()
-                }
-            }
-        })
-        dataBaseUpdater.update()
+        initializationModule.initializeDialogForDataUpdater(this, supportFragmentManager)
 
         CheckVersion(tapoDb, networkClient, this).checkVersion()
         val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
@@ -349,14 +299,7 @@ class MainActivity : AppCompatActivity() {
                     }.await()
                 }
                 State.networkType = "WiFi"
-                AssetUpdater(
-                    tapoDb,
-                    dataTapoDb,
-                    networkClient,
-                    this,
-                    this.supportFragmentManager,
-                    activity
-                ).getAllData()
+                initPackageDownloader.downloadInitPackage()
 
 
             }
@@ -370,14 +313,16 @@ class MainActivity : AppCompatActivity() {
 
                 }
                 State.networkType = "All"
-                AssetUpdater(
-                    tapoDb,
-                    dataTapoDb,
-                    networkClient,
-                    this,
-                    this.supportFragmentManager,
-                    activity
-                ).getAllData()
+                initPackageDownloader.downloadInitPackage()
+
+//                AssetUpdaterOLD(
+//                    tapoDb,
+//                    dataTapoDb,
+//                    networkClient,
+//                    this,
+//                    this.supportFragmentManager,
+//                    activity
+//                ).getAllData()
             }
         // Add customization options here
 
@@ -416,8 +361,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
-        val context = this
         MainScope().launch(Dispatchers.IO) {
             var settingNetwork: Setting? = null
             async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
@@ -425,17 +368,6 @@ class MainActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main) {
                     dialogTypeDownloadData.show()
                 }
-            } else {
-                State.networkType = settingNetwork!!.value
-                // DOWNLOAD DATA
-                AssetUpdater(
-                    tapoDb,
-                    dataTapoDb,
-                    networkClient,
-                    context,
-                    context.supportFragmentManager,
-                    activity
-                ).getAllData()
             }
         }
         IntentRouter().route(intent, navController)
@@ -534,6 +466,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         navController.removeOnDestinationChangedListener(listener)
         super.onPause()
+        if (State.dialogUpdater.isVisible && !supportFragmentManager.isStateSaved
+            && !supportFragmentManager.isDestroyed && !this.isFinishing && !this.isDestroyed) {
+            State.dialogUpdater.dismiss()
+        }
 
     }
 
@@ -559,6 +495,10 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         navController?.removeOnDestinationChangedListener(listener)
+        if (State.dialogUpdater.isVisible && !supportFragmentManager.isStateSaved
+            && !supportFragmentManager.isDestroyed && !this.isFinishing && !this.isDestroyed) {
+            State.dialogUpdater.dismiss()
+        }
     }
 
     private fun initializeNaveMenu(navView: NavigationView) {

@@ -5,8 +5,10 @@ import pl.tapo24.twa.BuildConfig
 import pl.tapo24.twa.R
 import pl.tapo24.twa.db.entity.CustomCategory
 import pl.tapo24.twa.db.entity.MapCategory
+import pl.tapo24.twa.updater.DialogDataUpdater
 
 object State {
+    val dialogUpdater = DialogDataUpdater()
     var startDownloadMainPackage: Boolean = false
     var countChangeFragment = 0
 
@@ -57,4 +59,8 @@ object State {
     var customCategoryList = listOf<CustomCategory>()
 
     val dialogDownloadMessage: MutableLiveData<String> = MutableLiveData("")
+    val dialogDownloadFileProgress: MutableLiveData<Int> = MutableLiveData(null)
+    var dialogDownloadFileMessage: String = ""
+    var setIndeterminate: MutableLiveData<Boolean> = MutableLiveData(false)
+
 }

@@ -24,7 +24,7 @@ class DialogDataUpdater: DialogFragment() {
 
         _binding = DialogDataUpdaterBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        dialog?.setCancelable(false)
+        //dialog?.setCancelable(false)
         dialog?.setCanceledOnTouchOutside(false)
         body.observe(this, Observer {
             binding.description.text = it
@@ -34,6 +34,10 @@ class DialogDataUpdater: DialogFragment() {
 
 
         return root
+    }
+
+    fun setBody(body: String) {
+        binding.description.text = body
     }
 
     fun setProgres(progress: Int) {

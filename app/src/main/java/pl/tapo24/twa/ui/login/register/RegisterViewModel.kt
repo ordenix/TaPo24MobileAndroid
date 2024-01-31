@@ -9,6 +9,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.data.register.RegisterForm
+import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import pl.tapo24.twa.infrastructure.NetworkClient
@@ -17,11 +18,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
-    private val networkClientRegister: NetworkClientRegister
+    private val networkClientRegister: NetworkClientRegister,
+    private val tapoDb: TapoDb
 ): ViewModel() {
     val validateLogin: MutableLiveData<Result<String>> = MutableLiveData()
     val validateEmail: MutableLiveData<Result<String>> = MutableLiveData()
     val statusRegister: MutableLiveData<Result<String>> = MutableLiveData()
+
+    var isPublicStorage = false
+
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            isPublicStorage = tapoDb.settingDb().getSettingByName("publicStorage")?.state ?: false
+
+        }
+    }
     fun existLoginInService(login: String) {
         var response: Result<String>? = null
         viewModelScope.launch(Dispatchers.IO) {

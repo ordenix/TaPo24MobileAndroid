@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.CheckListAdapter
 import pl.tapo24.twa.data.checkListMap.CheckListComplex
 import pl.tapo24.twa.useCase.checkList.ChangeMapStateUseCase
@@ -33,7 +34,10 @@ class CheckListViewModel @Inject constructor(
             var  itemsFromDb: List<CheckListComplex>? = null
            async { itemsFromDb = (getComplexCheckListByType.getCheckListByTypeNonDeleted(type)) }.await()
             if (itemsFromDb != null) {
-                items.postValue(itemsFromDb!!.toMutableList())
+                withContext(Dispatchers.Main) {
+                    items.value  = itemsFromDb!!.toMutableList()
+
+                }
                 if (itemsFromDb?.size != 0) {
                     val percent = itemsFromDb?.filter { it.isSelected }?.size?.times(100)?.div(itemsFromDb?.size ?: 1)
                     progress.postValue(percent?: 0)
@@ -69,14 +73,14 @@ class CheckListViewModel @Inject constructor(
 
     fun invokeDeleteItem(item: CheckListComplex, position: Int) {
         invokeDeletedPosition = position
-        invokeDeletedItem.postValue(item)
+        invokeDeletedItem.value = item
     }
 
     fun deleteItem(item: CheckListComplex, position: Int) {
         items.value?.remove(item)
         item.isDeleted = true
         changeMapStateUseCase.updateItem(item)
-        adapter.notifyItemRemoved(position)
+        adapter.notifyDataSetChanged()
         val percent = items.value?.filter { it.isSelected }?.size?.times(100)?.div(items.value?.size ?: 1)
         progress.postValue(percent?: 0)
     }

@@ -219,10 +219,10 @@ class RegisterFragment: Fragment() {
 
         // bind pdf
         binding.buttonPolicy.setOnClickListener {
-            PdfOpenIntent(requireContext()).openPDF("POLITYKA.pdf")
+            PdfOpenIntent(requireContext()).openPDF("POLITYKA.pdf", viewModel.isPublicStorage)
         }
         binding.buttonStatute.setOnClickListener {
-            PdfOpenIntent(requireContext()).openPDF("Regulamin.pdf")
+            PdfOpenIntent(requireContext()).openPDF("Regulamin.pdf", viewModel.isPublicStorage)
         }
         binding.allowAll.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {

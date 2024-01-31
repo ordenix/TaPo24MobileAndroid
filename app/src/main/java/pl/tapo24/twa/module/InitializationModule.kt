@@ -3,18 +3,91 @@ package pl.tapo24.twa.module
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
 import pl.tapo24.twa.R
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.updater.DialogDataUpdater
 import javax.inject.Inject
 
 class InitializationModule @Inject constructor(private val tapoDb: TapoDb, private val networkClient: NetworkClient, private val context: Context){
     fun setNetworkType() {
 
+    }
+
+    fun initializeDialogForDataUpdater(activity: AppCompatActivity, supportFragmentManager:FragmentManager ) {
+        val dialog = MaterialAlertDialogBuilder(activity)
+            .setTitle("Pobieranie danych")
+            .setMessage("Proszę czekać")
+            // .setCancelable(false)
+            .create()
+
+        State.dialogDownloadMessage.observe(activity, Observer {
+            if (it.isNotEmpty()) {
+                if (!supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                    if (dialog.isShowing) {
+                        dialog.setMessage(it)
+                    } else {
+                        dialog.setMessage(it)
+                        dialog.show()
+                    }
+                }
+            } else {
+                if (dialog.isShowing && !supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                    dialog.dismiss()
+                }
+            }
+        })
+        State.setIndeterminate.observe(activity, Observer {
+            if (it &&
+                State.dialogUpdater.isVisible
+                && !supportFragmentManager.isStateSaved
+                && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                State.dialogUpdater.setIndeterminate()
+
+            }
+        })
+
+        State.dialogDownloadFileProgress.observe(activity, Observer {
+            if (it != null) {
+                if (!supportFragmentManager.isStateSaved && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                    if (State.dialogUpdater.isVisible) {
+                        State.dialogUpdater.setBody(State.dialogDownloadFileMessage)
+                        State.dialogUpdater.setProgres(it)
+                    } else {
+                        MainScope().launch(Dispatchers.IO) {
+                            withContext(Dispatchers.Main) {
+                                if (!State.dialogUpdater.isVisible && !State.dialogUpdater.isAdded) {
+                                    State.dialogUpdater.show(supportFragmentManager.beginTransaction().remove(State.dialogUpdater), "dialogUpdater")
+                                }
+
+
+                            }
+                        }
+
+                    }
+                }
+            } else {
+                if (State.dialogUpdater.isVisible && !supportFragmentManager.isStateSaved
+                    && !supportFragmentManager.isDestroyed && !activity.isFinishing && !activity.isDestroyed) {
+                    State.dialogUpdater.setDone()
+                    MainScope().launch(Dispatchers.IO) {
+                        delay(1000)
+                        withContext(Dispatchers.Main) {
+                            State.dialogUpdater.dismiss()
+                        }
+
+
+                    }
+
+                }
+            }
+        })
     }
 
     fun setThemeObserver(activity: AppCompatActivity

@@ -8,10 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.databinding.FragmentHelpersBinding
 import pl.tapo24.twa.databinding.FragmentValidDocumentBinding
 import pl.tapo24.twa.utils.PdfOpenIntent
 
+@AndroidEntryPoint
 class ValidDocumentFragment : Fragment() {
 
     private var _binding: FragmentValidDocumentBinding? = null
@@ -32,15 +34,15 @@ class ValidDocumentFragment : Fragment() {
         }
 
         binding.id.setOnClickListener {
-            PdfOpenIntent(requireContext()).openPDF("wer_do.pdf")
+            PdfOpenIntent(requireContext()).openPDF("wer_do.pdf", viewModel.isPublicStorage)
         }
 
         binding.drivingLicenceUe.setOnClickListener {
-            PdfOpenIntent(requireContext()).openPDF("wzoryPJ.pdf")
+            PdfOpenIntent(requireContext()).openPDF("wzoryPJ.pdf", viewModel.isPublicStorage)
         }
 
         binding.passport.setOnClickListener {
-            PdfOpenIntent(requireContext()).openPDF("Paszport.pdf")
+            PdfOpenIntent(requireContext()).openPDF("Paszport.pdf", viewModel.isPublicStorage)
         }
 
         return root

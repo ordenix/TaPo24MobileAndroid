@@ -26,6 +26,8 @@ import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
 import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.DataBaseUpdater
+import pl.tapo24.twa.updater.InitPackageDownloader
+import pl.tapo24.twa.updater.LawUpdater
 import pl.tapo24.twa.updater.MourningCheck
 import pl.tapo24.twa.useCase.RegenerateJwtTokenUseCase
 import pl.tapo24.twa.useCase.ShowNotifyForTariffIconUseCase
@@ -64,10 +66,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNetwork(tapoDb: TapoDb): NetworkClient {
-        var url : String?
+        var url: String?
         runBlocking(Dispatchers.IO) {
-            val settingEnvironment: Setting?  = tapoDb.settingDb().getSettingByName("settingEnvironment")
-            if (settingEnvironment !=null) {
+            val settingEnvironment: Setting? = tapoDb.settingDb().getSettingByName("settingEnvironment")
+            if (settingEnvironment != null) {
                 val environment = EnvironmentType.values()[settingEnvironment.count]
                 url = environment.url
             } else {
@@ -84,10 +86,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRegisterNetwork(tapoDb: TapoDb): NetworkClientRegister {
-        var url : String?
+        var url: String?
         runBlocking(Dispatchers.IO) {
-            val settingEnvironment: Setting?  = tapoDb.settingDb().getSettingByName("settingEnvironment")
-            if (settingEnvironment !=null) {
+            val settingEnvironment: Setting? = tapoDb.settingDb().getSettingByName("settingEnvironment")
+            if (settingEnvironment != null) {
                 val environment = EnvironmentType.values()[settingEnvironment.count]
                 url = environment.url
             } else {
@@ -104,10 +106,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNetworkElastic(tapoDb: TapoDb): NetworkClientElastic {
-        var url : String?
+        var url: String?
         runBlocking(Dispatchers.IO) {
-            val settingEnvironment: Setting?  = tapoDb.settingDb().getSettingByName("settingEngine")
-            if (settingEnvironment !=null) {
+            val settingEnvironment: Setting? = tapoDb.settingDb().getSettingByName("settingEngine")
+            if (settingEnvironment != null) {
                 val engine = EnginesType.values()[settingEnvironment.count]
                 url = engine.url
             } else {
@@ -121,7 +123,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindSessionProvider(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): SessionProvider {
+    fun bindSessionProvider(
+        tapoDb: TapoDb,
+        networkClient: NetworkClient,
+        @ApplicationContext app: Context
+    ): SessionProvider {
         return SessionProvider(tapoDb, networkClient, app)
     }
 
@@ -140,8 +146,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindInitializationModule(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): InitializationModule {
-        return InitializationModule(tapoDb, networkClient, app )
+    fun bindInitializationModule(
+        tapoDb: TapoDb,
+        networkClient: NetworkClient,
+        @ApplicationContext app: Context
+    ): InitializationModule {
+        return InitializationModule(tapoDb, networkClient, app)
     }
 
     @Provides
@@ -153,25 +163,39 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindCustomCategoryModule(@ApplicationContext app: Context, tapoDb: TapoDb, networkClient: NetworkClient): CustomCategoryModule {
+    fun bindCustomCategoryModule(
+        @ApplicationContext app: Context,
+        tapoDb: TapoDb,
+        networkClient: NetworkClient
+    ): CustomCategoryModule {
         return CustomCategoryModule(app, tapoDb, networkClient)
     }
 
     @Provides
     @Singleton
-    fun bindChangeNameCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): ChangeNameCustomCategoryUseCase {
+    fun bindChangeNameCustomCategoryUseCase(
+        @ApplicationContext app: Context,
+        tapoDb: TapoDb
+    ): ChangeNameCustomCategoryUseCase {
         return ChangeNameCustomCategoryUseCase(app, tapoDb)
     }
 
     @Provides
     @Singleton
-    fun bindSynchronizeCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb, networkClient: NetworkClient): SynchronizeCustomCategoryUseCase {
+    fun bindSynchronizeCustomCategoryUseCase(
+        @ApplicationContext app: Context,
+        tapoDb: TapoDb,
+        networkClient: NetworkClient
+    ): SynchronizeCustomCategoryUseCase {
         return SynchronizeCustomCategoryUseCase(app, tapoDb, networkClient)
     }
 
     @Provides
     @Singleton
-    fun bindChangeOrderCustomCategoryUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): ChangeOrderCustomCategoryUseCase {
+    fun bindChangeOrderCustomCategoryUseCase(
+        @ApplicationContext app: Context,
+        tapoDb: TapoDb
+    ): ChangeOrderCustomCategoryUseCase {
         return ChangeOrderCustomCategoryUseCase(app, tapoDb)
     }
 
@@ -195,7 +219,10 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindSynchronizeCustomCategoryMapUseCase(@ApplicationContext app: Context, tapoDb: TapoDb): SynchronizeCustomCategoryMapUseCase {
+    fun bindSynchronizeCustomCategoryMapUseCase(
+        @ApplicationContext app: Context,
+        tapoDb: TapoDb
+    ): SynchronizeCustomCategoryMapUseCase {
         return SynchronizeCustomCategoryMapUseCase(app, tapoDb)
     }
 
@@ -213,7 +240,11 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindPremiumShopModule(tapoDb: TapoDb, networkClient: NetworkClient, @ApplicationContext app: Context): PremiumShopModule {
+    fun bindPremiumShopModule(
+        tapoDb: TapoDb,
+        networkClient: NetworkClient,
+        @ApplicationContext app: Context
+    ): PremiumShopModule {
         return PremiumShopModule(tapoDb, networkClient, app)
     }
 
@@ -250,18 +281,54 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindDataBaseUpdater(tapoDb: TapoDb, dataTapoDb: DataTapoDb,
-                            networkClient: NetworkClient,
-                            @ApplicationContext app: Context,
-                            getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase,
-                            getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase,
-                            getCheckListMapUseCase: GetCheckListMapUseCase,
-                            ): DataBaseUpdater {
-        return DataBaseUpdater(app,
+    fun bindDataBaseUpdater(
+        tapoDb: TapoDb, dataTapoDb: DataTapoDb,
+        networkClient: NetworkClient,
+        @ApplicationContext app: Context,
+        getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase,
+        getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase,
+        getCheckListMapUseCase: GetCheckListMapUseCase,
+    ): DataBaseUpdater {
+        return DataBaseUpdater(
+            app,
             networkClient,
             tapoDb,
             dataTapoDb, getCheckListDictionaryUseCase,
             getCheckListAllTypeUseCase,
-            getCheckListMapUseCase)
+            getCheckListMapUseCase
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun bindLawUpdater(
+        tapoDb: TapoDb, dataTapoDb: DataTapoDb,
+        networkClient: NetworkClient,
+        @ApplicationContext app: Context,
+
+        ): LawUpdater {
+        return LawUpdater(
+            app,
+            networkClient,
+            tapoDb,
+            dataTapoDb
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun bindInitPackageDownloader(
+        tapoDb: TapoDb, dataTapoDb: DataTapoDb,
+        networkClient: NetworkClient,
+        @ApplicationContext app: Context,
+
+        ): InitPackageDownloader {
+        return InitPackageDownloader(
+            app,
+            networkClient,
+            tapoDb,
+            dataTapoDb
+        )
+
     }
 }
