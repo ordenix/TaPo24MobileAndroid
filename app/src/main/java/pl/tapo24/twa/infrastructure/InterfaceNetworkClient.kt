@@ -1,5 +1,6 @@
 package pl.tapo24.twa.infrastructure
 
+import pl.tapo24.twa.data.DataHomeNews
 import pl.tapo24.twa.data.RString
 import pl.tapo24.twa.data.RType
 import pl.tapo24.twa.data.customCategory.RCustomMapList
@@ -54,6 +55,10 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/shop_status")
     fun getShopStatus(): Call<Setting>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_home_page_news")
+    fun getHomeNews(): Call<List<DataHomeNews>>
 
 
     // endpoints for module

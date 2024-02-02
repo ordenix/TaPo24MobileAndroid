@@ -2,6 +2,7 @@ package pl.tapo24.twa.infrastructure
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
+import pl.tapo24.twa.data.DataHomeNews
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
@@ -98,7 +99,18 @@ class NetworkClient(var url: String) {
         return Result.failure(InternalException(InternalMessage.InternalGetData.message))
     }
 
-
+    fun getHomeNewsData(): Result<List<DataHomeNews>>{
+        try {
+            val response = service.getHomeNews().execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!)
+            }
+            println(response)
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetHomeNewsData.message))
+    }
 
 
 

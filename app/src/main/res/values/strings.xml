@@ -276,5 +276,23 @@
 
     <string name="check_list">Check lista</string>
     <string name="list_check_list">Check listy</string>
+    <string name="info_error_no_data">Niestey z przyczyn technicznych nie doszło do poprawnego pobrania danych. Przy
+        ponownym uruchomieniu aplikacja ponowi próbę pobrania danych. Korzystanie z aplikacji możliwe jest w
+        ogranicznoym zakresie (nie zostały porane pliki pdf oraz grafiki znkaów drogowych)
+    </string>
+    <string name="updater_dont_have_data">Aktualizator danych nie pobrał danych</string>
+    <string name="go_to_tariff">Przejdź do taryfikatora</string>
+    <string name="info_5min">Jeżeli trwa to dłużej niż 5 minut to wyłącz aplikacje i spróbuj ponownie. Jeżeli problem
+        będzie się powtarzał to skontaktuj się z nami
+    </string>
+    <string name="updater_working">Aktualizator danych wykonuje swoje zadanie</string>
+    <string name="mainPackageInfo">Pobranie głównej paczki danych \n Wybór połączenia do aktualizacji danych</string>
+    <string name="main_package_info2">Nasza aplikacja może pobierać duże ilości danych do aktualizacji zmian przepisów.
+        Z racji, że widzisz ten komunikat to uruchamiasz aplikację po raz pierwszy :). Za chwilę zostaną pobrane
+        wszystkie dane przepisów, grafik etc. - będzie to wynosić około 250MB. Aby zapewnić spójność z obowiązującymi
+        przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów które nie powinny przekraczać kilku
+        MB pobieranych nie zależnie od zadeklarowanego rodzaju połączenia. Pamiętaj, że wybierając dane sieci mogą
+        zostać naliczone dodatkowe opłaty przez operatora w zależności od rodzaju taryfy połączenia
+    </string>
 
 </resources>

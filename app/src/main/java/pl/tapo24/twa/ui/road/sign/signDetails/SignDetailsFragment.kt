@@ -53,7 +53,11 @@ class SignDetailsFragment : Fragment() {
             signDetails.linkOld?.let { viewModel.getTariffDetails(it) }
         }
         val root: View = binding.root
-        val file: File = File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), signDetails.path!!)
+        val file: File = if (viewModel.isPublicStorage) {
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24Don'tDelete/${signDetails.path!!}")
+        } else {
+            File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), signDetails.path!!)
+        }
         if (file.exists()) {
             val myBitmap = BitmapFactory.decodeFile(file.absolutePath)
 

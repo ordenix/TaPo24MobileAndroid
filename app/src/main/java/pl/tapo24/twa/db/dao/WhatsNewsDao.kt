@@ -16,4 +16,10 @@ interface WhatsNewsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(whatsNews: WhatsNews)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(whatsNews: List<WhatsNews>)
+
+    @Query("DELETE FROM whatsNews")
+    fun deleteAll()
 }

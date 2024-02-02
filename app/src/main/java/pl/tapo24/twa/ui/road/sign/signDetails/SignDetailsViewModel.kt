@@ -21,7 +21,15 @@ class SignDetailsViewModel @Inject constructor(
     private val tapoDb: TapoDb
 )  : ViewModel() {
     val tariffDetail = MutableLiveData<Tariff?>()
+    var isPublicStorage = false
 
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            isPublicStorage = tapoDb.settingDb().getSettingByName("publicStorage")?.state ?: false
+
+        }
+    }
     fun getTariffDetails(linkId: String) {
         var tariffDetails: Tariff? = null
         viewModelScope.launch(Dispatchers.IO) {

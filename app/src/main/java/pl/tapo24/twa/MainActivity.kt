@@ -281,8 +281,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         // END NOTIFICATION SECTION
-
-
         initializationModule.initializeDialogForDataUpdater(this, supportFragmentManager)
 
         CheckVersion(tapoDb, networkClient, this).checkVersion()
@@ -292,37 +290,13 @@ class MainActivity : AppCompatActivity() {
             .setMessage("Nasza aplikacja może pobierać duże ilości danych do aktualizacji zmian przepisów. Z racji, że widzisz ten komunikat to uruchamiasz aplikację po raz pierwszy :). Za chwilę zostaną pobrane wszystkie dane przepisów, grafik etc. - będzie to wynosić około 250MB. Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora w zależności od rodzaju taryfy połączenia")
             .setNegativeButton("Tylko WiFi") { dialog, which ->
                 // Respond to negative button press
-                MainScope().launch(Dispatchers.IO) {
-                    async {
-                        val setting: Setting = Setting("settingNetwork", "WiFi")
-                        tapoDb.settingDb().insert(setting)
-                    }.await()
-                }
                 State.networkType = "WiFi"
-                initPackageDownloader.downloadInitPackage()
+                //initPackageDownloader.downloadInitPackage()
 
 
             }
             .setPositiveButton("WiFi oraz dane sieci") { dialog, which ->
-                // Respond to positive button press
-                MainScope().launch(Dispatchers.IO) {
-                    async {
-                        val setting: Setting = Setting("settingNetwork", "All")
-                        tapoDb.settingDb().insert(setting)
-                    }.await()
 
-                }
-                State.networkType = "All"
-                initPackageDownloader.downloadInitPackage()
-
-//                AssetUpdaterOLD(
-//                    tapoDb,
-//                    dataTapoDb,
-//                    networkClient,
-//                    this,
-//                    this.supportFragmentManager,
-//                    activity
-//                ).getAllData()
             }
         // Add customization options here
 
@@ -361,15 +335,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        MainScope().launch(Dispatchers.IO) {
-            var settingNetwork: Setting? = null
-            async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
-            if (settingNetwork == null) {
-                withContext(Dispatchers.Main) {
-                    dialogTypeDownloadData.show()
-                }
-            }
-        }
         IntentRouter().route(intent, navController)
     }
 

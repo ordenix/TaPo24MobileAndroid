@@ -12,6 +12,7 @@
             tools:layout="@layout/fragment_home">
         <action android:id="@+id/action_nav_home_to_nav_road" app:destination="@id/nav_road"/>
         <action android:id="@+id/action_nav_home_to_nav_helpers" app:destination="@id/nav_helpers"/>
+        <action android:id="@+id/action_nav_home_to_nav_updater" app:destination="@id/nav_updater"/>
     </fragment>
     <fragment android:id="@+id/nav_helpers"
               android:name="pl.tapo24.twa.ui.helpers.HelpersFragment"
@@ -308,4 +309,6 @@
               android:label="@string/check_list" tools:layout="@layout/fragment_check_list">
         <argument android:name="idList" app:argType="integer"/>
     </fragment>
+    <fragment android:id="@+id/nav_updater" android:name="pl.tapo24.twa.ui.home.update.UpdaterFragment"
+              android:label="fragment_updater" tools:layout="@layout/fragment_updater"/>
 </navigation>

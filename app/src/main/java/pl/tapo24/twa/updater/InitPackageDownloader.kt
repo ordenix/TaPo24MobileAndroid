@@ -34,71 +34,82 @@ class InitPackageDownloader @Inject constructor(
 )
 
 {
-//    @EntryPoint
-//    @InstallIn(SingletonComponent::class)
-//    interface LawUpdaterProviderEntryPoint {
-//        fun lawUpdater(): LawUpdater
-//    }
-//
-//
-//
-//    @EntryPoint
-//    @InstallIn(SingletonComponent::class)
-//    interface AssetUpdaterProviderEntryPoint {
-//        fun assetUpdater(): AssetUpdater
-//    }
+    val namePackage: String = "package_mainold.zip"
 
-    fun downloadInitPackage() {
-        MainScope().launch(Dispatchers.IO) {
-            delay(1000)
-            var isPublicStorage = false
-            downloadMainPackage(true)
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface LawUpdaterProviderEntryPoint {
+        fun lawUpdater(): LawUpdater
+    }
+
+
+
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface AssetUpdaterProviderEntryPoint {
+        fun assetUpdater(): AssetUpdater
+    }
+
+    suspend fun downloadInitPackage(isPublicStorage: Boolean): Result<String>? {
+        TODO("change package name to new one")
+        var result: Result<String>?  = null
+        MainScope().async(Dispatchers.IO) {
+            downloadMainPackage(isPublicStorage)
                 ?.onSuccess {
                    // insertDataToDb()
+                    result = Result.success("Success download")
                     withContext(Dispatchers.Main) {
                         State.dialogDownloadFileMessage = "Sukces"
                         State.dialogDownloadFileProgress.value  = null
                     }
                 }
                 ?.onFailure {
-                    isPublicStorage = true
-                    if (it.message?.contains("Permission denied") ?: false) {
-                        downloadMainPackage(true)
-                            ?.onSuccess {  }
-                            ?.onFailure {
-                                when (it) {
-                                    is java.io.FileNotFoundException -> {
-                                        ACRA.errorReporter.handleSilentException(it)
-                                        withContext(Dispatchers.Main) {
-                                            State.dialogDownloadFileMessage = "Błąd przy pobraniu paczki głównej, nastąpi pobranie proceduralne (może to potrwać chwilę dłużej)"
-                                            State.dialogDownloadFileProgress.value  = 0
-                                            State.setIndeterminate.value = true
-                                        }
-                                        delay(4000)
-//                                        val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
-//                                            LawUpdaterProviderEntryPoint::class.java)
-//                                        hiltEntryPoint.lawUpdater().update()
-//                                        val hiltEntryPoint2 = EntryPointAccessors.fromApplication(context,
-//                                            AssetUpdaterProviderEntryPoint::class.java)
-//                                        hiltEntryPoint2.assetUpdater().update()
-                                    }
-                                    else -> {
-                                        ACRA.errorReporter.handleSilentException(it)
-                                    }
-                                }
-                            }
-                    }
-
-
+                    ACRA.errorReporter.handleSilentException(it)
+                    result = Result.failure(it)
+//                    isPublicStorage = true
+//                    if (it.message?.contains("Permission denied") ?: false) {
+//                        downloadMainPackage(true)
+//                            ?.onSuccess {  }
+//                            ?.onFailure {
+//                                when (it) {
+//                                    is java.io.FileNotFoundException -> {
+//                                        ACRA.errorReporter.handleSilentException(it)
+//                                        withContext(Dispatchers.Main) {
+//                                            State.dialogDownloadFileMessage = "Błąd przy pobraniu paczki głównej, nastąpi pobranie proceduralne (może to potrwać chwilę dłużej)"
+//                                            State.dialogDownloadFileProgress.value  = 0
+//                                            State.setIndeterminate.value = true
+//                                        }
+//                                        delay(4000)
+////                                        val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
+////                                            LawUpdaterProviderEntryPoint::class.java)
+////                                        hiltEntryPoint.lawUpdater().update()
+////                                        val hiltEntryPoint2 = EntryPointAccessors.fromApplication(context,
+////                                            AssetUpdaterProviderEntryPoint::class.java)
+////                                        hiltEntryPoint2.assetUpdater().update()
+//                                    }
+//                                    else -> {
+//
+//                                    }
+//                                }
+//                            }
+//                    }
 
                 }
-
             clearPackageFolders()
+
+        }.await()
+    return result
+
+    }
+    fun saveSettings(isPublicStorage: Boolean, choseConnection: String) {
+        MainScope().launch(Dispatchers.Main) {
+            State.networkType = choseConnection
+        }
+        MainScope().launch(Dispatchers.IO) {
             tapoDb.settingDb().insert(Setting("settingInitializePackage", state = true))
             tapoDb.settingDb().insert(Setting("publicStorage", state = isPublicStorage))
+            tapoDb.settingDb().insert(Setting("settingNetwork", choseConnection))
         }
-
-        // TODO
     }
 
     private suspend fun clearPackageFolders() {
@@ -136,13 +147,13 @@ class InitPackageDownloader @Inject constructor(
                 }
                 State.dialogDownloadFileProgress.value  = 0
             }
-            Downloader().downloadAsset("package", "package_main.zip", context, isPublicStorage)
+            Downloader().downloadAsset("package", namePackage, context, isPublicStorage)
                 .onSuccess {
                     val file: File = if (isPublicStorage) {
-                        File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24Don'tDelete/package/package_main.zip")
+                        File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24Don'tDelete/package/$namePackage")
 
                     } else {
-                        File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/package_main.zip")
+                        File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "package/$namePackage")
                     }
                     val path = if (isPublicStorage) {
                         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -182,14 +193,14 @@ class InitPackageDownloader @Inject constructor(
     }
 
 
-//    private fun insertDataToDb() {
-//        val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
-//            LawUpdaterProviderEntryPoint::class.java)
-//        hiltEntryPoint.lawUpdater().initUpdate()
-//        val hiltEntryPoint2 = EntryPointAccessors.fromApplication(context,
-//            AssetUpdaterProviderEntryPoint::class.java)
-//        hiltEntryPoint2.assetUpdater().initUpdate()
-//
-//    }
+    fun insertDataToDb() {
+        val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
+            LawUpdaterProviderEntryPoint::class.java)
+        hiltEntryPoint.lawUpdater().initUpdate()
+        val hiltEntryPoint2 = EntryPointAccessors.fromApplication(context,
+            AssetUpdaterProviderEntryPoint::class.java)
+        hiltEntryPoint2.assetUpdater().initUpdate()
+
+    }
 
 }

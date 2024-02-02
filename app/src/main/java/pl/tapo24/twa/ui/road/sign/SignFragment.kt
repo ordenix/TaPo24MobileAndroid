@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.databinding.FragmentSignBinding
 import java.io.File
 
+@AndroidEntryPoint
 class SignFragment : Fragment() {
 
     private var _binding: FragmentSignBinding? = null
@@ -132,9 +134,14 @@ class SignFragment : Fragment() {
     }
 
     fun setImage(imView: ImageView, path: String) {
-        val file: File = File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), path)
+
+        val file: File = if (viewModel.isPublicStorage) {
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24Don'tDelete/$path")
+        } else {
+            File(context?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), path)
+        }
         if (file.exists()) {
-            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
+            val bitmap = BitmapFactory.decodeFile(file.path)
             imView.setImageBitmap(bitmap)
         }
     }

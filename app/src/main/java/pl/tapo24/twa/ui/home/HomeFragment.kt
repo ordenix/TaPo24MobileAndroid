@@ -3,6 +3,7 @@ package pl.tapo24.twa.ui.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.navigation.findNavController
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -39,6 +40,14 @@ class HomeFragment : Fragment() {
         homeViewModel.whatsNews.observe(viewLifecycleOwner, Observer {
             homeViewModel.adapter.items = it
             homeViewModel.adapter.notifyDataSetChanged()
+        })
+        homeViewModel.navigateToInitPackage.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                homeViewModel.navigateToInitPackage.value = false
+                val action = HomeFragmentDirections.actionNavHomeToNavUpdater()
+                view?.findNavController()?.navigate(action)
+            }
+
         })
 
 //        val textView: TextView = binding.textHome

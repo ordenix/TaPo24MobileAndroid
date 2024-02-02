@@ -46,7 +46,11 @@ class SignListAdapter(
 
 
         fun bind(item: Sign) {
-            val file: File = File(context2.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), item.path!!)
+            val file: File = if (viewModel.isPublicStorage) {
+                File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "tapo24Don'tDelete/${item.path!!}")
+            } else {
+                File(context2?.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), item.path!!)
+            }
             if (file.exists()) {
                 val bitmap = BitmapFactory.decodeFile(file.absolutePath)
                 imageView.setImageBitmap(bitmap)

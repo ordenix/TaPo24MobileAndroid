@@ -147,7 +147,7 @@ class AssetUpdaterOLD(
                     val colStatus = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)
                     if (colStatus > 0) {
                         when (cursor.getInt(colStatus)) {
-                            DownloadManager.STATUS_FAILED -> {
+                            DownloadManager.STATUS_FAILED -> { // 12962
                                 downloadFinished = true
                                 isError = true
                                 errorMessage = "STATUS_FAILED"

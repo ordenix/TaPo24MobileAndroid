@@ -66,24 +66,18 @@ class MainApplication: Application() {
         MainScope().launch(Dispatchers.IO) {
             var settingNetwork: Setting? = null
             async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
-            val settingInitializePackage = async { tapoDb.settingDb().getSettingByName("settingInitializePackage") }.await()
+           // val settingInitializePackage = async { tapoDb.settingDb().getSettingByName("settingInitializePackage") }.await()
             if (settingNetwork != null) {
                 State.networkType = settingNetwork!!.value
-                if (settingInitializePackage == null) {
-                    // init main package
-                    initPackageDownloader.downloadInitPackage()
-
-                } else {
-                    val constraints4 = Constraints.Builder()
-                        .setRequiredNetworkType(NetworkType.CONNECTED)
-                        .build()
-                    val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
-                        .setConstraints(constraints4)
-                        .addTag("DataLawAndAssetUpdate")
-                        .build()
-
-                    workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
-                }
+                val constraints4 = Constraints.Builder()
+                    .setRequiredNetworkType(NetworkType.CONNECTED)
+                    .build()
+                val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
+                    .setConstraints(constraints4)
+                    .addTag("DataLawAndAssetUpdate")
+                    .build()
+                workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
+//                }
 
             }
         }

@@ -35,6 +35,7 @@ enum class InternalMessage(val message: String) {
     InternalGetUserData("Internal exception during get user data"),
     InternalGetMourning("Internal exception during get data Mourning"),
     InternalGetData("Internal exception during get data"),
+    InternalGetHomeNewsData("Internal exception during get home news data"),
 
 
 

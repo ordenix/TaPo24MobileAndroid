@@ -10,18 +10,30 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.SignListAdapter
+import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.Sign
 import javax.inject.Inject
 @HiltViewModel
 
 class SignListViewModel @Inject constructor(
-    private val dataTapoDb: DataTapoDb
+    private val dataTapoDb: DataTapoDb,
+    private val tapoDb: TapoDb
 ) : ViewModel() {
     val data = MutableLiveData<List<Sign>>()
 
 
     lateinit var adapter: SignListAdapter
+
+    var isPublicStorage = false
+
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            isPublicStorage = tapoDb.settingDb().getSettingByName("publicStorage")?.state ?: false
+
+        }
+    }
 
 
     fun getData(signCategory: String) {

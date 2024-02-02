@@ -69,8 +69,14 @@ class Downloader {
                                 isError = true
                                 errorMessage = "STATUS_FAILED"
                             }
-                            DownloadManager.STATUS_PAUSED -> { }
-                            DownloadManager.STATUS_PENDING -> { }
+                            DownloadManager.STATUS_PAUSED -> {
+                                downloadFinished = true
+                                errorMessage = "PAUSED"
+                                isError = true
+                            }
+                            DownloadManager.STATUS_PENDING -> {
+                                println("ss")
+                            }
                             DownloadManager.STATUS_RUNNING -> {
 
                                 val totalBL =cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES)
