@@ -16,6 +16,7 @@ import pl.tapo24.twa.R
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.entity.WhatsNews
 import pl.tapo24.twa.utils.UlListBuilder
+import java.nio.charset.Charset
 import java.util.*
 
 class HomeWhatsNewsAdapter(
@@ -57,35 +58,24 @@ class HomeWhatsNewsAdapter(
             } catch (e: Exception) {
                 e.toString()
             }
-
-            val data  = "<p><strong>Od dzisiaj możecie korzystać z nowej, poprawionej wersji TaPo24. Przedstawiamy Wam TaPo24 v2.0</strong> \uD83D\uDC6E</p>\n" +
-                    "<p>&nbsp;<iframe width=\"100%\" height=\"360\" src=\"https://www.youtube.com/embed/wGu8oKKfRiA??ab_channel=WirtualnaPolska&wmode=opaque&rel=0\" frameborder=\"0\" allowfullscreen=\"\"></iframe></p>\n" +
-                    "<p>W nowej wersji aplikacji usprawniliśmy:</p>\n" +
-                    "<ul>\n" +
-                    "    <li>szybkość działania</li>\n" +
-                    "    <li>system aktualizacji danych w aplikacji</li>\n" +
-                    "    <li>wygląd aplikacji</li>\n" +
-                    "    <li>możliwość przeglądania plik&oacute;w PDF bez dostępu do Internetu</li>\n" +
-                    "    <li>szybkość i poprawność wyszukiwarki taryfikatora</li>\n" +
-                    "    <li>oraz wiele innych funkcjonalności</li>\n" +
-                    "</ul>\n" +
-                    "<p>&nbsp; Zapraszamy do korzystania z aplikacji, zgłaszania ewentualnych błęd&oacute;w oraz dziękujemy, że jesteście z nami. &nbsp; Pozdrawiamy Kuba i Damian ;)</p>\n" +
-                    "<p>&nbsp;</p>\n" +
-                    "<p>&nbsp;</p>"
             web.setBackgroundColor(Color.TRANSPARENT);
-            val data2 = "<iframe width=\\\"420\\\" height=\\\"315\\\" src=\\\"https://www.youtube.com/embed/4d7yJ2XCRLZs\\\" frameborder=\\\"0\\\" allowfullscreen></iframe>"
-            //val data2 = "<iframe src=\"www.youtube.com/embed/wGu8oKKfRiA?ab_channel=WirtualnaPolska\" width=\"560\" height=\"314\"></iframe>"
-
             web.webChromeClient = WebChromeClient()
-
             web.settings.allowContentAccess = true
             web.settings.javaScriptEnabled = true
-            web.loadData( item.p1, "text/html", "UTF-8")
+            web.settings.domStorageEnabled = true
+            web.settings.userAgentString = "Android"
+            web.settings.cacheMode
+            web.settings.allowFileAccess = true
+
+
+
+            web.requestFocus()
+            val tconvert = android.util.Base64.encodeToString(item.p1.toByteArray(), android.util.Base64.DEFAULT)
+            //web.loadUrl("https://www.instagram.com/p/C11V8UusBMc/")
+            //web.loadData( tconvert, "text/html", "base64")
+            web.loadDataWithBaseURL("https://instagram.com", item.p1, "text/html", "base64", "");
             //web.loadDataWithBaseURL(null, data, "text/html; charset=utf-8", "UTF-8", null)
             topic.text = item.title
-
-//            <p><strong><u><span style="color: rgb(0, 168, 133);">drgffg h s g</span></u></strong></p>
-
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
               //ss.text = (Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
 //            } else {
