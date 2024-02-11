@@ -12,14 +12,18 @@ import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.AboutApplicationAdapter
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.DataBaseVersion
+import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.DataBaseUpdater
+import pl.tapo24.twa.updater.LawUpdater
 import javax.inject.Inject
 
 
 @HiltViewModel
 class AboutApplicationViewModel @Inject constructor(
     private val dataBaseUpdater: DataBaseUpdater,
-    private val dataTapoDb: DataTapoDb
+    private val dataTapoDb: DataTapoDb,
+    private val assetUpdater: AssetUpdater,
+    private val lawUpdater: LawUpdater
 ): ViewModel() {
 
 //    private val _text = MutableLiveData<String>().apply {
@@ -39,6 +43,14 @@ class AboutApplicationViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun forceUpdateAsset() {
+        assetUpdater.update(true)
+    }
+
+    fun forceUpdatePdf() {
+        lawUpdater.update(true)
     }
 
     fun forceUpdate() {

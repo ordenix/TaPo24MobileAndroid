@@ -73,7 +73,7 @@ class UpdaterFragment : Fragment() {
                         if (it == "WiFi") {
                             MaterialAlertDialogBuilder(requireContext())
                                 .setTitle("Błąd")
-                                .setMessage("Aby pobrać dane musisz być połączony z siecią WiFi! ponieważ wybrałeś taki typ połączenia!")
+                                .setMessage("Aby pobrać dane połącz się z siecią WiFi z uwagi na wybrany wcześniej rodzaj połączenia!")
                                 .setPositiveButton("Ok") { _, _ ->
                                     binding.errorDataEmpty.visibility = View.VISIBLE
                                     binding.workInfo.visibility = View.GONE

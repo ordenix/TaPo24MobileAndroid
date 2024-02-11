@@ -34,7 +34,7 @@ class InitPackageDownloader @Inject constructor(
 )
 
 {
-    val namePackage: String = "package_mainold.zip"
+    val namePackage: String = "package_main.zip"
 
     @EntryPoint
     @InstallIn(SingletonComponent::class)
@@ -51,7 +51,7 @@ class InitPackageDownloader @Inject constructor(
     }
 
     suspend fun downloadInitPackage(isPublicStorage: Boolean): Result<String>? {
-        TODO("change package name to new one")
+        //TODO("change package name to new one")
         var result: Result<String>?  = null
         MainScope().async(Dispatchers.IO) {
             downloadMainPackage(isPublicStorage)

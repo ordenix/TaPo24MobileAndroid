@@ -123,17 +123,23 @@ class UpdaterViewModel @Inject constructor(
 
 
     private fun successDownloadOnInternalStorage() {
-        initPackageDownloader.insertDataToDb()
-        initPackageDownloader.saveSettings(false, choseConnection.value!!)
-        showSuccess.value = true
+        viewModelScope.launch(Dispatchers.Main) {
+            initPackageDownloader.insertDataToDb()
+            initPackageDownloader.saveSettings(false, choseConnection.value!!)
+            showSuccess.value = true
+        }
+
 
     }
 
 
     private fun successDownloadOnExternalStorage() {
-        initPackageDownloader.insertDataToDb()
-        initPackageDownloader.saveSettings(true, choseConnection.value!!)
-        showSuccess.value = true
+        viewModelScope.launch(Dispatchers.Main) {
+            initPackageDownloader.insertDataToDb()
+            initPackageDownloader.saveSettings(true, choseConnection.value!!)
+            showSuccess.value = true
+        }
+
     }
 
     private fun pausedDownload() {

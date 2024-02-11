@@ -55,6 +55,14 @@ class AboutApplicationFragment: Fragment() {
             viewModel.forceUpdate()
         }
 
+        binding.forcePdf.setOnClickListener {
+            viewModel.forceUpdatePdf()
+        }
+
+        binding.forceAsset.setOnClickListener {
+            viewModel.forceUpdateAsset()
+        }
+
 
         return root
     }
