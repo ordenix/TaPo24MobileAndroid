@@ -46,7 +46,7 @@
                     android:textAlignment="center"
                     android:layout_height="wrap_content"/>
             <TextView
-                    android:text="@{data.position}"
+                    android:text="@{viewModel.getSpanText2(data.position)}"
                     android:layout_width="match_parent"
                     style="@style/textStyleOrangeMediumWarp"
                     android:textAlignment="center"

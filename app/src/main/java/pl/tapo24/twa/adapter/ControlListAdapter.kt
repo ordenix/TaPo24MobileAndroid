@@ -55,7 +55,7 @@ class ControlListAdapter(
                     filterResults.count = items.size
                     filterResults.values = items
                 } else {
-                    var result = items.filter { element -> element.subTitleDepth1Name?.contains(constraint,true) == true }
+                    var result = items.filter { element -> element.subTitleDepth1Name?.contains(constraint,true) == true || element.position?.contains(constraint,true) == true }
                     if (result.isNotEmpty()) {
                         filterResults.values = result
                         filterResults.count = result.size

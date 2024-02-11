@@ -413,7 +413,8 @@ class ControlListViewModel @Inject constructor(
             // search
             if (text.contains(searchText,true)
                 || item.subTitleDepth1Name?.contains(searchText,true) == true
-                || item.subTitleDepth2Name?.contains(searchText,true) == true ) {
+                || item.subTitleDepth2Name?.contains(searchText,true) == true
+                || item.position?.contains(searchText,true) == true ) {
                 return View.VISIBLE
             } else {
                 View.GONE
@@ -429,9 +430,9 @@ class ControlListViewModel @Inject constructor(
         when (point) {
             "A" -> {
                 // !State.premiumVersion
-                if ((item.standardLevelFaultsA1 != null && (!State.premiumVersion || item.standardNameA1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsA2 != null && (!State.premiumVersion || item.standardNameA2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsA3 != null && (!State.premiumVersion || item.standardNameA3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsA1 != null && (!State.premiumVersion || item.standardNameA1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsA2 != null && (!State.premiumVersion || item.standardNameA2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsA3 != null && (!State.premiumVersion || item.standardNameA3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
 
@@ -442,58 +443,58 @@ class ControlListViewModel @Inject constructor(
                 }
             }
             "B" -> {
-                if ((item.standardLevelFaultsB1 != null && (!State.premiumVersion || item.standardNameB1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsB2 != null && (!State.premiumVersion || item.standardNameB2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsB3 != null && (!State.premiumVersion || item.standardNameB3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsB1 != null && (!State.premiumVersion || item.standardNameB1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsB2 != null && (!State.premiumVersion || item.standardNameB2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsB3 != null && (!State.premiumVersion || item.standardNameB3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "C" -> {
-                if ((item.standardLevelFaultsC1 != null && (!State.premiumVersion || item.standardNameC1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsC2 != null && (!State.premiumVersion || item.standardNameC2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsC3 != null && (!State.premiumVersion || item.standardNameC3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsC1 != null && (!State.premiumVersion || item.standardNameC1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsC2 != null && (!State.premiumVersion || item.standardNameC2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsC3 != null && (!State.premiumVersion || item.standardNameC3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "D" -> {
-                if ((item.standardLevelFaultsD1 != null && (!State.premiumVersion || item.standardNameD1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsD2 != null && (!State.premiumVersion || item.standardNameD2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsD3 != null && (!State.premiumVersion || item.standardNameD3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsD1 != null && (!State.premiumVersion || item.standardNameD1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsD2 != null && (!State.premiumVersion || item.standardNameD2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsD3 != null && (!State.premiumVersion || item.standardNameD3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "E" -> {
-                if ((item.standardLevelFaultsE1 != null && (!State.premiumVersion || item.standardNameE1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsE2 != null && (!State.premiumVersion || item.standardNameE2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsE3 != null && (!State.premiumVersion || item.standardNameE3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsE1 != null && (!State.premiumVersion || item.standardNameE1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsE2 != null && (!State.premiumVersion || item.standardNameE2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsE3 != null && (!State.premiumVersion || item.standardNameE3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "F" -> {
-                if ((item.standardLevelFaultsF1 != null && (!State.premiumVersion || item.standardNameF1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsF2 != null && (!State.premiumVersion || item.standardNameF2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsF3 != null && (!State.premiumVersion || item.standardNameF3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsF1 != null && (!State.premiumVersion || item.standardNameF1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsF2 != null && (!State.premiumVersion || item.standardNameF2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsF3 != null && (!State.premiumVersion || item.standardNameF3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "G" -> {
-                if ((item.standardLevelFaultsG1 != null && (!State.premiumVersion || item.standardNameG1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsG2 != null && (!State.premiumVersion || item.standardNameG2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsG3 != null && (!State.premiumVersion || item.standardNameG3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsG1 != null && (!State.premiumVersion || item.standardNameG1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsG2 != null && (!State.premiumVersion || item.standardNameG2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsG3 != null && (!State.premiumVersion || item.standardNameG3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "H" -> {
-                if ((item.standardLevelFaultsH1 != null && (!State.premiumVersion || item.standardNameH1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsH2 != null && (!State.premiumVersion || item.standardNameH2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsH3 != null && (!State.premiumVersion || item.standardNameH3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsH1 != null && (!State.premiumVersion || item.standardNameH1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsH2 != null && (!State.premiumVersion || item.standardNameH2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsH3 != null && (!State.premiumVersion || item.standardNameH3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }
             "I" -> {
-                if ((item.standardLevelFaultsI1 != null && (!State.premiumVersion || item.standardNameI1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsI2 != null && (!State.premiumVersion || item.standardNameI2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
-                    || (item.standardLevelFaultsI3 != null && (!State.premiumVersion || item.standardNameI3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
+                if ((item.standardLevelFaultsI1 != null && (!State.premiumVersion || item.standardNameI1?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsI2 != null && (!State.premiumVersion || item.standardNameI2?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))
+                    || (item.standardLevelFaultsI3 != null && (!State.premiumVersion || item.standardNameI3?.contains(searchText, true) != false || item.subTitleDepth1Name?.contains(searchText, true) == true || item.position?.contains(searchText, true) == true || item.subTitleDepth2Name?.contains(searchText, true) == true))) {
                     isVisible = true
                 }
             }

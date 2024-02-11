@@ -55,7 +55,7 @@ class TariffFragment: Fragment() {
 
        // dialog.setContentView(R.layout.dialog_overlay_loading,)
         var dataSize = 0
-        var showItem = 4
+        var showItem = 6
         viewModel =
             ViewModelProvider(this).get(TariffViewModel::class.java)
         _binding = FragmentTariffBinding.inflate(inflater, container, false)
@@ -66,8 +66,8 @@ class TariffFragment: Fragment() {
         viewModel.adapter = TariffDataAdapter(viewModel.tariffData.value.orEmpty(),viewModel,requireContext())
         rv. adapter = viewModel.adapter
         viewModel.tariffData.observe(viewLifecycleOwner, Observer {
-            showItem = if (it.size > 4) {
-                4
+            showItem = if (it.size > 6) {
+                6
             } else {
                 it.size
             }

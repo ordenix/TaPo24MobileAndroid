@@ -207,3 +207,91 @@ val options = ArrayList<String>()
 <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
 <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+
+
+
+
+
+
+
+        val dialogTest2 = SelectableSearchableDialog<CodePointsNew>()
+        dialogTest2.title = "Wybierz czyn"
+        dialogTest2.tileField1 = "Kod czynu: "
+        dialogTest2.tileField2 = "Opis: "
+        dialogTest2.tileField3 = "Punkty: "
+        dialogTest2.isMultiSelect = true
+        val listtotest2 = MutableLiveData<List<CodePointsNew>>()
+        MainScope().launch(Dispatchers.IO) {
+            val list = async { dataTapoDb.codePointsNew().getAll() }.await()
+            withContext(Dispatchers.Main) {
+                listtotest2.value = list
+            }
+        }
+        listtotest2.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                val listMap: List<SelectableSearchableDialogElement> = it.map {
+                    SelectableSearchableDialogElement(
+                        it.id,
+                        it.description?: "",
+                        it.points.toString()
+                    )
+                }
+                dialogTest2.itemMapList = listMap
+                dialogTest2.itemList = it
+                dialogTest2.selectedItem.observe(this, Observer {
+
+                        val selected = it
+                        println(selected)
+
+                })
+//                val list = it.map { it.name }
+//                dialogTest.itemList = list
+                dialogTest2.show(supportFragmentManager, "testNNN")
+            }
+
+        })
+
+        val dialogTest = SelectableSearchableDialog<CheckListDictionary>()
+        dialogTest.title = "Wybierz czynność"
+        dialogTest.tileField1 = ""
+        dialogTest.isMultiSelect = false
+        val listtotest = MutableLiveData<List<CheckListDictionary>>()
+        MainScope().launch(Dispatchers.IO) {
+            val list = async { tapoDb.checkListDictionary().getAll() }.await()
+            withContext(Dispatchers.Main) {
+                listtotest.value = list
+            }
+        }
+        listtotest.observe(this, Observer {
+            if (it.isNotEmpty()) {
+                val listMap: List<SelectableSearchableDialogElement> = it.map {
+                    SelectableSearchableDialogElement(
+                        it.description
+
+                    )
+                }
+                dialogTest.itemMapList = listMap
+                dialogTest.itemList = it
+                dialogTest.selectedItem.observe(this, Observer {
+
+                    val selected = it
+                    println(selected)
+
+                })
+//                val list = it.map { it.name }
+//                dialogTest.itemList = list
+                dialogTest.show(supportFragmentManager, "testNNN")
+            }
+
+        })
+
+
+
+
+
+
+
+
