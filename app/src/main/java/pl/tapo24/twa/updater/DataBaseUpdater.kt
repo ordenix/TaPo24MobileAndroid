@@ -221,6 +221,26 @@ class DataBaseUpdater @Inject constructor(
                                                         }
                                                     }
                                                 }
+                                                DataBaseType.TelephoneNumbers -> {
+                                                    async { dataTapoDb.telephoneNumbers().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.telephoneNumbers().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.CodeColors -> {
+                                                    async { dataTapoDb.codeColors().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.codeColors().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
                                                 else -> {}
                                             }
 

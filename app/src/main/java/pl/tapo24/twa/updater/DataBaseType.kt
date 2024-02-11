@@ -24,6 +24,8 @@ enum class DataBaseType (
     Tariff("data_tariff", "Pobieranie danych taryfikatora", "tariff", false, "Taryfikator"),
     Towing("data_towing", "Pobieranie danych holowania", "towing", namePl = "Holowanie"),
     Uto("data_uto", "Pobieranie danych uto", "uto", namePl = "UTO"),
+    CodeColors("data_code_colors", "Pobieranie danych kodów kolorów", "code_colors", namePl = "UTO"),
+    TelephoneNumbers("data_telephone_numbers", "Pobieranie danych telefonicznych", "telephone_numbers", namePl = "UTO"),
 
 
 }
