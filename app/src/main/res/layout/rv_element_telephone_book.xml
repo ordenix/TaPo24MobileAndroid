@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="position"
+                  type="java.lang.Integer"/>
+        <variable name="data"
+                  type="pl.tapo24.twa.dbData.entity.TelephoneNumbers"/>
+        <variable name="viewModel"
+                  type="pl.tapo24.twa.ui.helpers.telephone.TelephoneViewModel"/>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:onClick="@{() -> viewModel.onTelephoneClick(data.phoneNumber)}"
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:visibility="@{data.branchName.isEmpty == true ?  View.GONE : View.VISIBLE}"
+                android:text="@{viewModel.getSpanText(data.branchName)}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleOrangeMediumWarp"
+                android:layout_height="wrap_content" android:id="@+id/textView16"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+                android:text="@{viewModel.getSpanText(data.name)}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:layout_height="wrap_content" android:id="@+id/textView106"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView16" app:layout_constraintEnd_toEndOf="parent"
+                android:maxLines="10"/>
+        <TextView
+                android:text="@{`Dyżur: ` + data.workingTime}"
+                android:visibility="@{data.workingTime.isEmpty == true ?  View.GONE : View.VISIBLE}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:layout_height="wrap_content" android:id="@+id/textView1026"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView106" app:layout_constraintEnd_toEndOf="parent"
+                android:maxLines="10"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textView1026" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                    android:text="@{viewModel.getSpanText(data.phoneNumber)}"
+                    style="@style/textStyleWhiteSmallInContainerCenter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textView108"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@drawable/telephone_small"
+                    android:id="@+id/imageView26" app:layout_constraintEnd_toStartOf="@+id/textView108"
+                    app:layout_constraintStart_toStartOf="parent" app:tint="?attr/textSecondColor"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

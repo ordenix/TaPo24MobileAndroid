@@ -66,15 +66,20 @@ class HomeWhatsNewsAdapter(
             web.settings.userAgentString = "Android"
             web.settings.cacheMode
             web.settings.allowFileAccess = true
-
-
+//            web.setInitialScale(100)
+            //web.settings.loadWithOverviewMode = true
+            //web.settings.useWideViewPort = true
 
             web.requestFocus()
             val tconvert = android.util.Base64.encodeToString(item.p1.toByteArray(), android.util.Base64.DEFAULT)
             //web.loadUrl("https://www.instagram.com/p/C11V8UusBMc/")
             //web.loadData( tconvert, "text/html", "base64")
-            web.loadDataWithBaseURL("https://instagram.com", item.p1, "text/html", "base64", "");
-            //web.loadDataWithBaseURL(null, data, "text/html; charset=utf-8", "UTF-8", null)
+            if (item.p1.contains("instagram-media")) {
+                web.loadDataWithBaseURL("https://instagram.com", item.p1, "text/html", "base64", "")
+            } else {
+                web.loadDataWithBaseURL(null, item.p1, "text/html; charset=utf-8", "UTF-8", null)
+
+            }
             topic.text = item.title
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
               //ss.text = (Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));

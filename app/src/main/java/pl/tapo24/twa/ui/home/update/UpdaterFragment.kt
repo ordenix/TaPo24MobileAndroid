@@ -125,9 +125,7 @@ class UpdaterFragment : Fragment() {
                     .setTitle("Sukces")
                     .setMessage("Poprawnie pobrano dane!")
                     .setPositiveButton("Ok") { _, _ ->
-                        binding.backToHome.setOnClickListener {
-                            view?.findNavController()?.navigate(R.id.nav_home)
-                        }
+                        view?.findNavController()?.navigate(R.id.nav_home)
                     }
                     .show()
             }

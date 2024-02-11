@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -170,6 +171,14 @@ class MainActivity : AppCompatActivity() {
 //            WindowManager.LayoutParams.FLAG_SECURE
 //        )
         theme.applyStyle(themeType.themeName, true)
+
+
+        val typed1 = TypedValue()
+        val typed2 = TypedValue()
+        theme.resolveAttribute(R.attr.tapoSecondColor, typed1, true)
+        theme.resolveAttribute(R.attr.tapoBackgroundColor, typed2, true)
+        State.colorSpan1 = typed1.data
+        State.colorSpan2 = typed2.data
 
         val workManager = WorkManager.getInstance(this)
 

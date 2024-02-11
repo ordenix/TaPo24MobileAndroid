@@ -32,8 +32,7 @@ class HelpersFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val currentOrientation = resources.configuration.orientation
-        val roadViewModel =
-            ViewModelProvider(this).get(RoadViewModel::class.java)
+
         val viewModelHelpers =
             ViewModelProvider(this).get(HelpersViewModel::class.java)
 
@@ -48,10 +47,10 @@ class HelpersFragment: Fragment() {
             rv.layoutManager = GridLayoutManager(activity,3)
         }
 
-        roadViewModel.adapter = NavAdapter(NavHelpers.values().map {it.navElement})
-        rv.adapter = roadViewModel.adapter
+        viewModelHelpers.adapter = NavAdapter(NavHelpers.values().map {it.navElement})
+        rv.adapter = viewModelHelpers.adapter
 
-        roadViewModel.adapter.onActiveItemClick = { navElement ->
+        viewModelHelpers.adapter.onActiveItemClick = { navElement ->
             if (navElement.navId != null) {
                 requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
                 view?.findNavController()?.navigate(
@@ -69,7 +68,7 @@ class HelpersFragment: Fragment() {
                 startActivity(intent)
             }
         }
-        roadViewModel.adapter.onDeActiveItemClick = { message ->
+        viewModelHelpers.adapter.onDeActiveItemClick = { message ->
             Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
         }
 
@@ -79,10 +78,7 @@ class HelpersFragment: Fragment() {
         return root
     }
 
-    private fun openLink(link: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
-        startActivity(intent)
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

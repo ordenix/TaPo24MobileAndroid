@@ -1,5 +1,6 @@
 package pl.tapo24.twa.data.nav
 
+import androidx.core.os.bundleOf
 import pl.tapo24.twa.R
 
 enum class NavHelpers(
@@ -43,6 +44,7 @@ enum class NavHelpers(
         navName = "Wzory protokołów",
         navIcon= R.drawable.clipboard_check_solid,
         navId = R.id.action_nav_helpers_to_nav_law_with_args,
+        requireLogin = true,
         navHttpLink = null
     )
     ),
@@ -54,12 +56,13 @@ enum class NavHelpers(
         navHttpLink = null
     )
     ),
-    LinkTelephoneBook(
+    TelephoneBook(
         NavElement(
-        navName = "Link do książki telefonicznej (Policja)",
+        navName = "Książka telefoniczna",
         navIcon= R.drawable.telephone,
-        navId = null,
-        navHttpLink = "https://ckt.uc.ost112.gov.pl/"
+        navId = R.id.action_nav_helpers_to_nav_telephone,
+        navHttpLink = null,
+        listBundle = bundleOf("bookmark" to null)
     )
     ),
     LinkCheck12t(
@@ -67,6 +70,7 @@ enum class NavHelpers(
         navName = "Link do ograniczeń ruchu pow. 12t",
         navIcon= R.drawable.block_bold,
         navId = null,
+        requireLogin = true,
         navHttpLink = "https://www.gov.pl/web/infrastruktura/ograniczenia-w-ruchu"
     )
     ),

@@ -291,5 +291,11 @@
     <string name="mainPackageInfo">Pobranie głównej paczki danych \n Wybór połączenia do aktualizacji danych</string>
     <string name="main_package_info2">Aplikacja może pobierać duże ilości danych celem aktualizacji przepisów. Z racji tego, że widzisz ten komunikat, to uruchamiasz aplikację po raz pierwszy. Za chwilę zostaną pobrane wszystkie niezbędne dane (około 200 MB). Aby zapewnić spójność, z obowiązującymi przepisami aplikacja w trakcie działania może pobierać aktualizacje nieprzekraczające kilku MB niezależnie od zadeklarowanego rodzaju połączenia. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora zgodnie z obowiązującą taryfą.
     </string>
+    <string name="updater">Updater</string>
+    <string name="telephoneBooks">Książka telefoniczna</string>
+    <string name="search_number">Wybierz zakładkę lub wyszukaj nr</string>
+    <string name="numbers_other">Numery ogólne</string>
+    <string name="itd">ITD</string>
+    <string name="sg">Straż Graniczna</string>
 
 </resources>
