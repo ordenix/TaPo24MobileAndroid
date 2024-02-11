@@ -1,6 +1,5 @@
 package pl.tapo24.twa.ui.road
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
@@ -8,17 +7,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.NavAdapter
-import pl.tapo24.twa.data.NavElement
-import pl.tapo24.twa.data.NavRoad
-import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.nav.NavRoad
 import pl.tapo24.twa.databinding.FragmentRoadBinding
 
 class RoadFragment: Fragment() {

@@ -8,7 +8,7 @@
         <variable name="position"
                   type="java.lang.Integer"/>
         <variable name="data"
-                  type="pl.tapo24.twa.data.NavElement"/>
+                  type="pl.tapo24.twa.data.nav.NavElement"/>
         <variable name="enabled" type="java.lang.Boolean"/>
 <!--        <variable name="viewModel" type="pl.tapo24.twa.ui.road.status.StatusViewModel"/>-->
     </data>

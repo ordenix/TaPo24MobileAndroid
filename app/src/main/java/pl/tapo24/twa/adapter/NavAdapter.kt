@@ -9,10 +9,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import pl.tapo24.twa.R
 import pl.tapo24.twa.BR
-import pl.tapo24.twa.data.NavElement
+import pl.tapo24.twa.data.nav.NavElement
 import pl.tapo24.twa.data.State
-
-import java.util.*
 
 class NavAdapter(
     var items: List<NavElement>
