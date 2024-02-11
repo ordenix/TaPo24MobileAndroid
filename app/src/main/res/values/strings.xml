@@ -28,7 +28,9 @@
     <string name="vBase">Baza wykroczeń:</string>
     <string name="vServer">Wersje na serwerze</string>
     <string name="checkUpdate">Sprawdź aktualizacje</string>
-    <string name="forceUpdate">Wymuś aktualizacje</string>
+    <string name="forceUpdateDb">Wymuś aktualizacje baz danych</string>
+    <string name="forceUpdatepdf">Wymuś aktualizacje pdf</string>
+    <string name="forceUpdateAsset">Wymuś aktualizacje assetów</string>
 
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -276,23 +278,18 @@
 
     <string name="check_list">Check lista</string>
     <string name="list_check_list">Check listy</string>
-    <string name="info_error_no_data">Niestey z przyczyn technicznych nie doszło do poprawnego pobrania danych. Przy
-        ponownym uruchomieniu aplikacja ponowi próbę pobrania danych. Korzystanie z aplikacji możliwe jest w
-        ogranicznoym zakresie (nie zostały porane pliki pdf oraz grafiki znkaów drogowych)
+    <string name="info_error_no_data">Niestety z przyczyn technicznych dane nie zostały poprawnie pobrane. Przy
+        ponownym uruchomieniu aplikacja ponowi próbę pobrania danych. Korzystanie z aplikacji jest możliwe w
+        ograniczonym zakresie (nie zostały pobrane pliki Pdf oraz grafiki znaków drogowych)
     </string>
-    <string name="updater_dont_have_data">Aktualizator danych nie pobrał danych</string>
+    <string name="updater_dont_have_data">Aktualizator nie pobrał danych</string>
     <string name="go_to_tariff">Przejdź do taryfikatora</string>
-    <string name="info_5min">Jeżeli trwa to dłużej niż 5 minut to wyłącz aplikacje i spróbuj ponownie. Jeżeli problem
-        będzie się powtarzał to skontaktuj się z nami
+    <string name="info_5min">Jeżeli trwa to dłużej niż 5 minut, wyłącz aplikacje i spróbuj ponownie. Jeżeli problem
+        będzie się powtarzał skontaktuj się z nami
     </string>
     <string name="updater_working">Aktualizator danych wykonuje swoje zadanie</string>
     <string name="mainPackageInfo">Pobranie głównej paczki danych \n Wybór połączenia do aktualizacji danych</string>
-    <string name="main_package_info2">Nasza aplikacja może pobierać duże ilości danych do aktualizacji zmian przepisów.
-        Z racji, że widzisz ten komunikat to uruchamiasz aplikację po raz pierwszy :). Za chwilę zostaną pobrane
-        wszystkie dane przepisów, grafik etc. - będzie to wynosić około 250MB. Aby zapewnić spójność z obowiązującymi
-        przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów które nie powinny przekraczać kilku
-        MB pobieranych nie zależnie od zadeklarowanego rodzaju połączenia. Pamiętaj, że wybierając dane sieci mogą
-        zostać naliczone dodatkowe opłaty przez operatora w zależności od rodzaju taryfy połączenia
+    <string name="main_package_info2">Aplikacja może pobierać duże ilości danych celem aktualizacji przepisów. Z racji tego, że widzisz ten komunikat, to uruchamiasz aplikację po raz pierwszy. Za chwilę zostaną pobrane wszystkie niezbędne dane (około 200 MB). Aby zapewnić spójność, z obowiązującymi przepisami aplikacja w trakcie działania może pobierać aktualizacje nieprzekraczające kilku MB niezależnie od zadeklarowanego rodzaju połączenia. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora zgodnie z obowiązującą taryfą.
     </string>
 
 </resources>
