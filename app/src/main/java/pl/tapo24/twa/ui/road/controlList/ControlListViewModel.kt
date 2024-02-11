@@ -16,19 +16,20 @@ import pl.tapo24.twa.data.Standard
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.ControlList
+import pl.tapo24.twa.utils.ColorSpan
 import pl.tapo24.twa.utils.SpanFilter
 import javax.inject.Inject
 
 @HiltViewModel
 class ControlListViewModel @Inject constructor(
     private val dataTapoDb: DataTapoDb
-): ViewModel() {
+): ViewModel(), ColorSpan {
     val data = MutableLiveData<List<ControlList>>()
     lateinit var adapter: ControlListAdapter
     val standardList = MutableLiveData<List<Standard>>()
     val priorityList = PriorityList()
     var codeToInsert = ""
-    var searchText: String = ""
+    override var searchText: String = ""
     val showDialog = MutableLiveData<Boolean>(false)
     val emptyResults = MutableLiveData<Boolean>(false)
     var colorSpan1: Int = 0
@@ -397,14 +398,6 @@ class ControlListViewModel @Inject constructor(
             }
         }
 
-    }
-
-    fun getSpanText(text: String?): SpannableString? {
-        return SpanFilter().getSimpleSpanText(text, searchText, colorSpan1)
-    }
-
-    fun getSpanText2(text: String?): SpannableString? {
-        return SpanFilter().getSimpleSpanText(text, searchText, colorSpan2)
     }
 
     fun getVisibilityOfItem(text: String?, item: ControlList): Int {
