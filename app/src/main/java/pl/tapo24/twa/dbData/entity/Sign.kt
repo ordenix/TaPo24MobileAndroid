@@ -27,11 +27,15 @@ class Sign(
     var linkNew: String? = null,
 
     @ColumnInfo(defaultValue = "")
-    var signCategory: String? = null
+    var signCategory: String? = null,
+
+    @ColumnInfo(defaultValue = "")
+    var signExtendDescription: String? = null
 
 ) :Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -49,6 +53,7 @@ class Sign(
         parcel.writeString(linkOld)
         parcel.writeString(linkNew)
         parcel.writeString(signCategory)
+        parcel.writeString(signExtendDescription)
     }
 
     override fun describeContents(): Int {

@@ -29,7 +29,7 @@ import pl.tapo24.twa.dbData.entity.*
         TelephoneNumbers::class,
         CodeColors::class
 
-    ], version = 6,
+    ], version = 7,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -37,7 +37,7 @@ import pl.tapo24.twa.dbData.entity.*
         AutoMigration (from = 3, to = 4),
         AutoMigration (from = 4, to = 5),
         AutoMigration (from = 5, to = 6),
-//        AutoMigration (from = 6, to = 7),
+        AutoMigration (from = 6, to = 7),
 //        AutoMigration (from = 7, to = 8),
 //        AutoMigration (from = 8, to = 9),
 //        AutoMigration (from = 9, to = 10),
