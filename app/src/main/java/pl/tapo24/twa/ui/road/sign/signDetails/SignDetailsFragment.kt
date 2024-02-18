@@ -67,7 +67,12 @@ class SignDetailsFragment : Fragment() {
 
             binding.signDescr.text = signDetails.description
             if (signDetails.signExtendDescription?.isNotEmpty() == true) {
-                binding.signDescr2.text = signDetails.signExtendDescription
+                if (State.premiumVersion) {
+                    binding.signDescr2.text = signDetails.signExtendDescription
+                } else {
+                    binding.signDescr2.text = "Opis dostępny dla użytkowników PREMIUM"
+                }
+
             } else {
                 binding.signDescr2.visibility = View.GONE
                 binding.detailsInfo.visibility = View.GONE
