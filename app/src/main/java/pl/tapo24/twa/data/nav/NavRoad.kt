@@ -123,7 +123,7 @@ enum class NavRoad(
     ),
     CodeColors(
         NavElement(
-            navName = "Statusy ksip?!?",
+            navName = "Kody sprawdzeń KSIP",
             navIcon= R.drawable._123,
             navId = R.id.action_nav_road_to_nav_codeColors,
             requireLogin = true,
