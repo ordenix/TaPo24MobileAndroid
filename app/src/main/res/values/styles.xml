@@ -14,6 +14,11 @@
         <item name="android:textSize">15sp</item>
 
     </style>
+    <style name="blackConstansCodeColorText" parent="@style/textStyle">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+
+    </style>
     <style name="gridText">
         <item name="android:fontFamily">?attr/masterFont</item>
         <item name="android:layout_marginEnd">1dp</item>
@@ -46,6 +51,9 @@
         <item name="android:textColor">?attr/textMainColor</item>
         <item name="android:textStyle">?attr/weightFontMain</item>
         <item name="android:maxLines">50</item>
+    </style>
+    <style name="textStyleOrangeSmallWarpCenter" parent="@style/textStyleOrangeSmallWarp">
+        <item name="android:textAlignment">center</item>
     </style>
     <style name="textStyleCategoryDrivingLicence" parent="@style/textStyle">
         <item name="android:textSize">50sp</item>
@@ -132,7 +140,14 @@
         <item name="android:layout_marginBottom">5dp</item>
     </style>
 
-
+    <style name="itemCodeColors">
+        <item name="android:layout_marginStart">5dp</item>
+        <item name="android:layout_marginEnd">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 
     <style name="Theme.App" parent="Theme.Material3.Light">
         ...

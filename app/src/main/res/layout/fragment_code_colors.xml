@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.road.codeColors.CodeColorsFragment">
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    style="@style/smallContainer"
+                    android:backgroundTint="#edf2f4"
+                    android:background="@drawable/style_small_container"
+                    android:layout_height="match_parent" android:id="@+id/white">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="BIAŁY 00"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView152"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    style="@style/smallContainer"
+                    android:backgroundTint="#d90429"
+                    android:background="@drawable/style_small_container"
+                    android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/red77"
+                        app:layout_constraintEnd_toStartOf="@+id/red88"
+                        app:layout_constraintTop_toTopOf="@+id/red88"
+                        app:layout_constraintBottom_toBottomOf="@+id/red88">
+
+                    <TextView
+                            android:text="CZERWONY 77"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView153234"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_height="wrap_content" android:id="@+id/red88"
+                        app:layout_constraintStart_toEndOf="@+id/red77" android:layout_marginBottom="21dp"
+                        app:layout_constraintBottom_toTopOf="@+id/red99">
+
+                    <TextView
+                            android:text="CZERWONY 88"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView1543234"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/red99"
+                        app:layout_constraintTop_toBottomOf="@+id/red88"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                            android:text="CZERWONY 99"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView153124"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    style="@style/smallContainer"
+                    android:backgroundTint="#80b918"
+                    android:background="@drawable/style_small_container"
+                    android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" android:id="@+id/green11"
+                        app:layout_constraintEnd_toStartOf="@+id/green22">
+
+                    <TextView
+                            android:text="ZIELONY 11"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView1355"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/green11"
+                        android:id="@+id/green22">
+
+                    <TextView
+                            android:text="ZIELONY 22"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView13525"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    style="@style/smallContainer"
+                    android:backgroundTint="#eeef20"
+                    android:background="@drawable/style_small_container"
+                    android:layout_height="match_parent" android:id="@+id/yellow">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="ZÓŁTY 33"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView13455"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    style="@style/smallContainer"
+                    android:backgroundTint="#7ea3f1"
+                    android:background="@drawable/style_small_container"
+                    android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_height="wrap_content" android:id="@+id/blue44"
+                        app:layout_constraintEnd_toStartOf="@+id/blue144"
+                        app:layout_constraintTop_toTopOf="@+id/blue144"
+                        app:layout_constraintBottom_toBottomOf="@+id/blue144">
+
+                    <TextView
+                            android:text="NIEBIESKI 44"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView14566"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/blue44"
+                        android:id="@+id/blue144"
+                        app:layout_constraintBottom_toTopOf="@+id/blue155">
+
+                    <TextView
+                            android:text="NIEBIESKI 144"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView14585"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/blue144"
+                        android:id="@+id/blue155"
+                        app:layout_constraintBottom_toTopOf="@+id/blue66"
+                        app:layout_constraintStart_toEndOf="@+id/blue55">
+
+                    <TextView
+                            android:text="NIEBIESKI 155"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView174565"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toStartOf="@+id/blue155"
+                        app:layout_constraintTop_toTopOf="@+id/blue155" android:id="@+id/blue55"
+                        app:layout_constraintBottom_toBottomOf="@+id/blue155">
+
+                    <TextView
+                            android:text="NIEBIESKI 55"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView145645"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:id="@+id/blue66"
+                        app:layout_constraintTop_toBottomOf="@+id/blue155"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                            android:text="NIEBIESKI 66"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView14765"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    style="@style/smallContainer"
+                    android:backgroundTint="#fca252"
+                    android:background="@drawable/style_small_container"
+                    android:layout_height="wrap_content" android:id="@+id/orange">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                        style="@style/itemCodeColors" tools:ignore="MissingConstraints"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@drawable/style_small_container"
+                        android:backgroundTint="#19000000"
+                        app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                            android:text="POMARAŃCZOWY 999"
+                            style="@style/blackConstansCodeColorText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:id="@+id/textView34515"
+                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintTop_toTopOf="parent"
+                            android:textSize="10sp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

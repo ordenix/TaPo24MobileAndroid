@@ -113,5 +113,25 @@ class UlListBuilder {
 
     }
 
+    fun getSpannableTextBulletFromCustomText(text: String?): SpannableStringBuilder {
+        val ssb = SpannableStringBuilder()
+        if (text == null) return ssb
+        val list = text.split("/n").toList()
+        list.forEach{ element ->
+            val textTrim = element.trimStart().replaceFirstChar{it.uppercase()}.trim()
+            val ss = SpannableString(textTrim)
+            if (textTrim.last() != ':') {
+                ss.setSpan(BulletSpan(10), 0, textTrim.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            ssb.append(ss)
+            ssb.append("\n")
+        }
+
+
+
+        return ssb
+
+    }
+
 
 }
