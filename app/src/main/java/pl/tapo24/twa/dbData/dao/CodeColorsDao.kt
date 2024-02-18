@@ -21,4 +21,8 @@ interface  CodeColorsDao  {
 
     @Query("DELETE FROM codeColors")
     fun deleteAll()
+
+
+    @Query("SELECT * FROM codeColors WHERE code = :code")
+    fun getByCode(code: String): CodeColors
 }

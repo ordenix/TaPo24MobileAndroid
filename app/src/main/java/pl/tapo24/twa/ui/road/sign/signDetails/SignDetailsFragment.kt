@@ -66,6 +66,14 @@ class SignDetailsFragment : Fragment() {
             myImage.setImageBitmap(myBitmap)
 
             binding.signDescr.text = signDetails.description
+            if (signDetails.signExtendDescription?.isNotEmpty() == true) {
+                binding.signDescr2.text = signDetails.signExtendDescription
+            } else {
+                binding.signDescr2.visibility = View.GONE
+                binding.detailsInfo.visibility = View.GONE
+                binding.view19.visibility = View.GONE
+            }
+
             binding.signTitle.text = "Szczegóły znaku ${signDetails.name}"
         }
         binding.button7.setOnClickListener {

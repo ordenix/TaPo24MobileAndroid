@@ -121,5 +121,14 @@ enum class NavRoad(
         navHttpLink = null,
     )
     ),
+    CodeColors(
+        NavElement(
+            navName = "Statusy ksip?!?",
+            navIcon= R.drawable._123,
+            navId = R.id.action_nav_road_to_nav_codeColors,
+            requireLogin = true,
+            navHttpLink = null,
+        )
+    ),
 
 }
