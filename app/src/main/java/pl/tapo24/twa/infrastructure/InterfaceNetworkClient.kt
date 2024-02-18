@@ -32,6 +32,10 @@ interface InterfaceNetworkClient {
 
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_law")
+    fun getLaw(@Header("Authorization")header: String): Call<List<Law>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/data_law")
     fun getLaw(): Call<List<Law>>
 
     @Headers("Content-Type: application/json; charset=utf-8")

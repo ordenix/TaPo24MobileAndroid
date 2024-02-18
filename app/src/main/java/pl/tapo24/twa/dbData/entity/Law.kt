@@ -33,5 +33,8 @@ data class Law (
 
     @ColumnInfo(defaultValue = "")
     var type: String? = null,
+
+    @ColumnInfo(defaultValue = "false")
+    var isPremium: Boolean? = null,
 ) {
 }

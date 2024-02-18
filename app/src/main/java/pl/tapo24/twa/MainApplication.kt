@@ -58,7 +58,7 @@ class MainApplication: Application() {
             .build()
         val workRequest3 = PeriodicWorkRequestBuilder<DataBaseUpdateWorker>(10, TimeUnit.HOURS)
             .setConstraints(constraints3)
-            .addTag("Mourning")
+            .addTag("DataUpdate")
             .build()
         workManager.enqueueUniquePeriodicWork("DataUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest3)
 
@@ -75,6 +75,7 @@ class MainApplication: Application() {
                 val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
                     .setConstraints(constraints4)
                     .addTag("DataLawAndAssetUpdate")
+                    .setInitialDelay(5, TimeUnit.SECONDS)
                     .build()
                 workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
 //                }
