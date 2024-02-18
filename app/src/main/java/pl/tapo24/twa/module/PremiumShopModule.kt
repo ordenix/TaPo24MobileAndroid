@@ -16,6 +16,7 @@ import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.updater.LawUpdater
 import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -29,6 +30,13 @@ class PremiumShopModule @Inject constructor(private val tapoDb: TapoDb, private 
     @InstallIn(SingletonComponent::class)
     interface SessionProviderEntryPoint {
         fun sessionProvider(): SessionProvider
+    }
+
+
+    @EntryPoint
+    @InstallIn(SingletonComponent::class)
+    interface LawUpdaterEntryPoint {
+        fun lawUpdater(): LawUpdater
     }
 
     fun checkPermissionOnInit() {
@@ -51,10 +59,14 @@ class PremiumShopModule @Inject constructor(private val tapoDb: TapoDb, private 
             val resposne = async { networkClient.promoteToPaidAccount() }.await()
             resposne.onSuccess {
                 var jwtNewToDb: Setting = Setting("jwtToken", it, 0)
+                State.jwtToken = it
                 async {tapoDb.settingDb().insert(jwtNewToDb) }.await()
                 val hiltEntryPoint = EntryPointAccessors.fromApplication(context, SessionProviderEntryPoint::class.java)
                 val sessionProvider = hiltEntryPoint.sessionProvider()
                 sessionProvider.restoreSession()
+                val lawUpdaterEntryPoint = EntryPointAccessors.fromApplication(context, LawUpdaterEntryPoint::class.java)
+                val lawUpdaterProvider = lawUpdaterEntryPoint.lawUpdater()
+                lawUpdaterProvider.update()
             }
 
         }

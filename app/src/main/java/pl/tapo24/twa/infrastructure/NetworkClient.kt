@@ -17,6 +17,7 @@ import pl.tapo24.twa.exceptions.HttpException
 import pl.tapo24.twa.exceptions.HttpMessage
 import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.reflect.KClass
@@ -116,7 +117,13 @@ class NetworkClient(var url: String) {
 
     fun getLawData(): Result<List<Law>>{
         try {
-            val response = service.getLaw().execute()
+            val response: Response<List<Law>> = if (State.jwtToken.isNotEmpty()) {
+                // not empty
+                service.getLaw("Bearer ${State.jwtToken}").execute()
+            } else {
+                // empty
+                service.getLaw().execute()
+            }
             if (response.isSuccessful) {
                 return Result.success(response.body()!!)
             }

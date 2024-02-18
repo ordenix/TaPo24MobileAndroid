@@ -69,6 +69,7 @@ enum class NavRoad(
         navIcon= R.drawable.info_solid,
         navId = R.id.action_nav_road_to_nav_status,
         navHttpLink = null,
+        requireLogin = true
     )
     ),
     Lighting(

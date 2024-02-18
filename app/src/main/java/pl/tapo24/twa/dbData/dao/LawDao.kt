@@ -21,4 +21,10 @@ interface LawDao {
 
     @Delete
     fun deleteElement(item: Law)
+
+    @Query("SELECT EXISTS(SELECT * FROM law where isPremium = '1')")
+    fun isExistsVip(): Boolean
+
+    @Query("DELETE FROM law WHERE isPremium = '1'")
+    fun deleteAllVip()
 }
