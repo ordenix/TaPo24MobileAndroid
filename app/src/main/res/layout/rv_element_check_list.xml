@@ -41,7 +41,8 @@
                     android:layout_marginStart="8dp" android:layout_width="0dp"
                     android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent"
                     android:textAlignment="textStart"
-                    app:layout_constraintEnd_toStartOf="@+id/imageView2" android:maxLines="50"/>
+                    app:layout_constraintEnd_toStartOf="@+id/imageView27" android:maxLines="50"
+                    android:layout_marginEnd="8dp"/>
 
             <ImageView
                     app:tint="?attr/smallIconColor"
@@ -52,6 +53,15 @@
                     android:id="@+id/imageView2" app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_marginEnd="8dp"/>
+            <ImageView
+                    app:tint="?attr/smallIconColor"
+                    android:onClick="@{() -> (viewModel.clickShowPdf(data))}"
+                    android:visibility="@{data.pathToPdf != null ? View.VISIBLE : View.GONE}"
+                    android:layout_width="20dp"
+                    android:layout_height="0dp" app:srcCompat="@drawable/clipboard_solid"
+                    android:id="@+id/imageView27"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2" android:layout_marginEnd="8dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

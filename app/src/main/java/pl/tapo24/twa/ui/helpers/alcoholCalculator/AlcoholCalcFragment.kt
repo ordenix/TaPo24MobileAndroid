@@ -40,10 +40,25 @@ class AlcoholCalcFragment : Fragment() {
                 //calculate
                 if (promilStr.isEmpty()) {
                     // convert from mg/l to promil
-                    binding.promil.setText(viewModel.calculateFromMgLToPromile(mglStr.toDouble()))
+                    val promil = viewModel.calculateFromMgLToPromile(mglStr.toDouble())
+                    binding.promil.setText(promil)
+                    binding.view13.visibility = View.VISIBLE
+                    binding.infoText.visibility = View.VISIBLE
+                    if (mglStr.toDouble() >= 0.25) {
+                        binding.infoText.text = "Jeśli badany to kierujący pojazdem mechanicznym - przestępstwo art. 178A KK - czynności procesowe"
+                    } else {
+                        binding.infoText.text = "Jeśli badany to kierujący pojazdem mechanicznym - wykroczenie art. 87 § 1 KW - czynności 54 KPOW"
+                    }
                 } else {
                     // convert from  promil to mg/l
                     binding.mgl.setText(viewModel.calculateFromPromileToMgL(promilStr.toDouble()))
+                    binding.view13.visibility = View.VISIBLE
+                    binding.infoText.visibility = View.VISIBLE
+                    if (promilStr.toDouble() >= 0.50) {
+                        binding.infoText.text = "Jeśli badany to kierujący pojazdem mechanicznym - przestępstwo art. 178A KK - czynności procesowe"
+                    } else {
+                        binding.infoText.text = "Jeśli badany to kierujący pojazdem mechanicznym - wykroczenie art. 87 § 1 KW - czynności 54 KPOW"
+                    }
                 }
             }
 

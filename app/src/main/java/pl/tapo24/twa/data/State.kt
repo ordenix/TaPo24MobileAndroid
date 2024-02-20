@@ -39,6 +39,7 @@ object State {
 
     // CONFIG
     var maxVisibleItem: Int = 50
+    val maxTariffViewInSignModule = 3
 
     var downloadFinishId: Long = 0
 

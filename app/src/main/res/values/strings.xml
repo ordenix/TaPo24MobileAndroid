@@ -298,5 +298,6 @@
     <string name="itd">ITD</string>
     <string name="sg">Straż Graniczna</string>
     <string name="detalis">Szczegóły:</string>
+    <string name="code_check_colors_ksip">Kody sprawdzeń KSIP</string>
 
 </resources>

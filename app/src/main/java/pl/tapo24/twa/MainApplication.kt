@@ -20,7 +20,7 @@ import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.updater.InitPackageDownloader
 import pl.tapo24.twa.worker.DataBaseUpdateWorker
 import pl.tapo24.twa.worker.MourningWorker
-import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
+import pl.tapo24.twa.worker.NonPremiumLimitationWorker
 import pl.tapo24.twa.worker.UpdateWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -52,7 +52,7 @@ class MainApplication: Application() {
             workManager.enqueueUniquePeriodicWork("Mourning", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
             val constraints2 = Constraints.Builder()
                 .build()
-            val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
+            val workRequest2 = PeriodicWorkRequestBuilder<NonPremiumLimitationWorker>(10, TimeUnit.DAYS)
                 .setConstraints(constraints2)
                 .setInitialDelay(10, TimeUnit.DAYS)
                 .addTag("ShowNotifyForTariffIcon")
