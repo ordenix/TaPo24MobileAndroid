@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.work.*
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.*
+import org.acra.ACRA
 import org.acra.config.httpSender
 import org.acra.config.toast
 import org.acra.data.StringFormat
@@ -36,54 +37,65 @@ class MainApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        val workManager = WorkManager.getInstance(this)
-        val constraints = Constraints.Builder()
-            //.setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(5, TimeUnit.HOURS)
-            .setConstraints(constraints)
-            .addTag("Mourning")
-            .build()
-        workManager.enqueueUniquePeriodicWork("Mourning", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
-        val constraints2 = Constraints.Builder()
-            .build()
-        val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
-            .setConstraints(constraints2)
-            .setInitialDelay(10, TimeUnit.DAYS)
-            .addTag("ShowNotifyForTariffIcon")
-            .build()
-        workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
-        val constraints3 = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        val workRequest3 = PeriodicWorkRequestBuilder<DataBaseUpdateWorker>(10, TimeUnit.HOURS)
-            .setConstraints(constraints3)
-            .addTag("Mourning")
-            .build()
-        workManager.enqueueUniquePeriodicWork("DataUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest3)
-
-
-        MainScope().launch(Dispatchers.IO) {
-            var settingNetwork: Setting? = null
-            async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
-           // val settingInitializePackage = async { tapoDb.settingDb().getSettingByName("settingInitializePackage") }.await()
-            if (settingNetwork != null) {
-                State.networkType = settingNetwork!!.value
-                val constraints4 = Constraints.Builder()
-                    .setRequiredNetworkType(NetworkType.CONNECTED)
-                    .build()
-                val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
-                    .setConstraints(constraints4)
-                    .addTag("DataLawAndAssetUpdate")
-                    .build()
-                workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
-//                }
-
-            }
-        }
 
         initializationModule.getUid()
         initializationModule.getSetting()
+        try {
+            val workManager = WorkManager.getInstance(this)
+            val constraints = Constraints.Builder()
+                //.setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+            val workRequest = PeriodicWorkRequestBuilder<MourningWorker>(5, TimeUnit.HOURS)
+                .setConstraints(constraints)
+                .addTag("Mourning")
+                .build()
+            workManager.enqueueUniquePeriodicWork("Mourning", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
+            val constraints2 = Constraints.Builder()
+                .build()
+            val workRequest2 = PeriodicWorkRequestBuilder<ShowNotifyForTariffIconWorker>(10, TimeUnit.DAYS)
+                .setConstraints(constraints2)
+                .setInitialDelay(10, TimeUnit.DAYS)
+                .addTag("ShowNotifyForTariffIcon")
+                .build()
+            workManager.enqueueUniquePeriodicWork("ShowNotifyForTariffIcon", ExistingPeriodicWorkPolicy.KEEP, workRequest2)
+            val constraints3 = Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build()
+            val workRequest3 = PeriodicWorkRequestBuilder<DataBaseUpdateWorker>(10, TimeUnit.HOURS)
+                .setConstraints(constraints3)
+                .addTag("Mourning")
+                .build()
+            workManager.enqueueUniquePeriodicWork("DataUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest3)
+            MainScope().launch(Dispatchers.IO) {
+                var settingNetwork: Setting? = null
+                async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
+                // val settingInitializePackage = async { tapoDb.settingDb().getSettingByName("settingInitializePackage") }.await()
+                if (settingNetwork != null) {
+                    State.networkType = settingNetwork!!.value
+                    val constraints4 = Constraints.Builder()
+                        .setRequiredNetworkType(NetworkType.CONNECTED)
+                        .build()
+                    val workRequest4 = PeriodicWorkRequestBuilder<UpdateWorker>(10, TimeUnit.HOURS)
+                        .setConstraints(constraints4)
+                        .addTag("DataLawAndAssetUpdate")
+                        .build()
+                    workManager.enqueueUniquePeriodicWork("DataLawAndAssetUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest4)
+//                }
+
+                }
+            }
+        } catch (e: Exception) {
+            try {
+                ACRA.errorReporter.handleSilentException(e)
+            } catch (e: Exception) {
+                println(e)
+            }
+        }
+
+
+
+
+
 
     }
 
