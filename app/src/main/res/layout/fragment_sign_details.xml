@@ -20,6 +20,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" tools:src="@tools:sample/avatars" android:id="@+id/imageView16"
                     android:layout_gravity="center_horizontal"/>
+            <Button
+                    android:text="Button"
+                    android:theme="@style/OrangeBtn"
+                    android:backgroundTint="?attr/buttonBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/buttonShowTariff"
+                    android:layout_marginStart="8dp" android:layout_marginEnd="8dp" android:visibility="gone"/>
             <androidx.constraintlayout.widget.ConstraintLayout
                     style="@style/smallContainer"
                     android:background="@drawable/style_small_container"

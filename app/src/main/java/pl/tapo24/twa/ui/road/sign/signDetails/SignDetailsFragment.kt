@@ -88,7 +88,14 @@ class SignDetailsFragment : Fragment() {
 
         viewModel.tariffDetail.observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                binding.tariffView.visibility = View.VISIBLE
+                if (State.premiumVersion) {
+                    binding.tariffView.visibility = View.VISIBLE
+                    binding.buttonShowTariff.visibility = View.GONE
+                } else {
+                    // show button
+                    binding.buttonShowTariff.visibility = View.VISIBLE
+                }
+
 
                 binding.textView62.text = "${it.tax} zł"
                 if (it.recidive == true) {
@@ -117,6 +124,26 @@ class SignDetailsFragment : Fragment() {
         }
 
         requireActivity().findViewById<com.google.android.material.appbar.AppBarLayout>(pl.tapo24.twa.R.id.AppBarLayout)?.setExpanded(true)
+        viewModel.currentClick.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                if (it >= State.maxTariffViewInSignModule) {
+                    // more
+                    binding.buttonShowTariff.text = "Limit wyświetleń wyczerpany, odnawia się automatycznie co 7 dni. Aby korzystać bez limitu zostań użytkownikiem premium"
+                    binding.buttonShowTariff.isEnabled = false
+                } else {
+                    // less
+                    binding.buttonShowTariff.text = "Pokaż wykroczenie (pozostało ${State.maxTariffViewInSignModule - it})"
+                    binding.buttonShowTariff.isEnabled = true
+                }
+            }
+        })
+        binding.buttonShowTariff.setOnClickListener {
+            viewModel.increaseClick()
+            binding.tariffView.visibility = View.VISIBLE
+            binding.buttonShowTariff.visibility = View.GONE
+        }
+
+
         return root
 
     }

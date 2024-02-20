@@ -75,6 +75,18 @@
                             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_separator"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout7"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    android:id="@+id/view13" android:visibility="gone"/>
+            <TextView
+                    android:text=""
+                    style="@style/textStyleWhiteSmallInContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/infoText" android:visibility="gone"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </FrameLayout>

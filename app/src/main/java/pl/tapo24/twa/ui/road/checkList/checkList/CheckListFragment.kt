@@ -14,6 +14,7 @@ import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.CheckListAdapter
 import pl.tapo24.twa.databinding.FragmentCheckListBinding
 import pl.tapo24.twa.ui.helpers.spb.viewer.SpbViewerFragmentArgs
+import pl.tapo24.twa.utils.PdfOpenIntent
 
 @AndroidEntryPoint
 class CheckListFragment : Fragment() {
@@ -96,6 +97,14 @@ class CheckListFragment : Fragment() {
                     .show()
             }
          })
+
+        viewModel.itemShowPdf.observe(viewLifecycleOwner, Observer {
+            if (it != null) {
+                viewModel.itemShowPdf.value = null
+                it.pathToPdf?.let { it1 -> PdfOpenIntent(requireContext()).openPDF(it1, viewModel.isPublicStorage) }
+            }
+        })
+
         return root
     }
 

@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.CheckListAdapter
 import pl.tapo24.twa.data.checkListMap.CheckListComplex
+import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.useCase.checkList.ChangeMapStateUseCase
 import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
 import pl.tapo24.twa.useCase.checkList.GetComplexCheckListByType
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CheckListViewModel @Inject constructor(
     private val getComplexCheckListByType: GetComplexCheckListByType,
-    private val changeMapStateUseCase: ChangeMapStateUseCase
+    private val changeMapStateUseCase: ChangeMapStateUseCase,
+    private val tapoDb: TapoDb
 ): ViewModel() {
     var idList: Int? = null
     lateinit var adapter: CheckListAdapter
@@ -28,6 +30,15 @@ class CheckListViewModel @Inject constructor(
 
     val invokeDeletedItem = MutableLiveData<CheckListComplex>()
     var invokeDeletedPosition = 0
+    val itemShowPdf = MutableLiveData<CheckListComplex>()
+    var isPublicStorage = false
+
+    init {
+        viewModelScope.launch(Dispatchers.IO) {
+            isPublicStorage = tapoDb.settingDb().getSettingByName("publicStorage")?.state ?: false
+
+        }
+    }
 
     fun getCheckListByType(type: Int) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -55,6 +66,10 @@ class CheckListViewModel @Inject constructor(
         val percent = items.value?.filter { it.isSelected }?.size?.times(100)?.div(items.value?.size ?: 1)
         progress.postValue(percent?: 0)
 
+    }
+
+    fun clickShowPdf(item: CheckListComplex) {
+        itemShowPdf.value = item
     }
 
     fun clickEditMode() {

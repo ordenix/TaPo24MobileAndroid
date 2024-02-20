@@ -18,14 +18,21 @@ class GetComplexCheckListByType @Inject constructor(private val tapoDb: TapoDb
             val map = async {getCheckListMapByType(type)}.await()
 
             map.forEach { item ->
+                val elementFromDictionary =  dictionary.find { elementDictionary ->
+                    elementDictionary.id == item.checkListDictionary
+                }
+                val path = if (elementFromDictionary?.pathToPdf.isNullOrEmpty()) {
+                    null
+                } else {
+                    elementFromDictionary?.pathToPdf
+                }
                 val element = CheckListComplex(
                     mapId = item.id,
                     sortOrder = item.sortOrder,
-                    name = dictionary.find { elementDictionary ->
-                        elementDictionary.id == item.checkListDictionary
-                    }?.description ?: "",
+                    name = elementFromDictionary?.description ?: "",
                     isSelected = item.isSelected,
-                    isDeleted = item.isDeleted
+                    isDeleted = item.isDeleted,
+                    pathToPdf = path,
                 )
                 returnList.add(element)
             }

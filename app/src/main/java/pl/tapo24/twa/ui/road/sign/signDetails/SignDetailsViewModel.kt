@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
+import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.db.entity.Tariff
 import pl.tapo24.twa.dbData.DataTapoDb
 import javax.inject.Inject
@@ -22,12 +23,27 @@ class SignDetailsViewModel @Inject constructor(
 )  : ViewModel() {
     val tariffDetail = MutableLiveData<Tariff?>()
     var isPublicStorage = false
+    val currentClick = MutableLiveData<Int>()
 
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
             isPublicStorage = tapoDb.settingDb().getSettingByName("publicStorage")?.state ?: false
+            val currentClickFromDb: Int = async {
+                tapoDb.settingDb().getSettingByName("settingLimitTariffInSignCount")?.count ?: 0
+            }.await()
+            withContext(Dispatchers.Main) {
+                currentClick.value = currentClickFromDb
+            }
 
+        }
+    }
+    fun increaseClick() {
+        currentClick.value = currentClick.value?.plus(1)
+        viewModelScope.launch(Dispatchers.IO) {
+            val setting = Setting("settingLimitTariffInSignCount", count = currentClick.value ?: 0)
+            setting.count = currentClick.value ?: 0
+            tapoDb.settingDb().insert(setting)
         }
     }
     fun getTariffDetails(linkId: String) {

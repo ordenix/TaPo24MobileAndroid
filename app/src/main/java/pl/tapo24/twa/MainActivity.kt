@@ -54,11 +54,6 @@ import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.*
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
-import pl.tapo24.twa.worker.DataBaseUpdateWorker
-import pl.tapo24.twa.worker.MourningWorker
-import pl.tapo24.twa.worker.ShowNotifyForTariffIconWorker
-import pl.tapo24.twa.worker.UpdateWorker
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
