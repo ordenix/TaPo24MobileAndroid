@@ -47,7 +47,7 @@ import pl.tapo24.twa.dbData.entity.*
 
 
 
-    ]
+    ],
 
 )
 abstract class DataTapoDb: RoomDatabase() {

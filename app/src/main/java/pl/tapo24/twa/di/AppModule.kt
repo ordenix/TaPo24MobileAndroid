@@ -44,7 +44,7 @@ object AppModule {
             app,
             TapoDb::class.java,
             "Tapo24.db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides
@@ -54,7 +54,7 @@ object AppModule {
             app,
             DataTapoDb::class.java,
             "DataTapo24.db"
-        ).build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Provides

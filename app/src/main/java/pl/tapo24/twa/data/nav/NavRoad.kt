@@ -126,7 +126,7 @@ enum class NavRoad(
             navName = "Kody sprawdzeń KSIP",
             navIcon= R.drawable._123,
             navId = R.id.action_nav_road_to_nav_codeColors,
-            requireLogin = true,
+            requirePremium = true,
             navHttpLink = null,
         )
     ),
