@@ -44,7 +44,6 @@ object State {
     var downloadFinishId: Long = 0
 
     // THEME
-    var settingFont: MutableLiveData<FontTypes> = MutableLiveData(FontTypes.itim)
     var settingFontBoldTariff: MutableLiveData<Boolean> = MutableLiveData(true)
     var settingFontBoldMain: MutableLiveData<Boolean> = MutableLiveData(true)
     var funeralTheme: Boolean = false

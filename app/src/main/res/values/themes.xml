@@ -160,6 +160,26 @@
         <item name="masterFont">@font/armata</item>
     </style>
 
+    <style name="patrick_hand">
+        <item name="masterFont">@font/patrick_hand</item>
+    </style>
+
+    <style name="average">
+        <item name="masterFont">@font/average</item>
+    </style>
+
+    <style name="mulish_extralight">
+        <item name="masterFont">@font/mulish_extralight</item>
+    </style>
+
+    <style name="farro">
+        <item name="masterFont">@font/farro</item>
+    </style>
+
+    <style name="scada">
+        <item name="masterFont">@font/scada</item>
+    </style>
+
     <style name="alegreya">
         <item name="masterFont">@font/alegreya</item>
     </style>

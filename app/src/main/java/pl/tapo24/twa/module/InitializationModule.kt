@@ -108,9 +108,6 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
                 activity.theme.applyStyle(R.style.nonBoldFontMain, true)
             }
         })
-        State.settingFont.observe(activity, Observer {
-            activity.theme.applyStyle(it.themeName, true)
-        })
     }
 
     fun getThemeParameters() {
@@ -119,25 +116,10 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
             Context.MODE_PRIVATE
         )
         MainScope().async(Dispatchers.IO) {
-            var settingFont : Setting? = null
             var settingFontBoldTariff : Setting? = null
             var settingFontBoldMain : Setting? = null
-            async { settingFont = tapoDb.settingDb().getSettingByName("settingFont") }.await()
             async { settingFontBoldTariff = tapoDb.settingDb().getSettingByName("settingFontBoldTariff") }.await()
             async { settingFontBoldMain = tapoDb.settingDb().getSettingByName("settingFontBoldMain") }.await()
-            if (settingFont == null) {
-                async {
-                    val setting: Setting = Setting("settingFont","", FontTypes.itim.ordinal)
-                    tapoDb.settingDb().insert(setting)
-                }.await()
-                withContext(Dispatchers.Main) {
-                    State.settingFont.value = FontTypes.itim
-                }
-            } else {
-                withContext(Dispatchers.Main) {
-                    State.settingFont.value = FontTypes.values()[settingFont!!.count]
-                }
-            }
             if (settingFontBoldTariff == null) {
                 async {
                     val setting: Setting = Setting("settingFontBoldTariff","", state = true)
@@ -248,6 +230,12 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
             ThemeTypes.FuneralTheme
         }
 
+    }
+
+
+    fun returnFontStyle( themeKey: String = "Itim"): FontTypes {
+        val fontType: FontTypes? = FontTypes.values().find { element -> element.type == themeKey }
+        return fontType ?: FontTypes.itim
     }
 
 

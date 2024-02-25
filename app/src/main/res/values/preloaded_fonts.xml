@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/advent_pro</item>
         <item>@font/alegreya</item>
         <item>@font/arimo</item>
         <item>@font/armata</item>
+        <item>@font/average</item>
+        <item>@font/farro</item>
         <item>@font/itim</item>
+        <item>@font/mulish_extralight</item>
+        <item>@font/neuton_extralight</item>
+        <item>@font/patrick_hand</item>
+        <item>@font/scada</item>
     </array>
 </resources>

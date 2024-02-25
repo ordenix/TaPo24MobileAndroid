@@ -160,12 +160,16 @@ class MainActivity : AppCompatActivity() {
         )
         val funeralFromShared: Boolean = sharedPreferences.getBoolean("funeralTheme", false)
         val themeName: String = sharedPreferences.getString("mainTheme", "default") ?: "default"
+        val fontName: String = sharedPreferences.getString("mainFont", "Itim") ?: "Itim"
         val themeType = initializationModule.returnStyleTheme(funeralFromShared, themeName)
+        val fontType = initializationModule.returnFontStyle(fontName)
 //        window.setFlags(
 //            WindowManager.LayoutParams.FLAG_SECURE,
 //            WindowManager.LayoutParams.FLAG_SECURE
 //        )
         theme.applyStyle(themeType.themeName, true)
+        theme.applyStyle(fontType.themeName, true)
+
 
 
         val typed1 = TypedValue()

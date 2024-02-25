@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import pl.tapo24.twa.adapter.SettingFontAdapter
 import pl.tapo24.twa.adapter.SettingThemeAdapter
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.databinding.FragmentSettingBinding
@@ -126,15 +127,6 @@ class SettingsFragment: Fragment() {
             }
         }
 
-        settingsViewModel.fontType.observe(viewLifecycleOwner) {
-            when (it) {
-                FontTypes.itim -> binding.radioGroupFontTypes.check(binding.radioButtonItim.id)
-                FontTypes.sansSerifLight -> binding.radioGroupFontTypes.check(binding.radioButtonSansSerifLight.id)
-                FontTypes.arimo -> binding.radioGroupFontTypes.check(binding.radioButtonArmino.id)
-                FontTypes.armata -> binding.radioGroupFontTypes.check(binding.radioButtonArmata.id)
-                FontTypes.alegreya -> binding.radioGroupFontTypes.check(binding.radioButtonAlegreya.id)
-            }
-        }
         settingsViewModel.settingFontBoldMain.observe(viewLifecycleOwner) {
             binding.boldMain.isChecked = it
         }
@@ -157,9 +149,6 @@ class SettingsFragment: Fragment() {
         }
         binding.boldTariff.isEnabled = premiumVisible
         binding.boldMain.isEnabled = premiumVisible
-        binding.radioButtonArmino.isEnabled = premiumVisible
-        binding.radioButtonAlegreya.isEnabled = premiumVisible
-        binding.radioButtonArmata.isEnabled = premiumVisible
 
 
 
@@ -174,36 +163,6 @@ class SettingsFragment: Fragment() {
             settingsViewModel.saveSettings()
             Snackbar.make(it, "Zmieniono pogrubienie tekstów głównych, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
         }
-        binding.radioButtonItim.setOnClickListener {
-            binding.radioButtonItim.isChecked = true
-            settingsViewModel.fontType.value = FontTypes.itim
-            settingsViewModel.saveSettings()
-            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
-        }
-        binding.radioButtonArmino.setOnClickListener {
-            binding.radioButtonArmino.isChecked = true
-            settingsViewModel.fontType.value = FontTypes.arimo
-            settingsViewModel.saveSettings()
-            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
-        }
-        binding.radioButtonSansSerifLight.setOnClickListener {
-            binding.radioButtonSansSerifLight.isChecked = true
-            settingsViewModel.fontType.value = FontTypes.sansSerifLight
-            settingsViewModel.saveSettings()
-            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
-        }
-        binding.radioButtonAlegreya.setOnClickListener {
-            binding.radioButtonAlegreya.isChecked = true
-            settingsViewModel.fontType.value = FontTypes.alegreya
-            settingsViewModel.saveSettings()
-            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
-        }
-        binding.radioButtonArmata.setOnClickListener {
-            binding.radioButtonArmata.isChecked = true
-            settingsViewModel.fontType.value = FontTypes.armata
-            settingsViewModel.saveSettings()
-            Snackbar.make(it, "Zmieniono czcionki, ustawienia zapisano", Snackbar.LENGTH_LONG).show()
-        }
         ///
 
 
@@ -216,6 +175,15 @@ class SettingsFragment: Fragment() {
         settingsViewModel.themeTypesDataList.observe(viewLifecycleOwner, Observer {
             settingsViewModel.adapter.items = it
             settingsViewModel.adapter.notifyDataSetChanged()
+        })
+        // 220
+        val rv2 = binding.recyclerView2
+        rv2.layoutManager = LinearLayoutManager(activity)
+        settingsViewModel.adapter2 = SettingFontAdapter(settingsViewModel.fontTypesDataList.value.orEmpty(),settingsViewModel, requireContext())
+        rv2.adapter = settingsViewModel.adapter2
+        settingsViewModel.fontTypesDataList.observe(viewLifecycleOwner, Observer {
+            settingsViewModel.adapter2.items = it
+            settingsViewModel.adapter2.notifyDataSetChanged()
         })
 
         return root

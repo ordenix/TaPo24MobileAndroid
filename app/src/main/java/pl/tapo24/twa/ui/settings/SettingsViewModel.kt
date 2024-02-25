@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import pl.tapo24.twa.adapter.SettingFontAdapter
 import pl.tapo24.twa.adapter.SettingThemeAdapter
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.db.TapoDb
@@ -38,16 +39,15 @@ class SettingsViewModel@Inject constructor(
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
     val connectionType = MutableLiveData<String>("WiFi")
-
-    val fontType = MutableLiveData<FontTypes>(FontTypes.itim)
-
     val settingFontBoldMain = MutableLiveData<Boolean>(true)
     val settingFontBoldTariff = MutableLiveData<Boolean>(true)
     lateinit var adapter: SettingThemeAdapter
+    lateinit var adapter2 : SettingFontAdapter
     val themeTypesDataList: MutableLiveData<List<ThemeTypesData>> = MutableLiveData()
+    val fontTypesDataList: MutableLiveData<List<FontTypesData>> = MutableLiveData()
+
 
     init {
-        fontType.value = State.settingFont.value
         settingFontBoldMain.value = State.settingFontBoldMain.value
         settingFontBoldTariff.value = State.settingFontBoldTariff.value
         viewModelScope.launch(Dispatchers.IO) {
@@ -63,10 +63,10 @@ class SettingsViewModel@Inject constructor(
                 connectionType.value = settingConnection?.value ?: "WiFi" // If catch here null refactor it add to init on start application
             }
         }
-        prepareThemeList()
+        prepareThemeFontList()
     }
 
-    private fun prepareThemeList() {
+    private fun prepareThemeFontList() {
         val sharedPreferences = context.getSharedPreferences(
             "ThemePref",
             Context.MODE_PRIVATE
@@ -83,6 +83,20 @@ class SettingsViewModel@Inject constructor(
             }
         }
         themeTypesDataList.value = list
+        val fontName: String = sharedPreferences.getString("mainFont", "Itim") ?: "Itim"
+        val listFont = mutableListOf<FontTypesData>()
+        FontTypes.values().forEach {element->
+            if (!element.isHiddenInList) {
+                var selected = false
+                if (element.type == fontName) {
+                    selected = true
+                }
+                listFont.add(FontTypesData(element, selected))
+            }
+        }
+        fontTypesDataList.value = listFont
+
+
     }
     fun selectTheme(theme: ThemeTypes) {
         val sharedPreferences = context.getSharedPreferences(
@@ -100,6 +114,21 @@ class SettingsViewModel@Inject constructor(
         }
 
     }
+    fun selectFont(font: FontTypes) {
+        val sharedPreferences = context.getSharedPreferences(
+            "ThemePref",
+            Context.MODE_PRIVATE
+        )
+        if (font.isNonPremium) {
+            State.requireRestart.value = true
+            sharedPreferences.edit().putString("mainFont", font.type).apply()
+        } else {
+            if (State.premiumVersion) {
+                State.requireRestart.value = true
+                sharedPreferences.edit().putString("mainFont", font.type).apply()
+            }
+        }
+    }
     fun getData(){
         environment.value?.let { networkClient.rebuild(it.url) }
         environment.value?.let { networkClientRegister.rebuild(it.url) }
@@ -110,10 +139,8 @@ class SettingsViewModel@Inject constructor(
         var engSettingToDb: Setting? = Setting("settingEngine")
         var connSettingToDb: Setting? = Setting("settingNetwork")
         connSettingToDb = Setting("settingNetwork",connectionType.value!!,0)
-        val fontSettingToDb: Setting = Setting("settingFont","", fontType.value!!.ordinal)
         val boldMainSettingToDb: Setting = Setting("settingFontBoldMain","", state = settingFontBoldMain.value!!)
         val boldTariffSettingToDb: Setting = Setting("settingFontBoldTariff","", state = settingFontBoldTariff.value!!)
-        State.settingFont.value = fontType.value
         State.settingFontBoldTariff.value = settingFontBoldTariff.value
         State.settingFontBoldMain.value = settingFontBoldMain.value
         when (engine.value) {
@@ -136,9 +163,6 @@ class SettingsViewModel@Inject constructor(
             }
             if (connSettingToDb != null) {
                 tapoDb.settingDb().insert(connSettingToDb)
-            }
-            if (fontSettingToDb != null) {
-                tapoDb.settingDb().insert(fontSettingToDb)
             }
             tapoDb.settingDb().insert(boldMainSettingToDb)
             tapoDb.settingDb().insert(boldTariffSettingToDb)
