@@ -41,11 +41,16 @@
     <string name="engine">Silnik wykroczeń:</string>
     <string name="before09">Przed wrześńiem 2022</string>
     <string name="after09">Po wrześniu 2022 (obecne)</string>
-    <string name="WarnEngine">Zmiana silnika wpływa na wyświetlanie wykroczeń w aplikacji. Funkcja ta ma na celu podgląd wykroczeń sprzed znaczących zmian przepisów. Opcja ta przeznaczona jest głównie dla osób prowadzących czynności wyjaśniające sprzed zmiany przepisów. Dezaktywacja wsparcia tej funkcjonalności planowana jest w 2025 roku.</string>
-    <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera! Jeżeli udało ci się zmienić gratulacje ;), lecz pamiętaj wszystkie środowiska poza produkcyjnym zawierają dane testowe</string>
+    <string name="WarnEngine">Zmiana silnika wpływa na wyświetlanie wykroczeń w aplikacji. Funkcja ta ma na celu podgląd
+        wykroczeń sprzed znaczących zmian przepisów. Opcja ta przeznaczona jest głównie dla osób prowadzących czynności
+        wyjaśniające sprzed zmiany przepisów. Dezaktywacja wsparcia tej funkcjonalności planowana jest w 2025 roku.
+    </string>
+    <string name="WarnEnv">Uwaga!! Zmiana środowiska dostępna dla dewelopera! Jeżeli udało ci się zmienić gratulacje ;),
+        lecz pamiętaj wszystkie środowiska poza produkcyjnym zawierają dane testowe
+    </string>
 
 
-<!--    LOGIN-->
+    <!--    LOGIN-->
     <string name="newInTapo">Nowy w TaPo24.pl Załóż konto</string>
     <string name="hintLoginOrEmail">Wprowadź login lub email</string>
     <string name="hintPassword">Wprowadź hasło</string>
@@ -53,7 +58,7 @@
     <string name="loginToService">Zaloguj</string>
     <string name="register">Rejestracja</string>
 
-<!--    ROAD MODULE-->
+    <!--    ROAD MODULE-->
     <string name="roadSign">Znaki drogowe</string>
     <string name="Accident">Kwalifikacja zdarzenia</string>
     <string name="ControleAlcohol">Kontrola Trzeźwości</string>
@@ -93,10 +98,6 @@
     <string name="priority2">POWAŻNA</string>
     <string name="priority3">NIEBEZPIECZNA</string>
     <string name="prioritySelect">Wybierz priorytet:</string>
-
-
-
-
 
 
     <!--    Code Driving licence-->
@@ -142,7 +143,6 @@
     <string name="healthCreator">Kod RABATOTWOY TODO</string>
 
 
-
     <!--    Util or to sort-->
     <string name="expand">Rozwiń</string>
     <string name="colapse">Zwiń</string>
@@ -163,19 +163,38 @@
     <string name="tariff">Taryfikator:</string>
     <string name="onlyFavsNotification">Silnik wyświetli tylko ulubione wykroczenia.</string>
     <string name="allNotification">Wyszukiwanie we wszystkich wykroczeniach</string>
-    <string name="tariff_help_search">Wyszukiwanie wykroczeń związanych z niestosowaniem się do znaków drogowych. Celem odnalezienia interesującego nas wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 ; B-2 ; B-10. Nie należy wpisywać fraz takich jak: B10 ; B01; B-01.
+    <string name="tariff_help_search">Wyszukiwanie wykroczeń związanych z niestosowaniem się do znaków drogowych. Celem
+        odnalezienia interesującego nas wykroczenia dotyczącego znaku należy wpisać frazę np. B-1 ; B-2 ; B-10. Nie
+        należy wpisywać fraz takich jak: B10 ; B01; B-01.
     </string>
-    <string name="tariff_help_code">Aby odnaleźć interesujące nas wykroczenia należy wpisać kod w formacie np. A02 ; A10. Nie należy wpisywać formatów takich jak: A010 ; A 11.
+    <string name="tariff_help_code">Aby odnaleźć interesujące nas wykroczenia należy wpisać kod w formacie np. A02 ;
+        A10. Nie należy wpisywać formatów takich jak: A010 ; A 11.
     </string>
-    <string name="tariff_help_two_type">Wyszukiwarka działa w dwóch trybach. Pierwszy tryb - online oraz drugi - offline. Przełączenie trybu następuje automatycznie w zależności od dostępności sieci.</string>
-    <string name="tariff_help_online">W trybie „online” wyszukiwarka działa w sposób za dynamiczny. Dopuszcza on wprowadzenie szukanej frazy w sposób niedokładny. Odnalezienie wyników odbywa się za pomocą serii obliczeń matematycznych oraz wspomagane jest wyuczonym modelem AI. Po wpisaniu danej frazy silnik dokona sprawdzenia w każdym polu danego wykroczenia, pod uwagę brane są wszystkie pozycje między innymi: nazwa, kwalifikacja prawna, kwota czy kod czynu.
-        W tym trybie wpisanie słowa, np. śnieg spowoduje odnalezienie wykroczeń, które nie zawierają w żadnym polu frazy „śnieg” ale powiązane są z wykroczeniami sugerującymi dane zachowanie, n. „Kierowanie pojazdem, który nie jest utrzymany w należyty sposób”. Silnik dopuszcza również pominięcie znaków diakrytycznych (znaki miękkie).</string>
-    <string name="tariff_help_offline">W trybie „offline” wyszukiwarka działa w sposób statyczny. Wyszukiwana jest fraza znajdująca się w nazwie wykroczenia. Wpisanie słowa „śnieg” nie zwróci żadnego wyniku. Błędne wpisanie słowa, np. bez znaku diakrytycznego również nie zwróci żadnego wyniku.
+    <string name="tariff_help_two_type">Wyszukiwarka działa w dwóch trybach. Pierwszy tryb - online oraz drugi -
+        offline. Przełączenie trybu następuje automatycznie w zależności od dostępności sieci.
     </string>
-    <string name="tariff_help_warning">Uwaga! Aby usprawnić działanie silnika każda pozycja wyszukana za pomocą silnika dynamicznego zapisywana będzie w pamięci urządzenia. Zapisane w ten sposób „wyszukiwanie historyczne” wykorzystanie będzie do wyszukiwania statycznego w trybie offline. Przykład: wpisanie słowa „śnieg” w trybie online spowoduje odnalezienie danego wykroczenia. Dzięki „zapisowi historycznemu” ponowne wpisanie słowa „śnieg” w trybie offline spowoduje odnalezienie tego samego wykroczenia.
+    <string name="tariff_help_online">W trybie „online” wyszukiwarka działa w sposób za dynamiczny. Dopuszcza on
+        wprowadzenie szukanej frazy w sposób niedokładny. Odnalezienie wyników odbywa się za pomocą serii obliczeń
+        matematycznych oraz wspomagane jest wyuczonym modelem AI. Po wpisaniu danej frazy silnik dokona sprawdzenia w
+        każdym polu danego wykroczenia, pod uwagę brane są wszystkie pozycje między innymi: nazwa, kwalifikacja prawna,
+        kwota czy kod czynu.
+        W tym trybie wpisanie słowa, np. śnieg spowoduje odnalezienie wykroczeń, które nie zawierają w żadnym polu frazy
+        „śnieg” ale powiązane są z wykroczeniami sugerującymi dane zachowanie, n. „Kierowanie pojazdem, który nie jest
+        utrzymany w należyty sposób”. Silnik dopuszcza również pominięcie znaków diakrytycznych (znaki miękkie).
+    </string>
+    <string name="tariff_help_offline">W trybie „offline” wyszukiwarka działa w sposób statyczny. Wyszukiwana jest fraza
+        znajdująca się w nazwie wykroczenia. Wpisanie słowa „śnieg” nie zwróci żadnego wyniku. Błędne wpisanie słowa,
+        np. bez znaku diakrytycznego również nie zwróci żadnego wyniku.
+    </string>
+    <string name="tariff_help_warning">Uwaga! Aby usprawnić działanie silnika każda pozycja wyszukana za pomocą silnika
+        dynamicznego zapisywana będzie w pamięci urządzenia. Zapisane w ten sposób „wyszukiwanie historyczne”
+        wykorzystanie będzie do wyszukiwania statycznego w trybie offline. Przykład: wpisanie słowa „śnieg” w trybie
+        online spowoduje odnalezienie danego wykroczenia. Dzięki „zapisowi historycznemu” ponowne wpisanie słowa „śnieg”
+        w trybie offline spowoduje odnalezienie tego samego wykroczenia.
     </string>
     <string name="about_tariff_search">Informacje o wyszukiwarce:</string>
-    <string name="offline_work">Brak połączenia z siecią. Silnik wyszukiwarki będzie działał w trybie statycznym.</string>
+    <string name="offline_work">Brak połączenia z siecią. Silnik wyszukiwarki będzie działał w trybie statycznym.
+    </string>
     <string name="not_implemented">NOT IMPLEMENTED YET!!! :(</string>
     <string name="enter_number">Wprowadź liczby np. przebieg.</string>
     <string name="enter_text">Wprowadź tekst</string>
@@ -216,8 +235,17 @@
     <string name="acceptAll">Zaakceptuj wszystko</string>
     <string name="akceptMarketing">Zaakceptuj zgody marketnigowe</string>
     <string name="acceptStatute">Zaakceptuj regulamin oraz politykę prywatności*</string>
-    <string name="acceptMarketningDesc">Wyrażam zgodę na otrzymywanie informacji handlowych od Tapo24.pl dotyczących jej oferty oraz ofert jej partnerów biznesowych poprzez wiadomości typu push w aplikacji oraz z wykorzystaniem adresu email podanego w formularzu, a także zgodę na przetwarzanie moich danych osobowych w tym celu przez Tapo24.pl oraz w celach promocji, reklamy i badania rynku.</string>
-    <string name="acceptStatuteDesc">Wyrażam zgodę na przetwarzanie przez tapo24.pl danych osobowych podanych w formularzu. Podanie danych jest dobrowolne. Administratorem podanych przez Pana/ Panią danych osobowych jest administrator wyznaczony w zakładce kontakt. Pana/Pani dane będą przetwarzane w celach związanych z udzieleniem odpowiedzi, przedstawieniem oferty usług tapo24.pl oraz świadczeniem usług przez administratora danych. Przysługuje Panu/Pani prawo dostępu do treści swoich danych oraz ich poprawiania.</string>
+    <string name="acceptMarketningDesc">Wyrażam zgodę na otrzymywanie informacji handlowych od Tapo24.pl dotyczących jej
+        oferty oraz ofert jej partnerów biznesowych poprzez wiadomości typu push w aplikacji oraz z wykorzystaniem
+        adresu email podanego w formularzu, a także zgodę na przetwarzanie moich danych osobowych w tym celu przez
+        Tapo24.pl oraz w celach promocji, reklamy i badania rynku.
+    </string>
+    <string name="acceptStatuteDesc">Wyrażam zgodę na przetwarzanie przez tapo24.pl danych osobowych podanych w
+        formularzu. Podanie danych jest dobrowolne. Administratorem podanych przez Pana/ Panią danych osobowych jest
+        administrator wyznaczony w zakładce kontakt. Pana/Pani dane będą przetwarzane w celach związanych z udzieleniem
+        odpowiedzi, przedstawieniem oferty usług tapo24.pl oraz świadczeniem usług przez administratora danych.
+        Przysługuje Panu/Pani prawo dostępu do treści swoich danych oraz ich poprawiania.
+    </string>
     <string name="acceptRequired">*Zgoda wymagana</string>
     <string name="statute">Regulamin</string>
     <string name="policyPrivate">Polityka prywatności</string>
@@ -235,7 +263,9 @@
     <string name="type_connection">Rodzaj połączenia:</string>
     <string name="wifi_and_others">WiFi oraz sieci komórkowe</string>
     <string name="only_wifi">Tylko WiFi</string>
-    <string name="remember_download">Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów, które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez
+    <string name="remember_download">Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu
+        działania aktualizacje przepisów, które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą
+        zostać naliczone dodatkowe opłaty przez
         operatora w zależności od rodzaju taryfy połączenia
     </string>
     <string name="succes">Sukces</string>
@@ -248,7 +278,9 @@
     <string name="fontType">Rodzaj czcionki:</string>
     <string name="warningTheme">Uwaga! Zmiana motywu wymaga restartu aplikacji!!</string>
     <string name="premiumNotify">Aby aktywować pozostałe funkcjonalności zostań użytkownikiem PREMIUM.</string>
-    <string name="style_mourning_warning">Motyw aplikacji został automatycznie zmieniony z uwagi na obowiązującą żałobę. Indywidualna zmiana wersji kolorystycznej nie jest na razie możliwa. Prosimy o chwilę zadumy.</string>
+    <string name="style_mourning_warning">Motyw aplikacji został automatycznie zmieniony z uwagi na obowiązującą żałobę.
+        Indywidualna zmiana wersji kolorystycznej nie jest na razie możliwa. Prosimy o chwilę zadumy.
+    </string>
     <string name="networkRequiedToAddCustomCategory">Aby dodać kategorię musisz być połączony z internetem</string>
     <string name="succesAddCustomCategory">Dodano kategorię</string>
     <string name="ownCategory">Własne kategorie</string>
@@ -289,7 +321,12 @@
     </string>
     <string name="updater_working">Aktualizator danych wykonuje swoje zadanie</string>
     <string name="mainPackageInfo">Pobranie głównej paczki danych \n Wybór połączenia do aktualizacji danych</string>
-    <string name="main_package_info2">Aplikacja może pobierać duże ilości danych celem aktualizacji przepisów. Z racji tego, że widzisz ten komunikat, to uruchamiasz aplikację po raz pierwszy. Za chwilę zostaną pobrane wszystkie niezbędne dane (około 200 MB). Aby zapewnić spójność, z obowiązującymi przepisami aplikacja w trakcie działania może pobierać aktualizacje nieprzekraczające kilku MB niezależnie od zadeklarowanego rodzaju połączenia. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora zgodnie z obowiązującą taryfą.
+    <string name="main_package_info2">Aplikacja może pobierać duże ilości danych celem aktualizacji przepisów. Z racji
+        tego, że widzisz ten komunikat, to uruchamiasz aplikację po raz pierwszy. Za chwilę zostaną pobrane wszystkie
+        niezbędne dane (około 200 MB). Aby zapewnić spójność, z obowiązującymi przepisami aplikacja w trakcie działania
+        może pobierać aktualizacje nieprzekraczające kilku MB niezależnie od zadeklarowanego rodzaju połączenia.
+        Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora zgodnie z obowiązującą
+        taryfą.
     </string>
     <string name="updater">Updater</string>
     <string name="telephoneBooks">Książka telefoniczna</string>
@@ -299,5 +336,9 @@
     <string name="sg">Straż Graniczna</string>
     <string name="detalis">Szczegóły:</string>
     <string name="code_check_colors_ksip">Kody sprawdzeń KSIP</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pointsOvf">Uwaga! Przekroczona wartość punktów!</string>
+    <string name="pointsCalc">Kalkulator punktów</string>
 
 </resources>

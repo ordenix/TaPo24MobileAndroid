@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="position"
+                  type="java.lang.Integer"/>
+        <variable name="data"
+                  type="pl.tapo24.twa.dbData.entity.CodePointsNew"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.helpers.pointsCalc.basic.PointsCalculatorBasicViewModel"/>
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+                                                   style="@style/smallContainer"
+                                                   android:background="@drawable/style_small_container"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content">
+
+    <TextView
+            android:text="@{data.id}"
+            style="@style/textStyleOrangeSmallWarp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView109"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:text="@{data.points + ` pkt`}"
+            style="@style/textStyleWhiteSmallInContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView111"
+            app:layout_constraintEnd_toStartOf="@+id/imageView28" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+    <TextView
+            android:text="@{data.description}"
+            android:layout_width="0dp"
+            style="@style/textStyleWhiteSmallInContainer"
+            android:layout_height="wrap_content" android:id="@+id/textView112"
+            app:layout_constraintStart_toEndOf="@+id/textView109"
+            app:layout_constraintEnd_toStartOf="@+id/textView111" app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"/>
+    <ImageView
+            app:tint="?attr/smallIconColor"
+            android:onClick="@{()->viewModel.removeFromList(position)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@drawable/delete" android:id="@+id/imageView28"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </layout>

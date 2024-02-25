@@ -60,7 +60,7 @@ class SettingsViewModel@Inject constructor(
             withContext(Dispatchers.Main ){
                 environment.value = EnvironmentType.values()[settingEnvironment!!.count]
                 engine.value = EnginesType.values()[settingEngine!!.count]
-                connectionType.value = settingConnection!!.value // If catch here null refactor it add to init on start application
+                connectionType.value = settingConnection?.value ?: "WiFi" // If catch here null refactor it add to init on start application
             }
         }
         prepareThemeList()

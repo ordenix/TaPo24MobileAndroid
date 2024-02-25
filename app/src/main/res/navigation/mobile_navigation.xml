@@ -34,6 +34,7 @@
         <action android:id="@+id/action_nav_helpers_to_nav_dictionaryList" app:destination="@id/nav_dictionaryList"/>
         <action android:id="@+id/action_nav_helpers_self" app:destination="@id/nav_helpers"/>
         <action android:id="@+id/action_nav_helpers_to_nav_telephone" app:destination="@id/nav_telephone"/>
+        <action android:id="@+id/action_nav_helpers_to_nav_innerNavigation" app:destination="@id/nav_innerNavigation"/>
     </fragment>
     <fragment android:id="@+id/nav_category_driving_licence"
               android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
@@ -330,4 +331,22 @@
         <argument android:name="codeName" app:argType="string" android:defaultValue="BIAŁY"/>
         <argument android:name="code" app:argType="string"/>
     </fragment>
+    <fragment android:id="@+id/nav_innerNavigation"
+              android:name="pl.tapo24.twa.ui.utils.navigation.InnerNavigationFragment"
+              android:label="fragment_inner_navigation" tools:layout="@layout/fragment_inner_navigation">
+        <argument android:name="treeName" app:argType="string" android:defaultValue="calculatorsw"/>
+        <argument android:name="title" app:argType="string" android:defaultValue="Kalkulatoryw"/>
+        <action android:id="@+id/action_nav_innerNavigation_to_nav_pointsCalculatorBasic"
+                app:destination="@id/nav_pointsCalculatorBasic"/>
+        <action android:id="@+id/action_nav_innerNavigation_to_nav_alcoholCalc"
+                app:destination="@id/nav_alcoholCalc"/>
+        <action android:id="@+id/action_nav_innerNavigation_to_nav_speedCalc"
+                app:destination="@id/nav_speedCalc"/>
+
+
+    </fragment>
+    <fragment android:id="@+id/nav_pointsCalculatorBasic"
+              android:name="pl.tapo24.twa.ui.helpers.pointsCalc.basic.PointsCalculatorBasicFragment"
+              android:label="@string/pointsCalc"
+              tools:layout="@layout/fragment_points_calculator_basic"/>
 </navigation>

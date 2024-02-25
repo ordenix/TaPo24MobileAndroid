@@ -82,14 +82,14 @@ enum class NavHelpers(
         navHttpLink = null
     )
     ),
-    SpeedCalc(
-        NavElement(
-        navName = "Kalkulator prędkości",
-        navIcon= R.drawable.gauge_high_solid,
-        navId = R.id.action_nav_helpers_to_nav_speedCalc,
-        navHttpLink = null
-    )
-    ),
+//    SpeedCalc(
+//        NavElement(
+//        navName = "Kalkulator prędkości",
+//        navIcon= R.drawable.gauge_high_solid,
+//        navId = R.id.action_nav_helpers_to_nav_speedCalc,
+//        navHttpLink = null
+//    )
+//    ),
     Note(
         NavElement(
         navName = "Notatnik",
@@ -98,14 +98,14 @@ enum class NavHelpers(
         navHttpLink = null
     )
     ),
-    AlcoConverter(
-        NavElement(
-        navName = "Przelicznik mn/l - ‰",
-        navIcon= R.drawable.calculator_solid,
-        navId = R.id.action_nav_helpers_to_nav_alcoholCalc,
-        navHttpLink = null
-    )
-    ),
+//    AlcoConverter(
+//        NavElement(
+//        navName = "Przelicznik mn/l - ‰",
+//        navIcon= R.drawable.calculator_solid,
+//        navId = R.id.action_nav_helpers_to_nav_alcoholCalc,
+//        navHttpLink = null
+//    )
+//    ),
     BuyCaffe(
         NavElement(
         navName = "Postaw nam kawę",
@@ -123,6 +123,15 @@ enum class NavHelpers(
         navHttpLink = "https://patronite.pl/tapo24",
         statsDescription = "patron"
     )
+    ),
+    Calculators(
+        NavElement(
+            navName = "Kalkulatory/ Preliczniki",
+            navIcon= R.drawable.calculator_solid,
+            navId = R.id.action_nav_helpers_to_nav_innerNavigation,
+            navHttpLink = null,
+            listBundle = bundleOf("title" to "Kalkulatory", "treeName" to "calculator")
+        )
     ),
 
 }

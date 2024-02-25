@@ -1,4 +1,4 @@
-package pl.tapo24.twa.ui
+package pl.tapo24.twa.ui.utils
 
 import android.os.Bundle
 import android.view.LayoutInflater
