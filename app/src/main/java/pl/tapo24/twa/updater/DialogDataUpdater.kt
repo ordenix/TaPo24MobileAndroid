@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import pl.tapo24.twa.R
@@ -62,6 +64,19 @@ class DialogDataUpdater: DialogFragment() {
 
     }
 
+    override fun show(manager: FragmentManager, tag: String?) {
+        if (!this.isAdded && !manager.isStateSaved && !manager.isDestroyed && !this.isStateSaved && !this.isDetached && !this.isRemoving) {
+            super.show(manager, tag)
+        }
+    }
+
+    override fun show(transaction: FragmentTransaction, tag: String?): Int {
+        if (!this.isAdded && !transaction.isEmpty && !this.isStateSaved && !this.isDetached && !this.isRemoving) {
+            return super.show(transaction, tag)
+        }
+        return 0
+
+    }
 //    override fun onStart() {
 //        super.onStart()
 //        dialog?.setCanceledOnTouchOutside(false)
