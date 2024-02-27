@@ -134,7 +134,7 @@ class MainApplication: Application() {
 
                 toast {
                     //required
-                    text = "Oj awaria :( Przykro nam, że cb to spotkało. Juz został ogłoszony alarm u programisty i pracuje aby usunąć ten błąd"
+                    text = "O Jezus Maria zdarzyła się awaria:( Programista pracuje aby usunąć błąd"
                     //defaults to Toast.LENGTH_LONG
                     length = Toast.LENGTH_LONG
                 }
