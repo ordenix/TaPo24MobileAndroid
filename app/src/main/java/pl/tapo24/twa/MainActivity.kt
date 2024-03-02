@@ -18,6 +18,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import androidx.credentials.exceptions.GetCredentialException
 import androidx.databinding.BindingMethod
 import androidx.databinding.BindingMethods
 import androidx.drawerlayout.widget.DrawerLayout
@@ -31,6 +35,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.work.*
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -136,6 +143,16 @@ class MainActivity : AppCompatActivity() {
         }
         State.countChangeFragment += 1
     }
+    val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
+        .setFilterByAuthorizedAccounts(false)
+        //.setServerClientId("268792039367-83f6i355niqtb0au1ronoa3i6vrkcfp3.apps.googleusercontent.com")
+        .setServerClientId("268792039367-i42me62l5gln37jhefh7h688oncultv8.apps.googleusercontent.com")
+        //.setServerClientId("268792039367-cgmrund8iffrdpv062tkudtt1705l34o.apps.googleusercontent.com")
+        .build()
+    val request: GetCredentialRequest = GetCredentialRequest.Builder()
+        .addCredentialOption(googleIdOption)
+        .build()
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -154,6 +171,44 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
+        val credentialManager = CredentialManager.create(this)
+
+        val a = this
+
+        MainScope().launch {
+                try {
+                    val result = credentialManager.getCredential(
+                        request = request,
+                        context = a,
+                    )
+                    val c = result.credential
+                    when (c) {
+                        is CustomCredential -> {
+                            println(c)
+                        }
+                    }
+                    val googleIdTokenC = GoogleIdTokenCredential
+                        .createFrom(c.data)
+                    val googleIdToken = googleIdTokenC.idToken
+                } catch (e: GetCredentialException) {
+                    println(e)
+                }
+                catch (e: GoogleIdTokenParsingException) {
+                    println(e)
+
+                }
+            catch (e: Exception) {
+                println(e)
+            }
+
+        }
+
+
+
+
+
+
+
         sharedPreferences = getSharedPreferences(
             "ThemePref",
             Context.MODE_PRIVATE

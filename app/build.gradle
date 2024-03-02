@@ -116,6 +116,13 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.9.0"
 
+    // google provider
+
+    implementation "androidx.credentials:credentials:1.2.0"
+    implementation "androidx.credentials:credentials-play-services-auth:1.2.0"
+    implementation "com.google.android.libraries.identity.googleid:googleid:1.0.1"
+
+
 
 }
 kapt {
