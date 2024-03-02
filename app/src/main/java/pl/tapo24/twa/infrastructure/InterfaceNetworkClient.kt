@@ -12,6 +12,7 @@ import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCityWithStreetNumber
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.entity.*
@@ -74,6 +75,33 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("postal/get_city_by_code/")
     fun getPostalCityByCode(@Query("code") code: String): Call<ResponseCity>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_list_province_by_voivodeship/")
+    fun getListProvinceByVoivodeship(@Query("voivodeship") voivodeship: String): Call<RType<List<ResponseCityWithStreetNumber>>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_list_voivodeship/")
+    fun getListVoivodeship(@Query("voivodeship") voivodeship: String): Call<RType<List<ResponseCityWithStreetNumber>>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_list_city_by_community/")
+    fun getListCityByCommunity(@Query("community") community: String): Call<RType<List<ResponseCityWithStreetNumber>>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_list_community_by_province/")
+    fun getListCommunityByProvince(@Query("province") province: String): Call<RType<List<ResponseCityWithStreetNumber>>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("postal/get_postal_code_by_parameters/")
+    fun getPostalCodeByParameters(
+        @Query("voivodeship") voivodeship: String,
+        @Query("province") province: String,
+        @Query("community") community: String,
+        @Query("city") city: String,
+        @Query("street") street: String,
+        @Query("number") number: String
+    ): Call<RType<List<ResponseCityWithStreetNumber>>>
 
     // endpoints for login
     @Headers("Content-Type: application/json; charset=utf-8")

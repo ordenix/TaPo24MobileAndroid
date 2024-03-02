@@ -3,6 +3,7 @@ package pl.tapo24.twa.infrastructure
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import pl.tapo24.twa.data.DataHomeNews
+import pl.tapo24.twa.data.RType
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
@@ -10,6 +11,7 @@ import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCityWithStreetNumber
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.data.profile.BodyOffenses
 import pl.tapo24.twa.db.entity.*
@@ -205,6 +207,73 @@ class NetworkClient(var url: String) {
                 return Result.success(response.body()!!)
             }else if (response.code() == 404) {
                 return Result.failure(HttpException(HttpMessage.PostalCodeNotFound.message))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+    fun getListProvinceByVoivodeship(voivodeship: String): Result<List<ResponseCityWithStreetNumber>>{
+        try {
+            val response = service.getListProvinceByVoivodeship(voivodeship).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+    fun getListVoivodeship(voivodeship: String): Result<List<ResponseCityWithStreetNumber>>{
+        try {
+            val response = service.getListVoivodeship(voivodeship).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+    fun getListCityByCommunity(community: String): Result<List<ResponseCityWithStreetNumber>>{
+        try {
+            val response = service.getListCityByCommunity(community).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+    fun getListCommunityByProvince(province: String): Result<List<ResponseCityWithStreetNumber>>{
+        try {
+            val response = service.getListCommunityByProvince(province).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalGetPostal.message))
+    }
+
+    fun getPostalCodeByParameters(
+        voivodeship: String,
+        province: String,
+        community: String,
+        city: String,
+        street: String,
+        number: String
+    ): Result<List<ResponseCityWithStreetNumber>>{
+        try {
+            val response = service.getPostalCodeByParameters(voivodeship, province, community, city, street, number).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
             }
         } catch (ex: Throwable) {
             return Result.failure(ex)
