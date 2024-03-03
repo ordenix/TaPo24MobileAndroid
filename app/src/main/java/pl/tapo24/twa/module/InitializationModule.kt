@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.*
+import org.acra.ACRA
 import pl.tapo24.twa.R
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.db.TapoDb
@@ -65,7 +66,12 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
                         MainScope().launch(Dispatchers.IO) {
                             withContext(Dispatchers.Main) {
                                 if (!State.dialogUpdater.isVisible && !State.dialogUpdater.isAdded) {
-                                    State.dialogUpdater.show(supportFragmentManager.beginTransaction().remove(State.dialogUpdater), "dialogUpdater")
+                                    try {
+                                        State.dialogUpdater.show(supportFragmentManager.beginTransaction().remove(State.dialogUpdater), "dialogUpdater")
+
+                                    } catch (e: IllegalStateException) {
+                                        ACRA.errorReporter.handleSilentException(e)
+                                    }
                                 }
 
 
