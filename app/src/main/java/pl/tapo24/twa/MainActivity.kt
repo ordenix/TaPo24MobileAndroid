@@ -190,6 +190,7 @@ class MainActivity : AppCompatActivity() {
                     val googleIdTokenC = GoogleIdTokenCredential
                         .createFrom(c.data)
                     val googleIdToken = googleIdTokenC.idToken
+                    println(googleIdToken)
                 } catch (e: GetCredentialException) {
                     println(e)
                 }
