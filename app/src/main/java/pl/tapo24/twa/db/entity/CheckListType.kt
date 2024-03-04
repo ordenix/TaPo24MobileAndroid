@@ -10,5 +10,9 @@ data class CheckListType(
     val id: Int,
 
     @ColumnInfo(defaultValue = "")
-    val name: String
+    val name: String,
+
+
+    @ColumnInfo(defaultValue = "")
+    val iconName: String,
 )
