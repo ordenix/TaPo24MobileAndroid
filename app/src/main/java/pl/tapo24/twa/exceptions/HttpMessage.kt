@@ -26,5 +26,6 @@ enum class HttpMessage(val message: String) {
     UserHaveAlreadyThatCustomCategory("Użytkownik posiada już taką kategorię"),
     ThisCustomCategoryNotExist("Taka kategoria nie istnieje"),
     ThisCustomCategoryMapNotExist("Taka mapa kategorii nie istnieje"),
+    BadVerifyGoogleAccount("Błąd weryfikacji konta Google"),
 
 }

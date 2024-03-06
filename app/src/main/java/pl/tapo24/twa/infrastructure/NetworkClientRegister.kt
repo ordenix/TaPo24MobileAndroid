@@ -7,9 +7,11 @@ import okhttp3.OkHttpClient
 import pl.tapo24.twa.data.Dbid
 import java.util.concurrent.TimeUnit
 import pl.tapo24.twa.data.State
+import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.register.AccountTokenData
 import pl.tapo24.twa.data.register.RegisterForm
+import pl.tapo24.twa.data.register.ResponseExtractedDataFormGoogleToken
 import pl.tapo24.twa.data.register.TokenPasswordData
 import pl.tapo24.twa.exceptions.HttpException
 import pl.tapo24.twa.exceptions.HttpMessage
@@ -105,6 +107,21 @@ class NetworkClientRegister(var url: String) {
     fun registerUser(data: RegisterForm): Result<String> {
         try {
             val response = service.basicRegisterUser(State.uid,data).execute()
+            if (response.isSuccessful) {
+                return Result.success("Ok")
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                return Result.failure(InternalException(errorMessage))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalRegister.message))
+    }
+
+    fun googleRegisterUser(data: RegisterForm): Result<String> {
+        try {
+            val response = service.googleRegisterUser(State.uid,data).execute()
             if (response.isSuccessful) {
                 return Result.success("Ok")
             } else {
@@ -284,5 +301,20 @@ class NetworkClientRegister(var url: String) {
         }
     }
 
+    fun getDataFromGoogleToken(googleToken: String): Result<ResponseExtractedDataFormGoogleToken> {
+        return try {
+            val response = service.getDataFromGoogleToken(RequestLoginViaGoogle(googleToken)).execute()
+            if (response.isSuccessful) {
+                val body = response.body()
+                Result.success(body!!.r)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                Result.failure(HttpException(errorMessage))
+            }
+        } catch (ex: Throwable) {
+            Result.failure(ex)
+        }
+
+    }
 
 }

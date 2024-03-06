@@ -7,6 +7,7 @@ import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.login.DataUser
+import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
@@ -272,6 +273,33 @@ class NetworkClient(var url: String) {
 
 
 
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalLogin.message))
+    }
+
+    fun loginViaGoogle(googleToken: String): Result<String> {
+        try {
+            val response = service.loginViaGoogle(RequestLoginViaGoogle(googleToken)).execute()
+            if  (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                if (response.code() == 404) {
+                    // user not found
+                    return Result.failure(HttpException("404"))
+                } else if(response.code() == 401) {
+                    // bad verify token google
+                    return Result.failure(HttpException(HttpMessage.BadVerifyGoogleAccount.message))
+                } else if (response.code() == 403 && errorMessage == "User has been disabled") {
+                    return Result.failure(HttpException(HttpMessage.UserNotHaveActivateAccount.message))
+
+                } else if (response.code() == 403 && errorMessage == "User was banned") {
+                    return Result.failure(HttpException(HttpMessage.UserWasBanned.message))
+
+                }
+            }
         } catch (ex: Throwable) {
             return Result.failure(ex)
         }

@@ -2,9 +2,12 @@ package pl.tapo24.twa.infrastructure
 
 import pl.tapo24.twa.data.Dbid
 import pl.tapo24.twa.data.RString
+import pl.tapo24.twa.data.RType
+import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.register.AccountTokenData
 import pl.tapo24.twa.data.register.RegisterForm
+import pl.tapo24.twa.data.register.ResponseExtractedDataFormGoogleToken
 import pl.tapo24.twa.data.register.TokenPasswordData
 import retrofit2.Call
 import retrofit2.http.Body
@@ -25,6 +28,10 @@ interface InterfaceNetworkClientRegister {
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("registerUser/")
     fun basicRegisterUser(@Header("INSTALLATION-UID")header: String, @Body login: RegisterForm): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("register_user_by_google_provider/")
+    fun googleRegisterUser(@Header("INSTALLATION-UID")header: String, @Body login: RegisterForm): Call<RString>
 
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("activate_account/")
@@ -53,4 +60,8 @@ interface InterfaceNetworkClientRegister {
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("execute_forgot_password/")
     fun executeForgotPassword(@Header("INSTALLATION-UID")header: String, @Body data: TokenPasswordData): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("extract_data_from_google_id_token/")
+    fun getDataFromGoogleToken(@Body data: RequestLoginViaGoogle): Call<RType<ResponseExtractedDataFormGoogleToken>>
 }

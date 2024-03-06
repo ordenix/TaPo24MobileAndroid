@@ -9,6 +9,7 @@ import pl.tapo24.twa.data.Uid
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.customCategory.RCustomCategory
 import pl.tapo24.twa.data.login.DataUser
+import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
@@ -78,6 +79,11 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("login/normal_login_user/")
     fun basicLogin(@Body login: ToLoginData): Call<String>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @POST("login/login_via_google_auth_provider/")
+    fun loginViaGoogle(@Body body: RequestLoginViaGoogle):  Call<RType<String>>
+
 
     @Headers("Content-Type: application/json; charset=UTF-8")
     @GET("login/test_token_valid_and_account_baned_status/")
