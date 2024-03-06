@@ -69,7 +69,7 @@
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/google_login_button"/>
             <Button
-                    android:text="Zaloguj/zarejestruj przezGoogle"
+                    android:text="Zaloguj/zarejestruj przez Google"
                     app:icon="@drawable/googleg_standard_color_18"
                     app:iconGravity="textEnd"
                     style="@style/Widget.Material3.Button"
