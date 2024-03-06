@@ -25,7 +25,9 @@ import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.data.register.RegisterForm
+import pl.tapo24.twa.data.register.ResponseExtractedDataFormGoogleToken
 import pl.tapo24.twa.databinding.FragmentRegisterBinding
+import pl.tapo24.twa.ui.road.holdingDocuments.type.HoldingDocumentsFragmentArgs
 import pl.tapo24.twa.utils.PdfOpenIntent
 
 
@@ -65,6 +67,12 @@ class RegisterFragment: Fragment() {
         val root: View = binding.root
         val a = requireActivity()
         a.requestedOrientation = (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        val args = arguments?.let { RegisterFragmentArgs.fromBundle(it) }
+        if (args?.googleIdToken != null) {
+            // proces register form google ID token
+            viewModel.googleToken = args.googleIdToken
+            viewModel.getDataFormGoogleToken(args.googleIdToken)
+        }
 //        val currentOrientation = resources.configuration.orientation
 //        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
 //            val params: LinearLayout.LayoutParams =
@@ -113,12 +121,37 @@ class RegisterFragment: Fragment() {
 
 
         validateLogin.observe(viewLifecycleOwner, Observer {
-            if (it) {
+            if (viewModel.isFormFromGoogleRequest.value == true){
                 binding.formEmail.visibility = View.VISIBLE
             } else {
-                binding.formEmail.visibility = View.GONE
+                if (it) {
+                    binding.formEmail.visibility = View.VISIBLE
+                } else {
+                    binding.formEmail.visibility = View.GONE
+                }
             }
+
         })
+
+        viewModel.isFormFromGoogleRequest.observe(viewLifecycleOwner, Observer {
+            // bind email form
+            if (it) {
+                validateEmail.value = true
+                validator(true,"Ok",binding.formEmail,binding.inputEmailDesc,binding.inputEmailDescIco)
+                binding.formEmail.visibility = View.VISIBLE
+                binding.formEmail.isEnabled = false
+                binding.inputEmail.setText(viewModel.dataFormGoogleToken?.email)
+                // bind password
+                binding.passwordInfo.visibility = View.GONE
+                validatePassword.value = true
+                validateRePassword.value = true
+            }
+
+        })
+
+
+
+
         // email
 
         binding.inputEmail.doOnTextChanged { text, start, before, count ->
@@ -147,14 +180,19 @@ class RegisterFragment: Fragment() {
         })
 
         validateEmail.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.formPassword.visibility = View.VISIBLE
-                //binding.formLogin.visibility = View.GONE
-
-            } else {
+            if (viewModel.isFormFromGoogleRequest.value == true) {
                 binding.formPassword.visibility = View.GONE
-                binding.formLogin.visibility = View.VISIBLE
+            } else {
+                if (it) {
+                    binding.formPassword.visibility = View.VISIBLE
+                    //binding.formLogin.visibility = View.GONE
+
+                } else {
+                    binding.formPassword.visibility = View.GONE
+                    binding.formLogin.visibility = View.VISIBLE
+                }
             }
+
         })
         // password
         binding.inputPassword.doOnTextChanged { text, start, before, count ->
@@ -169,21 +207,28 @@ class RegisterFragment: Fragment() {
         }
 
         validatePassword.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                binding.formRePassword.visibility = View.VISIBLE
-               // binding.formEmail.visibility = View.GONE
-                binding.inputRePasswordDesc.visibility = View.VISIBLE
-                binding.inputRePasswordDescIco.visibility = View.VISIBLE
-
-            } else {
+            if (viewModel.isFormFromGoogleRequest.value == true) {
                 binding.formRePassword.visibility = View.GONE
-                if (validateLogin.value == true) {
-                    binding.formEmail.visibility = View.VISIBLE
-                }
-
                 binding.inputRePasswordDesc.visibility = View.GONE
                 binding.inputRePasswordDescIco.visibility = View.GONE
+            } else {
+                if (it) {
+                    binding.formRePassword.visibility = View.VISIBLE
+                    // binding.formEmail.visibility = View.GONE
+                    binding.inputRePasswordDesc.visibility = View.VISIBLE
+                    binding.inputRePasswordDescIco.visibility = View.VISIBLE
+
+                } else {
+                    binding.formRePassword.visibility = View.GONE
+                    if (validateLogin.value == true) {
+                        binding.formEmail.visibility = View.VISIBLE
+                    }
+
+                    binding.inputRePasswordDesc.visibility = View.GONE
+                    binding.inputRePasswordDescIco.visibility = View.GONE
+                }
             }
+
         })
         // repassword
         binding.inputRePassword.doOnTextChanged { text, start, before, count ->
@@ -255,15 +300,29 @@ class RegisterFragment: Fragment() {
                 validateStatute.value == true) {
                 // register !
             }
-            val dataToSend = RegisterForm(
-                acceptAdv = binding.checkMarket.isChecked,
-                acceptRules = binding.checkStautePolicy.isChecked,
-                email =  binding.inputEmail.text.toString(),
-                login = binding.inputLogin.text.toString(),
-                password = binding.inputPassword.text.toString()
+            if (viewModel.isFormFromGoogleRequest.value == true) {
+                val dataToSend = RegisterForm(
+                    acceptAdv = binding.checkMarket.isChecked,
+                    acceptRules = binding.checkStautePolicy.isChecked,
+                    email =  binding.inputEmail.text.toString(),
+                    login = binding.inputLogin.text.toString(),
+                    password = null,
+                    googleToken = viewModel.googleToken
 
-            )
-            viewModel.registerUser(dataToSend)
+                )
+                viewModel.registerUserByGoogle(dataToSend)
+            }else {
+                val dataToSend = RegisterForm(
+                    acceptAdv = binding.checkMarket.isChecked,
+                    acceptRules = binding.checkStautePolicy.isChecked,
+                    email =  binding.inputEmail.text.toString(),
+                    login = binding.inputLogin.text.toString(),
+                    password = binding.inputPassword.text.toString()
+
+                )
+                viewModel.registerUser(dataToSend)
+            }
+
             binding.sv1.visibility = View.GONE
             dialog.show()
 
@@ -271,10 +330,19 @@ class RegisterFragment: Fragment() {
         viewModel.statusRegister.observe(viewLifecycleOwner, Observer {
             dialog.dismiss()
             it.onSuccess {
-                findNavController().navigate(
-                    R.id.action_nav_register_to_nav_success,
-                    bundleOf("successDesc" to getString(R.string.succesRegister))
-                )
+                if (viewModel.isFormFromGoogleRequest.value == true) {
+
+                    findNavController().navigate(
+                        R.id.action_nav_register_to_nav_success,
+                        bundleOf("successDesc" to getString(R.string.succesRegisterGoogle))
+                    )
+                } else {
+                    findNavController().navigate(
+                        R.id.action_nav_register_to_nav_success,
+                        bundleOf("successDesc" to getString(R.string.succesRegister))
+                    )
+                }
+
             }
             it.onFailure {e ->
                 findNavController().navigate(

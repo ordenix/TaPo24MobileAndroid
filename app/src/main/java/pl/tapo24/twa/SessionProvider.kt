@@ -125,7 +125,18 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             }
         }
     }
+    fun loginToServiceViaGoogle(jwtToken: String) {
+        MainScope().launch(Dispatchers.Main) {
+            createSession(jwtToken)
 
+        }
+        val workRequest = PeriodicWorkRequestBuilder<RegenerateJwtTokenWorker>(15, TimeUnit.DAYS)
+            .setConstraints(constraints)
+            .setInitialDelay(15, TimeUnit.DAYS)
+            .build()
+        workManager.enqueueUniquePeriodicWork("RegenerateJwt", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
+
+    }
     suspend fun loginToService(dataToLogin: ToLoginData):Result<String> {
         var response: Result<String>? = null
         response = networkClient.login(dataToLogin)

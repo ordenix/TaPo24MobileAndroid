@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,7 @@ class LoginFragment: Fragment() {
     private val binding get() = _binding!!
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,10 +38,30 @@ class LoginFragment: Fragment() {
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        val dialog = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Logowanie")
+            .setMessage("Proszę czekać")
+            .setCancelable(false)
+            .create()
+        val dialogProcessRegister = MaterialAlertDialogBuilder(requireContext())
+            .setTitle("Brak konta")
+            .setMessage("Nie wykryliśmy konta w naszym serwisie, czy chcesz się zarejestrować?")
+            .setNegativeButton("Anuluj") {
+                    dialog, which ->
+                dialog.dismiss()
 
+            }
+            .setPositiveButton("Zarejestruj się") {
+                dialog, which ->
+                view?.findNavController()?.navigate(R.id.action_nav_login_to_nav_register,
+                    bundleOf("googleIdToken" to viewModel.tokenGoogle))
+                dialog.dismiss()
+            }
+            .create()
         binding.ButtonRegister.setOnClickListener{view->
             view.findNavController().navigate(
-                R.id.action_nav_login_to_nav_register
+                R.id.action_nav_login_to_nav_register,
+                bundleOf("googleIdToken" to null)
             )
         }
         binding.loginButton.setOnClickListener { view ->
@@ -50,6 +72,24 @@ class LoginFragment: Fragment() {
                 viewModel.login(loginData)
             }
         }
+        binding.googleLoginButton.setOnClickListener {
+            viewModel.loginViaGoogle(requireContext())
+        }
+        viewModel.showLoader.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                try {
+                    dialog.show()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            } else {
+                try {
+                    dialog.dismiss()
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        })
 
         viewModel.showError.observe(viewLifecycleOwner , Observer {
             if (it) {
@@ -71,6 +111,13 @@ class LoginFragment: Fragment() {
         binding.forgotPassword.setOnClickListener {
             findNavController().navigate(R.id.action_nav_login_to_nav_forgotPasswordStep1)
         }
+
+        viewModel.procesRegister.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.procesRegister.value = false
+                dialogProcessRegister.show()
+            }
+        })
 
 
 //        val textView: TextView = binding.textViewLogin

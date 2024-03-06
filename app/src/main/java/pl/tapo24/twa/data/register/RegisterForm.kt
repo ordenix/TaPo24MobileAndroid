@@ -5,5 +5,6 @@ data class RegisterForm(
     val acceptRules: Boolean,
     val email: String,
     val login: String,
-    val password: String
+    val password: String?,
+    val googleToken: String? = null
 )

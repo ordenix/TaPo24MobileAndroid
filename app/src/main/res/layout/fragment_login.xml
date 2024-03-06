@@ -63,9 +63,20 @@
                     style="@style/Widget.Material3.Button"
                     android:fontFamily="?attr/masterFont"
                     android:backgroundTint="?attr/buttonBackground"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" android:id="@+id/login_button"
                     app:layout_constraintTop_toBottomOf="@+id/outlinedTextField2"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/google_login_button"/>
+            <Button
+                    android:text="Zaloguj/zarejestruj przezGoogle"
+                    app:icon="@drawable/googleg_standard_color_18"
+                    app:iconGravity="textEnd"
+                    style="@style/Widget.Material3.Button"
+                    android:fontFamily="?attr/masterFont"
+                    android:backgroundTint="?attr/buttonBackground"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" android:id="@+id/google_login_button"
                     app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
             <Button

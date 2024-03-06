@@ -129,7 +129,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" android:id="@+id/passwordInfo">
 
                     <TextView
                             android:text="Wprowadź hasło"

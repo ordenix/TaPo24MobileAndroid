@@ -143,15 +143,6 @@ class MainActivity : AppCompatActivity() {
         }
         State.countChangeFragment += 1
     }
-    val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
-        .setFilterByAuthorizedAccounts(false)
-        //.setServerClientId("268792039367-83f6i355niqtb0au1ronoa3i6vrkcfp3.apps.googleusercontent.com")
-        .setServerClientId("268792039367-i42me62l5gln37jhefh7h688oncultv8.apps.googleusercontent.com")
-        //.setServerClientId("268792039367-cgmrund8iffrdpv062tkudtt1705l34o.apps.googleusercontent.com")
-        .build()
-    val request: GetCredentialRequest = GetCredentialRequest.Builder()
-        .addCredentialOption(googleIdOption)
-        .build()
 
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -171,44 +162,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         super.onCreate(savedInstanceState)
-        val credentialManager = CredentialManager.create(this)
-
-        val a = this
-
-        MainScope().launch {
-                try {
-                    val result = credentialManager.getCredential(
-                        request = request,
-                        context = a,
-                    )
-                    val c = result.credential
-                    when (c) {
-                        is CustomCredential -> {
-                            println(c)
-                        }
-                    }
-                    val googleIdTokenC = GoogleIdTokenCredential
-                        .createFrom(c.data)
-                    val googleIdToken = googleIdTokenC.idToken
-                    println(googleIdToken)
-                } catch (e: GetCredentialException) {
-                    println(e)
-                }
-                catch (e: GoogleIdTokenParsingException) {
-                    println(e)
-
-                }
-            catch (e: Exception) {
-                println(e)
-            }
-
-        }
-
-
-
-
-
-
 
         sharedPreferences = getSharedPreferences(
             "ThemePref",

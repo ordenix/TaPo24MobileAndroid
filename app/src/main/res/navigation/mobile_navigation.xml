@@ -105,6 +105,7 @@
         <action android:id="@+id/action_nav_register_to_nav_login" app:destination="@id/nav_login"/>
         <action android:id="@+id/action_nav_register_to_nav_error" app:destination="@id/nav_error"/>
         <action android:id="@+id/action_nav_register_to_nav_success" app:destination="@id/nav_success"/>
+        <argument android:name="googleIdToken" app:argType="string" app:nullable="true" android:defaultValue=""/>
     </fragment>
     <fragment android:id="@+id/nav_country_driving_licence"
               android:name="pl.tapo24.twa.ui.road.countryDrivingLicence.CountryDrivingLicenceFragment"
