@@ -22,12 +22,14 @@ class RequestGoogleLoginReturnGoogleTokenUseCase @Inject constructor(
     private val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
         .setFilterByAuthorizedAccounts(false)
         .setServerClientId(
-            if (State.environmentType == EnvironmentType.Master) {
-                "268792039367-83f6i355niqtb0au1ronoa3i6vrkcfp3.apps.googleusercontent.com" // production
-            } else {
+            //"268792039367-cgmrund8iffrdpv062tkudtt1705l34o.apps.googleusercontent.com"
+//            if (State.environmentType == EnvironmentType.Master) {
+//                //"268792039367-83f6i355niqtb0au1ronoa3i6vrkcfp3.apps.googleusercontent.com" // production
+//                "268792039367-cgmrund8iffrdpv062tkudtt1705l34o.apps.googleusercontent.com"
+//            } else {
                 "268792039367-i42me62l5gln37jhefh7h688oncultv8.apps.googleusercontent.com" /// test
-
-            }
+//
+//            }
         )
 
         //.setServerClientId("268792039367-cgmrund8iffrdpv062tkudtt1705l34o.apps.googleusercontent.com")
