@@ -10,6 +10,8 @@ import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
+import pl.tapo24.twa.data.EnvironmentType
+import pl.tapo24.twa.data.State
 import pl.tapo24.twa.infrastructure.NetworkClient
 import javax.inject.Inject
 
@@ -19,8 +21,15 @@ class RequestGoogleLoginReturnGoogleTokenUseCase @Inject constructor(
 
     private val googleIdOption: GetGoogleIdOption = GetGoogleIdOption.Builder()
         .setFilterByAuthorizedAccounts(false)
-        //.setServerClientId("268792039367-83f6i355niqtb0au1ronoa3i6vrkcfp3.apps.googleusercontent.com")
-        .setServerClientId("268792039367-i42me62l5gln37jhefh7h688oncultv8.apps.googleusercontent.com")
+        .setServerClientId(
+            if (State.environmentType == EnvironmentType.Master) {
+                "268792039367-83f6i355niqtb0au1ronoa3i6vrkcfp3.apps.googleusercontent.com" // production
+            } else {
+                "268792039367-i42me62l5gln37jhefh7h688oncultv8.apps.googleusercontent.com" /// test
+
+            }
+        )
+
         //.setServerClientId("268792039367-cgmrund8iffrdpv062tkudtt1705l34o.apps.googleusercontent.com")
         .build()
     private val request: GetCredentialRequest = GetCredentialRequest.Builder()
