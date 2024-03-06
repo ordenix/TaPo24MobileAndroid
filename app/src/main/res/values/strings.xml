@@ -253,8 +253,10 @@
     <string name="back_to_home">Przejdź na stronę główną</string>
     <string name="if_again_writ_to_us">Jeżeli błąd się powtarza napisz do nas.</string>
     <string name="success">Sukces</string>
-    <string name="succesRegister">Poprawnie zarejestrowano użytkownika w systemie. Na podany email został wysłany link
+    <string name="succesRegister">Poprawnie zarejestrowano użytkownika w systemie. Na podany adres e-mail został wysłany link
         do aktywacji konta.
+    </string>
+    <string name="succesRegisterGoogle">Poprawnie zarejestrowano użytkownika w systemie. Na podany adres e-mail został wysłany email z potwierdzeniem. Możesz się zalogować.
     </string>
     <string name="all_offences">Wszystkie wykroczenia</string>
     <string name="chose_category">Wybierz kategorię:</string>
