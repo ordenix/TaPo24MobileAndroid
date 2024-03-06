@@ -5,6 +5,10 @@ import android.os.Build
 import androidx.work.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.android.EntryPointAccessors
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
 import kotlinx.serialization.json.Json
 import pl.tapo24.twa.data.State
@@ -21,11 +25,13 @@ import pl.tapo24.twa.exceptions.InternalException
 import pl.tapo24.twa.exceptions.InternalMessage
 import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.succes.HttpSuccessMessage
+import pl.tapo24.twa.updater.LawUpdater
 import pl.tapo24.twa.worker.RegenerateJwtTokenWorker
+import pl.tapo24.twa.worker.UpdateWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private var networkClient: NetworkClient, private var context: Context)
+class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private var networkClient: NetworkClient, private var context: Context,)
 
  {
 
@@ -35,7 +41,11 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
 
          .build()
 
-
+     @EntryPoint
+     @InstallIn(SingletonComponent::class)
+     interface LawUpdaterProviderEntryPoint {
+         fun lawUpdater(): LawUpdater
+     }
 
     fun restoreSession() {
         State.isSessionRestored = true
@@ -77,7 +87,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
 
     }
 
-    private fun createSession(jwtToken: String) {
+    private fun createSession(jwtToken: String, getOptionalData: Boolean = false) {
         State.isLogin.value = true
         State.jwtToken = jwtToken
         val settingToDb = Setting("jwtToken", jwtToken)
@@ -93,6 +103,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                 val settingToDbRole = Setting("Role", it.role!!)
                 val settingToDbBetaStatus = Setting("Beta", state = it.isBetaTester ?: false)
                 State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
+
                 State.userName = it.login!!
                 State.beta = it.isBetaTester?: false
                 async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
@@ -101,6 +112,12 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                 withContext(Dispatchers.Main) {
                     State.paymentId.value = it.login!!
                 }
+                if (getOptionalData) {
+                    val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
+                        LawUpdaterProviderEntryPoint::class.java)
+                    hiltEntryPoint.lawUpdater().update()
+                }
+
             }
         }
         } else {
@@ -127,7 +144,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
     }
     fun loginToServiceViaGoogle(jwtToken: String) {
         MainScope().launch(Dispatchers.Main) {
-            createSession(jwtToken)
+            createSession(jwtToken, true)
 
         }
         val workRequest = PeriodicWorkRequestBuilder<RegenerateJwtTokenWorker>(15, TimeUnit.DAYS)
@@ -142,7 +159,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
         response = networkClient.login(dataToLogin)
         response.onSuccess {
             withContext(Dispatchers.Main) {
-                createSession(it)
+                createSession(it, true)
                // here add worker to regenrate
             val workRequest = PeriodicWorkRequestBuilder<RegenerateJwtTokenWorker>(15, TimeUnit.DAYS)
                     .setConstraints(constraints)
