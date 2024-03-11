@@ -342,5 +342,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pointsOvf">Uwaga! Przekroczona wartość punktów!</string>
     <string name="pointsCalc">Kalkulator punktów</string>
+    <string name="extended_search_voivodeship">Wprowadź województwo</string>
+    <string name="extended_search_province">Wprowadź powiat</string>
+    <string name="extended_search_community">Wprowadź gminę</string>
+    <string name="extended_search_city">Wprowadź miejscowość</string>
+    <string name="extended_search_street">Wprowadź ulicę</string>
+    <string name="extended_search_number">Wprowadź numer</string>
 
 </resources>

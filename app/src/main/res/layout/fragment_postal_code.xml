@@ -67,7 +67,7 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/outlinedTextField"
+                        android:id="@+id/searchVoivodeshipTIL"
                         app:startIconDrawable="@drawable/location_city"
                         style="@style/Widget.App.TextInputLayout"
                         app:startIconTint="@color/white"
@@ -92,7 +92,7 @@
                         app:icon="@drawable/magnifying_glass_solid"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/searchPostal"
-                        app:layout_constraintTop_toBottomOf="@+id/outlinedTextField"
+                        app:layout_constraintTop_toBottomOf="@+id/searchVoivodeshipTIL"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -189,6 +189,108 @@
                     android:layout_height="match_parent" app:layout_constraintTop_toBottomOf="@+id/postalCityWidnow"
                     app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/rv"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/extendedSearchVoivodeshipTIL"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.App.TextInputLayout"
+                        android:layout_height="match_parent"
+                        app:startIconDrawable="@drawable/magnifying_glass_solid"
+                        android:hint="@string/extended_search_voivodeship">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchVoivodeshipTIET"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/extendedSearchProvinceTIL"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.App.TextInputLayout"
+                        android:layout_height="match_parent"
+                        app:startIconDrawable="@drawable/magnifying_glass_solid"
+                        android:hint="@string/extended_search_province">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchProvinceTIET"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/extendedSearchCommunityTIL"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.App.TextInputLayout"
+                        android:layout_height="match_parent"
+                        app:startIconDrawable="@drawable/magnifying_glass_solid"
+                        android:hint="@string/extended_search_community">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchCommunityTIET"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/extendedSearchCityTIL"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.App.TextInputLayout"
+                        android:layout_height="match_parent"
+                        app:startIconDrawable="@drawable/magnifying_glass_solid"
+                        android:hint="@string/extended_search_city">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchCityTIET"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/extendedSearchStreetTIL"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.App.TextInputLayout"
+                        android:layout_height="match_parent"
+                        app:startIconDrawable="@drawable/magnifying_glass_solid"
+                        android:hint="@string/extended_search_street">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchStreetTIET"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/extendedSearchNumberTIL"
+                        android:layout_width="match_parent"
+                        style="@style/Widget.App.TextInputLayout"
+                        android:layout_height="match_parent"
+                        app:startIconDrawable="@drawable/magnifying_glass_solid"
+                        android:hint="@string/extended_search_number">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
+                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchNumberTIET"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>
