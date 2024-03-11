@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="position"
+                  type="java.lang.Integer"/>
+        <variable name="name"
+                  type="java.lang.String"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.helpers.pointsCalc.basic.PointsCalculatorBasicViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:text="@{name}"
+                style="@style/textStyleOrangeSmallWarp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/textView109"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
