@@ -9,7 +9,9 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.PostalCodeSequenceAdapter
+import pl.tapo24.twa.adapter.PostalHintAdapter
 import pl.tapo24.twa.data.postal.ResponseCity
+import pl.tapo24.twa.data.postal.ResponseCityWithStreetNumber
 import pl.tapo24.twa.data.postal.ResponseCodeSequence
 import pl.tapo24.twa.data.postal.ResponseCodeSequenceContent
 import pl.tapo24.twa.infrastructure.NetworkClient
@@ -28,8 +30,20 @@ class PostalCodeViewModel @Inject constructor(
 
     val responseCodeSequence: MutableLiveData<List<ResponseCodeSequenceContent>> = MutableLiveData()
 
+    val voivodeship: MutableLiveData<String> = MutableLiveData()
+    val province: MutableLiveData<String> = MutableLiveData()
+    val community: MutableLiveData<String> = MutableLiveData()
+    val city: MutableLiveData<String> = MutableLiveData()
+    val street: MutableLiveData<String> = MutableLiveData()
+    val number: MutableLiveData<String> = MutableLiveData()
 
+    val showRvVoivodeship: MutableLiveData<Boolean> = MutableLiveData(false)
+
+
+    lateinit var voivodeshipAdapter: PostalHintAdapter
     lateinit var adapter: PostalCodeSequenceAdapter
+
+    val voivodeshipData: MutableLiveData<List<ResponseCityWithStreetNumber>> = MutableLiveData()
 
     fun getCodeSequenceByCity(city: String) {
         busy.value = true
@@ -86,6 +100,24 @@ class PostalCodeViewModel @Inject constructor(
                 if (responseList != null) {
                     responseCity.value = responseList!!
                     busy.value = false
+                }
+
+            }
+        }
+    }
+
+    fun getVoivodeshipList(voivodeship: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            var responseList: List<ResponseCityWithStreetNumber>? = null
+            async {
+                val response = networkClient.getListVoivodeship(voivodeship)
+                response.onSuccess {
+                    responseList = it
+                }
+            }.await()
+            withContext(Dispatchers.Main) {
+                if (responseList != null) {
+                    voivodeshipData.value = responseList!!
                 }
 
             }

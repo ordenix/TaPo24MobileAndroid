@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.PostalCodeSequenceAdapter
+import pl.tapo24.twa.adapter.PostalHintAdapter
 import pl.tapo24.twa.databinding.FragmentPostalCodeBinding
 
 
@@ -47,6 +49,20 @@ class PostalCodeFragment : Fragment() {
             viewModel.adapter.notifyDataSetChanged()
 
 
+        })
+
+        viewModel.getVoivodeshipList("")
+        val rvVoivodeship = binding.rvVoivodeship
+        rvVoivodeship.layoutManager = LinearLayoutManager(activity)
+        viewModel.voivodeshipAdapter = PostalHintAdapter(
+            viewModel.voivodeshipData.value?.map { it.wojewodztwo!! }.orEmpty()
+
+        )
+        rvVoivodeship.adapter = viewModel.voivodeshipAdapter
+//
+        viewModel.voivodeshipData.observe(viewLifecycleOwner, Observer {
+            viewModel.voivodeshipAdapter.items = it?.map { it.wojewodztwo!! }.orEmpty()
+            viewModel.voivodeshipAdapter.notifyDataSetChanged()
         })
 
 
@@ -136,7 +152,22 @@ class PostalCodeFragment : Fragment() {
                 binding.postalCityWidnow.visibility = View.GONE
             }
         })
+        binding.extendedSearchVoivodeshipTIET.addTextChangedListener {
+            val text = binding.extendedSearchVoivodeshipTIET.text.toString()
+            if (text.isNotEmpty()) {
+                viewModel.showRvVoivodeship.value = true
+                viewModel.voivodeship.value = binding.extendedSearchVoivodeshipTIET.text.toString()
+            } else {
+                viewModel.showRvVoivodeship.value = false
+            }
 
+        }
+//        binding.rv.setOnTouchListener(View.OnTouchListener { v, event ->
+//            val inputManager: InputMethodManager =
+//                context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//            inputManager.hideSoftInputFromWindow(requireView().windowToken, 0)
+//            false
+//        })
 
         return root
     }

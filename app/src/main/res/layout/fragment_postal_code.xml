@@ -213,6 +213,9 @@
                             android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchVoivodeshipTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" android:id="@+id/rvVoivodeship"/>
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/extendedSearchProvinceTIL"
                         android:layout_width="match_parent"
