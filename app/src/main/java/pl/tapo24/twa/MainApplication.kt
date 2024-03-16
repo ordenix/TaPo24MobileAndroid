@@ -4,6 +4,7 @@ package pl.tapo24.twa
 import android.app.Application
 import android.content.Context
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.work.*
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.*
@@ -37,7 +38,7 @@ class MainApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initializationModule.getUid()
         initializationModule.getSetting()
         try {
