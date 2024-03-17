@@ -8,6 +8,14 @@ import pl.tapo24.twa.dbData.entity.*
 
 @Database(
     entities = [
+        AdrNumber::class,
+        Company::class,
+        EnginePollution::class,
+        HinNumberDao::class,
+        ImmunityAdres::class,
+        Immunity::class,
+        NoiseLevel::class,
+        TechnicalConditions::class,
         DataBaseVersion::class,
         CodeDrivingLicence::class,
         CountryDrivingLicence::class,
@@ -29,7 +37,7 @@ import pl.tapo24.twa.dbData.entity.*
         TelephoneNumbers::class,
         CodeColors::class
 
-    ], version = 7,
+    ], version = 8,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -38,7 +46,7 @@ import pl.tapo24.twa.dbData.entity.*
         AutoMigration (from = 4, to = 5),
         AutoMigration (from = 5, to = 6),
         AutoMigration (from = 6, to = 7),
-//        AutoMigration (from = 7, to = 8),
+        AutoMigration (from = 7, to = 8),
 //        AutoMigration (from = 8, to = 9),
 //        AutoMigration (from = 9, to = 10),
 //        AutoMigration (from = 10, to = 11),
@@ -52,36 +60,32 @@ import pl.tapo24.twa.dbData.entity.*
 )
 abstract class DataTapoDb: RoomDatabase() {
     abstract fun dataBaseVersion(): DataBaseVersionDao
-
     abstract fun codeDrivingLicence(): CodeDrivingLicenceDao
-
     abstract fun countryDivingLicence(): CountryDrivingLicenceDao
-
     abstract fun lightsCodeCountry(): LightsCodeCountryDao
-
     abstract fun lightsFront(): LightsFrontDao
-
     abstract fun  lightsOthers(): LightsOthersDao
     abstract fun status(): StatusDao
     abstract fun towing(): TowingDao
-
     abstract fun story(): StoryDao
     abstract fun holdingDocuments(): HoldingDocumentsDao
     abstract fun controlList(): ControlListDao
     abstract fun codePointsNew(): CodePointsNewDao
     abstract fun codePointsOld(): CodePointsOldDao
     abstract fun codeLimitsDrivingLicence(): CodeLimitsDrivingLicenceDao
-
     abstract fun uto(): UtoDao
-
     abstract fun sign(): SignDao
-
     abstract fun law(): LawDao
-
     abstract fun spb(): SpbDao
-
     abstract fun telephoneNumbers(): TelephoneNumbersDao
-
     abstract fun codeColors(): CodeColorsDao
+    abstract fun adrNumber(): AdrNumberDao
+    abstract fun company(): CompanyDao
+    abstract fun enginePollution(): EnginePollutionDao
+    abstract fun hinNumber(): HinNumberDao
+    abstract fun immunityAdres(): ImmunityAdresDao
+    abstract fun immunity(): ImmunityDao
+    abstract fun noiseLevel(): NoiseLevelDao
+    abstract fun technicalConditions(): TechnicalConditionsDao
 
 }
