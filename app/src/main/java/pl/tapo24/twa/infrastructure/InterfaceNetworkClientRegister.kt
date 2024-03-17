@@ -63,5 +63,5 @@ interface InterfaceNetworkClientRegister {
 
     @Headers("Content-Type: application/json; charset=utf-8")
     @POST("extract_data_from_google_id_token/")
-    fun getDataFromGoogleToken(@Body data: RequestLoginViaGoogle): Call<RType<ResponseExtractedDataFormGoogleToken>>
+    fun getDataFromGoogleToken(@Header("INSTALLATION-UID")header: String, @Body data: RequestLoginViaGoogle): Call<RType<ResponseExtractedDataFormGoogleToken>>
 }

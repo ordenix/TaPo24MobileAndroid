@@ -303,7 +303,7 @@ class NetworkClientRegister(var url: String) {
 
     fun getDataFromGoogleToken(googleToken: String): Result<ResponseExtractedDataFormGoogleToken> {
         return try {
-            val response = service.getDataFromGoogleToken(RequestLoginViaGoogle(googleToken)).execute()
+            val response = service.getDataFromGoogleToken(State.uid,RequestLoginViaGoogle(googleToken)).execute()
             if (response.isSuccessful) {
                 val body = response.body()
                 Result.success(body!!.r)
