@@ -241,6 +241,86 @@ class DataBaseUpdater @Inject constructor(
                                                         }
                                                     }
                                                 }
+                                                DataBaseType.AdrNumber -> {
+                                                    async { dataTapoDb.adrNumber().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.adrNumber().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.Company -> {
+                                                    async { dataTapoDb.company().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.company().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.HinNumber -> {
+                                                    async { dataTapoDb.hinNumber().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.hinNumber().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.ImmunityAdres -> {
+                                                    async { dataTapoDb.immunityAdres().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.immunityAdres().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.Immunity -> {
+                                                    async { dataTapoDb.immunity().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.immunity().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.NoiseLevel -> {
+                                                    async { dataTapoDb.noiseLevel().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.noiseLevel().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.TechnicalCondition -> {
+                                                    async { dataTapoDb.technicalConditions().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.technicalConditions().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
+                                                DataBaseType.EnginePollution -> {
+                                                    async { dataTapoDb.enginePollution().deleteAll() }.await()
+                                                    it.forEach {
+                                                        try {
+                                                            async { dataTapoDb.enginePollution().insert(convert(it)!!) }.await()
+                                                        } catch (ex:Throwable) {
+                                                            ACRA.errorReporter.handleSilentException(ex)
+                                                        }
+                                                    }
+                                                }
                                                 else -> {}
                                             }
 

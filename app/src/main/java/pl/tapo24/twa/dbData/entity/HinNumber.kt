@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class HinNumber(
     @PrimaryKey(autoGenerate = false)
-    var id: String? = null,
+    var id: String,
 
     @ColumnInfo(defaultValue = "")
     var description: String? = null,

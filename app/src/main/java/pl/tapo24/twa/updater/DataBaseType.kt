@@ -26,6 +26,15 @@ enum class DataBaseType (
     Uto("data_uto", "Pobieranie danych uto", "uto", namePl = "UTO"),
     CodeColors("data_code_colors", "Pobieranie danych kodów kolorów", "code_colors", namePl = "UTO"),
     TelephoneNumbers("data_telephone_numbers", "Pobieranie danych telefonicznych", "telephone_numbers", namePl = "UTO"),
+    AdrNumber("data_adr_nuber", "Pobieranie danych numerów ADR", "adrNumber", namePl = "ADR"),
+    Company("data_company", "Pobieranie danych firm", "company", namePl = "Firmy"),
+    EnginePollution("data_engine_pollution", "Pobieranie danych norm zanieczyszczeń", "enginePollution", namePl = "Normy zanieczyszczeń"),
+    HinNumber("data_hin_number", "Pobieranie danych numerów HIN", "hinNumber", namePl = "HIN"),
+    ImmunityAdres("data_immunity_adres", "Pobieranie danych immunitetów - adresy", "immunityAdres", namePl = "Immunitety - adresy"),
+    Immunity("data_immunity", "Pobieranie danych immunitetów", "immunity", namePl = "Immunitety"),
+    NoiseLevel("data_noise_level", "Pobieranie danych norm hałasu", "noiseLevel", namePl = "Normy hałasu"),
+    TechnicalCondition("data_technical_conditions", "Pobieranie danych wymagań technicznych", "technicalConditions", namePl = "Wymagań hałasu"),
+
 
 
 }

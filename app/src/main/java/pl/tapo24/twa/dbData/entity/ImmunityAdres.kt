@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class ImmunityAdres(
     @PrimaryKey(autoGenerate = false)
-    var id: Long? = null,
+    var id: Long,
 
     @ColumnInfo(defaultValue = "")
     var person: String? = null,

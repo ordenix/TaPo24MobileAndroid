@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class Company(
     @PrimaryKey(autoGenerate = false)
-    var id: Long? = null,
+    var id: Long,
 
     @ColumnInfo(defaultValue = "")
     var name: String? = null,

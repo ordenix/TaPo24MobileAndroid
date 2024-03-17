@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class Immunity(
 
     @PrimaryKey(autoGenerate = false)
-    var id: Long? = null,
+    var id: Long,
 
     @ColumnInfo(defaultValue = "")
     var person: String? = null,

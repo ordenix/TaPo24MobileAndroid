@@ -11,7 +11,7 @@ import pl.tapo24.twa.dbData.entity.*
         AdrNumber::class,
         Company::class,
         EnginePollution::class,
-        HinNumberDao::class,
+        HinNumber::class,
         ImmunityAdres::class,
         Immunity::class,
         NoiseLevel::class,
