@@ -11,6 +11,9 @@ interface HinNumberDao {
     @Query("SELECT * FROM hinNumber")
     fun getAll(): List<HinNumber>
 
+    @Query("SELECT * FROM hinNumber where id = :hinNumber")
+    fun getByHinNumber(hinNumber: String): HinNumber?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(items: List<HinNumber>)
 

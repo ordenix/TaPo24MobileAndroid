@@ -192,12 +192,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content" tools:visibility="gone">
             <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent">
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:visibility="gone">
                 <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/extendedSearchVoivodeshipTIL"
                         android:layout_width="match_parent"
@@ -210,7 +211,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
-                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchVoivodeshipTIET"/>
+                            android:paddingTop="0dp" android:paddingBottom="0dp"
+                            android:id="@+id/extendedSearchVoivodeshipTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <androidx.recyclerview.widget.RecyclerView
@@ -228,7 +230,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
-                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchProvinceTIET"/>
+                            android:paddingTop="0dp" android:paddingBottom="0dp"
+                            android:id="@+id/extendedSearchProvinceTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -243,7 +246,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
-                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchCommunityTIET"/>
+                            android:paddingTop="0dp" android:paddingBottom="0dp"
+                            android:id="@+id/extendedSearchCommunityTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -258,7 +262,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
-                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchCityTIET"/>
+                            android:paddingTop="0dp" android:paddingBottom="0dp"
+                            android:id="@+id/extendedSearchCityTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -273,7 +278,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
-                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchStreetTIET"/>
+                            android:paddingTop="0dp" android:paddingBottom="0dp"
+                            android:id="@+id/extendedSearchStreetTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
@@ -288,7 +294,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="40dp"
                             android:maxLines="1" android:nestedScrollingEnabled="false" android:singleLine="true"
-                            android:paddingTop="0dp" android:paddingBottom="0dp" android:id="@+id/extendedSearchNumberTIET"/>
+                            android:paddingTop="0dp" android:paddingBottom="0dp"
+                            android:id="@+id/extendedSearchNumberTIET"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

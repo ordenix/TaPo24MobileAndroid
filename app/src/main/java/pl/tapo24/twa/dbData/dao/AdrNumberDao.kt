@@ -19,4 +19,7 @@ interface AdrNumberDao {
 
     @Query("DELETE FROM adrNumber")
     fun deleteAll()
+
+    @Query("SELECT * from adrNumber where id = :adrNumber")
+    fun getByAdrNumber(adrNumber: String): AdrNumber?
 }

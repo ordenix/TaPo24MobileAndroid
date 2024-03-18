@@ -348,5 +348,9 @@
     <string name="extended_search_city">Wprowadź miejscowość</string>
     <string name="extended_search_street">Wprowadź ulicę</string>
     <string name="extended_search_number">Wprowadź numer</string>
+    <string name="adrTable">Tablica ADR</string>
+    <string name="enterHIN">Wprowadź na tablicy górny numer (HIN)</string>
+    <string name="enterADR">Wprowadź na tablicy dolny numer (ADR)</string>
+    <string name="searchPerson">Wyszukaj osobę</string>
 
 </resources>
