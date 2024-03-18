@@ -35,6 +35,7 @@
         <action android:id="@+id/action_nav_helpers_self" app:destination="@id/nav_helpers"/>
         <action android:id="@+id/action_nav_helpers_to_nav_telephone" app:destination="@id/nav_telephone"/>
         <action android:id="@+id/action_nav_helpers_to_nav_innerNavigation" app:destination="@id/nav_innerNavigation"/>
+        <action android:id="@+id/action_nav_helpers_to_nav_adrTable" app:destination="@+id/nav_adrTable"/>
     </fragment>
     <fragment android:id="@+id/nav_category_driving_licence"
               android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
@@ -67,6 +68,7 @@
                 app:destination="@id/nav_holdingDocumentsChose"/>
         <action android:id="@+id/action_nav_road_to_nav_checkListList" app:destination="@id/nav_checkListList"/>
         <action android:id="@+id/action_nav_road_to_nav_codeColors" app:destination="@id/nav_codeColors"/>
+        <action android:id="@+id/action_nav_road_to_nav_immunityPersonList" app:destination="@+id/nav_immunityPersonList"/>
     </fragment>
 
     <fragment
@@ -350,4 +352,27 @@
               android:name="pl.tapo24.twa.ui.helpers.pointsCalc.basic.PointsCalculatorBasicFragment"
               android:label="@string/pointsCalc"
               tools:layout="@layout/fragment_points_calculator_basic"/>
+    <fragment android:id="@+id/nav_adrTable" android:name="pl.tapo24.twa.ui.helpers.adrTable.AdrTableFragment"
+              android:label="@string/adrTable" tools:layout="@layout/fragment_adr_table"/>
+    <fragment android:id="@+id/nav_immunityAdres"
+              android:name="pl.tapo24.twa.ui.road.immunity.immunityAdres.ImmunityAdresFragment"
+              android:label="fragment_immunity_adres" tools:layout="@layout/fragment_immunity_adres"/>
+    <fragment android:id="@+id/nav_immunityList"
+              android:name="pl.tapo24.twa.ui.road.immunity.immunityList.ImmunityListFragment"
+              android:label="fragment_immunity_list" tools:layout="@layout/fragment_immunity_list">
+        <action android:id="@+id/action_nav_immunityList_to_nav_immunityView" app:destination="@id/nav_immunityView"/>
+        <argument android:name="immunity" app:argType="pl.tapo24.twa.dbData.entity.Immunity"/>
+    </fragment>
+    <fragment android:id="@+id/nav_immunityPersonList"
+              android:name="pl.tapo24.twa.ui.road.immunity.immunityPersonList.ImmunityPersonListFragment"
+              android:label="@string/immunity" tools:layout="@layout/fragment_immunity_person_list">
+        <action android:id="@+id/action_nav_immunityPersonList_to_nav_immunityList"
+                app:destination="@id/nav_immunityList"/>
+    </fragment>
+    <fragment android:id="@+id/nav_immunityView"
+              android:name="pl.tapo24.twa.ui.road.immunity.immunityVIew.ImmunityViewFragment"
+              android:label="fragment_immunity_view" tools:layout="@layout/fragment_immunity_view">
+        <argument android:name="condition" app:argType="string"/>
+        <argument android:name="list" app:argType="string"/>
+    </fragment>
 </navigation>

@@ -133,5 +133,14 @@ enum class NavHelpers(
             listBundle = bundleOf("title" to "Kalkulatory", "treeName" to "calculator")
         )
     ),
+    AdrTable(
+        NavElement(
+            navName = "Tablica ADR",
+            navIcon= R.drawable.explosion_solid,
+            navId = R.id.action_nav_helpers_to_nav_adrTable,
+            requirePremium = true,
+            navHttpLink = null,
+        )
+    ),
 
 }

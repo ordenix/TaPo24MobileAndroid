@@ -130,5 +130,14 @@ enum class NavRoad(
             navHttpLink = null,
         )
     ),
+    Immunity(
+        NavElement(
+            navName = "Immunitety",
+            navIcon= R.drawable.user_shield_solid,
+            navId = R.id.action_nav_road_to_nav_immunityPersonList,
+            requirePremium = true,
+            navHttpLink = null,
+        )
+    ),
 
 }

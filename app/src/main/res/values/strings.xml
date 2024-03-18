@@ -352,5 +352,17 @@
     <string name="enterHIN">Wprowadź na tablicy górny numer (HIN)</string>
     <string name="enterADR">Wprowadź na tablicy dolny numer (ADR)</string>
     <string name="searchPerson">Wyszukaj osobę</string>
+    <string name="immunity">Immunitety</string>
+    <string name="instruction41">Zastosowanie art. 41 k.w.</string>
+    <string name="ticket">Mandat karny</string>
+    <string name="courtProcedure">Zastosowanie art. 41 k.w. jest niewystarczające lub niecelowe/odmowa przyjęcia mandatu
+        karnego
+    </string>
+    <string name="courtProcedure2">Zastosowanie art. 41 k.w. jest niewystarczające lub niecelowe</string>
+    <string name="offenceOtherXI">Wykroczenia inne niż określone w rozdziale XI k.w.</string>
+    <string name="offenceXI">Wykroczenia określone w rozdziale XI k.w. \n (przeciwko bezpieczeństwu i porządkowi w
+        komunikacji)
+    </string>
+    <string name="allOffence">Wszystkie wykroczenia</string>
 
 </resources>
