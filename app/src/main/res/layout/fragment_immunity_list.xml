@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.road.immunity.immunityList.ImmunityListFragment">
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:background="@drawable/style_small_container"
+                style="@style/smallContainer"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="Poseł"
+                    style="@style/textStyleOrangeMediumWarpXl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/person"
+                    app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_separator"
+                    android:id="@+id/view13" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/person"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/view13"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp" android:id="@+id/allowTicket1">
+
+                <TextView
+                        android:text="@string/offenceXI"
+                        style="@style/textStyleWhiteMediumInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView15"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/instruction41"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/instruction"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/ticket"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/ticket"
+                        app:layout_constraintTop_toBottomOf="@+id/instruction"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/courtProcedure"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/court"
+                        app:layout_constraintTop_toBottomOf="@+id/ticket"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@drawable/style_separator"
+                    android:id="@+id/viewAllowTicket" app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/allowTicket1"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/viewAllowTicket"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/allowTicket2">
+
+                <TextView
+                        android:text="@string/offenceOtherXI"
+                        style="@style/textStyleWhiteMediumInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView1554"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/instruction41"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/instructionOther"
+                        app:layout_constraintTop_toBottomOf="@+id/textView1554"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/courtProcedure2"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/courtOther"
+                        app:layout_constraintTop_toBottomOf="@+id/instructionOther"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/allowTicket2"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/preventTicket">
+
+                <TextView
+                        android:text="@string/allOffence"
+                        style="@style/textStyleWhiteMediumInContainerCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/textView15548"
+                        app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/instruction41"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/instructionPreventTicket"
+                        app:layout_constraintTop_toBottomOf="@+id/textView15548"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                <Button
+                        android:text="@string/courtProcedure2"
+                        android:theme="@style/OrangeBtn"
+                        android:backgroundTint="?attr/buttonBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:id="@+id/courtPreventTicket"
+                        app:layout_constraintTop_toBottomOf="@+id/instructionPreventTicket"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>
