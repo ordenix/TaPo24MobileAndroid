@@ -18,6 +18,7 @@ import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.infrastructure.NetworkClientAdmin
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.updater.DataBaseUpdater
 import pl.tapo24.twa.useCase.checkList.GetCheckListAllTypeUseCase
@@ -34,7 +35,8 @@ class SettingsViewModel@Inject constructor(
     private val getCheckListDictionaryUseCase: GetCheckListDictionaryUseCase,
     private val getCheckListAllTypeUseCase: GetCheckListAllTypeUseCase,
     private val getCheckListMapUseCase: GetCheckListMapUseCase,
-    private val dataBaseUpdater: DataBaseUpdater
+    private val dataBaseUpdater: DataBaseUpdater,
+    private val networkClientAdmin: NetworkClientAdmin
 ) : ViewModel() {
     val environment = MutableLiveData<EnvironmentType>(EnvironmentType.Master)
     val engine = MutableLiveData<EnginesType>(EnginesType.New)
@@ -132,6 +134,8 @@ class SettingsViewModel@Inject constructor(
     fun getData(){
         environment.value?.let { networkClient.rebuild(it.url) }
         environment.value?.let { networkClientRegister.rebuild(it.url) }
+        environment.value?.let { networkClientAdmin.rebuild(it.url) }
+
         dataBaseUpdater.update(true)
     }
     fun saveSettings () {
