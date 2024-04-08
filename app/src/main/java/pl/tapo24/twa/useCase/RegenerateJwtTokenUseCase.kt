@@ -15,7 +15,7 @@ class RegenerateJwtTokenUseCase @Inject constructor(private val  networkClient: 
             MainScope().launch(Dispatchers.IO) {
                 val response = async {networkClient.generateNewToken(jwtFromDb.value)}.await()
                 response.onSuccess {
-                    jwtFromDb.name = it
+                    jwtFromDb.value = it
                     tapoDb.settingDb().insert(jwtFromDb)
                     State.jwtToken = it
 
