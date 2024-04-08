@@ -364,5 +364,7 @@
         komunikacji)
     </string>
     <string name="allOffence">Wszystkie wykroczenia</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="admin">Administracja</string>
 
 </resources>

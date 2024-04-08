@@ -29,6 +29,8 @@ object State {
     var premiumVersion: Boolean = false
     var beta: Boolean = false
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)
+    var isAdmin: MutableLiveData<Boolean> = MutableLiveData(false)
+
     var showNotifyForTariffIcon: Boolean = true
     var isSessionConfirm: Boolean = false
     var isSessionRestored: Boolean = false

@@ -24,5 +24,11 @@
                 android:id="@+id/nav_helpers"
                 android:icon="@drawable/life_ring_solid"
                 android:title="@string/menu_helpers"/>
+
+        <item
+                android:id="@+id/nav_admin"
+                android:visible="false"
+                android:icon="@drawable/shield_halved_solid"
+                android:title="@string/admin_panel"/>
     </group>
 </menu>

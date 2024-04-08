@@ -111,7 +111,6 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                 val settingToDbRole = Setting("Role", it.role!!)
                 val settingToDbBetaStatus = Setting("Beta", state = it.isBetaTester ?: false)
                 State.premiumVersion = it.role!! == "Admin" || it.role!! == "Vip"
-
                 State.userName = it.login!!
                 State.beta = it.isBetaTester?: false
                 async { tapoDb.settingDb().insert(settingToDbUserName) }.await()
@@ -119,6 +118,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                 async { tapoDb.settingDb().insert(settingToDbBetaStatus) }.await()
                 withContext(Dispatchers.Main) {
                     State.paymentId.value = it.login!!
+                    State.isAdmin.value = it.role!! == "Admin"
                 }
                 if (getOptionalData) {
                     val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
@@ -198,6 +198,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             tapoDb.settingDb().deleteElement(settingToDb)
 
         }
+        State.isAdmin.value = false
         sharedPreferences = context.getSharedPreferences(
             "Jwt",
             Context.MODE_PRIVATE)

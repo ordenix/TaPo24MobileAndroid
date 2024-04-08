@@ -61,6 +61,8 @@ import pl.tapo24.twa.module.PremiumShopModule
 import pl.tapo24.twa.updater.*
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
+import pl.tapo24.twa.worker.UpdateWorker
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 
@@ -213,12 +215,22 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView = binding.navView
         navController = findNavController(R.id.nav_host_fragment_content_main)
         initializeNaveMenu(navView)
+        // show admin panel
+        val menu = navView.menu
+        State.isAdmin.observe(this, Observer {
+            val item  = menu.findItem(R.id.nav_admin)
+            item.isVisible = it
+            item.isChecked = false
+            if (it) {
+                menu.findItem(R.id.nav_home).isChecked = true
+            }
+        })
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers
+                R.id.nav_home, R.id.nav_road, R.id.nav_tariff, R.id.nav_law, R.id.nav_helpers, R.id.nav_admin
             ), drawerLayout
         )
         setupActionBarWithNavController(navController!!, appBarConfiguration)
