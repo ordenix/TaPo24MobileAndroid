@@ -328,7 +328,17 @@ class DataBaseUpdater @Inject constructor(
                                         val date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(System.currentTimeMillis())
                                         val dataBaseVersion = dataBaseVersionFromServer.find { it.id == dataBaseType.nameInDb }
                                         dataBaseVersion?.dateLastUpdate = date
-                                        async { dataTapoDb.dataBaseVersion().insert(dataBaseVersion!!) }.await()
+                                        try {
+                                            async {
+                                                if (dataBaseVersion != null) {
+                                                    dataTapoDb.dataBaseVersion().insert(dataBaseVersion)
+                                                }
+                                            }.await()
+
+                                        } catch (ex: Exception) {
+                                            ACRA.errorReporter.handleSilentException(ex)
+
+                                        }
                                     }
 
 
