@@ -15,10 +15,10 @@ class LawUpdater @Inject constructor(
     private val dataTapoDb: DataTapoDb,
 ) {
 
-    fun update(force: Boolean = false) {
+    fun update(force: Boolean = false, jwt: String?) {
         MainScope().launch(Dispatchers.IO) {
             val isPublicStorage = async { getStorageIsPublic() }.await()
-            networkClient.getLawData().onSuccess { lawDataFromServer ->
+            networkClient.getLawData(jwt).onSuccess { lawDataFromServer ->
                 if (lawDataFromServer.isNotEmpty()) {
                     val lawDataFromDb =  async { dataTapoDb.law().getAll() }.await()
                     lawDataFromServer.forEach { law ->
@@ -85,7 +85,7 @@ class LawUpdater @Inject constructor(
 
     fun initUpdate() {
         MainScope().launch(Dispatchers.IO) {
-            networkClient.getLawData().onSuccess { lawData ->
+            networkClient.getLawData(jwt = null).onSuccess { lawData ->
                 dataTapoDb.law().insertList(lawData)
             }
         }

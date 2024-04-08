@@ -1,6 +1,7 @@
 package pl.tapo24.twa
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import androidx.work.*
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -34,6 +35,8 @@ import javax.inject.Inject
 class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private var networkClient: NetworkClient, private var context: Context,)
 
  {
+
+     private lateinit var sharedPreferences: SharedPreferences
 
      val workManager: WorkManager = WorkManager.getInstance(context)
      val constraints = Constraints.Builder()
@@ -88,8 +91,13 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
     }
 
     private fun createSession(jwtToken: String, getOptionalData: Boolean = false) {
+        sharedPreferences = context.getSharedPreferences(
+            "Jwt",
+            Context.MODE_PRIVATE)
         State.isLogin.value = true
         State.jwtToken = jwtToken
+        sharedPreferences.edit().putString("token", jwtToken).apply()
+
         val settingToDb = Setting("jwtToken", jwtToken)
         MainScope().launch(Dispatchers.IO) {
             async { tapoDb.settingDb().insert(settingToDb) }.await()
@@ -115,7 +123,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
                 if (getOptionalData) {
                     val hiltEntryPoint = EntryPointAccessors.fromApplication(context,
                         LawUpdaterProviderEntryPoint::class.java)
-                    hiltEntryPoint.lawUpdater().update()
+                    hiltEntryPoint.lawUpdater().update(jwt = jwtToken)
                 }
 
             }
@@ -149,7 +157,7 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
         }
         val workRequest = PeriodicWorkRequestBuilder<RegenerateJwtTokenWorker>(15, TimeUnit.DAYS)
             .setConstraints(constraints)
-            .setInitialDelay(15, TimeUnit.DAYS)
+            .setInitialDelay(1, TimeUnit.MINUTES)
             .build()
         workManager.enqueueUniquePeriodicWork("RegenerateJwt", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
 
@@ -190,6 +198,11 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb, private va
             tapoDb.settingDb().deleteElement(settingToDb)
 
         }
+        sharedPreferences = context.getSharedPreferences(
+            "Jwt",
+            Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString("token", null).apply()
+
 
     }
 }

@@ -222,8 +222,8 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun bindRegenerateJwtTokenUseCase(networkClient: NetworkClient, tapoDb: TapoDb): RegenerateJwtTokenUseCase {
-        return RegenerateJwtTokenUseCase(networkClient, tapoDb)
+    fun bindRegenerateJwtTokenUseCase(networkClient: NetworkClient, tapoDb: TapoDb, @ApplicationContext app: Context): RegenerateJwtTokenUseCase {
+        return RegenerateJwtTokenUseCase(networkClient, tapoDb, app)
     }
 
     @Provides

@@ -89,7 +89,7 @@ class AssetUpdaterOLD(
                 }
                 .setNegativeButton("Pobierz mimo to") {
                     dialog, which ->
-                    getAssets()
+                    //getAssets()
                     dialog.dismiss()
                 }
                 .show()
@@ -236,7 +236,7 @@ class AssetUpdaterOLD(
                   }.await()
             async { listAsset = tapoDb.assetListDb().getAll() }.await()
             async {
-                val response = networkClient.getLawData()
+                val response = networkClient.getLawData(jwt = null)
                 response.onSuccess {
                     listLawFromServer = it
                 }

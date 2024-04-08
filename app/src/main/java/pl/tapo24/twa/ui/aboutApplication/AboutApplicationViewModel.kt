@@ -1,10 +1,13 @@
 package pl.tapo24.twa.ui.aboutApplication
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -23,8 +26,10 @@ class AboutApplicationViewModel @Inject constructor(
     private val dataBaseUpdater: DataBaseUpdater,
     private val dataTapoDb: DataTapoDb,
     private val assetUpdater: AssetUpdater,
-    private val lawUpdater: LawUpdater
+    private val lawUpdater: LawUpdater,
+    @ApplicationContext private val context: Context
 ): ViewModel() {
+    private lateinit var sharedPreferences: SharedPreferences
 
 //    private val _text = MutableLiveData<String>().apply {
 //        value = "This is ABOUT APLICATION"
@@ -50,7 +55,12 @@ class AboutApplicationViewModel @Inject constructor(
     }
 
     fun forceUpdatePdf() {
-        lawUpdater.update(true)
+        sharedPreferences = context.getSharedPreferences(
+            "Jwt",
+            Context.MODE_PRIVATE)
+        val jwt: String? = sharedPreferences.getString("token", null)
+
+        lawUpdater.update(true, jwt = jwt)
     }
 
     fun forceUpdate() {

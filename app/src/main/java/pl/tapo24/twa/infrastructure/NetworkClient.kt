@@ -118,11 +118,11 @@ class NetworkClient(var url: String) {
 
 
 
-    fun getLawData(): Result<List<Law>>{
+    fun getLawData(jwt: String?): Result<List<Law>>{
         try {
-            val response: Response<List<Law>> = if (State.jwtToken.isNotEmpty()) {
+            val response: Response<List<Law>> = if (jwt != null) {
                 // not empty
-                service.getLaw("Bearer ${State.jwtToken}", State.uid).execute()
+                service.getLaw("Bearer $jwt", State.uid).execute()
             } else {
                 // empty
                 service.getLaw(State.uid).execute()

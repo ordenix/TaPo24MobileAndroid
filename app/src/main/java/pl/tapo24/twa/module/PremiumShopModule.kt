@@ -1,6 +1,7 @@
 package pl.tapo24.twa.module
 
 import android.content.Context
+import android.content.SharedPreferences
 import com.revenuecat.purchases.Purchases
 import com.revenuecat.purchases.getCustomerInfoWith
 import dagger.hilt.EntryPoint
@@ -25,6 +26,8 @@ import java.util.*
 import javax.inject.Inject
 
 class PremiumShopModule @Inject constructor(private val tapoDb: TapoDb, private val networkClient: NetworkClient, private val context: Context) {
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     @EntryPoint
     @InstallIn(SingletonComponent::class)
@@ -55,18 +58,22 @@ class PremiumShopModule @Inject constructor(private val tapoDb: TapoDb, private 
     }
 
     fun requestUpdatePermissionInBackendAndSetNewJWT() {
+        sharedPreferences = context.getSharedPreferences(
+            "Jwt",
+            Context.MODE_PRIVATE)
         MainScope().launch(Dispatchers.IO) {
             val resposne = async { networkClient.promoteToPaidAccount() }.await()
             resposne.onSuccess {
                 var jwtNewToDb: Setting = Setting("jwtToken", it, 0)
                 State.jwtToken = it
+                sharedPreferences.edit().putString("token", it).apply()
                 async {tapoDb.settingDb().insert(jwtNewToDb) }.await()
                 val hiltEntryPoint = EntryPointAccessors.fromApplication(context, SessionProviderEntryPoint::class.java)
                 val sessionProvider = hiltEntryPoint.sessionProvider()
                 sessionProvider.restoreSession()
                 val lawUpdaterEntryPoint = EntryPointAccessors.fromApplication(context, LawUpdaterEntryPoint::class.java)
                 val lawUpdaterProvider = lawUpdaterEntryPoint.lawUpdater()
-                lawUpdaterProvider.update()
+                lawUpdaterProvider.update(jwt= it)
             }
 
         }
