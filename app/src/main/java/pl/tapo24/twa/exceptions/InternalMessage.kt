@@ -38,6 +38,8 @@ enum class InternalMessage(val message: String) {
     InternalGetHomeNewsData("Internal exception during get home news data"),
     InternalGetSurveyList("Internal exception during get survey list"),
     InternalSendSurvey("Internal exception during send survey"),
+    InternalGetSurveyProgress("Internal exception during get survey progress"),
+    InternalChangeSurveyStatus("Internal exception during change survey status"),
 
 
 
