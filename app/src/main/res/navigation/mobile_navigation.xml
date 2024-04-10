@@ -380,11 +380,21 @@
         <action android:id="@+id/action_nav_admin_to_surveyListFragment" app:destination="@id/surveyListFragment"/>
     </fragment>
     <fragment android:id="@+id/surveyListFragment" android:name="pl.tapo24.twa.ui.admin.survey.list.SurveyListFragment"
-              android:label="fragment_survey_list" tools:layout="@layout/fragment_survey_list"/>
+              android:label="fragment_survey_list" tools:layout="@layout/fragment_survey_list">
+        <action android:id="@+id/action_surveyListFragment_to_surveyModifyFragment"
+                app:destination="@id/surveyModifyFragment"/>
+        <action android:id="@+id/action_surveyListFragment_to_surveyProgressFragment"
+                app:destination="@id/surveyProgressFragment"/>
+    </fragment>
     <fragment android:id="@+id/surveyModifyFragment"
               android:name="pl.tapo24.twa.ui.admin.survey.modify.SurveyModifyFragment"
-              android:label="fragment_survey_modify" tools:layout="@layout/fragment_survey_modify"/>
+              android:label="fragment_survey_modify" tools:layout="@layout/fragment_survey_modify">
+        <argument android:name="survey" app:argType="pl.tapo24.twa.data.survey.Survey" app:nullable="true"
+                  android:defaultValue="@null"/>
+    </fragment>
     <fragment android:id="@+id/surveyProgressFragment"
               android:name="pl.tapo24.twa.ui.admin.survey.progress.SurveyProgressFragment"
-              android:label="fragment_survey_progress" tools:layout="@layout/fragment_survey_progress"/>
+              android:label="fragment_survey_progress" tools:layout="@layout/fragment_survey_progress">
+        <argument android:name="survey" app:argType="pl.tapo24.twa.data.survey.Survey"/>
+    </fragment>
 </navigation>

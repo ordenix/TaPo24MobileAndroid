@@ -287,6 +287,7 @@
     <string name="succesAddCustomCategory">Dodano kategorię</string>
     <string name="ownCategory">Własne kategorie</string>
     <string name="addCategory">Dodaj kategorię</string>
+
     <string name="showOwnCategory">Wyświetlanie własnych kategorii</string>
     <string name="updateCustomCategory">Zaktualizowano nazwę kategorii</string>
     <string name="deleteCustomCategory">Usunięto kategorię</string>
@@ -366,5 +367,13 @@
     <string name="allOffence">Wszystkie wykroczenia</string>
     <string name="admin_panel">Admin Panel</string>
     <string name="admin">Administracja</string>
+    <string name="hintQuestion">Wprowadź pytanie</string>
+    <string name="addAnswer">Dodaj odpowiedź</string>
+    <string name="question">Pytanie:</string>
+    <string name="targetToAll">Target: Dla wszsytkich</string>
+    <string name="targetOnlyLoginNonVip">Tylko zalogowani (bez VIP)</string>
+    <string name="targetOnlyVip">Tylko VIP</string>
+    <string name="targetOnlyNonLogin">Tylko niezalogowani</string>
+    <string name="targetAllLogin">Tylko zalogowani (oraz VIP)</string>
 
 </resources>

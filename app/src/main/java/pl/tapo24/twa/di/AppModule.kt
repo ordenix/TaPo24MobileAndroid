@@ -18,6 +18,7 @@ import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.infrastructure.NetworkClient
+import pl.tapo24.twa.infrastructure.NetworkClientAdmin
 import pl.tapo24.twa.infrastructure.NetworkClientElastic
 import pl.tapo24.twa.infrastructure.NetworkClientRegister
 import pl.tapo24.twa.module.CustomCategoryModule
@@ -95,6 +96,26 @@ object AppModule {
         }
 
         return NetworkClientRegister(url!!)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAdminNetwork(tapoDb: TapoDb): NetworkClientAdmin {
+        var url: String?
+        runBlocking(Dispatchers.IO) {
+            val settingEnvironment: Setting? = tapoDb.settingDb().getSettingByName("settingEnvironment")
+            if (settingEnvironment != null) {
+                val environment = EnvironmentType.values()[settingEnvironment.count]
+                url = environment.url
+            } else {
+                url = "https://api3.tapo24.pl/api/"
+
+            }
+
+
+        }
+
+        return NetworkClientAdmin(url!!)
     }
 
     @Provides

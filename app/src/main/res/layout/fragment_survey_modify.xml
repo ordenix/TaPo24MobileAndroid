@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="pl.tapo24.twa.R" />
+        <variable name="viewModel"
+                  type="pl.tapo24.twa.ui.admin.survey.modify.SurveyModifyViewModel"/>
+
+    </data>
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_height="match_parent">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/outlinedTextField"
+                app:startIconDrawable="@drawable/circle_question_solid10"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hintQuestion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="8dp"
+        >
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/radioChoice" android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/outlinedTextField">
+            <RadioButton
+                    android:text="Pojedyńcza odpowiedź"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioSingleChoice"/>
+            <RadioButton
+                    android:text="Wiele odpowiedźi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioMultiChoice"/>
+        </RadioGroup>
+        <TextView
+                android:text="Lista odpowiedźi"
+                style="@style/textStyleWhiteInContainerCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView115"
+                app:layout_constraintTop_toBottomOf="@+id/radioChoice" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView115"
+                tools:layout_editor_absoluteX="10dp"
+                android:id="@+id/recyclerView" android:maxHeight="150dp"/>
+        <Button
+                android:text="@string/addAnswer"
+                android:theme="@style/OrangeBtn"
+                android:backgroundTint="?attr/buttonBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/addAnswer"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+                android:text="Target"
+                style="@style/textStyleWhiteInContainerCenter"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView116"
+                app:layout_constraintTop_toBottomOf="@+id/addAnswer"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+        />
+        <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView116"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:id="@+id/radioTarget">
+            <RadioButton
+                    android:text="Dla wszsytkich"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioAll"/>
+            <RadioButton
+                    android:text="Tylko dla zalogowanych (vip również)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioOnlyLogin"/>
+            <RadioButton
+                    android:text="Tylko dla nie zalogowanych"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioOnlyNonLogin"/>
+            <RadioButton
+                    android:text="Tylko dla vip (wymagane logowanie)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioOnlyVip"/>
+            <RadioButton
+                    android:text="Tylko dla zalogowanych ale nie vip (wymagane logowanie)"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioOnlyLoginNonVip"/>
+        </RadioGroup>
+        <TextView
+                android:text="Data publikacji ankiety"
+                style="@style/textStyleWhiteInContainerCenter"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView117"
+                app:layout_constraintTop_toBottomOf="@+id/radioTarget"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+        />
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dateStartTIL"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data początkowa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView117">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dateStartTIET"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dateEndTIL"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data końcowa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateStartTIL">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dateEndTIET"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+                android:text="Status ankiety"
+                style="@style/textStyleWhiteInContainerCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView118"
+                app:layout_constraintTop_toBottomOf="@+id/dateEndTIL" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textView118"
+                android:id="@+id/radioStatus" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            <RadioButton
+                    android:text="Aktywna"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioActive"/>
+            <RadioButton
+                    android:text="Nieaktywna"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/radioDeactive"/>
+        </RadioGroup>
+        <Button
+                android:text="Zapisz"
+                android:theme="@style/OrangeBtn"
+                android:backgroundTint="?attr/buttonBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/save"
+                app:layout_constraintTop_toBottomOf="@+id/radioStatus" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <Button
+                android:text="Publikuj"
+                android:theme="@style/OrangeBtn"
+                android:backgroundTint="?attr/buttonBackground"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/publish"
+                app:layout_constraintTop_toBottomOf="@+id/save" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

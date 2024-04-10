@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <import type="pl.tapo24.twa.R" />
+        <variable name="position"
+                  type="java.lang.Integer"/>
+        <variable name="data"
+                  type="pl.tapo24.twa.data.survey.Survey"/>
+        <variable name="finish" type="java.lang.Boolean"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.admin.survey.list.SurveyListViewModel"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:onClick="@{() -> viewModel.selectSurvey(data)}"
+
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            android:layout_width="match_parent"
+            style="@style/smallContainer"
+            android:background="@drawable/style_orange_container"
+            android:layout_height="wrap_content"
+    >
+
+
+        <TextView
+                android:text="@{data.name}"
+                style="@style/blackConstansCodeColorText"
+                android:maxLines="15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/textView114"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+        />
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/linearLayout4">
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" app:srcCompat="@drawable/flag_checkered_solid"
+                    android:id="@+id/imageView32"
+                    android:visibility="@{finish ? View.VISIBLE : View.GONE}"
+                    android:layout_marginEnd="8dp"/>
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" app:srcCompat="@drawable/flag_checkered_solid"
+                    android:id="@+id/imageView321"
+                    android:visibility="@{finish ? View.GONE : View.VISIBLE}" app:tint="#3EFFFFFF"
+
+                    android:layout_marginEnd="8dp"/>
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:id="@+id/imageView31"
+                    app:srcCompat="@{data.active ? @drawable/toggle_on_solid : @drawable/toggle_off_solid}"
+                    android:layout_marginEnd="8dp"/>
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" app:srcCompat="@drawable/upload_solid"
+                    android:id="@+id/imageView30"
+                    android:visibility="@{data.publish ? View.VISIBLE : View.GONE}"/>
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" app:srcCompat="@drawable/upload_solid"
+                    android:id="@+id/imageView310"
+                    android:visibility="@{data.publish ? View.GONE : View.VISIBLE}" app:tint="#3EFFFFFF"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

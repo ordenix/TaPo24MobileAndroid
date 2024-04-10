@@ -41,4 +41,16 @@ class NetworkClientAdmin(var url: String) {
         }
         return Result.failure(InternalException(InternalMessage.InternalGetSurveyList.message))
     }
+
+    fun sendSurvey(survey: Survey): Result<String> {
+        try {
+            val response = service.sendSurvey("Bearer ${State.jwtToken}", survey).execute()
+            if (response.isSuccessful) {
+                return Result.success(response.body()!!.r)
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+        return Result.failure(InternalException(InternalMessage.InternalSendSurvey.message))
+    }
 }
