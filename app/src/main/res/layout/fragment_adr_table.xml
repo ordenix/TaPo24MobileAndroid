@@ -33,7 +33,7 @@
                 <EditText
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:ems="10"
                         android:id="@+id/adrNumber"
                         app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
