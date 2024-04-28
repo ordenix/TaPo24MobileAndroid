@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import pl.tapo24.twa.R
+import pl.tapo24.twa.adapter.CodeColorsAdapter
 import pl.tapo24.twa.databinding.FragmentCodeColorsViewerBinding
 import pl.tapo24.twa.ui.pdfFileView.PdfFileViewFragmentArgs
 import pl.tapo24.twa.utils.UlListBuilder
@@ -42,18 +45,15 @@ class CodeColorsViewerFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(CodeColorsViewerViewModel::class.java)
 
         viewModel.getData(code)
-        viewModel.data.observe(viewLifecycleOwner) {
-            if (it != null) {
-                binding.codeNameTitle.text = "${it.codeName} ${it.code}"
-                binding.mean.text = it.mean
-                if (it.remarks.isNotEmpty()) {
-                    binding.remarks.text = it.remarks
-                } else {
-                    binding.remarks.visibility = View.GONE
-                }
-                binding.toDo.text = UlListBuilder().getSpannableTextBulletFromCustomText(it.toDo)
-            }
-        }
+        val rv = binding.rv
+        rv.layoutManager = LinearLayoutManager(activity)
+        viewModel.adapter = CodeColorsAdapter(viewModel.data.value.orEmpty(),viewModel)
+        rv.adapter = viewModel.adapter
+//
+        viewModel.data.observe(viewLifecycleOwner, Observer {
+            viewModel.adapter.items = it
+            viewModel.adapter.notifyDataSetChanged()
+        })
 
         return root
     }

@@ -24,5 +24,5 @@ interface  CodeColorsDao  {
 
 
     @Query("SELECT * FROM codeColors WHERE code = :code")
-    fun getByCode(code: String): CodeColors
+    fun getByCode(code: String): List<CodeColors>
 }

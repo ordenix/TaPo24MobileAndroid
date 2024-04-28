@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <data>
+        <import type="android.view.View"/>
+        <variable name="data"
+                  type="pl.tapo24.twa.dbData.entity.CodeColors"/>
+        <variable name="viewModel" type="pl.tapo24.twa.ui.road.codeColors.viewer.CodeColorsViewerViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/style_small_container"
+            style="@style/smallContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp">
+
+        <TextView
+                android:text="@{data.codeName + ` ` + data.code}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleOrangeMediumWarpXl"
+                android:layout_height="wrap_content" android:id="@+id/codeNameTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:text="@{data.mean}"
+                android:layout_width="wrap_content"
+                style="@style/textStyleWhiteSmallInContainerCenter"
+                android:layout_height="wrap_content" android:id="@+id/mean"
+                app:layout_constraintTop_toBottomOf="@+id/codeNameTitle" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:textAlignment="center"/>
+        <TextView
+                android:text="@string/toDoCodeColor"
+                style="@style/textStyleWhiteInContainerCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/textView110"
+                app:layout_constraintTop_toBottomOf="@+id/mean" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+                android:text="@{viewModel.returnBulletList(data.toDo)}"
+                android:layout_width="0dp"
+                style="@style/textStyleWhiteSmallInContainer"
+                android:layout_height="wrap_content" android:id="@+id/toDo"
+                app:layout_constraintTop_toBottomOf="@+id/textView110" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+                android:text="@{data.remarks}"
+                android:layout_width="wrap_content"
+                android:visibility="@{data.remarks != null ? View.VISIBLE : View.GONE}"
+                android:layout_height="wrap_content" android:id="@+id/remarks"
+                style="@style/textStyleOrangeSmallWarpCenter"
+                app:layout_constraintTop_toBottomOf="@+id/toDo" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
