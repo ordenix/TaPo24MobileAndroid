@@ -5,52 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.road.codeColors.viewer.CodeColorsViewerFragment">
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:background="@drawable/style_small_container"
-                style="@style/smallContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:text="CZERWONY 99"
-                    android:layout_width="wrap_content"
-                    style="@style/textStyleOrangeMediumWarpXl"
-                    android:layout_height="wrap_content" android:id="@+id/codeNameTitle"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-            <TextView
-                    android:text="Ostrzeżenia dotyczące osób/przedmiotów - niebezpieczna/uzbrojona/zbiegła osoba poszukiwana, cudzoziemiec, osoba zaginiona/działalność związana z terroryzmem/osoba, o której mowa w art. 10 ust. 1 ustawy z dnia 10 czerwca 2016 r. o działaniach antyterrorystycznych (Dz. U. z 2019 r. poz. 796)"
-                    android:layout_width="wrap_content"
-                    style="@style/textStyleWhiteSmallInContainerCenter"
-                    android:layout_height="wrap_content" android:id="@+id/mean"
-                    app:layout_constraintTop_toBottomOf="@+id/codeNameTitle" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" android:textAlignment="center"/>
-            <TextView
-                    android:text="Sposób postępowania:"
-                    style="@style/textStyleWhiteInContainerCenter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/textView110"
-                    app:layout_constraintTop_toBottomOf="@+id/mean" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-            <TextView
-                    android:text="W przypadku niejawnej kontroli: bez ujawniania faktu, iż dane osoby lub przedmiotu znajdują się w SIS zebrać informacje dotyczące: − trasy i celu podróży, − użytkowanego środka transportu, − osób towarzyszących danej osobie, innych przewożonych osób, co do których istnieje uzasadnione podejrzenie, że pozostają one w związku z osobami, których dotyczy wpis, − przewożonych przedmiotów, − okoliczności, w jakich osoba, pojazd, jednostka pływająca, statek powietrzny lub kontener zostały znalezione.
-    "
-                    android:layout_width="0dp"
-                    style="@style/textStyleWhiteSmallInContainer"
-                    android:layout_height="wrap_content" android:id="@+id/toDo"
-                    app:layout_constraintTop_toBottomOf="@+id/textView110" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-            <TextView
-                    android:text="Wystąpić do Biura SIRENE o przesłanie informacji uzupełniających, gdy jest to niezbędne do podjęcia odpowiednich działań, w tym dokonania identyfikacji osoby."
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:id="@+id/remarks"
-                    style="@style/textStyleOrangeSmallWarpCenter"
-                    app:layout_constraintTop_toBottomOf="@+id/toDo" app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            android:layout_height="match_parent" android:id="@+id/rv"/>
 </FrameLayout>
