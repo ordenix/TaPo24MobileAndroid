@@ -50,6 +50,7 @@ import com.revenuecat.purchases.PurchasesConfiguration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import pl.tapo24.twa.data.*
+import pl.tapo24.twa.data.survey.ResponseSurvey
 import pl.tapo24.twa.databinding.ActivityMainBinding
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
@@ -58,6 +59,7 @@ import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.module.FavouriteModule
 import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.module.PremiumShopModule
+import pl.tapo24.twa.ui.utils.SurveyDialog
 import pl.tapo24.twa.updater.*
 import pl.tapo24.twa.utils.CheckConnection
 import pl.tapo24.twa.utils.IntentRouter
@@ -131,17 +133,6 @@ class MainActivity : AppCompatActivity() {
             State.countChangeFragment = 0
             //SessionProvider(tapoDb,networkClient).restoreSession()
             CheckVersion(tapoDb, networkClient, this).checkVersion()
-            //
-            val activity: Activity = this
-//            AssetUpdaterOLD(
-//                tapoDb,
-//                dataTapoDb,
-//                networkClient,
-//                applicationContext,
-//                supportFragmentManager,
-//                activity
-//            ).getAllData()
-
         }
         State.countChangeFragment += 1
     }
@@ -163,7 +154,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         sharedPreferences = getSharedPreferences(
             "ThemePref",
             Context.MODE_PRIVATE
@@ -364,6 +354,46 @@ class MainActivity : AppCompatActivity() {
         })
 
         IntentRouter().route(intent, navController)
+
+        // survey
+        MainScope().launch(Dispatchers.IO) {
+            val responseSurvey = async { networkClient.getAllSurveyList() }.await()
+            responseSurvey.onSuccess {
+                try {
+                    if (it.isNotEmpty()) {
+                        val survey = it[0]
+                        val dialogSurvey = SurveyDialog(survey)
+                        dialogSurvey.show(supportFragmentManager, "dialogSurvey")
+                        dialogSurvey.onRejectSurveyClick = {
+                            dialogSurvey.dismiss()
+                            networkClient.responseSurvey(ResponseSurvey(emptyList(), survey.id!!))
+                        }
+                        dialogSurvey.onNonSelectedAnswerSurveyClick = {
+                            val infoDialog = MaterialAlertDialogBuilder(this@MainActivity)
+                                .setTitle("Błąd")
+                                .setMessage("Wybierz odpowiedź")
+                                .setPositiveButton("OK") { dialog, which ->
+                                    // Respond to positive button press
+                                    dialog.dismiss()
+                                }
+                                .show()
+                            //Snackbar.make(window.decorView.rootView, "Wybierz odpowiedź", Snackbar.LENGTH_LONG).show()
+                        }
+                        dialogSurvey.onSendSurveyClick = {el->
+                            MainScope().launch(Dispatchers.IO) {
+                                networkClient.responseSurvey(el)
+                            }
+                            dialogSurvey.dismiss()
+                        }
+
+                    }
+                } catch (e: Exception) {
+                    println(e)
+                }
+
+
+            }
+        }
     }
 
     override fun onNewIntent(intent: Intent?) {

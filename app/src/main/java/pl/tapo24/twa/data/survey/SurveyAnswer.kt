@@ -6,12 +6,14 @@ import android.os.Parcelable
 data class SurveyAnswer(
     val answer: String?,
     val id: Int? = null,
-    var sortId: Int? = null
+    var sortId: Int? = null,
+    var isSelected: Boolean = false
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readValue(Int::class.java.classLoader) as? Int
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readByte() != 0.toByte()
     ) {
     }
 
@@ -19,6 +21,7 @@ data class SurveyAnswer(
         parcel.writeString(answer)
         parcel.writeValue(id)
         parcel.writeValue(sortId)
+        parcel.writeByte(if (isSelected) 1 else 0)
     }
 
     override fun describeContents(): Int {
@@ -34,5 +37,6 @@ data class SurveyAnswer(
             return arrayOfNulls(size)
         }
     }
+
 
 }

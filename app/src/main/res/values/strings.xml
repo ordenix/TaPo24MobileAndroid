@@ -341,7 +341,7 @@
     <string name="code_check_colors_ksip">Kody sprawdzeń KSIP</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="pointsOvf">Uwaga! Przekroczona wartość punktów!</string>
+    <string name="pointsOvf">Uwaga! Przekroczona dopuszczalna ilość punktów karnych!</string>
     <string name="pointsCalc">Kalkulator punktów</string>
     <string name="extended_search_voivodeship">Wprowadź województwo</string>
     <string name="extended_search_province">Wprowadź powiat</string>
@@ -375,5 +375,9 @@
     <string name="targetOnlyVip">Tylko VIP</string>
     <string name="targetOnlyNonLogin">Tylko niezalogowani</string>
     <string name="targetAllLogin">Tylko zalogowani (oraz VIP)</string>
+    <string name="toDoCodeColor">Sposób postępowania:</string>
+    <string name="sendSurvey">Wyślij ankietę</string>
+    <string name="rejectSurvey">Odrzuć ankietę</string>
+    <string name="impossibleTicket">Postępowanie mandatowe niemożliwe. Sprawdź uwagi.</string>
 
 </resources>
