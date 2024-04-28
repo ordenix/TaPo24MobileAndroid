@@ -2,7 +2,6 @@ package pl.tapo24.twa.data
 
 import androidx.lifecycle.MutableLiveData
 import pl.tapo24.twa.BuildConfig
-import pl.tapo24.twa.R
 import pl.tapo24.twa.db.entity.CustomCategory
 import pl.tapo24.twa.db.entity.MapCategory
 import pl.tapo24.twa.updater.DialogDataUpdater
@@ -66,5 +65,13 @@ object State {
     val dialogDownloadFileProgress: MutableLiveData<Int> = MutableLiveData(null)
     var dialogDownloadFileMessage: String = ""
     var setIndeterminate: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    fun provideAuditData(): AuditData {
+        return AuditData(
+            uid = uid,
+            versionCode = versionCode,
+            versionName = versionName
+        )
+    }
 
 }

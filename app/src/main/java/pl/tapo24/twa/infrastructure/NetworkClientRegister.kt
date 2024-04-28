@@ -67,7 +67,7 @@ class NetworkClientRegister(var url: String) {
 
     fun checkLogin(data: RegisterForm): Result<String> {
         try {
-            val response = service.checkExistLogin(State.uid,data).execute()
+            val response = service.checkExistLogin(State.uid,State.provideAuditData(), data).execute()
             if (response.isSuccessful) {
                 return Result.success("Ok")
             } else {
@@ -86,7 +86,7 @@ class NetworkClientRegister(var url: String) {
 
     fun checkEmail(data: RegisterForm): Result<String> {
         try {
-            val response = service.checkExistEmail(State.uid,data).execute()
+            val response = service.checkExistEmail(State.uid,State.provideAuditData(),data).execute()
             if (response.isSuccessful) {
                 return Result.success("Ok")
             } else {
@@ -106,7 +106,7 @@ class NetworkClientRegister(var url: String) {
 
     fun registerUser(data: RegisterForm): Result<String> {
         try {
-            val response = service.basicRegisterUser(State.uid,data).execute()
+            val response = service.basicRegisterUser(State.uid,State.provideAuditData(),data).execute()
             if (response.isSuccessful) {
                 return Result.success("Ok")
             } else {
@@ -121,7 +121,7 @@ class NetworkClientRegister(var url: String) {
 
     fun googleRegisterUser(data: RegisterForm): Result<String> {
         try {
-            val response = service.googleRegisterUser(State.uid,data).execute()
+            val response = service.googleRegisterUser(State.uid,State.provideAuditData(),data).execute()
             if (response.isSuccessful) {
                 return Result.success("Ok")
             } else {
@@ -136,7 +136,7 @@ class NetworkClientRegister(var url: String) {
 
     fun accountActivate(tokenData: AccountTokenData): Result<String> {
         try {
-            val response = service.basicActivateAccountUser(State.uid, tokenData).execute()
+            val response = service.basicActivateAccountUser(State.uid,State.provideAuditData(), tokenData).execute()
             if (response.isSuccessful) {
                 // ok
                 return Result.success(HttpSuccessMessage.SuccessAccountActivate.message)
@@ -162,7 +162,7 @@ class NetworkClientRegister(var url: String) {
 
     fun checkIsAccountActivated(dbid: Dbid): Result<String> {
         try {
-            val response = service.basicCheckIsAccountActivated(State.uid, dbid).execute()
+            val response = service.basicCheckIsAccountActivated(State.uid,State.provideAuditData(), dbid).execute()
             if (response.isSuccessful) {
                 return Result.success(HttpSuccessMessage.UserHaveActivateAccount.message)
             }else {
@@ -185,7 +185,7 @@ class NetworkClientRegister(var url: String) {
 
     fun resendActivationToken(dbid: Dbid): Result<String> {
         try {
-            val response = service.resendActivationToken(State.uid, dbid).execute()
+            val response = service.resendActivationToken(State.uid,State.provideAuditData(), dbid).execute()
             if (response.isSuccessful) {
                 return Result.success(HttpSuccessMessage.SuccessRegenerateToken.message)
             } else {
@@ -207,7 +207,7 @@ class NetworkClientRegister(var url: String) {
 
     fun unsubscribeAdv(tokenData: AccountTokenData): Result<String> {
         try {
-            val response = service.unsubscribeAdv(State.uid, tokenData).execute()
+            val response = service.unsubscribeAdv(State.uid,State.provideAuditData(), tokenData).execute()
             if (response.isSuccessful) {
                 return Result.success(HttpSuccessMessage.SuccessUnSubscribeAdv.message)
             } else {
@@ -231,7 +231,7 @@ class NetworkClientRegister(var url: String) {
 
     fun deleteAccountFromFirstEmail(tokenData: AccountTokenData): Result<String> {
         try {
-            val response = service.deleteAccountFromFirstEmail(State.uid, tokenData).execute()
+            val response = service.deleteAccountFromFirstEmail(State.uid,State.provideAuditData(), tokenData).execute()
             if (response.isSuccessful) {
                 return Result.success(HttpSuccessMessage.SuccessDeleteAccount.message)
             } else {
@@ -255,7 +255,7 @@ class NetworkClientRegister(var url: String) {
 
     fun forgotPasswordStep1(data: ToLoginData): Result<String> {
         try {
-            val response = service.requestForgotPassword(State.uid, data).execute()
+            val response = service.requestForgotPassword(State.uid,State.provideAuditData(), data).execute()
             if (response.isSuccessful) {
                 return Result.success(HttpSuccessMessage.SuccessForgotStep1.message)
             } else {
@@ -281,7 +281,7 @@ class NetworkClientRegister(var url: String) {
     }
     fun forgotPasswordStep2(tokenData: TokenPasswordData): Result<String> {
         try {
-            val response = service.executeForgotPassword(State.uid,tokenData).execute()
+            val response = service.executeForgotPassword(State.uid,State.provideAuditData(),tokenData).execute()
             if (response.isSuccessful) {
                 return Result.success(HttpSuccessMessage.SuccessForgotStep2.message)
             } else {
@@ -303,7 +303,7 @@ class NetworkClientRegister(var url: String) {
 
     fun getDataFromGoogleToken(googleToken: String): Result<ResponseExtractedDataFormGoogleToken> {
         return try {
-            val response = service.getDataFromGoogleToken(State.uid,RequestLoginViaGoogle(googleToken)).execute()
+            val response = service.getDataFromGoogleToken(State.uid,State.provideAuditData(),RequestLoginViaGoogle(googleToken)).execute()
             if (response.isSuccessful) {
                 val body = response.body()
                 Result.success(body!!.r)
