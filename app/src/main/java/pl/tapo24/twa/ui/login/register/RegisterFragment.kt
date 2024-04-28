@@ -369,6 +369,9 @@ class RegisterFragment: Fragment() {
         if (!regex.matches(email)) {
             return "Błędny adres e-mail"
         }
+        if (email.contains(" ") || email.contains("\n") || email.contains("\t") || email.contains("\r")){
+            return "Email nie może zawierać spacji"
+        }
         viewModel.existEmailInService(email)
 
         return null
@@ -377,6 +380,10 @@ class RegisterFragment: Fragment() {
         if (login.length < 5) {
             return "Login powinien mieć conajmniej 5 znaków"
         }
+        if (login.contains(" ") || login.contains("\n") || login.contains("\t") || login.contains("\r")){
+            return "Login nie może zawierać spacji"
+        }
+
         val regex = Regex(pattern = "[A-Za-z0-9]+")
         if (!regex.matches(login)) {
             return "Login powinien składać się z znaków a-z oraz cyfr 0-9"
