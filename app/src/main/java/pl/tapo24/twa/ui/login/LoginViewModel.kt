@@ -9,8 +9,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.SessionProvider
+import pl.tapo24.twa.data.login.ToLoginData
+import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.useCase.login.RequestGenerateJwtTokenFromBackendUseCase
 import pl.tapo24.twa.useCase.login.RequestGoogleLoginReturnGoogleTokenUseCase
 import javax.inject.Inject
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val sessionProvider: SessionProvider,
     private val requestGoogleLoginReturnGoogleTokenUseCase: RequestGoogleLoginReturnGoogleTokenUseCase,
-    private val requestGenerateJwtTokenFromBackendUseCase: RequestGenerateJwtTokenFromBackendUseCase
+    private val requestGenerateJwtTokenFromBackendUseCase: RequestGenerateJwtTokenFromBackendUseCase,
+    private val networkClient: NetworkClient
 ): ViewModel() {
 
     val showError: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -36,15 +38,15 @@ class LoginViewModel @Inject constructor(
     fun login(loginData: ToLoginData) {
         showLoader.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            val statusLogin = sessionProvider.loginToService(loginData)
-
-            statusLogin.onSuccess {
+            val response = async { networkClient.login(loginData) }.await()
+            response.onSuccess {
                 withContext(Dispatchers.Main) {
+                    sessionProvider.createSession(it)
                     showLoader.value = false
                     successLogin.value = true
                 }
             }
-            statusLogin.onFailure {
+            response.onFailure {
                 withContext(Dispatchers.Main) {
                     showLoader.value = false
                     errorMessage = it.message.toString()
@@ -67,9 +69,8 @@ class LoginViewModel @Inject constructor(
                     withContext(Dispatchers.Main) {
                         showLoader.value = false
                         successLogin.value = true
-
+                        sessionProvider.createSession(it)
                     }
-                    sessionProvider.loginToServiceViaGoogle(it)
                 }
                 requestJwtToken?.onFailure {
                     withContext(Dispatchers.Main) {

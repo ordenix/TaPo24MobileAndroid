@@ -31,10 +31,7 @@ object State {
     var isAdmin: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var showNotifyForTariffIcon: Boolean = true
-    var isSessionConfirm: Boolean = false
-    var isSessionRestored: Boolean = false
     var isFavouritesSynchronized: Boolean = false
-    var isCustomCategorySynchronized: Boolean = false
 
     var networkType = "WiFi"
 

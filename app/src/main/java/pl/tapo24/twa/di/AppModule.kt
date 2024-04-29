@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import pl.tapo24.twa.module.FavouriteModule
 import pl.tapo24.twa.module.InitializationModule
-import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.EnvironmentType
 import pl.tapo24.twa.db.TapoDb
@@ -136,15 +135,6 @@ object AppModule {
         return NetworkClientElastic(url!!)
     }
 
-    @Provides
-    @Singleton
-    fun bindSessionProvider(
-        tapoDb: TapoDb,
-        networkClient: NetworkClient,
-        @ApplicationContext app: Context
-    ): SessionProvider {
-        return SessionProvider(tapoDb, networkClient, app)
-    }
 
     @Provides
     @Singleton
@@ -364,6 +354,5 @@ object AppModule {
         )
 
     }
-
 
 }

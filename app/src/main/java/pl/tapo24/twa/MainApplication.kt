@@ -35,12 +35,16 @@ class MainApplication: Application() {
     @Inject
     lateinit var initPackageDownloader: InitPackageDownloader
 
+    @Inject
+    lateinit var sessionProvider: SessionProvider
+
 
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         initializationModule.getUid()
         initializationModule.getSetting()
+        sessionProvider.restoreSession()
         try {
             val workManager = WorkManager.getInstance(this)
             val constraints = Constraints.Builder()

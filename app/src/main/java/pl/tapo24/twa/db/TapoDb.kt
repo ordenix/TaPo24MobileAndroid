@@ -22,7 +22,7 @@ import pl.tapo24.twa.db.entity.*
         CheckListDictionary::class,
         CheckListMap::class,
         CheckListType::class,
-    ], version = 14,
+    ], version = 15,
     exportSchema = true,
     autoMigrations = [
         AutoMigration (from = 1, to = 2),
@@ -38,6 +38,8 @@ import pl.tapo24.twa.db.entity.*
         AutoMigration (from = 11, to = 12),
         AutoMigration (from = 12, to = 13),
         AutoMigration (from = 13, to = 14),
+        AutoMigration (from = 14, to = 15),
+
 
 
     ]

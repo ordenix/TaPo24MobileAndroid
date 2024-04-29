@@ -74,6 +74,9 @@ data class Tariff(
     @ColumnInfo(defaultValue = "false")
     var court: Boolean = false,
 
+    @ColumnInfo(defaultValue = "")
+    var remarks: String?,
+
     @ColumnInfo(defaultValue = "false")
     var premiumIcon: Boolean = false,
 

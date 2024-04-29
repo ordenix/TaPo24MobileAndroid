@@ -14,7 +14,6 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import pl.tapo24.twa.MainActivity
-import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.updater.MourningCheck

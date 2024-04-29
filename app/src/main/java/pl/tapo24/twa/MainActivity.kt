@@ -85,9 +85,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var initializationModule: InitializationModule
 
     @Inject
-    lateinit var favouriteModule: FavouriteModule
-
-    @Inject
     lateinit var sessionProvider: SessionProvider
 
     @Inject
@@ -178,8 +175,6 @@ class MainActivity : AppCompatActivity() {
         theme.resolveAttribute(R.attr.tapoBackgroundColor, typed2, true)
         State.colorSpan1 = typed1.data
         State.colorSpan2 = typed2.data
-
-        val workManager = WorkManager.getInstance(this)
 
         // get theme
         val activity: Activity = this
@@ -300,46 +295,11 @@ class MainActivity : AppCompatActivity() {
         }
         // END NOTIFICATION SECTION
         initializationModule.initializeDialogForDataUpdater(this, supportFragmentManager)
-
         CheckVersion(tapoDb, networkClient, this).checkVersion()
-        val dialogTypeDownloadData = MaterialAlertDialogBuilder(this)
-            .setTitle("Wybór połączenia do aktualizacji danych")
-            .setCancelable(false)
-            .setMessage("Nasza aplikacja może pobierać duże ilości danych do aktualizacji zmian przepisów. Z racji, że widzisz ten komunikat to uruchamiasz aplikację po raz pierwszy :). Za chwilę zostaną pobrane wszystkie dane przepisów, grafik etc. - będzie to wynosić około 250MB. Aby zapewnić spójność z obowiązującymi przepisami aplikacja może pobierać w ciągu działania aktualizacje przepisów które nie powinny przekraczać 10MB. Pamiętaj, że wybierając dane sieci mogą zostać naliczone dodatkowe opłaty przez operatora w zależności od rodzaju taryfy połączenia")
-            .setNegativeButton("Tylko WiFi") { dialog, which ->
-                // Respond to negative button press
-                State.networkType = "WiFi"
-                //initPackageDownloader.downloadInitPackage()
-
-
-            }
-            .setPositiveButton("WiFi oraz dane sieci") { dialog, which ->
-
-            }
         // Add customization options here
 
 
         State.internetStatus.value = CheckConnection().getConnectionType(applicationContext)
-        if (State.isLogin.value == false && !State.isSessionRestored) {
-            sessionProvider.restoreSession()
-        }
-        State.internetStatus.observe(this, Observer {
-            if (it != NetworkTypes.None) {
-                // to do execute offline stacks
-                if (!State.isSessionConfirm && State.isLogin.value == true) {
-                    sessionProvider.restoreSession()
-
-                }
-                if (State.isLogin.value == true) {
-                    favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
-                }
-            }
-        })
-        State.isLogin.observe(this, Observer {
-            if (it && State.internetStatus.value != NetworkTypes.None) {
-                favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
-            }
-        })
         State.paymentId.observe(this, Observer {
             if (it.isNotEmpty()) {
                 Purchases.configure(

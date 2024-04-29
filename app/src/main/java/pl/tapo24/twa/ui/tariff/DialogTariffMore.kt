@@ -50,7 +50,16 @@ class DialogTariffMore: DialogFragment() {
             //binding  here
             val textCategory = item!!.category?.let { parseCategory(it) }
             binding.textView61.text = "Kategoria: ${textCategory}"
-
+            if (!item!!.court) {
+                binding.taxContainer.visibility = View.VISIBLE
+                binding.remarks.visibility = View.GONE
+                binding.remarksDescription.visibility = View.GONE
+            }  else {
+                binding.taxContainer.visibility = View.GONE
+                binding.remarks.visibility = View.VISIBLE
+                binding.remarksDescription.visibility = View.VISIBLE
+                binding.remarksDescription.text = item!!.remarks
+            }
 
             if (item!!.code != null) {
                 binding.codeContainer.visibility = View.VISIBLE

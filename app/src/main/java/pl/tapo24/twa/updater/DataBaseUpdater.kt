@@ -404,6 +404,8 @@ class DataBaseUpdater @Inject constructor(
                             elementFind.recidive = it.recidive
                             elementFind.tax = it.tax
                             elementFind.enginesType = it.enginesType
+                            elementFind.court = it.court
+                            elementFind.remarks = it.remarks
                             async { tapoDb.tariffDb().insert(elementFind) }.await()
 
                         } else {

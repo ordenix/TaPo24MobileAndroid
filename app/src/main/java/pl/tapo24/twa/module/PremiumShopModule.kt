@@ -8,10 +8,7 @@ import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import pl.tapo24.twa.SessionProvider
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
@@ -33,13 +30,6 @@ class PremiumShopModule @Inject constructor(private val tapoDb: TapoDb, private 
     @InstallIn(SingletonComponent::class)
     interface SessionProviderEntryPoint {
         fun sessionProvider(): SessionProvider
-    }
-
-
-    @EntryPoint
-    @InstallIn(SingletonComponent::class)
-    interface LawUpdaterEntryPoint {
-        fun lawUpdater(): LawUpdater
     }
 
     fun checkPermissionOnInit() {
@@ -70,10 +60,9 @@ class PremiumShopModule @Inject constructor(private val tapoDb: TapoDb, private 
                 async {tapoDb.settingDb().insert(jwtNewToDb) }.await()
                 val hiltEntryPoint = EntryPointAccessors.fromApplication(context, SessionProviderEntryPoint::class.java)
                 val sessionProvider = hiltEntryPoint.sessionProvider()
-                sessionProvider.restoreSession()
-                val lawUpdaterEntryPoint = EntryPointAccessors.fromApplication(context, LawUpdaterEntryPoint::class.java)
-                val lawUpdaterProvider = lawUpdaterEntryPoint.lawUpdater()
-                lawUpdaterProvider.update(jwt= it)
+                withContext(Dispatchers.Main) {
+                    sessionProvider.createSession(it)
+                }
             }
 
         }
