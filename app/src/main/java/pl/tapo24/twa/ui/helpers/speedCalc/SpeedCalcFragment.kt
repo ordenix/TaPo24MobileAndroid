@@ -12,7 +12,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.acra.ACRA
 import pl.tapo24.twa.R
+import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.FragmentSpeedCalcBinding
 import pl.tapo24.twa.ui.tariff.DialogTariffMore
 
@@ -130,6 +132,13 @@ class SpeedCalcFragment : Fragment() {
 
     private fun showDialog() {
         dialogMore.item = viewModel.tariffDetail.value
-        dialogMore.show(childFragmentManager, "More")
+        try {
+            dialogMore.show(childFragmentManager, "More")
+
+        } catch (ex: Exception) {
+            if (State.silentExceptionSaveOnState) {
+                ACRA.errorReporter.handleSilentException(ex)
+            }
+        }
     }
 }

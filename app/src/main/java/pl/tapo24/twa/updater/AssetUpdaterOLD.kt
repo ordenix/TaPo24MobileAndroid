@@ -458,7 +458,9 @@ class AssetUpdaterOLD(
                                         try {
                                             dialog.dismiss()
                                         } catch (ex: IllegalStateException) {
-                                            ACRA.errorReporter.handleSilentException(ex)
+                                            if (State.silentExceptionSaveOnState) {
+                                                ACRA.errorReporter.handleSilentException(ex)
+                                            }
                                         }
 
 

@@ -72,7 +72,9 @@ class UpdaterViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             showError.value = true
         }
-        ACRA.errorReporter.handleSilentException(ex)
+        if (State.silentExceptionFileDownload) {
+            ACRA.errorReporter.handleSilentException(ex)
+        }
     }
     private fun retryDownloadOnInternal() {
         viewModelScope.launch(Dispatchers.IO) {

@@ -64,7 +64,9 @@ class InitPackageDownloader @Inject constructor(
                     }
                 }
                 ?.onFailure {
-                    ACRA.errorReporter.handleSilentException(it)
+                    if (State.silentExceptionFileDownload) {
+                        ACRA.errorReporter.handleSilentException(it)
+                    }
                     result = Result.failure(it)
 //                    isPublicStorage = true
 //                    if (it.message?.contains("Permission denied") ?: false) {
