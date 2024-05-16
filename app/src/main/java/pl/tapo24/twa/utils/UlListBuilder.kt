@@ -55,6 +55,13 @@ class UlListBuilder {
 
     }
 
+    /**
+     * Generate a numbered list using the given text.
+     *
+     * @param text The input text.
+     * @param forceFirst If true, the first line will always be styled by a numerator 1, regardless of the number of lines.
+     * @return A SpannableStringBuilder object representing the numbered list.
+     */
     fun getTextNumerator(text: String?, forceFirst: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
@@ -74,6 +81,13 @@ class UlListBuilder {
         return ssb
     }
 
+    /**
+     * Gets a styled text with dashes for each line in the input text.
+     *
+     * @param text The input text to style. Can be null.
+     * @param forceFirst If true, the first line will always be styled with a dash, regardless of the number of lines.
+     * @return A SpannableStringBuilder object containing the styled text.
+     */
     fun getTextDash(text: String?, forceFirst: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
@@ -94,6 +108,13 @@ class UlListBuilder {
 
 
 
+    /**
+     * Generates a SpannableStringBuilder object representing a list of text items without bullets.
+     *
+     * @param text The input text. Can be null.
+     * @param extraSeparateLine If true, adds an extra separate line between items.
+     * @return A SpannableStringBuilder object representing the list of text items without bullets.
+     */
     fun getSpannableTextListWithoutBullet(text: String?, extraSeparateLine: Boolean = false): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
@@ -113,6 +134,12 @@ class UlListBuilder {
 
     }
 
+    /**
+     * Generates a SpannableStringBuilder object representing a list of text items with bullets.
+     *
+     * @param text The input text. Can be null.
+     * @return A SpannableStringBuilder object representing the list of text items with bullets.
+     */
     fun getSpannableTextBulletFromCustomText(text: String?): SpannableStringBuilder {
         val ssb = SpannableStringBuilder()
         if (text == null) return ssb
