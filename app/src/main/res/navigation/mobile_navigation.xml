@@ -36,6 +36,7 @@
         <action android:id="@+id/action_nav_helpers_to_nav_telephone" app:destination="@id/nav_telephone"/>
         <action android:id="@+id/action_nav_helpers_to_nav_innerNavigation" app:destination="@id/nav_innerNavigation"/>
         <action android:id="@+id/action_nav_helpers_to_nav_adrTable" app:destination="@+id/nav_adrTable"/>
+        <action android:id="@+id/action_nav_helpers_to_companyFragment" app:destination="@id/companyFragment"/>
     </fragment>
     <fragment android:id="@+id/nav_category_driving_licence"
               android:name="pl.tapo24.twa.ui.road.categoryDrivingLicence.CategoryDrivingLicenceFragment"
@@ -69,6 +70,7 @@
         <action android:id="@+id/action_nav_road_to_nav_checkListList" app:destination="@id/nav_checkListList"/>
         <action android:id="@+id/action_nav_road_to_nav_codeColors" app:destination="@id/nav_codeColors"/>
         <action android:id="@+id/action_nav_road_to_nav_immunityPersonList" app:destination="@+id/nav_immunityPersonList"/>
+        <action android:id="@+id/action_nav_road_to_nav_innerNavigation" app:destination="@id/nav_innerNavigation"/>
     </fragment>
 
     <fragment
@@ -335,7 +337,7 @@
         <argument android:name="code" app:argType="string"/>
     </fragment>
     <fragment android:id="@+id/nav_innerNavigation"
-              android:name="pl.tapo24.twa.ui.utils.navigation.InnerNavigationFragment"
+              android:name="pl.tapo24.twa.ui.utils.navigation.inner.InnerNavigationFragment"
               android:label="fragment_inner_navigation" tools:layout="@layout/fragment_inner_navigation">
         <argument android:name="treeName" app:argType="string" android:defaultValue="calculatorsw"/>
         <argument android:name="title" app:argType="string" android:defaultValue="Kalkulatoryw"/>
@@ -345,6 +347,8 @@
                 app:destination="@id/nav_alcoholCalc"/>
         <action android:id="@+id/action_nav_innerNavigation_to_nav_speedCalc"
                 app:destination="@id/nav_speedCalc"/>
+        <action android:id="@+id/action_nav_innerNavigation_to_noiseLevelFragment"
+                app:destination="@id/noiseLevelFragment"/>
 
 
     </fragment>
@@ -397,4 +401,9 @@
               android:label="fragment_survey_progress" tools:layout="@layout/fragment_survey_progress">
         <argument android:name="survey" app:argType="pl.tapo24.twa.data.survey.Survey"/>
     </fragment>
+    <fragment android:id="@+id/noiseLevelFragment"
+              android:name="pl.tapo24.twa.ui.road.technicalCondition.noiseLevel.NoiseLevelFragment"
+              android:label="@string/noise_level" tools:layout="@layout/fragment_noise_level"/>
+    <fragment android:id="@+id/companyFragment" android:name="pl.tapo24.twa.ui.helpers.company.CompanyFragment"
+              android:label="@string/list_company" tools:layout="@layout/fragment_company"/>
 </navigation>

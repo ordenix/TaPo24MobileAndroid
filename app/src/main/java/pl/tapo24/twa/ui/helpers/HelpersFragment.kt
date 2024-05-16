@@ -17,9 +17,8 @@ import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.ktx.Firebase
 import pl.tapo24.twa.adapter.NavAdapter
-import pl.tapo24.twa.data.nav.NavHelpers
+import pl.tapo24.twa.ui.utils.navigation.NavHelpers
 import pl.tapo24.twa.databinding.FragmentHelpersBinding
-import pl.tapo24.twa.ui.road.RoadViewModel
 
 class HelpersFragment: Fragment() {
     private var _binding: FragmentHelpersBinding? = null

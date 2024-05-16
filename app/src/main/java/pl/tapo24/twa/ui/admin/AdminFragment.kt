@@ -1,8 +1,6 @@
 package pl.tapo24.twa.ui.admin
 
-import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,13 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.analytics.ktx.logEvent
-import com.google.firebase.ktx.Firebase
-import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.NavAdapter
-import pl.tapo24.twa.data.nav.NavHelpers
 import pl.tapo24.twa.databinding.FragmentAdminBinding
 
 class AdminFragment : Fragment() {

@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import pl.tapo24.twa.adapter.NavAdapter
-import pl.tapo24.twa.data.nav.NavRoad
+import pl.tapo24.twa.ui.utils.navigation.NavRoad
 import pl.tapo24.twa.databinding.FragmentRoadBinding
 
 class RoadFragment: Fragment() {

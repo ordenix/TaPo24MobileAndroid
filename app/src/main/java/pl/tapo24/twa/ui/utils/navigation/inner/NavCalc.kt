@@ -1,4 +1,4 @@
-package pl.tapo24.twa.ui.utils.navigation
+package pl.tapo24.twa.ui.utils.navigation.inner
 
 import pl.tapo24.twa.R
 import pl.tapo24.twa.data.nav.NavElement

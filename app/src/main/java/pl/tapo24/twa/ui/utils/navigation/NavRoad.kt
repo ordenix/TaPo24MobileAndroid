@@ -1,6 +1,8 @@
-package pl.tapo24.twa.data.nav
+package pl.tapo24.twa.ui.utils.navigation
 import androidx.core.os.bundleOf
 import pl.tapo24.twa.R
+import pl.tapo24.twa.data.nav.NavElement
+
 enum class NavRoad(
     val navElement: NavElement
 ) {
@@ -137,6 +139,16 @@ enum class NavRoad(
             navId = R.id.action_nav_road_to_nav_immunityPersonList,
             requirePremium = true,
             navHttpLink = null,
+        )
+    ),
+    TechnicalCondition(
+        NavElement(
+            navName = "Warunki techniczne",
+            navIcon= R.drawable.wrench,
+            navId = R.id.action_nav_road_to_nav_innerNavigation,
+            navHttpLink = null,
+            requirePremium = true,
+            listBundle = bundleOf("title" to "Warunki techniczne", "treeName" to "technicalCondition")
         )
     ),
 

@@ -1,4 +1,4 @@
-package pl.tapo24.twa.ui.utils.navigation
+package pl.tapo24.twa.ui.utils.navigation.inner
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -20,7 +20,7 @@ import com.google.firebase.ktx.Firebase
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.NavAdapter
 import pl.tapo24.twa.databinding.FragmentInnerNavigationBinding
-import pl.tapo24.twa.ui.story.StoryFragmentArgs
+import pl.tapo24.twa.ui.utils.navigation.inner.InnerNavigationFragmentArgs
 
 class InnerNavigationFragment : Fragment() {
 
@@ -70,6 +70,11 @@ class InnerNavigationFragment : Fragment() {
         when (viewModel.type) {
             "calculator" -> {
                 viewModel.adapter = NavAdapter(NavCalc.values().map { it.navElement })
+                rv.adapter = viewModel.adapter
+
+            }
+            "technicalCondition" -> {
+                viewModel.adapter = NavAdapter(NavTechnicalCondition.values().map { it.navElement })
                 rv.adapter = viewModel.adapter
 
             }

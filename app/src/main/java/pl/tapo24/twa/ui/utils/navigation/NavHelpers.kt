@@ -1,7 +1,8 @@
-package pl.tapo24.twa.data.nav
+package pl.tapo24.twa.ui.utils.navigation
 
 import androidx.core.os.bundleOf
 import pl.tapo24.twa.R
+import pl.tapo24.twa.data.nav.NavElement
 
 enum class NavHelpers(
     val navElement: NavElement
@@ -138,6 +139,15 @@ enum class NavHelpers(
             navName = "Tablica ADR",
             navIcon= R.drawable.explosion_solid,
             navId = R.id.action_nav_helpers_to_nav_adrTable,
+            requirePremium = true,
+            navHttpLink = null,
+        )
+    ),
+    Company(
+        NavElement(
+            navName = "Lista Firm",
+            navIcon= R.drawable.company,
+            navId = R.id.action_nav_helpers_to_companyFragment,
             requirePremium = true,
             navHttpLink = null,
         )
