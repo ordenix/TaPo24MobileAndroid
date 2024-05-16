@@ -63,6 +63,10 @@ object State {
     var dialogDownloadFileMessage: String = ""
     var setIndeterminate: MutableLiveData<Boolean> = MutableLiveData(false)
 
+    // silent exception
+    const val silentExceptionSaveOnState: Boolean = false
+    const val silentExceptionFileDownload: Boolean = false
+
     fun provideAuditData(): AuditData {
         return AuditData(
             uid = uid,

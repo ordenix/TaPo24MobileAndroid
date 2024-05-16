@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import org.acra.ACRA
 import pl.tapo24.twa.R
 import pl.tapo24.twa.adapter.CustomCategoryMapAdapter
 import pl.tapo24.twa.adapter.QuerySuggestionAdapter
@@ -314,16 +315,22 @@ class TariffFragment: Fragment() {
     private fun showDialog() {
         dialogMore.item = viewModel.itemToDialog
         dialogMore.position = viewModel.positionToDialog
-        dialogMore.show(childFragmentManager, "More")
-        dialogMore.onAddFavClick = {
-            viewModel.itemToDialog?.let { it1 -> viewModel.clickOnFavorites(it1, viewModel.positionToDialog) }
-        }
-        dialogMore.editMapClick = {
-            viewModel.getListForDialogMap(viewModel.itemToDialog?.id ?: "")
-            viewModel.showEditMapDialog.value = true
-        }
-        dialogMore.closeClick = {
-            viewModel.showDialog.value = false
+        try {
+            dialogMore.show(childFragmentManager, "More")
+            dialogMore.onAddFavClick = {
+                viewModel.itemToDialog?.let { it1 -> viewModel.clickOnFavorites(it1, viewModel.positionToDialog) }
+            }
+            dialogMore.editMapClick = {
+                viewModel.getListForDialogMap(viewModel.itemToDialog?.id ?: "")
+                viewModel.showEditMapDialog.value = true
+            }
+            dialogMore.closeClick = {
+                viewModel.showDialog.value = false
+            }
+        } catch (ex: Exception) {
+            if (State.silentExceptionSaveOnState) {
+                ACRA.errorReporter.handleSilentException(ex)
+            }
         }
     }
 

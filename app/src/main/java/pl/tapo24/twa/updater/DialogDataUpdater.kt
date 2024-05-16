@@ -11,6 +11,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import org.acra.ACRA
 import pl.tapo24.twa.R
+import pl.tapo24.twa.data.State
 import pl.tapo24.twa.databinding.DialogDataUpdaterBinding
 import pl.tapo24.twa.databinding.DialogTariffMoreBinding
 
@@ -70,7 +71,9 @@ class DialogDataUpdater: DialogFragment() {
             try {
                 super.show(manager, tag)
             } catch (e: IllegalStateException) {
-                ACRA.errorReporter.handleSilentException(e)
+                if (State.silentExceptionSaveOnState) {
+                    ACRA.errorReporter.handleSilentException(e)
+                }
             }
         }
     }
@@ -81,7 +84,9 @@ class DialogDataUpdater: DialogFragment() {
                 return super.show(transaction, tag)
 
             } catch (e: IllegalStateException) {
-                ACRA.errorReporter.handleSilentException(e)
+                if (State.silentExceptionSaveOnState) {
+                    ACRA.errorReporter.handleSilentException(e)
+                }
             }
         }
         return 0

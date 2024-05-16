@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
+import org.acra.ACRA
 import pl.tapo24.twa.MainActivity
 import pl.tapo24.twa.data.EnginesType
 import pl.tapo24.twa.data.State
@@ -165,7 +166,14 @@ class SignDetailsFragment : Fragment() {
 
     private fun showDialog() {
         dialogMore.item = viewModel.tariffDetail.value
-        dialogMore.show(childFragmentManager, "More")
+        try {
+            dialogMore.show(childFragmentManager, "More")
+
+        } catch (ex: Exception) {
+            if (State.silentExceptionSaveOnState) {
+                ACRA.errorReporter.handleSilentException(ex)
+            }
+        }
     }
 
 

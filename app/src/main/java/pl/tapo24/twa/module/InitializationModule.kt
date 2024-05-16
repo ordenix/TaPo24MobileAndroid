@@ -70,7 +70,9 @@ class InitializationModule @Inject constructor(private val tapoDb: TapoDb, priva
                                         State.dialogUpdater.show(supportFragmentManager.beginTransaction().remove(State.dialogUpdater), "dialogUpdater")
 
                                     } catch (e: IllegalStateException) {
-                                        ACRA.errorReporter.handleSilentException(e)
+                                        if (State.silentExceptionSaveOnState) {
+                                            ACRA.errorReporter.handleSilentException(e)
+                                        }
                                     }
                                 }
 
