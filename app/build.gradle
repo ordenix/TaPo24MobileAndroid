@@ -12,13 +12,18 @@ plugins {
 android {
     namespace 'pl.tapo24.twa'
     compileSdk 34
+//    lintOptions {
+//        checkReleaseBuilds false
+//        //If you want to continue even if errors found use following line
+//        abortOnError false
+//    }
 
     defaultConfig {
         applicationId "pl.tapo24.twa"
         minSdk 24
         targetSdk 34
-        versionCode 76
-        versionName "2.76"
+        versionCode 77
+        versionName "2.77"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -69,6 +74,7 @@ dependencies {
 
     // room db
     implementation "androidx.room:room-ktx:$room_version"
+
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
