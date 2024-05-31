@@ -84,15 +84,13 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
         // add worker to regenerate token
         val workRequest = PeriodicWorkRequestBuilder<RegenerateJwtTokenWorker>(15, TimeUnit.DAYS)
             .setConstraints(constraints)
-            .setInitialDelay(1, TimeUnit.MINUTES)
+            .setInitialDelay(15, TimeUnit.DAYS)
             .build()
         workManager.enqueueUniquePeriodicWork("RegenerateJwt", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest)
     }
 
     // execute on start
     fun restoreSession() {
-        // State.uid = "" // TODO: SET TATE UID AND DB BY LOGIN UID
-
         MainScope().launch(Dispatchers.IO) {
             val jwtTokenFromDb = async{tapoDb.settingDb().getSettingByName("jwtToken") }.await()
             if (jwtTokenFromDb != null) {

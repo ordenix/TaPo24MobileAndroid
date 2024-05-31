@@ -107,24 +107,24 @@ enum class NavHelpers(
 //        navHttpLink = null
 //    )
 //    ),
-    BuyCaffe(
-        NavElement(
-        navName = "Postaw nam kawę",
-        navIcon= R.drawable.mug_hot_solid,
-        navId = null,
-        navHttpLink = "https://buycoffee.to/tapo24",
-        statsDescription = "buy caffe"
-    )
-    ),
-    Patronite(
-        NavElement(
-        navName = "Wesprzyj nas",
-        navIcon= R.drawable.patronite_mini_svg_02,
-        navId = null,
-        navHttpLink = "https://patronite.pl/tapo24",
-        statsDescription = "patron"
-    )
-    ),
+//    BuyCaffe(
+//        NavElement(
+//        navName = "Postaw nam kawę",
+//        navIcon= R.drawable.mug_hot_solid,
+//        navId = null,
+//        navHttpLink = "https://buycoffee.to/tapo24",
+//        statsDescription = "buy caffe"
+//    )
+//    ),
+//    Patronite(
+//        NavElement(
+//        navName = "Wesprzyj nas",
+//        navIcon= R.drawable.patronite_mini_svg_02,
+//        navId = null,
+//        navHttpLink = "https://patronite.pl/tapo24",
+//        statsDescription = "patron"
+//    )
+//    ),
     Calculators(
         NavElement(
             navName = "Kalkulatory/ Preliczniki",
