@@ -9,6 +9,7 @@ import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.*
+import org.acra.ACRA
 import pl.tapo24.twa.data.NetworkTypes
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.data.login.DataUser
@@ -102,9 +103,11 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
                         loadDataFromDb()
                         favouriteModule.synchronizeOnSessionCreatedOrInternetAvailable()
                     }
-                    checkToken.onFailure {
+                    checkToken.onFailure { ex->
                         withContext(Dispatchers.Main) {
                             clearSession()
+                            ACRA.errorReporter.putCustomData("CLEAR SESSION AT ${System.currentTimeMillis()}", jwtTokenFromDb.value)
+                            ACRA.errorReporter.handleSilentException(ex)
                         }
                     }
                 } else {
