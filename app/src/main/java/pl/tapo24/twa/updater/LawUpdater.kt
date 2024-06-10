@@ -5,6 +5,7 @@ import kotlinx.coroutines.*
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.dbData.DataTapoDb
+import pl.tapo24.twa.dbData.entity.Law
 import pl.tapo24.twa.infrastructure.NetworkClient
 import javax.inject.Inject
 
@@ -26,7 +27,10 @@ class LawUpdater @Inject constructor(
                         val lawFromDb = lawDataFromDb.find { it.id == law.id }
                         val versionFromServer = law.version ?: 0
                         val versionFromDb: Int = lawFromDb?.version ?: 0
-                        if ((versionFromServer > versionFromDb || force) && law.fileName != null) {
+                        val isSelectToDownload =  lawFromDb?.isSelectedToDownload ?: false
+                        if ((versionFromServer > versionFromDb || force)
+                            && law.fileName != null
+                            && (law.isOptional != true || isSelectToDownload) ) {
                             // download file
                             State.dialogDownloadFileMessage = "Pobieranie pliku ${law.fileName}"
                             async {
@@ -44,8 +48,20 @@ class LawUpdater @Inject constructor(
                                 isPublicStorage
                             )
                             resultDownloadFile.onSuccess {
+                                if (law.isOptional != true) {
+                                    law.isSelectedToDownload = true
+                                } else {
+                                    law.isSelectedToDownload = lawFromDb?.isSelectedToDownload ?: false
+                                }
+
                                 async { dataTapoDb.law().insert(law) }.await()
                             }
+
+                        } else if ((versionFromServer > versionFromDb || force)
+                            && law.fileName != null
+                            && (law.isOptional == true && !isSelectToDownload) ) {
+                            law.isSelectedToDownload = false
+                            async { dataTapoDb.law().insert(law) }.await()
 
                         }
 
@@ -70,9 +86,6 @@ class LawUpdater @Inject constructor(
                         }
 
                     }
-
-
-
                     withContext(Dispatchers.Main) {
                         State.dialogDownloadFileProgress.value = null
                     }
@@ -81,6 +94,54 @@ class LawUpdater @Inject constructor(
             }
         }
 
+    }
+
+    suspend fun downloadOptionalFile(law: Law) {
+        MainScope().async(Dispatchers.IO) {
+            val isPublicStorage = async { getStorageIsPublic() }.await()
+            State.dialogDownloadFileMessage = "Pobieranie pliku ${law.fileName}"
+            async {
+                Downloader().deleteAsset(
+                    "pdf",
+                    law.fileName!!,
+                    context,
+                    isPublicStorage
+                )
+            }.await()
+            val resultDownloadFile = Downloader().downloadAsset(
+                "pdf",
+                law.fileName!!,
+                context,
+                isPublicStorage
+            )
+            resultDownloadFile.onSuccess {
+                async { dataTapoDb.law().insert(law) }.await()
+                withContext(Dispatchers.Main) {
+                    State.dialogDownloadFileProgress.value = null
+                }
+            }
+        }.await()
+    }
+
+    suspend fun deleteOptionalFile(law: Law) {
+        MainScope().async(Dispatchers.IO) {
+            val isPublicStorage = async { getStorageIsPublic() }.await()
+            State.dialogDownloadFileMessage = "Kasowanie starych plików"
+            async {
+                Downloader().deleteAsset(
+                    "pdf",
+                    law.fileName!!,
+                    context,
+                    isPublicStorage
+                )
+            }.await()
+
+            async { dataTapoDb.law().insert(law) }.await()
+            withContext(Dispatchers.Main) {
+                State.dialogDownloadFileProgress.value = null
+            }
+
+        }.await()
     }
 
     fun initUpdate() {

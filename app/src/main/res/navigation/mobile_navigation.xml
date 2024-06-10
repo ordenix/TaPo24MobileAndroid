@@ -87,7 +87,9 @@
             android:id="@+id/nav_settings"
             android:name="pl.tapo24.twa.ui.settings.SettingsFragment"
             android:label="@string/settings"
-            tools:layout="@layout/fragment_setting"/>
+            tools:layout="@layout/fragment_setting">
+        <action android:id="@+id/action_nav_settings_to_pdfListFragment" app:destination="@id/pdfListFragment"/>
+    </fragment>
     <fragment
             android:id="@+id/nav_about_application"
             android:name="pl.tapo24.twa.ui.aboutApplication.AboutApplicationFragment"
@@ -198,6 +200,7 @@
         <action android:id="@+id/action_nav_law_to_nav_tariff" app:destination="@id/nav_tariff"/>
         <argument android:name="type" app:argType="string" android:defaultValue="law"/>
         <argument android:name="title" app:argType="string" android:defaultValue="Przepisy"/>
+        <action android:id="@+id/action_nav_law_to_pdfListFragment" app:destination="@id/pdfListFragment"/>
     </fragment>
     <fragment android:id="@+id/nav_codeLimitsDrivingLicence"
               android:name="pl.tapo24.twa.ui.road.codeLimitsDrivingLicence.CodeLimitsDrivingLicenceFragment"
@@ -406,4 +409,6 @@
               android:label="@string/noise_level" tools:layout="@layout/fragment_noise_level"/>
     <fragment android:id="@+id/companyFragment" android:name="pl.tapo24.twa.ui.helpers.company.CompanyFragment"
               android:label="@string/list_company" tools:layout="@layout/fragment_company"/>
+    <fragment android:id="@+id/pdfListFragment" android:name="pl.tapo24.twa.ui.settings.pdf.PdfListFragment"
+              android:label="@string/file_management"/>
 </navigation>

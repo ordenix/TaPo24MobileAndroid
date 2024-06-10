@@ -36,7 +36,7 @@ class LawViewModel @Inject constructor(
     fun getData(type: String) {
         viewModelScope.launch(Dispatchers.IO) {
             var dataFromDb: List<Law>? = null
-            async{dataFromDb = dataTapoDb.law().getAllByType(type)}.await()
+            async{dataFromDb = dataTapoDb.law().getAllByTypeAndSelectedToDownload(type)}.await()
             withContext(Dispatchers.Main) {
                 if (dataFromDb != null) {
                     data.value = dataFromDb!!
