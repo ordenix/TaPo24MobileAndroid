@@ -36,5 +36,14 @@ data class Law (
 
     @ColumnInfo(defaultValue = "false")
     var isPremium: Boolean? = null,
+
+    @ColumnInfo(defaultValue = "false")
+    var isOptional: Boolean? = null,
+
+    @ColumnInfo(defaultValue = "false")
+    var isSelectedToDownload: Boolean? = null,
+
+    @ColumnInfo(defaultValue = "")
+    var size: String? = null,
 ) {
 }

@@ -19,6 +19,9 @@ interface LawDao {
     @Query("SELECT * FROM law where type = :type")
     fun getAllByType(type: String): List<Law>
 
+    @Query("SELECT * FROM law where type = :type and isSelectedToDownload = '1'")
+    fun getAllByTypeAndSelectedToDownload(type: String): List<Law>
+
     @Delete
     fun deleteElement(item: Law)
 
