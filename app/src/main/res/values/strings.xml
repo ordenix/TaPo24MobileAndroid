@@ -385,5 +385,6 @@
     <string name="gasolineEngine">Silnik o zapłonie iskrowym:</string>
     <string name="maximumOutsideNoise">Dopuszczalny poziom hałasu zewnetrznego</string>
     <string name="searchCompany">Wyszukaj firmę</string>
+    <string name="file_management">Zarządzanie plikami</string>
 
 </resources>

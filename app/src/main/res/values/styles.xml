@@ -64,6 +64,10 @@
         <item name="android:textSize">14sp</item>
         <item name="android:maxLines">100</item>
     </style>
+    <style name="textStyleWhiteVerySmallInContainer" parent="@style/textStyle">
+        <item name="android:textSize">8sp</item>
+        <item name="android:maxLines">100</item>
+    </style>
     <style name="textStyleWhiteSmallInContainerCenter" parent="@style/textStyle">
         <item name="android:textSize">14sp</item>
         <item name="android:textAlignment">center</item>
