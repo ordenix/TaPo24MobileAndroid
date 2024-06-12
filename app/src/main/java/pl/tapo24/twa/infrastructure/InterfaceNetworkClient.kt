@@ -62,6 +62,12 @@ interface InterfaceNetworkClient {
     fun getShopStatus(@Header("AUDIT-DATA")auditHeader: AuditData): Call<Setting>
 
     @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/special_config")
+    fun getSpecialConfig(@Header("AUDIT-DATA")auditHeader: AuditData,
+                        @Query("login") userName: String?,
+                        @Query("uid") uid: String?): Call<List<SpecialConfig>>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/data_home_page_news")
     fun getHomeNews(@Header("AUDIT-DATA")auditHeader: AuditData): Call<List<DataHomeNews>>
 

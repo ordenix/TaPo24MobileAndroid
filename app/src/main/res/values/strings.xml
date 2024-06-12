@@ -386,5 +386,6 @@
     <string name="maximumOutsideNoise">Dopuszczalny poziom hałasu zewnetrznego</string>
     <string name="searchCompany">Wyszukaj firmę</string>
     <string name="file_management">Zarządzanie plikami</string>
+    <string name="restorePurchase">Odnów zakup</string>
 
 </resources>

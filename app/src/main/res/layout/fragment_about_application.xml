@@ -132,9 +132,20 @@
                             android:visibility="visible"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/forcePdf"
-                            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             android:layout_marginStart="16dp" android:layout_marginEnd="16dp"
                     />
+                    <Button
+                            android:text="@string/restorePurchase"
+                            app:icon="@drawable/money_bill_wave_solid"
+                            app:iconSize="20dp"
+                            android:backgroundTint="?attr/buttonBackground"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content" android:id="@+id/restorePurchase"
+                            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/forceAsset"
+                            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

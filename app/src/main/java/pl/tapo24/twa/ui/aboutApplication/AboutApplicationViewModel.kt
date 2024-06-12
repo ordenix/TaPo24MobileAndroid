@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.revenuecat.purchases.Purchases
+import com.revenuecat.purchases.restorePurchasesWith
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +17,7 @@ import kotlinx.coroutines.withContext
 import pl.tapo24.twa.adapter.AboutApplicationAdapter
 import pl.tapo24.twa.dbData.DataTapoDb
 import pl.tapo24.twa.dbData.entity.DataBaseVersion
+import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.updater.AssetUpdater
 import pl.tapo24.twa.updater.DataBaseUpdater
 import pl.tapo24.twa.updater.LawUpdater
@@ -27,7 +30,8 @@ class AboutApplicationViewModel @Inject constructor(
     private val dataTapoDb: DataTapoDb,
     private val assetUpdater: AssetUpdater,
     private val lawUpdater: LawUpdater,
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val networkClient: NetworkClient
 ): ViewModel() {
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -37,6 +41,8 @@ class AboutApplicationViewModel @Inject constructor(
 //    val text: LiveData<String> = _text
     lateinit var adapter: AboutApplicationAdapter
     val data = MutableLiveData<List<DataBaseVersion>>()
+
+    val restoreButtonStatus = MutableLiveData<Boolean>(false)
 
     fun getData () {
         viewModelScope.launch(Dispatchers.IO) {
@@ -48,6 +54,30 @@ class AboutApplicationViewModel @Inject constructor(
             }
         }
 
+    }
+
+    fun getRestoreButtonStatus() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = async {networkClient.getSpecialConfig()}. await()
+            response.onSuccess { r->
+                val restoreButton = r.find { it.name == "restoreButton" }
+                if (restoreButton?.state == true) {
+                    withContext(Dispatchers.Main) {
+                        restoreButtonStatus.value = true
+                    }
+                } else {
+                    withContext(Dispatchers.Main) {
+                        restoreButtonStatus.value = false
+                    }
+                }
+            }
+
+        }
+    }
+
+    fun restorePurchase() {
+        Purchases.sharedInstance.restorePurchasesWith() { customerInfo ->
+        }
     }
 
     fun forceUpdateAsset() {

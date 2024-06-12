@@ -2,10 +2,7 @@ package pl.tapo24.twa.infrastructure
 
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
-import pl.tapo24.twa.data.DataHomeNews
-import pl.tapo24.twa.data.RType
-import pl.tapo24.twa.data.State
-import pl.tapo24.twa.data.Uid
+import pl.tapo24.twa.data.*
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.login.DataUser
 import pl.tapo24.twa.data.login.RequestLoginViaGoogle
@@ -557,6 +554,19 @@ class NetworkClient(var url: String) {
     fun getShopStatus(): Result<Setting> {
         try {
             val response = service.getShopStatus(State.provideAuditData()).execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!)
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+        }
+    }
+
+    fun getSpecialConfig(): Result<List<SpecialConfig>> {
+        try {
+            val response = service.getSpecialConfig(State.provideAuditData(),State.userName, State.uid).execute()
             return if (response.isSuccessful) {
                 Result.success(response.body()!!)
             } else {

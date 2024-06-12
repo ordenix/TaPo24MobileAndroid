@@ -63,6 +63,18 @@ class AboutApplicationFragment: Fragment() {
             viewModel.forceUpdateAsset()
         }
 
+        viewModel.getRestoreButtonStatus()
+
+        viewModel.restoreButtonStatus.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.restorePurchase.visibility = View.VISIBLE
+            } else {
+                binding.restorePurchase.visibility = View.GONE
+            }
+        })
+        binding.restorePurchase.setOnClickListener {
+            viewModel.restorePurchase()
+        }
 
         return root
     }
