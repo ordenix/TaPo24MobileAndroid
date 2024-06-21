@@ -33,7 +33,6 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
 
     private lateinit var sharedPreferences: SharedPreferences
 
-    val workManager: WorkManager = WorkManager.getInstance(context)
     val constraints = Constraints.Builder()
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()
@@ -46,6 +45,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
 
 
     fun createSession(jwtToken: String) {
+        val workManager: WorkManager = WorkManager.getInstance(context)
+
 /////
         sharedPreferences = context.getSharedPreferences(
             "Jwt",
@@ -92,6 +93,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
 
     // execute on start
     fun restoreSession() {
+        val workManager: WorkManager = WorkManager.getInstance(context)
+
         MainScope().launch(Dispatchers.IO) {
             val jwtTokenFromDb = async{tapoDb.settingDb().getSettingByName("jwtToken") }.await()
             if (jwtTokenFromDb != null) {
@@ -139,6 +142,8 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
         }
     }
     fun clearSession() {
+        val workManager: WorkManager = WorkManager.getInstance(context)
+
         workManager.cancelUniqueWork("RegenerateJwt")
         // clear data in state
         State.isLogin.value = false
