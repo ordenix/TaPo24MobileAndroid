@@ -367,32 +367,42 @@ class MainActivity : AppCompatActivity() {
         val menuLogin = menu.findItem(R.id.action_login)
         val menuLogOut = menu.findItem(R.id.action_logout)
         val menuShop = menu.findItem(R.id.action_shop)
+        val menuEnterPromoCode = menu.findItem(R.id.action_enter_promo_code)
+        menuEnterPromoCode.isVisible = false
         State.isLogin.observe(this, Observer {
             if (it == true) {
                 menuLogOut.isVisible = true
                 menuLogin.isVisible = false
                 menuShop.isVisible = true
+                State.isPremiumCodeActive.observe(this, Observer{premiumCodeActive->
+                    if (premiumCodeActive && !State.premiumVersion) {
+                        menuEnterPromoCode.isVisible = true
+                    } else {
+                        menuEnterPromoCode.isVisible = false
+                    }
+                })
             } else {
                 menuLogOut.isVisible = false
                 menuLogin.isVisible = true
                 menuShop.isVisible = false
+                menuEnterPromoCode.isVisible = false
             }
         })
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
         if (item.itemId == R.id.action_settings) {
-            // DataUpdater(tapoDb,dataTapoDb,networkClient,this, getCheckListDictionaryUseCase, getCheckListAllTypeUseCase, getCheckListMapUseCase).getData()
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_settings)
         }
         if (item.itemId == R.id.action_info) {
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_about_application)
         }
+        if (item.itemId == R.id.action_enter_promo_code) {
+            navController.navigate(R.id.promoCodeFragment)
+        }
         if (item.itemId == R.id.action_shop) {
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
             var shopAvailable = false
             MainScope().launch(Dispatchers.IO) {
                 val checkShopStatus = async { networkClient.getShopStatus() }.await()
@@ -412,7 +422,6 @@ class MainActivity : AppCompatActivity() {
 
         }
         if (item.itemId == R.id.action_login) {
-            val navController = findNavController(R.id.nav_host_fragment_content_main)
             navController.navigate(R.id.nav_login)
         }
         if (item.itemId == R.id.action_logout) {

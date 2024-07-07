@@ -25,6 +25,8 @@ object State {
     const val versionName = BuildConfig.VERSION_NAME
     const val versionCode = BuildConfig.VERSION_CODE
 
+    var isPremiumCodeActive: MutableLiveData<Boolean> = MutableLiveData(false)
+
     var premiumVersion: Boolean = false
     var beta: Boolean = false
     var isLogin: MutableLiveData<Boolean> = MutableLiveData(false)

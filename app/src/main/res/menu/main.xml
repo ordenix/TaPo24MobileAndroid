@@ -16,6 +16,12 @@
           android:icon="@drawable/gears_solid"
           android:orderInCategory="155"
           app:showAsAction="never"/>
+    <item android:id="@+id/action_enter_promo_code"
+          android:title="@string/enter_promo_code"
+          android:visible="false"
+          android:icon="@drawable/gears_solid"
+          android:orderInCategory="155"
+          app:showAsAction="never"/>
 <!--    <item android:id="@+id/action_about"-->
 <!--          android:title="@string/menu_about"-->
 <!--          android:orderInCategory="200"-->

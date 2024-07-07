@@ -302,6 +302,7 @@
     <string name="add_to_fav">Dodaj do ulubionych</string>
     <string name="editCategory">Edytuj kategorię</string>
     <string name="shop_Premium">Sklep</string>
+    <string name="enter_promo_code">Wprowadź kod</string>
     <string name="check_listy">Check Listy</string>
     <string name="test">test</string>
     <string name="unSelesctAll">Odznacz wszystkie</string>
@@ -387,5 +388,7 @@
     <string name="searchCompany">Wyszukaj firmę</string>
     <string name="file_management">Zarządzanie plikami</string>
     <string name="restorePurchase">Odnów zakup</string>
+    <string name="enter_code">Wprowadź kod</string>
+    <string name="checkCode">Sprawdź kod</string>
 
 </resources>

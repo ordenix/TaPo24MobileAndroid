@@ -17,6 +17,7 @@ import org.acra.sender.HttpSender
 import pl.tapo24.twa.data.State
 import pl.tapo24.twa.db.TapoDb
 import pl.tapo24.twa.db.entity.Setting
+import pl.tapo24.twa.infrastructure.NetworkClient
 import pl.tapo24.twa.module.InitializationModule
 import pl.tapo24.twa.updater.InitPackageDownloader
 import pl.tapo24.twa.worker.DataBaseUpdateWorker
@@ -37,6 +38,9 @@ class MainApplication: Application() {
 
     @Inject
     lateinit var sessionProvider: SessionProvider
+
+    @Inject
+    lateinit var networkClient: NetworkClient
 
 
     override fun onCreate() {
@@ -89,6 +93,17 @@ class MainApplication: Application() {
 //                }
 
                 }
+                // get enterCode
+                val settingCode = async {networkClient.getServerSettings("code_promo") }.await()
+                settingCode.onSuccess { codePromo->
+                    if (codePromo.state) {
+                        withContext(Dispatchers.Main) {
+                            State.isPremiumCodeActive.value = true
+                        }
+                    }
+                }
+
+
             }
         } catch (e: Exception) {
             try {
@@ -97,12 +112,6 @@ class MainApplication: Application() {
                 println(e)
             }
         }
-
-
-
-
-
-
     }
 
     override fun attachBaseContext(base: Context?) {

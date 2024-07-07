@@ -64,6 +64,12 @@ class LoginFragment: Fragment() {
                 bundleOf("googleIdToken" to null)
             )
         }
+        viewModel.buttonBlockedLogin.observe(viewLifecycleOwner, Observer {
+            binding.loginButton.isEnabled = !it
+        })
+        viewModel.buttonBlockedGogoleLogin.observe(viewLifecycleOwner, Observer {
+            binding.googleLoginButton.isEnabled = !it
+        })
         binding.loginButton.setOnClickListener { view ->
             if (binding.login.text.isNullOrEmpty() || binding.password.text.isNullOrEmpty()) {
                 showDialog(getString(R.string.enter_login_or_passwd))

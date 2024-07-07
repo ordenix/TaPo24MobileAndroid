@@ -132,18 +132,18 @@ class SessionProvider @Inject constructor(private var tapoDb: TapoDb,
             val betaFromDb = async{tapoDb.settingDb().getSettingByName("Beta") }.await()
             withContext(Dispatchers.Main) {
                 State.jwtToken = jwtTokenFromDb!!.value
+                State.premiumVersion = roleFromDb!!.value == "Admin" || roleFromDb.value == "Vip"
                 State.isLogin.value = true
                 State.userName = userNameFromDb!!.value
                 State.paymentId.value = userNameFromDb.value
-                State.isAdmin.value = roleFromDb!!.value == "admin"
+                State.isAdmin.value = roleFromDb.value == "admin"
                 State.beta = betaFromDb!!.value == "true"
-                State.premiumVersion = roleFromDb.value == "Admin" || roleFromDb.value == "Vip"
             }
         }
     }
     fun clearSession() {
         val workManager: WorkManager = WorkManager.getInstance(context)
-
+        ACRA.errorReporter.handleSilentException(Exception("CLEAR SESSION FUNCTION AT ${System.currentTimeMillis()}"))
         workManager.cancelUniqueWork("RegenerateJwt")
         // clear data in state
         State.isLogin.value = false

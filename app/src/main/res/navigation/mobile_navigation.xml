@@ -411,4 +411,6 @@
               android:label="@string/list_company" tools:layout="@layout/fragment_company"/>
     <fragment android:id="@+id/pdfListFragment" android:name="pl.tapo24.twa.ui.settings.pdf.PdfListFragment"
               android:label="@string/file_management"/>
+    <fragment android:id="@+id/promoCodeFragment" android:name="pl.tapo24.twa.ui.settings.promoCode.PromoCodeFragment"
+              android:label="@string/enter_code" tools:layout="@layout/fragment_promo_code"/>
 </navigation>

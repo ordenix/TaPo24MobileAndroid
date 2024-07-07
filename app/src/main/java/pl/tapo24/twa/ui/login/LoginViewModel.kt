@@ -30,12 +30,16 @@ class LoginViewModel @Inject constructor(
     val showLoader: MutableLiveData<Boolean> = MutableLiveData(false)
     val procesRegister: MutableLiveData<Boolean> = MutableLiveData(false)
     var tokenGoogle: String? = null
+    val buttonBlockedLogin = MutableLiveData<Boolean>(false)
+    val buttonBlockedGogoleLogin = MutableLiveData<Boolean>(false)
+
 //    private val _text = MutableLiveData<String>().apply {
 //        value = "This is LOGIN"
 //    }
 //    val text: LiveData<String> = _text
 
     fun login(loginData: ToLoginData) {
+        buttonBlockedLogin.value = true
         showLoader.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val response = async { networkClient.login(loginData) }.await()
@@ -44,6 +48,7 @@ class LoginViewModel @Inject constructor(
                     sessionProvider.createSession(it)
                     showLoader.value = false
                     successLogin.value = true
+                    buttonBlockedLogin.value = false
                 }
             }
             response.onFailure {
@@ -51,6 +56,7 @@ class LoginViewModel @Inject constructor(
                     showLoader.value = false
                     errorMessage = it.message.toString()
                     showError.value = true
+                    buttonBlockedLogin.value = false
                 }
             }
         }
@@ -59,6 +65,7 @@ class LoginViewModel @Inject constructor(
 
     fun loginViaGoogle(context: Context) {
         showLoader.value = true
+        buttonBlockedGogoleLogin.value = true
         viewModelScope.launch(Dispatchers.IO) {
             val googleIdUseCase = async{requestGoogleLoginReturnGoogleTokenUseCase.run(context)}.await()
             googleIdUseCase.onSuccess {googleToken ->
@@ -70,11 +77,13 @@ class LoginViewModel @Inject constructor(
                         showLoader.value = false
                         successLogin.value = true
                         sessionProvider.createSession(it)
+                        buttonBlockedGogoleLogin.value = false
                     }
                 }
                 requestJwtToken?.onFailure {
                     withContext(Dispatchers.Main) {
                         showLoader.value = false
+                        buttonBlockedGogoleLogin.value = false
 
                     }
                     if (it.message == "404") {
@@ -98,6 +107,8 @@ class LoginViewModel @Inject constructor(
                     showLoader.value = false
                     errorMessage = it.message.toString()
                     showError.value = true
+                    buttonBlockedGogoleLogin.value = false
+
                 }
             }
         }

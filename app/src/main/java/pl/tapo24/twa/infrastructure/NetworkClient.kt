@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import pl.tapo24.twa.data.*
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.login.DataUser
+import pl.tapo24.twa.data.login.PromotionCode
 import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
@@ -281,6 +282,21 @@ class NetworkClient(var url: String) {
     }
 
     // login
+
+    fun executePromotionCode(promotionCode: String): Result<String> {
+        return try {
+            val response = service.executePromotionToken("Bearer ${State.jwtToken}", State.provideAuditData(), PromotionCode(promotionCode)).execute()
+            if (response.isSuccessful){
+                Result.success(response.body()!!.r!!)
+            } else {
+                val errorMessage = response.errorBody()?.string()
+                Result.failure(HttpException(errorMessage))
+            }
+
+        } catch (ex: Throwable) {
+            Result.failure(ex)
+        }
+    }
 
     fun promoteToPaidAccount(): Result<String> {
         return try {
@@ -561,6 +577,22 @@ class NetworkClient(var url: String) {
             }
         } catch (ex: Throwable) {
             return Result.failure(ex)
+        }
+    }
+
+    fun getServerSettings(serverSettings: String): Result<Setting> {
+        try {
+            val response = service.getServerSettings(State.provideAuditData(), serverSettings).execute()
+            return if (response.isSuccessful) {
+                Result.success(response.body()!!)
+
+            } else {
+                Result.failure(HttpException(response.errorBody().toString()))
+
+            }
+        } catch (ex: Throwable) {
+            return Result.failure(ex)
+
         }
     }
 

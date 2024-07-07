@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.settings.promoCode.PromoCodeFragment" android:id="@+id/frameLayout5">
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            style="@style/smallContainer"
+            android:background="@drawable/style_small_container"
+            android:layout_height="wrap_content" android:id="@+id/constraintLayout16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+        <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/codeTIL"
+                android:textColor="?attr/textSecondColor"
+                app:startIconDrawable="@drawable/key_solid"
+                style="@style/Widget.App.TextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/enter_code"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/codeTIET"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+                android:text="@string/checkCode"
+                app:icon="@drawable/explosion_solid"
+                app:iconGravity="textEnd"
+                style="@style/Widget.Material3.Button"
+                android:fontFamily="?attr/masterFont"
+                android:backgroundTint="?attr/buttonBackground"
+                android:layout_width="0dp"
+                android:layout_height="48dp" android:id="@+id/send_code_btn"
+                app:layout_constraintTop_toBottomOf="@+id/codeTIL" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginTop="16dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

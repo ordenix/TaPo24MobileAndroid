@@ -6,6 +6,7 @@ import pl.tapo24.twa.dbData.entity.*
 import pl.tapo24.twa.data.checkListMap.CheckListMapComplex
 import pl.tapo24.twa.data.customCategory.RCustomCategory
 import pl.tapo24.twa.data.login.DataUser
+import pl.tapo24.twa.data.login.PromotionCode
 import pl.tapo24.twa.data.login.RequestLoginViaGoogle
 import pl.tapo24.twa.data.login.ToLoginData
 import pl.tapo24.twa.data.postal.ResponseCity
@@ -60,6 +61,12 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/shop_status")
     fun getShopStatus(@Header("AUDIT-DATA")auditHeader: AuditData): Call<Setting>
+
+    @Headers("Content-Type: application/json; charset=utf-8")
+    @GET("data/server_settings")
+    fun getServerSettings(@Header("AUDIT-DATA")auditHeader: AuditData,
+                          @Query("name") name: String): Call<Setting>
+
 
     @Headers("Content-Type: application/json; charset=utf-8")
     @GET("data/special_config")
@@ -143,6 +150,13 @@ interface InterfaceNetworkClient {
     @Headers("Content-Type: application/json; charset=UTF-8")
     @POST("login/promote_to_paid_account/")
     fun promoteToPaidAccount(@Header("Authorization")header: String, @Header("AUDIT-DATA")auditHeader: AuditData): Call<RString>
+
+    @Headers("Content-Type: application/json; charset=UTF-8")
+    @POST("login/execute_promotion_token/")
+    fun executePromotionToken(@Header("Authorization")header: String,
+                              @Header("AUDIT-DATA")auditHeader: AuditData,
+                              @Body data: PromotionCode): Call<RString>
+
 
 // customCategory
 
