@@ -8,8 +8,9 @@ import pl.tapo24.twa.updater.DialogDataUpdater
 
 object State {
     val dialogUpdater = DialogDataUpdater()
-    var startDownloadMainPackage: Boolean = false
     var countChangeFragment = 0
+
+    var showInfoGovernmentDialog: MutableLiveData<Boolean> = MutableLiveData(false)
 
     var environmentType: EnvironmentType = EnvironmentType.Master
     var enginesType: EnginesType = EnginesType.New

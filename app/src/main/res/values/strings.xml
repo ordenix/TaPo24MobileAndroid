@@ -390,5 +390,6 @@
     <string name="restorePurchase">Odnów zakup</string>
     <string name="enter_code">Wprowadź kod</string>
     <string name="checkCode">Sprawdź kod</string>
+    <string name="infoGov">TextView</string>
 
 </resources>

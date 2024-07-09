@@ -76,6 +76,15 @@ class MainApplication: Application() {
                 .build()
             workManager.enqueueUniquePeriodicWork("DataUpdate", ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, workRequest3)
             MainScope().launch(Dispatchers.IO) {
+                var settingDialogGovernment: Setting? = null
+                async { settingDialogGovernment = tapoDb.settingDb().getSettingByName("settingDialogGovernment") }.await()
+                withContext(Dispatchers.Main){
+                    State.showInfoGovernmentDialog.value = settingDialogGovernment == null
+
+                }
+
+
+
                 var settingNetwork: Setting? = null
                 async { settingNetwork = tapoDb.settingDb().getSettingByName("settingNetwork") }.await()
                 // val settingInitializePackage = async { tapoDb.settingDb().getSettingByName("settingInitializePackage") }.await()

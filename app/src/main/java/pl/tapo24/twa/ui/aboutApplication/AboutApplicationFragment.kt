@@ -75,6 +75,15 @@ class AboutApplicationFragment: Fragment() {
         binding.restorePurchase.setOnClickListener {
             viewModel.restorePurchase()
         }
+        binding.textView124.text = "Aplikacja TaPo24 nie reprezentuje żadnej instytucji rządowej." +
+        "\nDane zawarte w aplikacji pochodzą między innymi z oficjalnych domen rządowych." +
+                "\nPoniżej znajduje się wykaz domen, z których pochodzą niektóre dane:" +
+                "\nhttps://isap.sejm.gov.pl/" +
+                "\nhttps://www.ufg.pl/infoportal/faces/pages_home-page/Page_4d98135c_14e2b8ace27__7ff1/Pagee0e22f3_14efe6adc05__7ff1/Page4d024e07_14f0a824115__7ff6?_afrLoop=3753003479910681&_afrWindowMode=0&_adf.ctrl-state=182qsvy3xd_29" +
+                "\nhttps://moj.gov.pl/uslugi/engine/ng/index?xFormsAppName=UprawnieniaKierowcow&xFormsOrigin=EXTERNAL" +
+                "\nhttps://historiapojazdu.gov.pl/" +
+                "\nhttps://www.gov.pl/web/infrastruktura/ograniczenia-w-ruchu" +
+                "\nhttps://opendata.hsc.gov.ua/"
 
         return root
     }

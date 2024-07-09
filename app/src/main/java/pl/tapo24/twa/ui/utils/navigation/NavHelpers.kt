@@ -152,5 +152,13 @@ enum class NavHelpers(
             navHttpLink = null,
         )
     ),
+    LinkCheckDrivingLicenceUa(
+        NavElement(
+            navName = "Link do sprawdzenia uprawnień kierowców/dowodów rej.- Ukraina",
+            navIcon= R.drawable.id_card_solid,
+            navId = null,
+            navHttpLink = "https://opendata.hsc.gov.ua/"
+        )
+    ),
 
 }
